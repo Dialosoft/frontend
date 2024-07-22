@@ -16,24 +16,16 @@ const config: Config = {
 				lg: "1024px",
 				xl: "1280px",
 				"2xl": "1536px",
-				"3xl": "1920px"
+				"3xl": "1920px",
+				"4xl": "2560px"
 			},
 			container: {
 				center: true,
 				padding: {
-					DEFAULT: "1rem",
-					md: "2rem",
-					xl: "1rem",
-					"2xl": "2rem",
-					"3xl": "1rem"
+					DEFAULT: "1rem"
 				},
 				screens: {
-					sm: "100%",
-					md: "768px",
-					lg: "1024px",
-					xl: "1280px",
-					"2xl": "1536px",
-					"3xl": "2000px"
+					"3xl": "1920px"
 				}
 			}
 		}
