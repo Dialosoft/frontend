@@ -3,20 +3,20 @@
 # dependencies
 *-lock.json
 *-lock.yaml
-/node_modules
-/.pnp
-.pnp.js
+*node_modules
+*.pnp
+*.pnp.js
 .yarn/install-state.gz
 
 # testing
 /coverage
 
 # next.js
-/.next/
-/out/
+*.next
+*out
 
 # production
-/build
+*build
 
 # misc
 .DS_Store
