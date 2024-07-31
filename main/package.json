@@ -10,15 +10,16 @@
   },
   "dependencies": {
     "just-debounce-it": "^3.2.0",
-    "lucide-react": "^0.417.0",
+    "lucide-react": "^0.418.0",
     "next": "14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sharp": "^0.33.4",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
+    "@types/node": "^22.0.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/uuid": "^10.0.0",
