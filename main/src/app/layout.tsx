@@ -10,8 +10,8 @@ const Header = dynamic(() => import("@/components/header/main"));
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 	return (
-		<html className="dark" lang="en">
-			<body className={`${poppins.className} antialiased text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex flex-col`}>
+		<html lang="en">
+			<body className={`${poppins.className} antialiased dark text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex flex-col`}>
 				<Header />
 				<main className="flex-grow">{children}</main>
 			</body>
