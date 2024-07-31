@@ -8,7 +8,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400
 import "@/app/globals.css";
 const Header = dynamic(() => import("@/components/Header/main"));
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
+export default function ForumLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 	return (
 		<html lang="en">
 			<body className={`${poppins.className} antialiased dark text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex flex-col`}>
