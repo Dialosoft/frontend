@@ -1,15 +1,19 @@
-"use server";
-
 import { z } from "zod";
 
+/* Username */
 const usernameRegex = /^[a-zA-Z0-9]+$/;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,;]).*$/;
+
+/* Password */
+const pUppercaseRegex = /(?=.*[A-Z])/;
+const pLowercaseRegex = /(?=.*[a-z])/;
+const pNumberRegex = /(?=.*\d)/;
+const pSpecialCharRegex = /(?=.*[@$!%*?&.,;])/;
 
 const registerSchema = z.object({
-	username: z.string().min(1, { message: "Username is required" }).max(20, { message: "Username must be 20 characters or less" }).regex(usernameRegex, { message: "Username can only contain letters and numbers" }),
-	email: z.string().email({ message: "Invalid email address" }),
-	password: z.string().min(8, { message: "Password must be at least 8 characters long" }).max(50, { message: "Password must be 50 characters or less" }).regex(passwordRegex, { message: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character" }),
-	confirmPassword: z.string().min(8, { message: "Password must be at least 8 characters long" }).max(50, { message: "Password must be 50 characters or less" })
-}).refine((data) => data.password === data.confirmPassword, { message: "Passwords don't match", path: ["confirmPassword"] });
+	username: z.string().min(1, { message: "Required" }).max(20, { message: "Max 20 chars" }).regex(usernameRegex, { message: "Letters & numbers only" }),
+	email: z.string().email({ message: "Invalid email" }),
+	password: z.string().min(8, { message: "Min 8 chars" }).max(50, { message: "Max 50 chars" }).regex(pUppercaseRegex, { message: "1 uppercase" }).regex(pLowercaseRegex, { message: "1 lowercase" }).regex(pNumberRegex, { message: "1 number" }).regex(pSpecialCharRegex, { message: "1 special char" }),
+	confirmPassword: z.string().min(8, { message: "Min 8 chars" }).max(50, { message: "Max 50 chars" })
+}).refine((data) => data.password === data.confirmPassword, { message: "Passwords must match", path: ["confirmPassword"] });
 
 export default registerSchema;
