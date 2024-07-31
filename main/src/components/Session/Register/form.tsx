@@ -53,7 +53,7 @@ export default function Register_Form() {
 				<div className="flex flex-col">
 					{errors.email && <span>{errors.email}</span>}
 					<label className="select-none" htmlFor="email">Email</label>
-					<input className="appearance-none" type="email" value={email} id="email" autoComplete="email" onChange={handle_Email_Change} required />
+					<input className="appearance-none" type="email" value={email} id="email" autoComplete="email" onChange={handle_Email_Change} maxLength={254} required />
 				</div>
 
 				{/* Password */}
