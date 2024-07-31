@@ -6,7 +6,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400
 
 /* Components */
 import "@/app/globals.css";
-const Header = dynamic(() => import("@/components/header/main"));
+const Header = dynamic(() => import("@/components/Header/main"));
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 	return (

@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 
-import { Search_sk } from "@/components/header/skeletons";
+import { Search_sk } from "@/components/Header/skeletons";
 
-const Search = dynamic(() => import("@/components/header/search"), { loading: () => <Search_sk /> });
-const DarkMode = dynamic(() => import("@/components/header/dark_tester"), { ssr: false });
+const Search = dynamic(() => import("@/components/Header/search"), { loading: () => <Search_sk /> });
+const DarkMode = dynamic(() => import("@/components/Header/dark_tester"), { ssr: false });
 
 export default function Main_Header() {
 	return (
