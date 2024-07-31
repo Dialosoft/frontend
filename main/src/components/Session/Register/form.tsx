@@ -13,11 +13,11 @@ export default function Register_Form() {
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
 	/* Username */
-	const debounced_setUsername = useCallback(debounce((value: string) => setUsername(value), 100), []);
+	const debounced_setUsername = useCallback(debounce((value: string) => setUsername(value), 50), []);
 	const handle_Username_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUsername(e.target.value);
 
 	/* Email */
-	const debounced_setEmail = useCallback(debounce((value: string) => setEmail(value), 100), []);
+	const debounced_setEmail = useCallback(debounce((value: string) => setEmail(value), 50), []);
 	const handle_Email_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setEmail(e.target.value);
 
 	const handleSubmit = (event: React.FormEvent) => {
@@ -46,7 +46,7 @@ export default function Register_Form() {
 				<div className="flex flex-col">
 					{errors.username && <span>{errors.username}</span>}
 					<label className="select-none" htmlFor="username">Username</label>
-					<input className="appearance-none" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} required />
+					<input className="appearance-none" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} minLength={1} maxLength={20} required />
 				</div>
 
 				{/* Email */}
@@ -60,18 +60,18 @@ export default function Register_Form() {
 				<div className="flex flex-col">
 					{errors.password && <span>{errors.password}</span>}
 					<label className="select-none" htmlFor="password">Password</label>
-					<input className="appearance-none" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} required />
+					<input className="appearance-none" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
 				</div>
 
 				{/* Confirm Password */}
 				<div className="flex flex-col">
 					{errors.confirmPassword && <span>{errors.confirmPassword}</span>}
 					<label className="select-none" htmlFor="confirm-password">Confirm Password</label>
-					<input className="appearance-none" type="password" value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={(e) => setConfirmPassword(e.target.value)} required />
+					<input className="appearance-none" type="password" value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={(e) => setConfirmPassword(e.target.value)} minLength={8} maxLength={50} required />
 				</div>
 			</div>
 
-			<button type="submit" disabled={!errors}>
+			<button type="submit" disabled={!!Object.keys(errors).length}>
 				<span className="select-none">Register</span>
 			</button>
 		</form>
