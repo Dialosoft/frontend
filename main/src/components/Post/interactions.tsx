@@ -15,7 +15,7 @@ function ActionButton({ Icon, children }: ActionButtonProps) {
 	const bgStyles = "bg-black-500 bg-opacity-25 hover:bg-opacity-40";
 	return (
 		<div
-			className={`${children !== undefined ? bgStyles : ""} flex items-center rounded-full cursor-pointer`}
+			className={`${children !== undefined ? bgStyles+" pl-1" : ""} flex items-center rounded-full cursor-pointer`}
 		>
 			<Icon
 				className={`${
