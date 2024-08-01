@@ -2,6 +2,7 @@ import UserChip from "@/components/User/chip";
 import PostInteractions from "./interactions";
 import PostVotingChip from "./voting_chip";
 import { MessageSquareText as ResponseIcon } from "lucide-react";
+import PostTags from "./tags";
 
 export default function PostOverview() {
 	return (
@@ -9,6 +10,7 @@ export default function PostOverview() {
 			<div className="flex gap-1">
 				<UserChip highlighted={true} />
 				<PostVotingChip />
+				<PostTags />
 			</div>
 			<div>
 				<h1 className="font-medium text-lg">{"No se como centrar un div"}</h1>
@@ -19,8 +21,11 @@ export default function PostOverview() {
 				</p>
 			</div>
 			<div className="flex">
-				<PostInteractions  />
-				<a href="#" className="flex items-center gap-2 px-3 justify-center bg-primary-500 rounded-full h-auto text-black-900 ml-auto font-bold hover:bg-primary-600 transition-colors">
+				<PostInteractions />
+				<a
+					href="#"
+					className="flex items-center gap-2 px-3 justify-center bg-primary-500 rounded-full h-auto text-black-900 ml-auto font-bold hover:bg-primary-600 transition-colors"
+				>
 					<ResponseIcon className="text-center" />
 					<p>Responder</p>
 				</a>
