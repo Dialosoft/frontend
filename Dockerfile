@@ -4,6 +4,7 @@ WORKDIR /app
 COPY main/package.json ./
 RUN npm install
 COPY main ./
+COPY main/.env ./
 RUN npm run build
 
 # Stage 2: Run the application
