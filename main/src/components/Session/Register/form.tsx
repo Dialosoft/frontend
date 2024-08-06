@@ -1,7 +1,7 @@
 "use client";
 
-import debounce from "just-debounce-it";
 import { useCallback, useState } from "react";
+import debounce from "just-debounce-it";
 
 import registerSchema from "@/schemas/Session/register";
 
@@ -13,11 +13,17 @@ export default function Register_Form() {
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
 	/* Username */
-	const debounced_setUsername = useCallback(debounce((value: string) => setUsername(value), 50), [setUsername]);
+	const debounced_setUsername = useCallback(
+		debounce((value: string) => setUsername(value), 50),
+		[setUsername]
+	);
 	const handle_Username_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUsername(e.target.value);
 
 	/* Email */
-	const debounced_setEmail = useCallback(debounce((value: string) => setEmail(value), 50), [setEmail]);
+	const debounced_setEmail = useCallback(
+		debounce((value: string) => setEmail(value), 50),
+		[setEmail]
+	);
 	const handle_Email_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setEmail(e.target.value);
 
 	const handleSubmit = (event: React.FormEvent) => {
