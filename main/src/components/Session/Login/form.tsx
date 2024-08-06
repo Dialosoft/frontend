@@ -11,7 +11,7 @@ export default function Login_Form() {
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
 	/* Username or Email */
-	const debounced_setUserOrEmail = useCallback(debounce((value: string) => setUserOrEmail(value), 50), []);
+	const debounced_setUserOrEmail = useCallback(debounce((value: string) => setUserOrEmail(value), 50), [setUserOrEmail]);
 	const handle_UserOrEmail_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUserOrEmail(e.target.value);
 
 	const handleSubmit = (event: React.FormEvent) => {
