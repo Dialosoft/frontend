@@ -1,0 +1,25 @@
+name: "Pull Request Lint"
+
+on:
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.16.0'
+
+    - name: Install ESLint and config
+      run: npm install eslint eslint-config-next
+
+    - name: Run ESLint
+      run: npx eslint main --ext .js,.jsx,.ts,.tsx
