@@ -8,7 +8,7 @@ export default function Rol({ rol }: RolProps) {
 	switch (rol) {
 		case "Admin":
 			return (
-				<div className="flex items-center space-x-1 text-yellow-300 border border-yellow-300 bg-yellow-300 bg-opacity-25 py-1 px-2 rounded-md">
+				<div className="flex items-center space-x-1 text-yellow border border-yellow bg-yellow bg-opacity-25 py-1 px-2 rounded-md">
 					<Crown className="aspect-square w-4 h-4" />
 
 					<span className="text-xs">{rol}</span>
@@ -16,7 +16,7 @@ export default function Rol({ rol }: RolProps) {
 			);
 		case "Moderator":
 			return (
-				<div className="flex items-center space-x-1 text-green-400 border border-green-400 bg-green-400 bg-opacity-25 py-1 px-2 rounded-md">
+				<div className="flex items-center space-x-1 text-green border border-green bg-green bg-opacity-25 py-1 px-2 rounded-md">
 					<Crown className="aspect-square w-4 h-4" />
 
 					<span className="text-xs">{rol}</span>
