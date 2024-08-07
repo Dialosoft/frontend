@@ -6,6 +6,7 @@
 		"indent": ["error", "tab"],
 		"no-unused-vars": ["error"],
 		"no-console": ["warn"],
-		"eqeqeq": ["error", "always"]
+		"eqeqeq": ["error", "always"],
+		"curly": ["error", "all"]
 	}
 }
