@@ -87,7 +87,7 @@ export default function Category({ params }: Props) {
 					<div className="text-3xl font-semibold">
 						{Category.title}
 						<div className="text-black-500 flex items-center text-sm">
-							<span>Main category</span> <ChevronRight className="w-4 h-4" />
+							<Link href="/" className="hover:text-secondary"> Main category</Link>  
 							<ChevronRight className="w-4 h-4" />
 							<span> {Category.title}</span>
 						</div>
