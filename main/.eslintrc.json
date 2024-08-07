@@ -5,6 +5,7 @@
 		"quotes": ["error", "double"],
 		"indent": ["error", "tab"],
 		"no-unused-vars": ["error"],
-		"no-console": ["warn"]
+		"no-console": ["warn"],
+		"eqeqeq": ["error", "always"]
 	}
 }
