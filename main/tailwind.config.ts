@@ -15,7 +15,7 @@ const config: Config = {
 					"100": "#d4f4f9",
 					"200": "#aee9f3",
 					"300": "#76d8ea",
-					"400": "#27b4d2",
+					"400": "#27b4d2", //Main Color
 					"500": "#1aa0c0",
 					"600": "#1981a1",
 					"700": "#1b6983",
@@ -25,9 +25,13 @@ const config: Config = {
 				},
 				secondary: "#D3D3ED",
 				black: {
-					500: "#3A3A50",
-					900: "#0F0F13",
+					300: "#3A3A50", //gray for boxes with 25% opacity
+					500: "#43435B", //gray for text
+					900: "#0F0F13", //background
 				},
+				green: "#00A32E",
+				red: "#D11335",
+				yelllow: "#D29827",
 			},
 			screens: {
 				sm: "100%",
