@@ -1,4 +1,4 @@
-export default function saved() {
+export default function Saved() {
 	return(
 		<>
 		</>
