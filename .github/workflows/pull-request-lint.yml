@@ -1,4 +1,4 @@
-name: "Pull Request Lint"
+name: "Lint and Prettier"
 
 on:
   pull_request:
@@ -11,15 +11,21 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4.1.7
+      with:
+        fetch-depth: 0
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4.0.3
       with:
         node-version: '20.16.0'
+        cache: yarn
 
-    - name: Install ESLint and config
-      run: npm install eslint eslint-config-next
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
 
     - name: Run ESLint
       run: npx eslint main --ext .js,.jsx,.ts,.tsx
+
+    - name: Run Prettier
+      run: yarn prettier --check .
