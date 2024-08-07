@@ -8,9 +8,9 @@ export default function Members() {
 	];
 
 	return (
-		<>
-			<h2 className=" text-3xl font-semibold">Last Articles</h2>
-			<div className="bg-black-500 bg-opacity-25 max-w-[317px] p-2 space-y-2 rounded-lg">
+		<div className="space-y-4">
+			<h2 className=" text-3xl font-semibold">Members</h2>
+			<div className="bg-black-500 bg-opacity-25  p-2 space-y-2 rounded-lg">
 				{member.map((member) => (
 					<Member						key={uuidv4()}
 						name={member.name}
@@ -20,6 +20,6 @@ export default function Members() {
 					/>
 				))}
 			</div>
-		</>
+		</div>
 	);
 }
