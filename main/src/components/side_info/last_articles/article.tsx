@@ -7,7 +7,7 @@ interface ArticleProps {
 export default function Article({ title, user, time }: ArticleProps) {
 	return (
 		<>
-			<div className="flex space-x-2 items-center hover:bg-black-500 p-2 rounded-sm hover:bg-opacity-25">
+			<div className="flex space-x-2 items-center hover:bg-black-500 p-2 rounded-md hover:bg-opacity-25">
 				<div className="border border-primary-500  rounded-full aspect-square h-12  " />
 				<div className=" w-full">
 					<h3>{title}</h3>

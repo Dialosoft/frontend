@@ -10,7 +10,7 @@ export default function LastArticles() {
 	];
 
 	return (
-		<>
+		<div className="w-full flex-col space-y-4 ">
 			<h2 className=" text-3xl font-semibold">Last Articles</h2>
 			<div className="bg-black-500 bg-opacity-25 max-w-[317px] p-2 space-y-2 rounded-lg">
 				{article.map((article, index) => (
@@ -22,6 +22,6 @@ export default function LastArticles() {
 					/>
 				))}
 			</div>
-		</>
+		</div>
 	);
 }

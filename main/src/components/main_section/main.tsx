@@ -4,21 +4,21 @@ export default function MainSection() {
 	const category = [
 		{
 			type: "Info",
-			title: " News and announcements",
-			posts: 32,
-			comments: 2333,
+			title: "News and announcements",
+			posts: 52,
+			comments: 2133,
 		},
 		{
 			type: "Event",
-			title: " News and announcements",
+			title: "Promotions & events",
 			posts: 32,
-			comments: 2333,
+			comments: 8333,
 		},
 		{
 			type: "Help",
-			title: " News and announcements",
-			posts: 32,
-			comments: 2333,
+			title: "Rules & FAQs",
+			posts: 62,
+			comments: 1733,
 		},
 	];
 
