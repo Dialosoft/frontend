@@ -11,6 +11,7 @@
 		"comma-dangle": ["error", "always-multiline"],
 		"no-trailing-spaces": ["error"],
 		"object-curly-spacing": ["error", "always"],
-		"array-bracket-spacing": ["error", "never"]
+		"array-bracket-spacing": ["error", "never"],
+		"arrow-spacing": ["error", { "before": true, "after": true }]
 	}
 }
