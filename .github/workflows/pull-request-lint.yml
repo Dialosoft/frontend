@@ -31,5 +31,5 @@ jobs:
       working-directory: ./main
 
     - name: Run Prettier
-      run: yarn prettier --check ./main
+      run: npx prettier --check ./main
       working-directory: ./
