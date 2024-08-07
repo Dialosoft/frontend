@@ -5,7 +5,9 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # Specify the package ecosystem
-    directory: "/main" # Location of package manifests
+  - package-ecosystem: "npm"
+    directory: "/main"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "eslint"
