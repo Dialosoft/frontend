@@ -23,9 +23,11 @@ jobs:
 
     - name: Install dependencies
       run: yarn install --frozen-lockfile
+      working-directory: ./main
 
     - name: Run ESLint
-      run: npx eslint main --ext .js,.jsx,.ts,.tsx
+      run: npx eslint --ext .js,.jsx,.ts,.tsx
+      working-directory: ./main
 
     - name: Run Prettier
-      run: yarn prettier --check .
+      run: yarn prettier --check ./main
