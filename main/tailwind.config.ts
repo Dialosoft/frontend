@@ -31,7 +31,7 @@ const config: Config = {
 				},
 				green: "#00A32E",
 				red: "#D11335",
-				yelllow: "#D29827",
+				yellow: "#D29827",
 			},
 			screens: {
 				sm: "100%",
@@ -45,10 +45,12 @@ const config: Config = {
 			container: {
 				center: true,
 				padding: {
-					DEFAULT: "1rem",
+
+					DEFAULT: "3rem",
+				
 				},
 				screens: {
-					"3xl": "1920px",
+					"2xl": "1536px",
 				},
 			},
 		},
