@@ -13,9 +13,20 @@ type Props = {
 	};
 };
 export default function Category({ params }: Props) {
-	const CategoryInfo = {
-		title: "Promotions & events",
-	};
+	const CategoryInfo = [
+		{
+			id: "1",
+			title: " News and announcements",
+		},
+		{
+			id: "2",
+			title: "Promotions & events",
+		},
+		{
+			id: "3",
+			title: "Rules & FAQs",
+		},
+	]; ;
 	const PostsInfo = [
 		{
 			id: 1,
@@ -63,16 +74,22 @@ export default function Category({ params }: Props) {
 			fixed: false,
 		},
 	];
+	  const Category = CategoryInfo.find(
+			category => category.id === params.categoryID
+		);
+ if (!Category) {
+		return <div>¿Que haces?</div>;
+ }
 	return (
 		<div className=" container flex justify-center  mt-16">
 			<div className="w-full space-y-4  ">
 				<div className="flex items-end justify-between w-full  max-w-[1110px] ">
 					<div className="text-3xl font-semibold">
-						{CategoryInfo.title}
+						{Category.title}
 						<div className="text-black-500 flex items-center text-sm">
 							<span>Main category</span> <ChevronRight className="w-4 h-4" />
 							<ChevronRight className="w-4 h-4" />
-							<span>{CategoryInfo.title}</span>
+							<span> {Category.title}</span>
 						</div>
 					</div>
 
