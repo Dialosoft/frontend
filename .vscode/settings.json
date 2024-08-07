@@ -1,0 +1,12 @@
+{
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": true,
+	"editor.formatOnSave": false,
+	"editor.defaultFormatter": null,
+	"prettier.singleQuote": false,
+	"prettier.trailingComma": "es5",
+	"prettier.semi": true,
+	"prettier.useTabs": true,
+	"prettier.arrowParens": "avoid"
+}
