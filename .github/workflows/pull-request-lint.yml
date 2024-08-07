@@ -40,11 +40,11 @@ jobs:
       run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.ts$|\.tsx$' || true)" >> $GITHUB_ENV
 
     - name: Run ESLint
-      if: steps.filter.outputs.ts_files == "true"
+      if: steps.filter.outputs.ts_files == 'true' && env.CHANGED_FILES != ''
       run: npx eslint --ext .js,.jsx,.ts,.tsx $CHANGED_FILES
       working-directory: ./main
 
     - name: Run Prettier
-      if: steps.filter.outputs.ts_files == "true"
+      if: steps.filter.outputs.ts_files == 'true' && env.CHANGED_FILES != ''
       run: npx prettier --check ./main $CHANGED_FILES
       working-directory: ./
