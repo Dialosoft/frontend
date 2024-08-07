@@ -1,4 +1,4 @@
-export default function account() {
+export default function Account() {
 	return(
 		<>
 		</>
