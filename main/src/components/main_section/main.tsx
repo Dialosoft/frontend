@@ -1,4 +1,5 @@
 import Category from "./category";
+import { v4 as uuidv4 } from "uuid";
 export default function MainSection() {
 	const category = [
 		{
@@ -25,9 +26,9 @@ export default function MainSection() {
 		<div className="w-full space-y-4">
 			<h2 className=" text-3xl font-semibold">Main Category</h2>
 			<div className="bg-black-500 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
-				{category.map((category, index) => (
+				{category.map(category => (
 					<Category
-						key={index}
+						key={uuidv4()}
 						type={category.type}
 						title={category.title}
 						posts={category.posts}
