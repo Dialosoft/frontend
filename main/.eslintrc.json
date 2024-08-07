@@ -4,6 +4,7 @@
 		"semi": ["error", "always"],
 		"quotes": ["error", "double"],
 		"indent": ["error", "tab"],
-		"no-unused-vars": ["error"]
+		"no-unused-vars": ["error"],
+		"no-console": ["warn"]
 	}
 }
