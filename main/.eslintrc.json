@@ -8,6 +8,7 @@
 		"no-console": ["warn"],
 		"eqeqeq": ["error", "always"],
 		"curly": ["error", "all"],
-		"comma-dangle": ["error", "always-multiline"]
+		"comma-dangle": ["error", "always-multiline"],
+		"no-trailing-spaces": ["error"]
 	}
 }
