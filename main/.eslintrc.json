@@ -7,6 +7,7 @@
 		"no-unused-vars": ["error"],
 		"no-console": ["warn"],
 		"eqeqeq": ["error", "always"],
-		"curly": ["error", "all"]
+		"curly": ["error", "all"],
+		"comma-dangle": ["error", "always-multiline"]
 	}
 }
