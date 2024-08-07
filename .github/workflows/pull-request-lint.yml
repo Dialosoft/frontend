@@ -18,18 +18,33 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4.0.3
       with:
-        node-version: '20.16.0'
+        node-version: "20.16.0"
         cache: "npm"
         cache-dependency-path: "./main/package-lock.json"
+
+    - name: Filter changed files
+      id: filter
+      uses: dorny/paths-filter@v3.0.2
+      with:
+        filters: |
+          ts_files:
+            - "**/*.ts"
+            - "**/*.tsx"
 
     - name: Install dependencies
       run: npm ci
       working-directory: ./main
 
+    - name: Get list of changed files
+      id: changed_files
+      run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E '\.ts$|\.tsx$' || true)" >> $GITHUB_ENV
+
     - name: Run ESLint
-      run: npx eslint --ext .js,.jsx,.ts,.tsx
+      if: steps.filter.outputs.ts_files == "true"
+      run: npx eslint --ext .js,.jsx,.ts,.tsx $CHANGED_FILES
       working-directory: ./main
 
     - name: Run Prettier
-      run: npx prettier --check ./main
+      if: steps.filter.outputs.ts_files == "true"
+      run: npx prettier --check ./main $CHANGED_FILES
       working-directory: ./
