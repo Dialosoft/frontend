@@ -19,10 +19,10 @@ jobs:
       uses: actions/setup-node@v4.0.3
       with:
         node-version: '20.16.0'
-        cache: yarn
+        cache: 'npm'
 
     - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      run: npm ci
       working-directory: ./main
 
     - name: Run ESLint
@@ -31,3 +31,4 @@ jobs:
 
     - name: Run Prettier
       run: yarn prettier --check ./main
+      working-directory: ./
