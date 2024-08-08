@@ -35,7 +35,7 @@ export default function Category({ title, posts, comments , type}: CategoryProps
 
 	return (
 		<>
-			<div className="flex justify-between space-x-2 items-center hover:bg-black-500 py-2 px-4 rounded-md hover:bg-opacity-25">
+			<div className="flex justify-between space-x-2 items-center hover:bg-black-300 py-2 px-4 rounded-md hover:bg-opacity-25">
 				<div className="flex w-full text-primary-400 space-x-2">
 					{renderIcon()}
 					<h3 className="text-xl text-secondary font-semibold">{title}</h3>
