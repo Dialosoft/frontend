@@ -29,7 +29,7 @@ export default function MainSection() {
 	return (
 		<div className="w-full space-y-4">
 			<h2 className=" text-3xl font-semibold">Main Category</h2>
-			<div className="bg-black-500 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
+			<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 				{category.map(category => (
 					<Link href={`c/${category.id}`} key={uuidv4()}>
 						<Category

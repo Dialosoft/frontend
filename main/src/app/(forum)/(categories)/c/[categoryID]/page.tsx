@@ -26,7 +26,7 @@ export default function Category({ params }: Props) {
 			id: "3",
 			title: "Rules & FAQs",
 		},
-	]; ;
+	];
 	const PostsInfo = [
 		{
 			id: 1,
@@ -74,30 +74,35 @@ export default function Category({ params }: Props) {
 			fixed: false,
 		},
 	];
-	  const Category = CategoryInfo.find(
-			category => category.id === params.categoryID
-		);
- if (!Category) {
+	const Category = CategoryInfo.find(
+		category => category.id === params.categoryID
+	);
+	if (!Category) {
 		return <div>¿Que haces?</div>;
- }
+	}
 	return (
 		<div className=" container flex justify-center  mt-16">
-			<div className="w-full space-y-4  ">
-				<div className="flex items-end justify-between w-full  max-w-[1110px] ">
+			<div className="w-full -my-1">
+				<div className="flex items-start justify-between w-full  max-w-[1110px] ">
 					<div className="text-3xl font-semibold">
 						{Category.title}
-						<div className="text-black-500 flex items-center text-sm">
-							<Link href="/" className="hover:text-secondary"> Main category</Link>  
+						<div className=" max-h-4 h-4 -mt-1 mb-2 font-medium text-black-500 flex items-center text-sm">
+							<Link href="/" className="hover:text-secondary">
+								Main category
+							</Link>
 							<ChevronRight className="w-4 h-4" />
-							<span> {Category.title}</span>
+							<span className="text-secondary">
+								{Category.title}
+							</span>
 						</div>
 					</div>
 
-					<div className="flex items-center font-medium space-x-2">
+					<div className="flex items-center font-medium space-x-2 mt-2">
 						<div className="text-black-500 flex items-center space-x-2">
 							<div>Sort by:</div>
 							<button className="flex  items-center hover:bg-black-300 hover:bg-opacity-25 px-2 py-1 rounded-lg">
-								<span>Best</span> <ChevronDown className="w-4 h-4" />
+								<span>Best</span>
+								<ChevronDown className="w-4 h-4" />
 							</button>
 						</div>
 						<Link href={`${params.categoryID}/create`}>
@@ -108,9 +113,12 @@ export default function Category({ params }: Props) {
 						</Link>
 					</div>
 				</div>
-				<div className="bg-black-500 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
+				<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 					{PostsInfo.filter(post => post.fixed).map(post => (
-						<Link href={`${params.categoryID}/${post.id}`} key={uuidv4()}>
+						<Link
+							href={`${params.categoryID}/${post.id}`}
+							key={uuidv4()}
+						>
 							<Post
 								id={post.id}
 								user={post.user}
@@ -123,12 +131,15 @@ export default function Category({ params }: Props) {
 						</Link>
 					))}
 				</div>
-				<div className="flex items-end justify-between w-full  max-w-[1110px] ">
+				<div className="flex items-end justify-between w-full my-4 max-w-[1110px] ">
 					<div className="text-3xl font-semibold">Posts</div>
 				</div>
-				<div className="bg-black-500 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
+				<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 					{PostsInfo.filter(post => !post.fixed).map(post => (
-						<Link href={`${params.categoryID}/${post.id}`} key={uuidv4()}>
+						<Link
+							href={`${params.categoryID}/${post.id}`}
+							key={uuidv4()}
+						>
 							<Post
 								id={post.id}
 								user={post.user}
