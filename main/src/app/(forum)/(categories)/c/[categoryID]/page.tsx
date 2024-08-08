@@ -113,7 +113,7 @@ export default function Category({ params }: Props) {
 						</Link>
 					</div>
 				</div>
-				<div className="bg-black-500 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
+				<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 					{PostsInfo.filter(post => post.fixed).map(post => (
 						<Link
 							href={`${params.categoryID}/${post.id}`}
@@ -134,7 +134,7 @@ export default function Category({ params }: Props) {
 				<div className="flex items-end justify-between w-full my-4 max-w-[1110px] ">
 					<div className="text-3xl font-semibold">Posts</div>
 				</div>
-				<div className="bg-black-500 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
+				<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 					{PostsInfo.filter(post => !post.fixed).map(post => (
 						<Link
 							href={`${params.categoryID}/${post.id}`}
