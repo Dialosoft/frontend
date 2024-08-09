@@ -3,6 +3,8 @@ name: "Lint and Prettier"
 on:
   pull_request:
     branches: [ "develop" ]
+  pull_request_target:
+    branches: [ "develop" ]
 
 jobs:
   lint:
