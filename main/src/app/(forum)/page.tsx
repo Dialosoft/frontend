@@ -1,13 +1,25 @@
-import PostOverview from "@/components/Post/overview";
-import LastArticles from "@/components/side_info/last_articles/main";
+"use client"
 import Categories from "@/components/main_section/main";
-import Members from "@/components/side_info/members/main";
 import Aside from "@/components/side_info/main";
+import getWidth from "@/utils/getWidth"
+
+
 export default function Home() {
+	const width = getWidth()
+	
 	return (
-		<div className=" container flex justify-center   mt-16">
-			<Categories />
-			<Aside/>
-		</div>
+		<>
+			{width < 1024 ? (
+				<div className=" container flex justify-center space-x-4   mt-16">
+					<Categories />
+					<Aside />
+				</div>
+			) : (
+				<div className=" container flex justify-center space-x-4   mt-16">
+					<Categories />
+					<Aside />
+				</div>
+			)}
+		</>
 	);
 }
