@@ -54,7 +54,7 @@ export default function Login_Form() {
 			</div>
 
 			<button className="w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300" type="submit" disabled={!!Object.keys(errors).length}>
-				<span className="select-none text-black-900 group-disabled:text-secondary">Login</span>
+				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">Login</span>
 			</button>
 		</form>
 	);
