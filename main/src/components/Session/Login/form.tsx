@@ -34,7 +34,7 @@ export default function Login_Form() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="w-[20rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
+		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
