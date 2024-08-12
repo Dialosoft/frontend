@@ -31,6 +31,7 @@ export default function Register_Form() {
 
 		const result = registerSchema.safeParse({ username, email, password, confirmPassword });
 		if (result.success) {
+			// AQUI VA EL CODIGO DE ENVIO AL BACKEND
 			console.log(result.data, "VALID");
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
@@ -45,40 +46,52 @@ export default function Register_Form() {
 		}
 	};
 
+	/* Styles */
+	const tw_label = "select-none font-medium";
+	const tw_input = "appearance-none focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
+
 	return (
-		<form onSubmit={handleSubmit} className="flex flex-col items-center justify-center space-y-[2rem]">
-			<div className="flex flex-col items-center justify-center space-y-[1rem]">
+		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]">
+			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 				{/* Username */}
-				<div className="flex flex-col">
-					{errors.username && <span>{errors.username}</span>}
-					<label className="select-none" htmlFor="username">Username</label>
-					<input className="appearance-none" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} minLength={1} maxLength={20} required />
+				<div className="w-full flex flex-col space-y-[.2rem]">
+					<div className="flex items-center justify-between">
+						<label className={tw_label} htmlFor="username">Username</label>
+						{errors.username && <span>{errors.username}</span>}
+					</div>
+					<input className={`${tw_input}`} placeholder="Choose your username" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} minLength={1} maxLength={20} required />
 				</div>
 
 				{/* Email */}
-				<div className="flex flex-col">
-					{errors.email && <span>{errors.email}</span>}
-					<label className="select-none" htmlFor="email">Email</label>
-					<input className="appearance-none" type="email" value={email} id="email" autoComplete="email" onChange={handle_Email_Change} maxLength={254} required />
+				<div className="w-full flex flex-col space-y-[.2rem]">
+					<div className="flex items-center justify-between">
+						<label className={tw_label} htmlFor="email">Email</label>
+						{errors.email && <span>{errors.email}</span>}
+					</div>
+					<input className={`${tw_input}`} placeholder="Enter your email" type="email" value={email} id="email" autoComplete="email" onChange={handle_Email_Change} maxLength={254} required />
 				</div>
 
 				{/* Password */}
-				<div className="flex flex-col">
-					{errors.password && <span>{errors.password}</span>}
-					<label className="select-none" htmlFor="password">Password</label>
-					<input className="appearance-none" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
+				<div className="w-full flex flex-col space-y-[.2rem]">
+					<div className="flex items-center justify-between">
+						<label className={tw_label} htmlFor="password">Password</label>
+						{errors.password && <span>{errors.password}</span>}
+					</div>
+					<input className={`${tw_input}`} placeholder="Create a password" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
 				</div>
 
 				{/* Confirm Password */}
-				<div className="flex flex-col">
-					{errors.confirmPassword && <span>{errors.confirmPassword}</span>}
-					<label className="select-none" htmlFor="confirm-password">Confirm Password</label>
-					<input className="appearance-none" type="password" value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={(e) => setConfirmPassword(e.target.value)} minLength={8} maxLength={50} required />
+				<div className="w-full flex flex-col space-y-[.2rem]">
+					<div className="flex items-center justify-between">
+						<label className={tw_label} htmlFor="confirm-password">Confirm Password</label>
+						{errors.confirmPassword && <span>{errors.confirmPassword}</span>}
+					</div>
+					<input className={`${tw_input}`} placeholder="Repeat your password" type="password" value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={(e) => setConfirmPassword(e.target.value)} minLength={8} maxLength={50} required />
 				</div>
 			</div>
 
-			<button type="submit" disabled={!!Object.keys(errors).length}>
-				<span className="select-none">Register</span>
+			<button className="w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300" type="submit" disabled={!!Object.keys(errors).length}>
+				<span className="select-none text-black-900 group-disabled:text-secondary">Register</span>
 			</button>
 		</form>
 	);
