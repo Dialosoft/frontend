@@ -21,7 +21,10 @@ export default function Register_Form() {
 	const handle_Username_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUsername(e.target.value);
 
 	/* Email */
-	const debounced_setEmail = useCallback(debounce((value: string) => setEmail(value), 30), [setEmail]);
+	const debounced_setEmail = useCallback(debounce((value: string) => {
+		setEmail(value);
+		validateField("email", value);
+	}, 30), [setEmail]);
 	const handle_Email_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setEmail(e.target.value);
 
 	/* Validate individual fields */
