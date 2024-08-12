@@ -49,6 +49,7 @@ export default function Register_Form() {
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
 	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
+	const tw_error = "text-red text-sm";
 
 	return (
 		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 font-light lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]">
@@ -57,36 +58,36 @@ export default function Register_Form() {
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
 						<label className={tw_label} htmlFor="username">Username</label>
-						{errors.username && <span>{errors.username}</span>}
+						{errors.username && <span className={tw_error}>{errors.username}</span>}
 					</div>
-					<input className={`${tw_input}`} placeholder="Choose your username" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} minLength={1} maxLength={20} required />
+					<input className={`${tw_input} ${errors.username && "border-red"}`} placeholder="Choose your username" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} minLength={1} maxLength={20} required />
 				</div>
 
 				{/* Email */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
 						<label className={tw_label} htmlFor="email">Email</label>
-						{errors.email && <span>{errors.email}</span>}
+						{errors.email && <span className={tw_error}>{errors.email}</span>}
 					</div>
-					<input className={`${tw_input}`} placeholder="Enter your email" type="email" value={email} id="email" autoComplete="email" onChange={handle_Email_Change} maxLength={254} required />
+					<input className={`${tw_input} ${errors.email && "border-red"}`} placeholder="Enter your email" type="email" value={email} id="email" autoComplete="email" onChange={handle_Email_Change} maxLength={254} required />
 				</div>
 
 				{/* Password */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
 						<label className={tw_label} htmlFor="password">Password</label>
-						{errors.password && <span>{errors.password}</span>}
+						{errors.password && <span className={tw_error}>{errors.password}</span>}
 					</div>
-					<input className={`${tw_input}`} placeholder="Create a password" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
+					<input className={`${tw_input} ${errors.password && "border-red"}`} placeholder="Create a password" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
 				</div>
 
 				{/* Confirm Password */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
 						<label className={tw_label} htmlFor="confirm-password">Confirm Password</label>
-						{errors.confirmPassword && <span>{errors.confirmPassword}</span>}
+						{errors.confirmPassword && <span className={tw_error}>{errors.confirmPassword}</span>}
 					</div>
-					<input className={`${tw_input}`} placeholder="Repeat your password" type="password" value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={(e) => setConfirmPassword(e.target.value)} minLength={8} maxLength={50} required />
+					<input className={`${tw_input} ${errors.confirmPassword && "border-red"}`} placeholder="Repeat your password" type="password" value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={(e) => setConfirmPassword(e.target.value)} minLength={8} maxLength={50} required />
 				</div>
 			</div>
 
