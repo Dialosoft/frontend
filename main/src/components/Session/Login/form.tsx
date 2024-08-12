@@ -19,6 +19,10 @@ export default function Login_Form() {
 	const handle_UserOrEmail_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUserOrEmail(e.target.value);
 
 	/* Password */
+	const handle_Password_Change = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPassword(e.target.value);
+		validateField("password", e.target.value);
+	};
 
 	/* Validate individual fields */
 	const validateField = (field: string, value: string) => {
@@ -98,7 +102,7 @@ export default function Login_Form() {
 						<label className={tw_label} htmlFor="password">Password</label>
 						{errors.password && <span className={tw_error}>{errors.password}</span>}
 					</div>
-					<input className={`${tw_input} ${errors.password && "border-red"}`} placeholder="Enter your password" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
+					<input className={`${tw_input} ${errors.password && "border-red"}`} placeholder="Enter your password" type="password" value={password} id="password" autoComplete="current-password" onChange={handle_Password_Change} minLength={8} maxLength={50} required />
 				</div>
 			</div>
 
