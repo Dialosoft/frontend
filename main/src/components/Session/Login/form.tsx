@@ -9,16 +9,23 @@ export default function Login_Form() {
 	const [UserOrEmail, setUserOrEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
+	const [isDisabled, setIsDisabled] = useState(true);
 
 	/* Username or Email */
-	const debounced_setUserOrEmail = useCallback(debounce((value: string) => setUserOrEmail(value), 50),[setUserOrEmail]);
+	const debounced_setUserOrEmail = useCallback(debounce((value: string) => {
+		setUserOrEmail(value);
+		validateField("username", value);
+	}, 30), [setUserOrEmail]);
 	const handle_UserOrEmail_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUserOrEmail(e.target.value);
+
+	/* Password */
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
 
 		const result = loginSchema.safeParse({ UserOrEmail, password });
 		if (result.success) {
+			// AQUI VA EL CODIGO DE ENVIO AL BACKEND
 			console.log(result.data, "VALID");
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
