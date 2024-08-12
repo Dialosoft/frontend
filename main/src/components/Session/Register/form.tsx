@@ -59,6 +59,12 @@ export default function Register_Form() {
 
 			if (fieldError) {
 				setErrors((prev) => ({ ...prev, [field]: fieldError.message }));
+			} else {
+				setErrors((prev) => {
+					const newErrors = { ...prev };
+					delete newErrors[field];
+					return newErrors;
+				});
 			}
 		}
 	};
