@@ -47,11 +47,11 @@ export default function Register_Form() {
 	};
 
 	/* Styles */
-	const tw_label = "select-none font-medium";
-	const tw_input = "appearance-none focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
+	const tw_label = "select-none font-medium text-sm lg:text-base";
+	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
 
 	return (
-		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]">
+		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 font-light lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]">
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 				{/* Username */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
