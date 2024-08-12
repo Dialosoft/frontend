@@ -102,7 +102,7 @@ export default function Register_Form() {
 	const tw_error = "text-red text-sm";
 
 	return (
-		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 font-light lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
+		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 				{/* Username */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
