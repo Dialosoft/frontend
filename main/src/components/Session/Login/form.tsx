@@ -45,7 +45,7 @@ export default function Login_Form() {
 						<label className={tw_label} htmlFor="UsernameOrEmail">Email or Username</label>
 						{errors.UserOrEmail && <span className="text-red">{errors.UserOrEmail}</span>}
 					</div>
-					<input className={`${tw_input}`} placeholder="Enter your email or username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} minLength={1} maxLength={254} required />
+					<input className={`${tw_input}`} placeholder="Enter your email or username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} maxLength={254} required />
 				</div>
 
 				<div className="w-full flex flex-col space-y-[.2rem]">
