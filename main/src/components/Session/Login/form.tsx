@@ -33,12 +33,15 @@ export default function Login_Form() {
 		}
 	};
 
+	/* Styles */
+	const tw_label = "select-none font-medium text-sm lg:text-base";
+
 	return (
 		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
-						<label className="select-none font-medium" htmlFor="UsernameOrEmail">Email or Username</label>
+						<label className={tw_label} htmlFor="UsernameOrEmail">Email or Username</label>
 						{errors.UserOrEmail && <span className="text-red">{errors.UserOrEmail}</span>}
 					</div>
 					<input className="appearance-none focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} minLength={1} maxLength={254} required />
@@ -46,7 +49,7 @@ export default function Login_Form() {
 
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
-						<label className="select-none font-medium" htmlFor="password">Password</label>
+						<label className={tw_label} htmlFor="password">Password</label>
 						{errors.password && <span className="text-red">{errors.password}</span>}
 					</div>
 					<input className={`appearance-none focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem] ${errors.password && 'border-red'}`} type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
