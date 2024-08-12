@@ -1,6 +1,15 @@
-export default function Saved() {
-	return(
-		<>
-		</>
+"use client";
+import Profile from "@/components/Account/Profile_Section/profile";
+import { useState } from "react";
+import AccountSideNav from "@/components/Account/sidenav";
+export default function SavedSection() {
+
+
+	return (
+		<div className="container   flex  space-x-4 mt-16">
+			<div className="max-w-[317px] w-full">
+				<AccountSideNav />
+			</div>
+			</div>
 	)
 }
