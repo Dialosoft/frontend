@@ -14,12 +14,38 @@ export default function Register_Form() {
 	const [isDisabled, setIsDisabled] = useState(true);
 
 	/* Username */
-	const debounced_setUsername = useCallback(debounce((value: string) => setUsername(value), 30), [setUsername]);
+	const debounced_setUsername = useCallback(debounce((value: string) => {
+		setUsername(value);
+		validateField("username", value);
+	}, 30), [setUsername]);
 	const handle_Username_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUsername(e.target.value);
 
 	/* Email */
 	const debounced_setEmail = useCallback(debounce((value: string) => setEmail(value), 30), [setEmail]);
 	const handle_Email_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setEmail(e.target.value);
+
+	/* Validate individual fields */
+	const validateField = (field: string, value: string) => {
+		const result = registerSchema.safeParse({
+			username: field === "username" ? value : username,
+			email: field === "email" ? value : email,
+			password: field === "password" ? value : password,
+			confirmPassword: field === "confirmPassword" ? value : confirmPassword
+		});
+
+		if (result.success) {
+			setErrors((prev) => {
+				const newErrors = { ...prev };
+				delete newErrors[field];
+				return newErrors;
+			});
+		} else {
+			const fieldError = result.error.errors.find((error) => error.path[0] === field);
+			if (fieldError) {
+				setErrors((prev) => ({ ...prev, [field]: fieldError.message }));
+			}
+		}
+	};
 
 	/* Button */
 	useEffect(() => {
