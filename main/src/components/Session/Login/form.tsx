@@ -35,6 +35,7 @@ export default function Login_Form() {
 
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
+	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
 
 	return (
 		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
@@ -44,7 +45,7 @@ export default function Login_Form() {
 						<label className={tw_label} htmlFor="UsernameOrEmail">Email or Username</label>
 						{errors.UserOrEmail && <span className="text-red">{errors.UserOrEmail}</span>}
 					</div>
-					<input className="appearance-none focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} minLength={1} maxLength={254} required />
+					<input className={`${tw_input}`} type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} minLength={1} maxLength={254} required />
 				</div>
 
 				<div className="w-full flex flex-col space-y-[.2rem]">
@@ -52,7 +53,7 @@ export default function Login_Form() {
 						<label className={tw_label} htmlFor="password">Password</label>
 						{errors.password && <span className="text-red">{errors.password}</span>}
 					</div>
-					<input className={`appearance-none focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem] ${errors.password && 'border-red'}`} type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
+					<input className={`${tw_input}`} type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
 				</div>
 			</div>
 
