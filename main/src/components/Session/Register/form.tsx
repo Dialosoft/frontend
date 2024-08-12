@@ -33,6 +33,12 @@ export default function Register_Form() {
 		validateField("password", e.target.value);
 	};
 
+	/* Confirm Password */
+	const handle_ConfirmPassword_Change = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setConfirmPassword(e.target.value);
+		validateField("confirmPassword", e.target.value);
+	};
+
 	/* Validate individual fields */
 	const validateField = (field: string, value: string) => {
 		const result = registerSchema.safeParse({
@@ -50,7 +56,7 @@ export default function Register_Form() {
 			});
 		} else {
 			const fieldError = result.error.errors.find((error) => error.path[0] === field);
-			
+
 			if (fieldError) {
 				setErrors((prev) => ({ ...prev, [field]: fieldError.message }));
 			}
@@ -125,7 +131,7 @@ export default function Register_Form() {
 						<label className={tw_label} htmlFor="confirm-password">Confirm Password</label>
 						{errors.confirmPassword && <span className={tw_error}>{errors.confirmPassword}</span>}
 					</div>
-					<input className={`${tw_input} ${errors.confirmPassword && "border-red"}`} placeholder="Repeat your password" type="password" value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={(e) => setConfirmPassword(e.target.value)} minLength={8} maxLength={50} required />
+					<input className={`${tw_input} ${errors.confirmPassword && "border-red"}`} placeholder="Repeat your password" type="password" value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={handle_ConfirmPassword_Change} minLength={8} maxLength={50} required />
 				</div>
 			</div>
 
