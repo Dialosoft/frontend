@@ -1,7 +1,7 @@
 "use client";
 
 import debounce from "just-debounce-it";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import loginSchema from "@/schemas/Session/login";
 
@@ -47,6 +47,13 @@ export default function Login_Form() {
 			}
 		}
 	};
+
+	/* Button */
+	useEffect(() => {
+		const noErrors = Object.keys(errors).length === 0;
+		const allFieldsFilled = UserOrEmail && password;
+		setIsDisabled(!(noErrors && allFieldsFilled));
+	}, [errors, UserOrEmail, password]);
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
@@ -95,7 +102,7 @@ export default function Login_Form() {
 				</div>
 			</div>
 
-			<button className="w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300" type="submit" disabled={!!Object.keys(errors).length}>
+			<button className="w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300" type="submit" disabled={isDisabled}>
 				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">Login</span>
 			</button>
 		</form>
