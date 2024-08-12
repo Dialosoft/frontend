@@ -14,11 +14,39 @@ export default function Login_Form() {
 	/* Username or Email */
 	const debounced_setUserOrEmail = useCallback(debounce((value: string) => {
 		setUserOrEmail(value);
-		validateField("username", value);
+		validateField("UserOrEmail", value);
 	}, 30), [setUserOrEmail]);
 	const handle_UserOrEmail_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUserOrEmail(e.target.value);
 
 	/* Password */
+
+	/* Validate individual fields */
+	const validateField = (field: string, value: string) => {
+		const result = loginSchema.safeParse({
+			UserOrEmail: field === "UserOrEmail" ? value : UserOrEmail,
+			password: field === "password" ? value : password
+		});
+
+		if (result.success) {
+			setErrors((prev) => {
+				const newErrors = { ...prev };
+				delete newErrors[field];
+				return newErrors;
+			});
+		} else {
+			const fieldError = result.error.errors.find((error) => error.path[0] === field);
+
+			if (fieldError) {
+				setErrors((prev) => ({ ...prev, [field]: fieldError.message }));
+			} else {
+				setErrors((prev) => {
+					const newErrors = { ...prev };
+					delete newErrors[field];
+					return newErrors;
+				});
+			}
+		}
+	};
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
