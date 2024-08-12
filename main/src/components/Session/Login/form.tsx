@@ -41,20 +41,22 @@ export default function Login_Form() {
 	return (
 		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
+				{/* Username or Email */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
 						<label className={tw_label} htmlFor="UsernameOrEmail">Email or Username</label>
 						{errors.UserOrEmail && <span className={tw_error}>{errors.UserOrEmail}</span>}
 					</div>
-					<input className={`${tw_input}`} placeholder="Enter your email or username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} maxLength={254} required />
+					<input className={`${tw_input} ${errors.UserOrEmail && "border-red"}`} placeholder="Enter your email or username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} maxLength={254} required />
 				</div>
 
+				{/* Password */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
 						<label className={tw_label} htmlFor="password">Password</label>
 						{errors.password && <span className={tw_error}>{errors.password}</span>}
 					</div>
-					<input className={`${tw_input}`} placeholder="Enter your password" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
+					<input className={`${tw_input} ${errors.password && "border-red"}`} placeholder="Enter your password" type="password" value={password} id="password" autoComplete="current-password" onChange={(e) => setPassword(e.target.value)} minLength={8} maxLength={50} required />
 				</div>
 			</div>
 
