@@ -1,7 +1,7 @@
 "use client";
 
 import debounce from "just-debounce-it";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import registerSchema from "@/schemas/Session/register";
 
@@ -20,6 +20,13 @@ export default function Register_Form() {
 	/* Email */
 	const debounced_setEmail = useCallback(debounce((value: string) => setEmail(value), 30), [setEmail]);
 	const handle_Email_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setEmail(e.target.value);
+
+	/* Button */
+	useEffect(() => {
+		const noErrors = Object.keys(errors).length === 0;
+		const allFieldsFilled = username && email && password && confirmPassword;
+		setIsDisabled(!(noErrors && allFieldsFilled));
+	}, [errors, username, email, password, confirmPassword]);
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
@@ -86,8 +93,8 @@ export default function Register_Form() {
 				</div>
 			</div>
 
-			<button className="w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300" type="submit" disabled={!!Object.keys(errors).length}>
-				<span className="select-none text-black-900 group-disabled:text-secondary">Register</span>
+			<button className="w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300" type="submit" disabled={isDisabled}>
+				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">Register</span>
 			</button>
 		</form>
 	);
