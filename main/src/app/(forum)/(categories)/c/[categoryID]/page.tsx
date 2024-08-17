@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { Plus } from "lucide-react";
 import Aside from "@/components/side_info/main";
-import Post from "@/components/Posts_Section/post";
+import Post from "@/components/Category_Section/post";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 

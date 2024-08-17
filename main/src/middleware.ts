@@ -32,6 +32,13 @@ export function middleware(req: NextRequest) {
 	requestHeaders.set("x-nonce", nonce);
 	requestHeaders.set("Content-Security-Policy", cspHeader.replace(/\s{2,}/g, " ").trim());
 
+	/* Redirects */
+	const normalizedUrl = req.nextUrl.pathname.toLowerCase();
+	if(normalizedUrl === "/a"){
+		return NextResponse.redirect(new URL("/a/profile", req.url));
+
+	}
+
 	/* Server - Headers */
 	const response = NextResponse.next({ request: { headers: requestHeaders }});
 
