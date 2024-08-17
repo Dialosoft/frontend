@@ -1,15 +1,24 @@
 "use client";
 
 import debounce from "just-debounce-it";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import loginSchema from "@/schemas/Session/login";
+import loginDatabase from "@/utils/Session/login";
 
 export default function Login_Form() {
+	const router = useRouter();
+
 	const [UserOrEmail, setUserOrEmail] = useState("");
 	const [password, setPassword] = useState("");
+
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
+
+	const [showErrorModal, setShowErrorModal] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	/* Username or Email */
 	const debounced_setUserOrEmail = useCallback(debounce((value: string) => {
@@ -59,13 +68,24 @@ export default function Login_Form() {
 		setIsDisabled(!(noErrors && allFieldsFilled));
 	}, [errors, UserOrEmail, password]);
 
-	const handleSubmit = (event: React.FormEvent) => {
+	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
+		setIsSubmitting(true);
 
 		const result = loginSchema.safeParse({ UserOrEmail, password });
 		if (result.success) {
-			// AQUI VA EL CODIGO DE ENVIO AL BACKEND
-			console.log(result.data, "VALID");
+			const status = await loginDatabase({ UserOrEmail: UserOrEmail, password: password });
+			if (!status.success) {
+				setErrorMessage(status.message as string);
+				setShowErrorModal(true);
+				setIsSubmitting(false);
+				
+				return setTimeout(() => {
+					setShowErrorModal(false);
+				}, 10 * 1000); // 10 seconds
+			}
+
+			router.push("/");
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
 
@@ -76,6 +96,7 @@ export default function Login_Form() {
 			});
 
 			setErrors(fieldErrors);
+			setIsSubmitting(false);
 		}
 	};
 
@@ -85,6 +106,7 @@ export default function Login_Form() {
 	const tw_error = "text-red text-sm";
 
 	return (
+		<>
 		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 				{/* Username or Email */}
@@ -106,9 +128,16 @@ export default function Login_Form() {
 				</div>
 			</div>
 
-			<button className="w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300" type="submit" disabled={isDisabled}>
-				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">Login</span>
+			<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
+				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Login"}</span>
 			</button>
 		</form>
+
+		{showErrorModal && (
+			<div className="fixed right-[2rem] bottom-[2rem] bg-red py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
+				<span>{errorMessage}</span>
+			</div>
+		)}
+		</>
 	);
 }
