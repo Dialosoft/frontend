@@ -38,7 +38,7 @@ export default async function Register_Database({ username, email, password, con
 
 		return { success: true };
 	} catch (error) {
-		return { success: false, message: "An unexpected error occurred. Please try again later." };
+		return { success: false, message: "A network error occurred. Please check your connection and try again." };
 	}
 
 }
