@@ -66,6 +66,7 @@ export default function Login_Form() {
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
+		setIsSubmitting(true);
 
 		const result = loginSchema.safeParse({ UserOrEmail, password });
 		if (result.success) {
@@ -81,6 +82,7 @@ export default function Login_Form() {
 			});
 
 			setErrors(fieldErrors);
+			setIsSubmitting(false);
 		}
 	};
 
@@ -90,6 +92,7 @@ export default function Login_Form() {
 	const tw_error = "text-red text-sm";
 
 	return (
+		<>
 		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 				{/* Username or Email */}
@@ -115,5 +118,12 @@ export default function Login_Form() {
 				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">Login</span>
 			</button>
 		</form>
+
+		{showErrorModal && (
+			<div className="fixed right-[2rem] bottom-[2rem] bg-red py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
+				<span>{errorMessage}</span>
+			</div>
+		)}
+		</>
 	);
 }
