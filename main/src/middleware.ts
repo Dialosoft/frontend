@@ -33,6 +33,7 @@ export function middleware(req: NextRequest) {
 	requestHeaders.set("Content-Security-Policy", cspHeader.replace(/\s{2,}/g, " ").trim());
 
 	/* Redirects */
+	const cookies = req.cookies;
 	const normalizedUrl = req.nextUrl.pathname.toLowerCase();
 
 	// Account
@@ -42,12 +43,12 @@ export function middleware(req: NextRequest) {
 
 	// Session
 	if ([ "/login", "/register" ].includes(normalizedUrl)) {
-		const cookie = req.cookies.has("_rtkn");
-
-		if (cookie) {
+		if (cookies.has("_rtkn")) {
 			return NextResponse.redirect(new URL("/", req.url));	
 		}
 	}
+
+	/* Session */
 
 	/* Server - Headers */
 	const response = NextResponse.next({ request: { headers: requestHeaders }});
