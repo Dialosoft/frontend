@@ -54,7 +54,7 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 			httpOnly: true,
 			secure: false,
 			sameSite: "strict",
-			maxAge: data.accessTokenExpiresInSeconds,
+			maxAge: tokens.accessTokenExpiresInSeconds,
 			path: "/"
 		});
 		
