@@ -1,6 +1,9 @@
+"use client"
 import { UserRound, Bookmark, Settings, LogOut } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
+
+
 export default function AccountSideNav() {
 
 	const menuItems = [
