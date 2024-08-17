@@ -4,14 +4,20 @@ import debounce from "just-debounce-it";
 import { useCallback, useEffect, useState } from "react";
 
 import registerSchema from "@/schemas/Session/register";
+import registerDatabase from "@/utils/Session/register";
 
 export default function Register_Form() {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
+
+	const [showErrorModal, setShowErrorModal] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	/* Username */
 	const debounced_setUsername = useCallback(debounce((value: string) => {
@@ -76,13 +82,24 @@ export default function Register_Form() {
 		setIsDisabled(!(noErrors && allFieldsFilled));
 	}, [errors, username, email, password, confirmPassword]);
 
-	const handleSubmit = (event: React.FormEvent) => {
+	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
+		setIsSubmitting(true);
 
 		const result = registerSchema.safeParse({ username, email, password, confirmPassword });
 		if (result.success) {
-			// AQUI VA EL CODIGO DE ENVIO AL BACKEND
-			console.log(result.data, "VALID");
+			const status = await registerDatabase({ username: username, email: email, password: password, confirmPassword: confirmPassword });
+			if (!status.success) {
+				setErrorMessage(status.message as string);
+				setShowErrorModal(true);
+				setIsSubmitting(false);
+				
+				return setTimeout(() => {
+					setShowErrorModal(false);
+				}, 10 * 1000); // 10 seconds
+			}
+
+			// HERE
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
 
@@ -93,6 +110,7 @@ export default function Register_Form() {
 			});
 
 			setErrors(fieldErrors);
+			setIsSubmitting(false);
 		}
 	};
 
@@ -102,6 +120,7 @@ export default function Register_Form() {
 	const tw_error = "text-red text-sm";
 
 	return (
+		<>
 		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 				{/* Username */}
@@ -141,9 +160,16 @@ export default function Register_Form() {
 				</div>
 			</div>
 
-			<button className="w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300" type="submit" disabled={isDisabled}>
-				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">Register</span>
+			<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
+				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Register"}</span>
 			</button>
 		</form>
+
+		{showErrorModal && (
+			<div className="fixed right-[2rem] bottom-[2rem] bg-red py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
+				<span>{errorMessage}</span>
+			</div>
+		)}
+		</>
 	);
 }
