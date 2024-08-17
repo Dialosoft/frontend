@@ -27,7 +27,7 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 
 		if (!response.ok) {
 			if (response.status === 401) {
-				return { success: false, message: "Invalid username, email or password. Please try again." };
+				return { success: false, message: "Invalid username, email or password." };
 			} else {
 				return { success: false, message: "An unexpected error occurred. Please try again later." };
 			}
