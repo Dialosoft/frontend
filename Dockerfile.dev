@@ -4,8 +4,8 @@ ENV PNPM_HOME="/var/lib/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# Install pnpm and nginx globally
-RUN pnpm add -g pnpm && apk add --no-cache nginx
+# Install pnpm globally
+RUN pnpm add -g pnpm
 
 # Development environment setup
 FROM base AS dev
@@ -24,5 +24,8 @@ RUN pnpm install
 COPY main ./
 COPY main/.env ./
 
-# Start Nginx and the development server
-CMD ["sh", "-c", "nginx -g 'daemon off;' & pnpm run dev"]
+# Expose the port for Next.js
+EXPOSE 3030
+
+# Start the development server
+CMD ["pnpm", "run", "dev"]
