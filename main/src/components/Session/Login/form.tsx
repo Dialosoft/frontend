@@ -4,6 +4,7 @@ import debounce from "just-debounce-it";
 import { useCallback, useEffect, useState } from "react";
 
 import loginSchema from "@/schemas/Session/login";
+import loginDatabase from "@/utils/Session/login";
 
 export default function Login_Form() {
 	const [UserOrEmail, setUserOrEmail] = useState("");
@@ -64,14 +65,24 @@ export default function Login_Form() {
 		setIsDisabled(!(noErrors && allFieldsFilled));
 	}, [errors, UserOrEmail, password]);
 
-	const handleSubmit = (event: React.FormEvent) => {
+	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		setIsSubmitting(true);
 
 		const result = loginSchema.safeParse({ UserOrEmail, password });
 		if (result.success) {
-			// AQUI VA EL CODIGO DE ENVIO AL BACKEND
-			console.log(result.data, "VALID");
+			const status = await loginDatabase({ UsernameOrEmail: UserOrEmail, password: password });
+			if (!status.success) {
+				setErrorMessage(status.message as string);
+				setShowErrorModal(true);
+				setIsSubmitting(false);
+				
+				return setTimeout(() => {
+					setShowErrorModal(false);
+				}, 10 * 1000); // 10 seconds
+			}
+
+			// HERE
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
 
