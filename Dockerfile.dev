@@ -1,0 +1,38 @@
+# Nginx setup
+FROM nginx:stable-alpine AS nginx
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Base image setup
+FROM node:20-alpine AS base
+ENV PNPM_HOME="/var/lib/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+# Install pnpm globally
+RUN pnpm add -g pnpm
+
+# Development environment setup
+FROM base AS dev
+WORKDIR /app
+
+# Install Nginx in the dev stage
+RUN apk add --no-cache nginx
+
+# Copy package.json and pnpm-lock.yaml
+COPY main/package.json ./
+
+# Install dependencies
+RUN pnpm install
+
+# Copy the rest of the application code
+COPY main ./
+COPY main/.env ./
+
+# Copy Nginx configuration
+COPY --from=nginx /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+
+# Expose the necessary port for development
+EXPOSE 3030
+
+# Start Nginx and the development server
+CMD ["sh", "-c", "nginx -g 'daemon off;' & pnpm run dev"]
