@@ -39,6 +39,11 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 		
 		// Set cookies
 		const cookieStore = cookies();
+
+		// Search refresh token
+		if (cookieStore.get("_rtkn")) {
+			return { success: true };
+		}
 		
 		// Refresh token
 		cookieStore.set("_rtkn", tokens.refreshToken, {
