@@ -3,12 +3,12 @@
 import loginSchema from "@/schemas/Session/login";
 
 interface LoginProps {
-	UsernameOrEmail: string,
+	UserOrEmail: string,
 	password: string
 }
 
-export default async function Login_Database({ UsernameOrEmail, password }: LoginProps) {
-	const result = loginSchema.safeParse({ UsernameOrEmail, password });
+export default async function Login_Database({ UserOrEmail, password }: LoginProps) {
+	const result = loginSchema.safeParse({ UserOrEmail, password });
 	if (!result.success) {
 		return { success: false, message: "Validation failed" };
 	}
@@ -20,7 +20,7 @@ export default async function Login_Database({ UsernameOrEmail, password }: Logi
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				username: UsernameOrEmail,
+				username: UserOrEmail,
 				password: password
 			})
 		});

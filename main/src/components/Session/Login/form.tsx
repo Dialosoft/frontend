@@ -71,7 +71,7 @@ export default function Login_Form() {
 
 		const result = loginSchema.safeParse({ UserOrEmail, password });
 		if (result.success) {
-			const status = await loginDatabase({ UsernameOrEmail: UserOrEmail, password: password });
+			const status = await loginDatabase({ UserOrEmail: UserOrEmail, password: password });
 			if (!status.success) {
 				setErrorMessage(status.message as string);
 				setShowErrorModal(true);
