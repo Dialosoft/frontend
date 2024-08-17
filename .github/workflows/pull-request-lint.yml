@@ -32,10 +32,12 @@ jobs:
     
     - name: Run ESLint
       if: steps.changed-files.outputs.all_changed_files != ''
-      run: npx eslint --ext .ts,.tsx ${{ steps.changed-files.outputs.all_changed_files }}
+      run: |
+        npx eslint --ext .ts,.tsx $(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep -E '\.ts$|\.tsx$')
       working-directory: ./main
     
     - name: Run Prettier
       if: steps.changed-files.outputs.all_changed_files != ''
-      run: npx prettier --check ${{ steps.changed-files.outputs.all_changed_files }}
+      run: |
+        npx prettier --check $(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep -E '\.ts$|\.tsx$')
       working-directory: ./main
