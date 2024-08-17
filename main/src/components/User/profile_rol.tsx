@@ -3,7 +3,7 @@ import { Sword } from "lucide-react";
 import { UserRound } from "lucide-react";
 
 interface RolProps {
-	rol: "Admin" | "Moderator" | "User";
+	rol: string;
 }
 
 export default function ProfileRol({ rol }: RolProps) {
