@@ -1,22 +1,18 @@
-# Nginx setup
-FROM nginx:stable-alpine AS nginx
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
-
-# Base image setup
+# Base image setup with Node.js and Nginx
 FROM node:20-alpine AS base
 ENV PNPM_HOME="/var/lib/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# Install pnpm globally
-RUN pnpm add -g pnpm
+# Install pnpm and nginx globally
+RUN pnpm add -g pnpm && apk add --no-cache nginx
 
 # Development environment setup
 FROM base AS dev
 WORKDIR /app
 
-# Install Nginx in the development stage
-RUN apk add --no-cache nginx
+# Copy Nginx configuration
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Copy package.json
 COPY main/package.json ./
