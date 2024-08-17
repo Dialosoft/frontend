@@ -1,21 +1,24 @@
 "use client";
-import Aside from "@/components/side_info/main";
-import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import { ChevronLeft } from "lucide-react";
-import { BellRing } from "lucide-react";
-import { BellPlus } from "lucide-react";
-import { BellOff } from "lucide-react";
+import {
+  ChevronRight,
+  ChevronLeft,
+  BellRing,
+  BellPlus,
+  BellOff,
+  Smile,
+  Image,
+  Paperclip,
+  Send,
+  ChevronDown,
+  Search,
+} from "lucide-react";
+import Aside from "@/components/side_info/main";
 import Post from "@/components/Post_Section/post";
-import { Smile } from "lucide-react";
-import { Image } from "lucide-react";
-import { Paperclip } from "lucide-react";
-import { Send } from "lucide-react";
-import { ChevronDown } from "lucide-react";
-import { Search } from "lucide-react";
 import Comments from "@/components/Post_Section/comments";
+
 
 type Props = {
 	params: {
