@@ -34,9 +34,19 @@ export function middleware(req: NextRequest) {
 
 	/* Redirects */
 	const normalizedUrl = req.nextUrl.pathname.toLowerCase();
+
+	// Account
 	if(normalizedUrl === "/a"){
 		return NextResponse.redirect(new URL("/a/profile", req.url));
+	}
 
+	// Session
+	if ([ "/login", "/register" ].includes(normalizedUrl)) {
+		const cookie = req.cookies.has("_rtkn");
+
+		if (cookie) {
+			return NextResponse.redirect(new URL("/", req.url));	
+		}
 	}
 
 	/* Server - Headers */
