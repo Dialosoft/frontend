@@ -1,12 +1,15 @@
 "use client";
 
 import debounce from "just-debounce-it";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import loginSchema from "@/schemas/Session/login";
 import loginDatabase from "@/utils/Session/login";
 
 export default function Login_Form() {
+	const router = useRouter();
+
 	const [UserOrEmail, setUserOrEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -82,7 +85,7 @@ export default function Login_Form() {
 				}, 10 * 1000); // 10 seconds
 			}
 
-			// HERE
+			router.push("/");
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
 

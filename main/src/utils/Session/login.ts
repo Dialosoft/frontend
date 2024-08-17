@@ -1,5 +1,6 @@
 "use server";
 
+import { cookies } from "next/headers";
 import loginSchema from "@/schemas/Session/login";
 
 interface LoginProps {
@@ -33,6 +34,30 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 			}
 		}
 
+		const data = await response.json();
+		const tokens = data.metadata;
+		
+		// Set cookies
+		const cookieStore = cookies();
+		
+		// Refresh token
+		cookieStore.set("_rtkn", tokens.refreshToken, {
+			httpOnly: true,
+			secure: false,
+			sameSite: "strict",
+			maxAge: 5 * (24 * 60 * 60), // 5 days
+			path: "/"
+		});
+
+		// Access token
+		cookieStore.set("_atkn", tokens.accessToken, {
+			httpOnly: true,
+			secure: false,
+			sameSite: "strict",
+			maxAge: data.accessTokenExpiresInSeconds,
+			path: "/"
+		});
+		
 		return { success: true };
 	} catch (error) {
 		return { success: false, message: "A network error occurred. Please check your connection and try again." };
