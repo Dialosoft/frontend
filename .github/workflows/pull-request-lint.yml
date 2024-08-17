@@ -1,8 +1,6 @@
 name: "Lint and Prettier"
 
 on:
-  pull_request:
-    branches: [ "develop" ]
   pull_request_target:
     branches: [ "develop" ]
 
@@ -14,8 +12,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.1.7
-      with:
-        fetch-depth: 0
 
     - name: Set up Node.js
       uses: actions/setup-node@v4.0.3
@@ -28,16 +24,18 @@ jobs:
       run: npm ci
       working-directory: ./main
 
-    - name: Get list of changed files
-      id: changed_files
-      run: echo "CHANGED_FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }} ${{ github.sha }} | grep -E '\.ts$|\.tsx$' || true)" >> $GITHUB_ENV
-
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v44.5.7
+      with:
+        since_last_remote_commit: true
+    
     - name: Run ESLint
-      if: env.CHANGED_FILES != ''
-      run: npx eslint --ext .js,.jsx,.ts,.tsx $CHANGED_FILES
+      if: steps.changed-files.outputs.all_changed_files != ''
+      run: npx eslint --ext .ts,.tsx ${{ steps.changed-files.outputs.all_changed_files }}
       working-directory: ./main
-
+    
     - name: Run Prettier
-      if: env.CHANGED_FILES != ''
-      run: npx prettier --check ./main $CHANGED_FILES
-      working-directory: ./
+      if: steps.changed-files.outputs.all_changed_files != ''
+      run: npx prettier --check ${{ steps.changed-files.outputs.all_changed_files }}
+      working-directory: ./main
