@@ -38,5 +38,8 @@ COPY --from=build /app/.env /app/.env
 # Copy Nginx configuration
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
+# Expose the port
+EXPOSE 80
+
 # Start Nginx and the application
 CMD ["sh", "-c", "nginx -g 'daemon off;' & pnpm start"]
