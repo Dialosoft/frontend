@@ -8,8 +8,13 @@ import loginSchema from "@/schemas/Session/login";
 export default function Login_Form() {
 	const [UserOrEmail, setUserOrEmail] = useState("");
 	const [password, setPassword] = useState("");
+
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
+
+	const [showErrorModal, setShowErrorModal] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	/* Username or Email */
 	const debounced_setUserOrEmail = useCallback(debounce((value: string) => {
