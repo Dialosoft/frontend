@@ -3,6 +3,8 @@
 import debounce from "just-debounce-it";
 import { useCallback, useEffect, useState } from "react";
 
+import { Eye, EyeOff } from "lucide-react";
+
 import registerSchema from "@/schemas/Session/register";
 import registerDatabase from "@/utils/Session/register";
 
@@ -10,6 +12,7 @@ export default function Register_Form() {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 	const [confirmPassword, setConfirmPassword] = useState("");
 	
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -37,6 +40,11 @@ export default function Register_Form() {
 	const handle_Password_Change = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPassword(e.target.value);
 		validateField("password", e.target.value);
+	};
+
+	/* Toggle Password Visibility */
+	const togglePasswordVisibility = () => {
+		setShowPassword(!showPassword);
 	};
 
 	/* Confirm Password */
@@ -147,7 +155,10 @@ export default function Register_Form() {
 						<label className={tw_label} htmlFor="password">Password</label>
 						{errors.password && <span className={tw_error}>{errors.password}</span>}
 					</div>
-					<input className={`${tw_input} ${errors.password && "border-red"}`} placeholder="Create a password" type="password" value={password} id="password" autoComplete="current-password" onChange={handle_Password_Change} minLength={8} maxLength={50} required />
+					<div className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}>
+						<input className="w-full appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-transparent mr-2" placeholder="Create a password" type={showPassword ? "text" : "password"} value={password} id="password" autoComplete="current-password" onChange={handle_Password_Change} minLength={8} maxLength={50} required />
+						<button type="button" onClick={togglePasswordVisibility}>{showPassword ? <EyeOff className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} /> : <Eye className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />}</button>
+					</div>
 				</div>
 
 				{/* Confirm Password */}
