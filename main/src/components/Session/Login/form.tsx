@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import debounce from "just-debounce-it";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -120,11 +121,11 @@ export default function Login_Form() {
 				{/* Username or Email */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
-						<label className={tw_label} htmlFor="UsernameOrEmail">Email or Username</label>
+						<label className={tw_label} htmlFor="UsernameOrEmail">Username</label>
 						{errors.UserOrEmail && <span className={tw_error}>{errors.UserOrEmail}</span>}
 					</div>
 
-					<input className={`${tw_input} ${errors.UserOrEmail && "border-red"}`} placeholder="Enter your email or username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} maxLength={254} required />
+					<input className={`${tw_input} ${errors.UserOrEmail && "border-red"}`} placeholder="Enter your username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} maxLength={254} required />
 				</div>
 
 				{/* Password */}
@@ -141,9 +142,16 @@ export default function Login_Form() {
 				</div>
 			</div>
 
-			<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
-				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Login"}</span>
-			</button>
+			<div className="w-full flex flex-col items-center space-y-[.5rem]">
+				<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
+					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Login"}</span>
+				</button>
+
+				<div className="select-none flex space-x-2">
+					<p className="text-black-500">Don't have an account?</p>
+					<Link className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100" href="/register">Register</Link>
+				</div>
+			</div>
 		</form>
 
 		{showErrorModal && (
