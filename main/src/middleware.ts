@@ -59,24 +59,29 @@ export async function middleware(req: NextRequest) {
 	/* Server - Headers */
 	const response = NextResponse.next({ request: { headers: requestHeaders }});
 
-	// Session Tokens: Refresh token
+	// Session: Access Token
+	if (req.cookies.has("_atkn") && !req.cookies.has("_rtkn")) {
+		response.cookies.delete("_atkn");
+	}
+
+	// Session: Refresh Token
 	if (!req.cookies.has("_atkn") && req.cookies.has("_rtkn")) {
 		const statusRefresh = await refreshToken();
 
-		if (statusRefresh.redirect) {
+		if (statusRefresh.redirect && normalizedUrl !== "/") {
 			return NextResponse.redirect(new URL("/", req.url));
-		}
-
-		if (statusRefresh.status === "delete") {
-			response.cookies.delete("_rtkn");
 		} else {
-			response.cookies.set("_atkn", statusRefresh.token, {
-				httpOnly: true,
-				secure: false,
-				sameSite: "strict",
-				maxAge: statusRefresh.time,
-				path: "/"
-			});
+			if (statusRefresh.status === "delete") {
+				response.cookies.delete("_rtkn");
+			} else {
+				response.cookies.set("_atkn", statusRefresh.token, {
+					httpOnly: true,
+					secure: false,
+					sameSite: "strict",
+					maxAge: statusRefresh.time,
+					path: "/"
+				});
+			}
 		}
 	}
 
