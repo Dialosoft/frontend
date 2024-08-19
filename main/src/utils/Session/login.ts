@@ -35,7 +35,7 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 		}
 
 		const data = await response.json();
-		const tokens = data.metadata;
+		const tokens = data.data;
 		
 		// Set cookies
 		const cookieStore = cookies();
@@ -50,7 +50,7 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 			httpOnly: true,
 			secure: false,
 			sameSite: "strict",
-			maxAge: 5 * (24 * 60 * 60), // 5 days
+			maxAge: tokens.refreshTokenExpiresInSeconds,
 			path: "/"
 		});
 
