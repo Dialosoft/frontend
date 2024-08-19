@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import debounce from "just-debounce-it";
 import { useCallback, useEffect, useState } from "react";
 
@@ -191,9 +192,16 @@ export default function Register_Form() {
 				</div>
 			</div>
 
-			<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
-				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Register"}</span>
-			</button>
+			<div className="w-full flex flex-col items-center space-y-[.5rem]">
+				<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
+					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Register"}</span>
+				</button>
+
+				<div className="select-none flex space-x-2">
+					<p className="text-black-500">Already have an account?</p>
+					<Link className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100" href="/login">Login</Link>
+				</div>
+			</div>
 		</form>
 
 		{showErrorModal && (
