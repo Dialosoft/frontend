@@ -59,12 +59,24 @@ export async function middleware(req: NextRequest) {
 	/* Server - Headers */
 	const response = NextResponse.next({ request: { headers: requestHeaders }});
 
-	// Session Tokens
+	// Session Tokens: Refresh token
 	if (!req.cookies.has("_atkn") && req.cookies.has("_rtkn")) {
 		const statusRefresh = await refreshToken();
 
 		if (statusRefresh.redirect) {
 			return NextResponse.redirect(new URL("/", req.url));
+		}
+
+		if (statusRefresh.status === "delete") {
+			response.cookies.delete("_rtkn");
+		} else {
+			response.cookies.set("_atkn", statusRefresh.token, {
+				httpOnly: true,
+				secure: false,
+				sameSite: "strict",
+				maxAge: statusRefresh.time,
+				path: "/"
+			});
 		}
 	}
 
