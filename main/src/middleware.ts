@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import refreshToken from "@/utils/Session/refreshToken";
+
 function generateNonce() {
 	const array = new Uint8Array(30);
 	crypto.getRandomValues(array);
 	return btoa(String.fromCharCode(...array));
 }
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
 	/* Add headers */
 	const nonce = generateNonce();
 	const cspHeader = `
@@ -33,25 +35,38 @@ export function middleware(req: NextRequest) {
 	requestHeaders.set("Content-Security-Policy", cspHeader.replace(/\s{2,}/g, " ").trim());
 
 	/* Redirects */
-	const cookies = req.cookies;
 	const normalizedUrl = req.nextUrl.pathname.toLowerCase();
-
-	// Account
-	if(normalizedUrl === "/a"){
-		return NextResponse.redirect(new URL("/a/profile", req.url));
-	}
 
 	// Session
 	if ([ "/login", "/register" ].includes(normalizedUrl)) {
-		if (cookies.has("_rtkn")) {
-			return NextResponse.redirect(new URL("/", req.url));	
+		if (req.cookies.has("_rtkn")) {
+			return NextResponse.redirect(new URL("/", req.url));
 		}
 	}
 
-	/* Session */
+	// Account
+	if (normalizedUrl.startsWith("/a")) {
+		if (normalizedUrl === "/a"){
+			return NextResponse.redirect(new URL("/a/profile", req.url));
+		}
+		
+		// Verify cookies
+		if (!req.cookies.has("_rtkn")) {
+			return NextResponse.redirect(new URL("/", req.url));
+		}
+	}
 
 	/* Server - Headers */
 	const response = NextResponse.next({ request: { headers: requestHeaders }});
+
+	// Session Tokens
+	if (!req.cookies.has("_atkn") && req.cookies.has("_rtkn")) {
+		const statusRefresh = await refreshToken();
+
+		if (statusRefresh.redirect) {
+			return NextResponse.redirect(new URL("/", req.url));
+		}
+	}
 
 	response.headers.set("Content-Security-Policy", cspHeader.replace(/\s{2,}/g, " ").trim());
 	response.headers.set("X-Content-Type-Options", "nosniff");
