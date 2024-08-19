@@ -14,6 +14,8 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 		return { success: false, message: "Validation failed" };
 	}
 
+	const { UserOrEmail: validUserOrEmail, password: validPassword } = result.data;
+
 	try {
 		const response = await fetch("http://gateway-service:8080/dialosoft-api/auth/login", {
 			method: "POST",
@@ -21,8 +23,8 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				username: UserOrEmail,
-				password: password
+				username: validUserOrEmail.toLowerCase(),
+				password: validPassword
 			})
 		});
 

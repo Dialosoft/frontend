@@ -54,10 +54,13 @@ export default function Register_Form() {
 	};
 
 	/* Validate individual fields */
-	const validateField = (field: string, value: string) => {
+	type FieldName = "username" | "email" | "password" | "confirmPassword";
+	const validateField = (field: FieldName, value: string) => {
+		const data = { username, email, password, confirmPassword };
+		data[field] = value;
+
 		const result = registerSchema.safeParse({
-			username: field === "username" ? value : username,
-			email: field === "email" ? value : email,
+			...data,
 			password: field === "password" ? value : password,
 			confirmPassword: field === "confirmPassword" ? value : confirmPassword
 		});
@@ -66,6 +69,13 @@ export default function Register_Form() {
 			setErrors((prev) => {
 				const newErrors = { ...prev };
 				delete newErrors[field];
+
+				if (field === "password" || field === "confirmPassword") {
+					if (data.password === data.confirmPassword) {
+						delete newErrors["confirmPassword"];
+					}
+				}
+
 				return newErrors;
 			});
 		} else {
@@ -79,6 +89,12 @@ export default function Register_Form() {
 					delete newErrors[field];
 					return newErrors;
 				});
+			}
+
+			if (field === "password" || field === "confirmPassword") {
+				if (data.password !== data.confirmPassword) {
+					setErrors((prev) => ({ ...prev, confirmPassword: "Passwords must match" }));
+				}
 			}
 		}
 	};
