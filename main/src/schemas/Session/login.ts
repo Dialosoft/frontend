@@ -4,7 +4,7 @@ import { z } from "zod";
 const pUppercaseRegex = /(?=.*[A-Z])/;
 const pLowercaseRegex = /(?=.*[a-z])/;
 const pNumberRegex = /(?=.*\d)/;
-const pSpecialCharRegex = /(?=.*[@$!%*?&.,;#^_~()[\]{}|\\\-+=<>])/;
+const pSpecialCharRegex = /(?=.*[@$!%*?&.,;#^_~()[\]{}|\\\-+=<>/'":`])/;
 
 const loginSchema = z.object({
 	UserOrEmail: z.string().min(1, { message: "Required" }).max(254, { message: "Invalid username or email" }),
