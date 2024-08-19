@@ -15,6 +15,8 @@ export default async function Register_Database({ username, email, password, con
 		return { success: false, message: "Validation failed" };
 	}
 
+	const { username: validUsername, email: validEmail, password: validPassword } = result.data;
+
 	try {
 		const response = await fetch("http://gateway-service:8080/dialosoft-api/auth/register", {
 			method: "POST",
@@ -22,9 +24,9 @@ export default async function Register_Database({ username, email, password, con
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				username: username,
-				email: email,
-				password: password
+				username: validUsername.toLowerCase(),
+				email: validEmail.toLowerCase(),
+				password: validPassword
 			})
 		});
 
