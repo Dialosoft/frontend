@@ -133,7 +133,7 @@ export default function Login_Form() {
 						{errors.password && <span className={tw_error}>{errors.password}</span>}
 					</div>
 					<div className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}>
-						<input className="w-full appearance-none focus:outline-none bg-transparent mr-2" placeholder="Enter your password" type={showPassword ? "text" : "password"} value={password} id="password" autoComplete="current-password" onChange={handle_Password_Change} minLength={8} maxLength={50} required />
+						<input className="w-full appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-transparent mr-2" placeholder="Enter your password" type={showPassword ? "text" : "password"} value={password} id="password" autoComplete="current-password" onChange={handle_Password_Change} minLength={8} maxLength={50} required />
 						<button type="button" onClick={togglePasswordVisibility}>{showPassword ? <EyeOff className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} /> : <Eye className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />}</button>
 					</div>
 				</div>
