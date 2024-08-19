@@ -8,11 +8,6 @@ export default async function RefreshToken() {
 		return { redirect: true };
 	}
 
-	// Check: Access Token
-	if (cookies().has("_atkn")) {
-		return { redirect: true };
-	}
-
 	const refreshToken = cookies().get("_rtkn");
 	
 	try {
@@ -35,7 +30,7 @@ export default async function RefreshToken() {
 		}
 
 		const data = await response.json();
-		return { status: "create", token: data.data.accessToken, time: data.data.accessTokenExpiresInSeconds };
+		return { token: data.data.accessToken, time: data.data.accessTokenExpiresInSeconds };
 	} catch (error) {
 		return { redirect: true };
 	}
