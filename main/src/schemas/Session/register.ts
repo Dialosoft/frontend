@@ -7,7 +7,7 @@ const usernameRegex = /^[a-zA-Z0-9]+$/;
 const pUppercaseRegex = /(?=.*[A-Z])/;
 const pLowercaseRegex = /(?=.*[a-z])/;
 const pNumberRegex = /(?=.*\d)/;
-const pSpecialCharRegex = /(?=.*[@$!%*?&.,;#^_~()[\]{}|\\\-+=<>])/;
+const pSpecialCharRegex = /(?=.*[@$!%*?&.,;#^_~()[\]{}|\\\-+=<>/'":`])/;
 
 const registerSchema = z.object({
 	username: z.string().min(1, { message: "Required" }).max(20, { message: "Max 20 chars" }).regex(usernameRegex, { message: "Letters & numbers only" }),
