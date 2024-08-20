@@ -7,10 +7,10 @@ interface UserSimpleProps {
 export async function getUser_Simple({ accessToken }: UserSimpleProps) {
 	if (accessToken === "") return false;
 
-	try {
-		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
+	const controller = new AbortController();
+	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
 
+	try {
 		const response = await fetch("http://gateway-service:8080/dialosoft-api/user-service/get-simpleuser-info", {
 			method: "GET",
 			headers: {

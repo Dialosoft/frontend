@@ -10,10 +10,10 @@ export default async function RefreshToken() {
 
 	const refreshToken = cookies().get("_rtkn");
 	
-	try {
-		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
+	const controller = new AbortController();
+	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
 
+	try {
 		const response = await fetch("http://gateway-service:8080/dialosoft-api/auth/refresh-token", {
 			method: "POST",
 			headers: {
