@@ -59,6 +59,20 @@ export async function middleware(req: NextRequest) {
 	/* Server - Headers */
 	const response = NextResponse.next({ request: { headers: requestHeaders }});
 
+	// Verify Session: Access Token
+	if (req.cookies.has("_atkn")) {
+		if (req.cookies.get("_atkn")?.value === "") {
+			response.cookies.delete("_atkn");
+		}
+	}
+
+	// Verify Session: Refresh Token
+	if (req.cookies.has("_rtkn")) {
+		if (req.cookies.get("_rtkn")?.value === "") {
+			response.cookies.delete("_rtkn");
+		}
+	}
+
 	// Session: Access Token
 	if (req.cookies.has("_atkn") && !req.cookies.has("_rtkn")) {
 		response.cookies.delete("_atkn");
