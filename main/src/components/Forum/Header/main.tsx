@@ -4,7 +4,8 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
 
-const Menu = dynamic(() => import("@/components/Forum/Header/menu"));
+import { Menu_sk } from "@/components/Forum/Header/skeletons";
+const Menu = dynamic(() => import("@/components/Forum/Header/menu"), { loading: () => <Menu_sk /> });
 
 export default function Main_Header() {
 	const session = cookies().has("_rtkn");
@@ -19,7 +20,7 @@ export default function Main_Header() {
 
 				<div>
 					{ session ? (
-						<Suspense>
+						<Suspense fallback={<Menu_sk />}>
 							<Menu />
 						</Suspense>
 					) : (
