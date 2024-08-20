@@ -18,17 +18,23 @@ export default async function Register_Database({ username, email, password, con
 	const { username: validUsername, email: validEmail, password: validPassword } = result.data;
 
 	try {
+		const controller = new AbortController();
+		const timeoutId = setTimeout(() => controller.abort(), (1 * 60 * 1000)); // 1 minute
+
 		const response = await fetch("http://gateway-service:8080/dialosoft-api/auth/register", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
+			signal: controller.signal,
 			body: JSON.stringify({
 				username: validUsername.toLowerCase(),
 				email: validEmail.toLowerCase(),
 				password: validPassword
 			})
 		});
+
+		clearTimeout(timeoutId);
 
 		if (!response.ok) {
 			if (response.status === 409) {

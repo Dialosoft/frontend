@@ -17,16 +17,22 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 	const { UserOrEmail: validUserOrEmail, password: validPassword } = result.data;
 
 	try {
+		const controller = new AbortController();
+		const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
+
 		const response = await fetch("http://gateway-service:8080/dialosoft-api/auth/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
+			signal: controller.signal,
 			body: JSON.stringify({
 				username: validUserOrEmail.toLowerCase(),
 				password: validPassword
 			})
 		});
+
+		clearTimeout(timeoutId);
 
 		if (!response.ok) {
 			if (response.status === 401) {
