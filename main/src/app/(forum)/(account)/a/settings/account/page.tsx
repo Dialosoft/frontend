@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import AccountSideNav from "@/components/Account/sidenav";
-import SettingsNav from "@/components/Account/Settings_Section/settingsnav";
-import InputText from "@/components/Account/Settings_Section/input_text";
+import AccountSideNav from "@/components/Forum/Account/sidenav";
+import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
+import InputText from "@/components/Forum/Account/Settings_Section/input_text";
 import { ChevronRight } from "lucide-react";
 
 export default function StgsAccount() {

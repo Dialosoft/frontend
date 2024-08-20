@@ -1,6 +1,6 @@
 
-import SettingsNav from "@/components/Account/Settings_Section/settingsnav";
-import AccountSideNav from "@/components/Account/sidenav";
+import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
+import AccountSideNav from "@/components/Forum/Account/sidenav";
 
 export default function StgsPrivacity() {
 	return (

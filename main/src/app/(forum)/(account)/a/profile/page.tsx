@@ -1,9 +1,9 @@
 "use client";
-import Profile from "@/components/Account/Profile_Section/profile";
+import Profile from "@/components/Forum/Account/Profile_Section/profile";
 import { useState } from "react";
-import AccountSideNav from "@/components/Account/sidenav";
-import FeedPost from "@/components/Account/Profile_Section/feed_comments";
-import UserPosts from "@/components/Account/Profile_Section/user_posts";
+import AccountSideNav from "@/components/Forum/Account/sidenav";
+import FeedPost from "@/components/Forum/Account/Profile_Section/feed_comments";
+import UserPosts from "@/components/Forum/Account/Profile_Section/user_posts";
 export default function ProfileSection() {
 
 	
