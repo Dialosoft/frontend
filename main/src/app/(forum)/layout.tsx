@@ -17,6 +17,10 @@ export const metadata: Metadata = {
 		index: true,
 		follow: true,
 		nocache: false
+	},
+	icons: {
+		icon: "/favicon.ico",
+		apple: "/logo.png"
 	}
 };
 
