@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
 
@@ -10,11 +12,16 @@ export default function Main_Header() {
 	return (
 		<header className="py-[1rem] border-b border-black-500">
 			<div className="container z-10 flex items-center justify-between">
-				<Link href="/"><span className="select-none font-bold text-xl lg:text-3xl">{process.env.Name}</span></Link>
+				<Link className="flex items-center justify-center space-x-2" href="/">
+					<Image className="order-1 select-none" src="/logo.png" alt="Forum Logo" width={35} height={35} />
+					<span className="order-2 select-none font-bold text-xl lg:text-3xl">{process.env.Name}</span>
+				</Link>
 
 				<div>
 					{ session ? (
-						<Menu />
+						<Suspense>
+							<Menu />
+						</Suspense>
 					) : (
 						<div className="flex items-center space-x-[.5rem]">
 							<Link href="/login">
