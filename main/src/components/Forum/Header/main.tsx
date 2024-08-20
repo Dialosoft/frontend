@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { cookies } from "next/headers";
+
+const Menu = dynamic(() => import("@/components/Forum/Header/menu"));
 
 export default function Main_Header() {
 	const session = cookies().has("_rtkn");
@@ -13,7 +14,7 @@ export default function Main_Header() {
 
 				<div>
 					{ session ? (
-						<></>
+						<Menu />
 					) : (
 						<div className="flex items-center space-x-[.5rem]">
 							<Link href="/login">
