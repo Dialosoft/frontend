@@ -1,12 +1,32 @@
 import dynamic from "next/dynamic";
 
+/* Variables */
+const SITE = process.env.HOST as string;
+
+/* SEO */
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+	metadataBase: new URL(SITE),
+	title: {
+		template: "%s | " + process.env.Name,
+		default: "Home - " + process.env.Name
+	},
+	description: process.env.Description,
+	category: "forum",
+	robots: {
+		index: true,
+		follow: true,
+		nocache: false
+	}
+};
+
 /* FONT */
 import { Poppins } from "next/font/google";
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
 /* Components */
 import "@/app/globals.css";
-const Header = dynamic(() => import("@/components/Header/main"));
+const Header = dynamic(() => import("@/components/Forum/Header/main"));
 
 export default function ForumLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 	return (
