@@ -15,9 +15,9 @@ import {
   ChevronDown,
   Search,
 } from "lucide-react";
-import Aside from "@/components/side_info/main";
-import Post from "@/components/Post_Section/post";
-import Comments from "@/components/Post_Section/comments";
+import Aside from "@/components/Forum/side_info/main";
+import Post from "@/components/Forum/Post_Section/post";
+import Comments from "@/components/Forum/Post_Section/comments";
 
 
 type Props = {

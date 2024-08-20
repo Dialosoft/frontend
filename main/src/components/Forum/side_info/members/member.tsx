@@ -1,5 +1,5 @@
 import { Crown } from "lucide-react";
-import Rol from "@/components/User/rol";
+import Rol from "@/components/Forum/User/rol";
 interface MemberProps {
 	name: string;
 	username: string;

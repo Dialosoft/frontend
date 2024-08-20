@@ -1,4 +1,4 @@
-import UserChip from "@/components/User/chip";
+import UserChip from "@/components/Forum/User/chip";
 import PostInteractions from "./interactions";
 import PostVotingChip from "./voting_chip";
 import { MessageSquareText as ResponseIcon } from "lucide-react";

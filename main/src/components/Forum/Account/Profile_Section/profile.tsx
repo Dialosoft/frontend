@@ -1,6 +1,6 @@
 import { Settings } from "lucide-react";
 import Link from "next/link";
-import Rol from "@/components/User/rol";
+import Rol from "@/components/Forum/User/rol";
 interface ProfileProps{
 	name: string,
 		username:string,

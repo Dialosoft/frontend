@@ -1,6 +1,6 @@
 "use client"
-import Categories from "@/components/main_section/main";
-import Aside from "@/components/side_info/main";
+import Categories from "@/components/Forum/main_section/main";
+import Aside from "@/components/Forum/side_info/main";
 import getWidth from "@/utils/getWidth"
 
 

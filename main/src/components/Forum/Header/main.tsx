@@ -3,15 +3,15 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { Bell, MessageCircleMore } from "lucide-react";
 import ProfileRol from "../User/profile_rol";
-import { Search_sk } from "@/components/Header/skeletons";
+import { Search_sk } from "@/components/Forum/Header/skeletons";
 import OptionsOverlay from "./options";
 import { useState } from "react";
 import Link from "next/link";
 import NotificationsOverlay from "./notifications";
-const Search = dynamic(() => import("@/components/Header/search"), {
+const Search = dynamic(() => import("@/components/Forum/Header/search"), {
 	loading: () => <Search_sk />,
 });
-const DarkMode = dynamic(() => import("@/components/Header/dark_tester"), {
+const DarkMode = dynamic(() => import("@/components/Forum/Header/dark_tester"), {
 	ssr: false,
 });
 
