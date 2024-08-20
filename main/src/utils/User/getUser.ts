@@ -9,7 +9,7 @@ export async function getUser_Simple({ accessToken }: UserSimpleProps) {
 
 	try {
 		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), (1 * 60 * 1000)); // 1 minute
+		const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
 
 		const response = await fetch("http://gateway-service:8080/dialosoft-api/user-service/get-simpleuser-info", {
 			method: "GET",
