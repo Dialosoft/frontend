@@ -1,7 +1,7 @@
 "use client";
-import Profile from "@/components/Account/Profile_Section/profile";
+import Profile from "@/components/Forum/Account/Profile_Section/profile";
 import { useState } from "react";
-import AccountSideNav from "@/components/Account/sidenav";
+import AccountSideNav from "@/components/Forum/Account/sidenav";
 export default function SavedSection() {
 
 

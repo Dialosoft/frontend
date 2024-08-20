@@ -1,7 +1,8 @@
+
 import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
 import AccountSideNav from "@/components/Forum/Account/sidenav";
 
-export default function StgsSecurity() {
+export default function StgsPrivacity() {
 	return (
 		<div className="container   flex  space-x-4 mt-16">
 			<div className="max-w-[317px] w-full">
