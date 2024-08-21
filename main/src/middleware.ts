@@ -38,7 +38,7 @@ export async function middleware(req: NextRequest) {
 	const normalizedUrl = req.nextUrl.pathname.toLowerCase();
 
 	// Session
-	if ([ "/login", "/register" ].includes(normalizedUrl)) {
+	if ([ "/login", "/register", "/reset-password" ].includes(normalizedUrl)) {
 		if (req.cookies.has("_rtkn")) {
 			return NextResponse.redirect(new URL("/", req.url));
 		}
