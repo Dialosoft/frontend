@@ -152,10 +152,10 @@
 
 #style1::-webkit-color-swatch {
     border: none;
-    border-radius: 20%;
+    border-radius: 20px;
 }
 
 #style1::-moz-color-swatch {
     border: none;
-    border-radius: 20%;
+    border-radius: 20px;
 }
