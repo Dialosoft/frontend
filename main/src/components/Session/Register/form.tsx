@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { v4 as uuidv4 } from "uuid";
 import debounce from "just-debounce-it";
 import { useCallback, useEffect, useState } from "react";
 
@@ -15,6 +16,9 @@ export default function Register_Form() {
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const [seeds, setSeeds] = useState<string[]>([]);
+	const [showSeedsModal, setShowSeedsModal] = useState(false);
 	
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -124,7 +128,15 @@ export default function Register_Form() {
 				}, 10 * 1000); // 10 seconds
 			}
 
-			// HERE
+			setSeeds(status.seeds);
+			setShowSeedsModal(true);
+
+			setUsername("");
+			setEmail("");
+			setPassword("");
+			setConfirmPassword("");
+
+			setIsSubmitting(false);
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
 
@@ -203,6 +215,45 @@ export default function Register_Form() {
 				</div>
 			</div>
 		</form>
+
+		{showSeedsModal && (
+			<div className="fixed inset-0 bg-black-900 bg-opacity-80 flex items-center justify-center z-50">
+				<div className="container flex flex-col items-center justify-center">
+					<div>
+						<span className="font-semibold text-red">IMPORTANT</span>
+						<span>Here are your recovery words in case you forget your password. It's crucial to keep them safe and secure. Don't lose them.</span>
+					</div>
+				</div>
+				{/* <div className="bg-darkgray text-whitebg w-[60rem] h-[32rem] flex flex-col justify-between rounded-lg items-center p-10 space-y-5">
+					<div className="font-bold text-2xl">
+						Congratulations!
+					</div>
+
+					<div className="flex space-x-2 ">
+						<div className="font-semibold text-red">IMPORTANT:
+						</div>
+						<div className="text-whitegray">
+							These are the recovery words in case you forget your password, it is important that you keep it in a safe place and do not lose it.
+						</div>
+					</div>
+
+					<div className="grid grid-cols-5 gap-4 p-5 bg-whitegray rounded-lg">
+						</div>
+							{seeds.map((seed, index) => (
+                                    <div className=" flex items-center wtext-center rounded-lg w-40 space-x-2 text-whitebg" key={index}>
+                                        <div className="text-black w-4">
+                                            {`${index + 1}`}
+                                        </div>
+                                        <div className="h-12 w-32 flex items-center justify-center bg-darkgray rounded-lg">
+                                            {` ${seed}`}
+                                        </div>
+                                    </div>
+                            ))}
+						<div className="w-full px-24">
+					</div>
+				</div> */}
+			</div>
+		)}
 
 		{showErrorModal && (
 			<div className="fixed right-[2rem] bottom-[2rem] bg-red py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">

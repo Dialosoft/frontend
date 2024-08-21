@@ -1,4 +1,4 @@
-import ChatView from "@/components/Messages/chat_view";
+import ChatView from "@/components/Forum/Messages/chat_view";
 
 export default function Chat({ params }) {
 	const { username } = params;

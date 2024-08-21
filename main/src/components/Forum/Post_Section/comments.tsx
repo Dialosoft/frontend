@@ -1,6 +1,6 @@
 import { User, Share2, Ellipsis, MessageSquare, Heart, Bookmark } from "lucide-react";
-import ProfileRol from "../User/profile_rol";
-import Rol from "../User/rol";
+import ProfileRol from "../Header/User/profile_rol";
+import Rol from "../Header/User/rol";
 import { ArrowBigUp } from "lucide-react";
 import { ArrowBigDown } from "lucide-react";
 import { Trophy } from "lucide-react";

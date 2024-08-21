@@ -147,9 +147,13 @@ export default function Login_Form() {
 					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Login"}</span>
 				</button>
 
-				<div className="select-none flex space-x-2">
-					<p className="text-black-500">Don't have an account?</p>
-					<Link className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100" href="/register">Register</Link>
+				<div className="w-full flex flex-col items-center">
+					<Link className="inline-block text-black-500 transition-colors ease-in-out duration-300 hover:text-primary-400" href="/reset-password" prefetch={false}><span>Forgot your password?</span></Link>
+
+					<div className="select-none flex space-x-2">
+						<p className="text-black-500">Don't have an account?</p>
+						<Link className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100" href="/register">Register</Link>
+					</div>
 				</div>
 			</div>
 		</form>

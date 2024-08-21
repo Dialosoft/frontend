@@ -1,4 +1,4 @@
-import InboxList from "@/components/Messages/MessageInbox/inbox_list";
+import InboxList from "@/components/Forum/Messages/MessageInbox/inbox_list";
 
 export default function MessagesLayout({
 	children,
