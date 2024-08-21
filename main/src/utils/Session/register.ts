@@ -19,7 +19,7 @@ export default async function Register_Database({ username, email, password, con
 	const { username: validUsername, email: validEmail, password: validPassword } = result.data;
 
 	try {
-		await axios.post("http://gateway-service:8080/dialosoft-api/auth/register",
+		const response = await axios.post("http://gateway-service:8080/dialosoft-api/auth/register",
 			{
 				username: validUsername.toLowerCase(),
 				email: validEmail.toLowerCase(),
@@ -33,7 +33,7 @@ export default async function Register_Database({ username, email, password, con
 			}
 		);
 
-		return { success: true };
+		return { success: true, seeds: response.data.data.seedPhrase };
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			if (error.response?.status === 409) {
