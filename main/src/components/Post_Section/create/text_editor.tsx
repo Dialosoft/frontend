@@ -239,7 +239,7 @@ export default function BasicEditor() {
 				</button>
 				<button
 					onClick={handleColorButtonClick}
-					className={`h-6  flex items-center justify-center w-fit ${
+					className={`h-6  flex items-center justify-center space-x-1 w-fit ${
 						editor.isActive("color") // Adjust this logic as needed
 							? "text-primary-400"
 							: "text-black-500 hover:text-secondary"
