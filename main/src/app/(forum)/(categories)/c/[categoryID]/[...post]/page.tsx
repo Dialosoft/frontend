@@ -1,24 +1,25 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import {
-  ChevronRight,
-  ChevronLeft,
-  BellRing,
-  BellPlus,
-  BellOff,
-  Smile,
-  Image,
-  Paperclip,
-  Send,
-  ChevronDown,
-  Search,
+	ChevronRight,
+	ChevronLeft,
+	BellRing,
+	BellPlus,
+	BellOff,
+	Smile,
+	Image,
+	Paperclip,
+	Send,
+	ChevronDown,
+	Search,
 } from "lucide-react";
 import Aside from "@/components/Forum/side_info/main";
 import Post from "@/components/Forum/Post_Section/post";
 import Comments from "@/components/Forum/Post_Section/comments";
-
+import { getPostById } from "@/utils/Post/getPost";
 
 type Props = {
 	params: {
@@ -26,6 +27,17 @@ type Props = {
 		postID: string;
 	};
 };
+
+type Post = {
+	postId: string,
+	postOwner: string,
+	content: string,
+	comments: any[],
+	positiveReaction: boolean,
+	negativeReaction: boolean,
+	creationTime: string
+}
+
 type UserType = {
 	user: string;
 	username: string;
@@ -74,30 +86,31 @@ const initialComments: CommentType[] = [
 	},
 ];
 export default function PostPage({ params }: Props) {
+	const [postData, setPostData] = useState<Post>();
 	const [user, setUser] = useState<UserType>(initialUser);
 	const [inputValue, setInputValue] = useState<string>("");
 	const [commentsList, setCommentsList] =
 		useState<CommentType[]>(initialComments);
 	const handleSubmit = () => {
-		if (!inputValue.trim()) return;  
+		if (!inputValue.trim()) {return;}
 
 		const newComment: CommentType = {
 			...user, //esta vaina copia todo lo de user al nuevo comentario (user, username, etc.)
 			id: (commentsList.length + 1).toString(), //agrega id al comentario
-			message: inputValue, 
+			message: inputValue,
 			date: new Date()
 				.toLocaleDateString("en-GB", {
 					day: "2-digit",
 					month: "short",
 					year: "numeric",
 				})
-				.replace(/ /g, ". "), 
+				.replace(/ /g, ". "),
 		};
 
-	
+
 		setCommentsList([...commentsList, newComment]);
 
-		
+
 		setInputValue("");
 		setUser({ ...initialUser });
 	};
@@ -151,6 +164,10 @@ export default function PostPage({ params }: Props) {
 	useEffect(() => {
 		const urlSegments = window.location.pathname.split("/");
 		const lastSegment = urlSegments[urlSegments.length - 1];
+
+		getPostById({ postId: "7ed677a7-e5da-4a2a-92d1-82c2c73c388e" }).then((data) => {
+		  		setPostData(data);
+		});
 		setCategoryID(lastSegment);
 	}, []);
 
@@ -192,7 +209,7 @@ export default function PostPage({ params }: Props) {
 						<span className="">Follow Post</span>
 					</button>
 				</div>
-				<Post />
+				{postData ? <Post postId={postData.postId} postOwner={postData.postOwner} content={postData.content} creationTime={postData.creationTime} /> : <></>}
 				<div className="flex w-full space-x-4 items-center text-black-500 bg-black-300 bg-opacity-25 max-w-[1110px] rounded-lg mt-1 h-12 px-4 ">
 					<Smile className="h-6 w-6 hover:text-secondary" />
 					<input
