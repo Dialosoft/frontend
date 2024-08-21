@@ -4,7 +4,12 @@ import { cookies } from "next/headers";
 import { getUser_Simple } from "@/utils/User/getUser";
 import { Suspense } from "react";
 
-const Search = dynamic(() => import("@/components/Forum/Header/Options/search"));
+import { Section_sk } from "@/components/Forum/Header/skeletons";
+
+const Search = dynamic(() => import("@/components/Forum/Header/Options/search"), { loading: () => <Section_sk /> });
+const User = dynamic(() => import("@/components/Forum/Header/Options/user"), { loading: () => <Section_sk /> });
+const Notify = dynamic(() => import("@/components/Forum/Header/Options/notify"), { ssr: false, loading: () => <Section_sk /> });
+const Messages = dynamic(() => import("@/components/Forum/Header/Options/messages"), { loading: () => <Section_sk /> });
 
 export default async function Menu_Header() {
 	const session = cookies().has("_rtkn");
@@ -17,9 +22,21 @@ export default async function Menu_Header() {
 	if (!user) return null;
 
 	return (
-		<div>
-			<Suspense>
-				<Search />
+		<div className="flex items-center justify-center space-x-[1rem]">
+			<Suspense fallback={<Section_sk />}>
+				{/* <Search /> */}
+			</Suspense>
+
+			<Suspense fallback={<Section_sk />}>
+				<Messages />
+			</Suspense>
+
+			<Suspense fallback={<Section_sk />}>
+				<Notify />
+			</Suspense>
+
+			<Suspense fallback={<Section_sk />}>
+				<User username={user.username} id={user.id} role={{ type: user.role.role_type, admin: user.role.admin_role, mod: user.role.mod_role }} />
 			</Suspense>
 		</div>
 	);
