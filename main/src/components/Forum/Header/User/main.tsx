@@ -6,6 +6,8 @@ import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
 import { UserRound, Bookmark, Settings, Moon, Sun, LogOut } from "lucide-react";
 
+import useDarkMode from "@/components/Hooks/useDarkMode";
+
 const Role = dynamic(() => import("@/components/Forum/Header/User/role"));
 
 interface UserProps {
@@ -15,10 +17,10 @@ interface UserProps {
 }
 
 export default function User({ name, admin, mod }: UserProps) {
-	const [isDark, setDark] = useState(true);
+	const [colorTheme, setTheme] = useDarkMode();
 
 	const toggleDark = () => {
-		setDark(!isDark);
+		setTheme(colorTheme);
 	};
 
 	const menuItems = [
@@ -59,12 +61,12 @@ export default function User({ name, admin, mod }: UserProps) {
 
 					<button className="w-full p-2 rounded-md flex items-center justify-between transition-all ease-in-out duration-300 group hover:bg-black-300 hover:bg-opacity-25" onClick={toggleDark}>
 						<div className="flex items-center justify-start space-x-[.5rem] transition-all ease-in-out duration-300 group-hover:text-secondary">
-							<div>{isDark ? (<Moon size={24} />) : (<Sun size={24} />)}</div>
-							<span className="select-none">{ isDark ? "Dark Mode" : "Light Mode" }</span>
+							<div>{colorTheme === "light" ? (<Moon size={24} />) : (<Sun size={24} />)}</div>
+							<span className="select-none">{colorTheme === "light" ? "Dark Mode" : "Light Mode"}</span>
 						</div>
 
 						<div className="bg-black-300 bg-opacity-25 rounded-full h-5 w-10">
-							<div className={`bg-primary-400 rounded-full aspect-square h-full ease-in duration-100 ${isDark && "translate-x-5"}`}></div>
+							<div className={`bg-primary-400 rounded-full aspect-square h-full ease-in duration-100 ${(colorTheme === "dark") && "translate-x-5"}`}></div>
 						</div>
 					</button>
 

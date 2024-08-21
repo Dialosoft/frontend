@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import Rol from "../User/rol";
+import Rol from "./User/rol";
 import { UserRound, Bookmark, Settings, Moon, LogOut } from "lucide-react";
 import Link from "next/link";
 import { link } from "fs";

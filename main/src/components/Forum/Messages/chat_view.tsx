@@ -1,4 +1,4 @@
-import UserChip from "../User/chip";
+import UserChip from "../Header/User/chip";
 import { Send, Smile } from "lucide-react";
 import ChatMessage from "./chat_message";
 
