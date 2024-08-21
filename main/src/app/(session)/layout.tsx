@@ -1,3 +1,5 @@
+import dynamic from "next/dynamic";
+
 /* Variables */
 const SITE = process.env.HOST as string;
 
@@ -27,11 +29,13 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400
 
 /* Components */
 import "@/app/globals.css";
+const SetTheme = dynamic(() => import("@/components/Hooks/useDark"), { ssr: false });
 
 export default function SessionLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 	return (
 		<html lang="en">
 			<body className={`${poppins.className} antialiased dark text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex`}>
+				<SetTheme />
 				<main className="flex-grow">{children}</main>
 			</body>
 		</html>
