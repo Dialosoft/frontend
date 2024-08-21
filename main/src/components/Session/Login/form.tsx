@@ -112,7 +112,7 @@ export default function Login_Form() {
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
 	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
-	const tw_error = "text-red text-sm";
+	const tw_error = "select-none text-red text-sm";
 
 	return (
 		<>

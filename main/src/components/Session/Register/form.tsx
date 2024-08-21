@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import debounce from "just-debounce-it";
 import { useCallback, useEffect, useState } from "react";
 
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Check, Copy } from "lucide-react";
 
 import registerSchema from "@/schemas/Session/register";
 import registerDatabase from "@/utils/Session/register";
@@ -16,6 +16,10 @@ export default function Register_Form() {
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const [countdown, setCountdown] = useState(5);
+	const [isCopied, setIsCopied] = useState(false);
+	const [canRedirect, setCanRedirect] = useState(false);
 
 	const [seeds, setSeeds] = useState<string[]>([]);
 	const [showSeedsModal, setShowSeedsModal] = useState(false);
@@ -57,6 +61,36 @@ export default function Register_Form() {
 		setConfirmPassword(e.target.value);
 		validateField("confirmPassword", e.target.value);
 	};
+
+	/* Copy seeds */
+	const copyToClipboard = () => {
+		const seedText = seeds.join(" ");
+		navigator.clipboard.writeText(seedText).then(() => {
+			setIsCopied(true);
+			setTimeout(() => setIsCopied(false), 2000);
+		}).catch();
+	};
+
+	/* Redirect to Login */
+	useEffect(() => {
+		if (showSeedsModal) {
+			const timer = setInterval(() => {
+				setCountdown((prev) => prev - 1);
+			}, 1000);
+	
+			setTimeout(() => {
+				setCanRedirect(true);
+				clearInterval(timer);
+			}, 5000); // 5 seconds
+	
+			return () => {
+				clearInterval(timer);
+				setCountdown(5);
+			};
+		} else {
+			setCanRedirect(false);
+		}
+	}, [showSeedsModal]);
 
 	/* Validate individual fields */
 	type FieldName = "username" | "email" | "password" | "confirmPassword";
@@ -154,7 +188,7 @@ export default function Register_Form() {
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
 	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
-	const tw_error = "text-red text-sm";
+	const tw_error = "select-none text-red text-sm";
 
 	return (
 		<>
@@ -217,41 +251,40 @@ export default function Register_Form() {
 		</form>
 
 		{showSeedsModal && (
-			<div className="fixed inset-0 bg-black-900 bg-opacity-80 flex items-center justify-center z-50">
-				<div className="container flex flex-col items-center justify-center">
-					<div>
-						<span className="font-semibold text-red">IMPORTANT</span>
-						<span>Here are your recovery words in case you forget your password. It's crucial to keep them safe and secure. Don't lose them.</span>
+			<div className="fixed inset-0 bg-black-900 bg-opacity-90 flex items-center justify-center z-50">
+				<div className="container flex items-center justify-center">
+					<div className="w-fit flex flex-col items-center justify-center space-y-[3rem] rounded-lg p-[4rem] bg-black-700 border border-opacity-25 border-black-300">
+						<div className="flex flex-col items-center justify-center">
+							<span className="font-semibold text-2xl text-red">IMPORTANT</span>
+							<span>Here are your recovery words in case you forget your password. It's crucial to keep them safe and secure. Don't lose them.</span>
+						</div>
+
+						<div className="p-[1rem] bg-black-700 border border-opacity-25 border-black-300 rounded-lg space-y-[1rem]">
+							<div className="grid grid-cols-3">
+								{seeds.map((seed, index) => (
+									<div className="flex items-center justify-start p-2" key={uuidv4()}>
+										<span className="font-medium text-black-500">
+											{`${index + 1}.`} <span className="text-secondary font-normal">{seed}</span>
+										</span>
+									</div>
+								))}
+							</div>
+							
+							<button className="w-full flex items-center justify-center space-x-2 text-black-500 transition-colors ease-in-out duration-150 group hover:text-primary-400" onClick={copyToClipboard}>
+								{isCopied ? <Check className="text-primary-400" size={20} /> : <Copy className="transition-colors ease-in-out duration-150 group-hover:text-primary-400" size={20} />}
+								<span className="transition-colors ease-in-out duration-150 group-hover:text-primary-400">{isCopied ? <span className="text-primary-400">Copied!</span> : "Copy to Clipboard"}</span>
+							</button>
+						</div>
+
+						{canRedirect ? (
+							<Link href="/login" prefetch={false}>
+								<button className="bg-primary-400 text-black-900 px-4 py-2 rounded-md hover:bg-primary-500 transition-colors">Continue</button>
+							</Link>
+						) : (
+							<span className="text-black-500">Please wait {countdown} seconds...</span>
+						)}
 					</div>
 				</div>
-				{/* <div className="bg-darkgray text-whitebg w-[60rem] h-[32rem] flex flex-col justify-between rounded-lg items-center p-10 space-y-5">
-					<div className="font-bold text-2xl">
-						Congratulations!
-					</div>
-
-					<div className="flex space-x-2 ">
-						<div className="font-semibold text-red">IMPORTANT:
-						</div>
-						<div className="text-whitegray">
-							These are the recovery words in case you forget your password, it is important that you keep it in a safe place and do not lose it.
-						</div>
-					</div>
-
-					<div className="grid grid-cols-5 gap-4 p-5 bg-whitegray rounded-lg">
-						</div>
-							{seeds.map((seed, index) => (
-                                    <div className=" flex items-center wtext-center rounded-lg w-40 space-x-2 text-whitebg" key={index}>
-                                        <div className="text-black w-4">
-                                            {`${index + 1}`}
-                                        </div>
-                                        <div className="h-12 w-32 flex items-center justify-center bg-darkgray rounded-lg">
-                                            {` ${seed}`}
-                                        </div>
-                                    </div>
-                            ))}
-						<div className="w-full px-24">
-					</div>
-				</div> */}
 			</div>
 		)}
 
