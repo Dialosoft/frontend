@@ -1,0 +1,161 @@
+/* General Tiptap styles */
+.tiptap {
+    :first-child {
+        margin-top: 0;
+    }
+
+    /* List styles */
+    ul,
+    ol {
+        padding: 0 1rem;
+    }
+
+    ul {
+        list-style-type: disc;
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+
+    li p {
+        margin-top: 0.25em;
+        margin-bottom: 0.25em;
+    }
+
+    /* Code and preformatted text styles */
+    code {
+        padding: 0.25rem;
+        border-radius: 0.375rem;
+        background-color: #2a2a39;
+    }
+
+    pre {
+        background-color: var(--purple-light);
+        border-radius: 0.4rem;
+        color: var(--black);
+        font-size: 0.85rem;
+        padding: 0.25em 0.3em;
+    }
+
+    /* Link styles */
+    a {
+        color: #27b4d2;
+        cursor: pointer;
+
+        &:hover {
+            color: #1aa0c0;
+        }
+    }
+
+    /* Heading styles */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 1.1;
+        margin-top: 2.5rem;
+        text-wrap: pretty;
+    }
+
+    h1,
+    h2 {
+        margin-top: 3.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    h4 {
+        font-size: 1rem;
+    }
+
+    h5,
+    h6 {
+        font-size: 0.875rem;
+    }
+
+    /* Blockquote styles */
+    blockquote {
+        border-left: 3px solid #27b4d2;
+        margin: 0.75rem 0;
+        padding: 0.25rem 3rem 0.25rem 1rem;
+        background: transparent;
+        /* Hacer transparente el fondo real */
+        width: fit-content;
+        border-radius: 0.375rem;
+        position: relative;
+        z-index: 1;
+        /* Asegura que el contenido esté sobre el pseudo-elemento */
+    }
+
+    blockquote::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #3a3a50;
+        opacity: 0.25;
+        /* Ajusta la opacidad según lo que necesites */
+        border-radius: 0.375rem;
+        /* Coincide con el radio del borde del blockquote */
+        z-index: -1;
+        /* Coloca el pseudo-elemento detrás del contenido */
+    }
+
+    blockquote::after {
+        content: "";
+        position: absolute;
+        right: 10px;
+        top: 0%;
+        margin-top: 0.9rem;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%2327b4d2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-quote"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    p.is-editor-empty:first-child::before {
+        color: #43435B;
+        content: attr(data-placeholder);
+        float: left;
+        height: 0;
+        pointer-events: none;
+    }
+}
+
+#style1 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+
+    background: transparent;
+    /* Asegúrate de que el fondo sea transparente */
+}
+
+#style1::-webkit-color-swatch {
+    border: none;
+    border-radius: 20%;
+}
+
+#style1::-moz-color-swatch {
+    border: none;
+    border-radius: 20%;
+}
