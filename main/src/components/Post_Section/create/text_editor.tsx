@@ -133,7 +133,7 @@ export default function BasicEditor() {
 	}
 
 	return (
-		<div className="container space-y-4 mt-16">
+		<div className="w-full space-y-4 ">
 			<div className="flex items-center button-group space-x-4">
 				<button
 					onClick={() =>
