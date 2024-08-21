@@ -65,6 +65,7 @@ export default function StgsAccount() {
 								onChange={newValue =>
 									handleInputChange("name", newValue)
 								}
+								background="bg-transparent"
 							/>
 						</div>
 						<div>
@@ -75,6 +76,7 @@ export default function StgsAccount() {
 								onChange={newValue =>
 									handleInputChange("pronoun", newValue)
 								}
+								background="bg-transparent"
 							/>
 						</div>
 					</div>
@@ -86,6 +88,7 @@ export default function StgsAccount() {
 							onChange={newValue =>
 								handleInputChange("username", newValue)
 							}
+							background="bg-transparent"
 						/>
 					</div>
 					<div>
@@ -96,6 +99,7 @@ export default function StgsAccount() {
 							onChange={newValue =>
 								handleInputChange("email", newValue)
 							}
+							background="bg-transparent"
 						/>
 					</div>
 				</div>

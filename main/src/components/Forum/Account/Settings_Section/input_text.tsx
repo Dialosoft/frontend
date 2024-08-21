@@ -5,9 +5,10 @@ interface InputProps {
 	value: string;
 	placeholder: string;
 	onChange: (newValue: string) => void;
+	background:string
 }
 
-export default function InputText({value, placeholder, onChange}:InputProps) {
+export default function InputText({value, placeholder, onChange, background}:InputProps) {
      const [inputValue, setInputValue] = useState(value);
 
 		const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +23,7 @@ export default function InputText({value, placeholder, onChange}:InputProps) {
 				value={value}
 				placeholder={placeholder}
 				onChange={handleChange}
-				className="bg-transparent border border-black-300 rounded-md outline-none px-4 h-9 font-normal w-full appearance-none placeholder:text-black-500"
+				className={`${background} border border-black-300 rounded-md outline-none px-2 h-9 font-normal w-full appearance-none placeholder:text-black-500`}
 			/>
 		</>
 	);
