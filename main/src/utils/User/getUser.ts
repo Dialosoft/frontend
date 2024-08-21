@@ -1,5 +1,7 @@
 "use server";
 
+import axios from "axios";
+
 interface UserSimpleProps {
 	accessToken: string
 }
@@ -7,29 +9,17 @@ interface UserSimpleProps {
 export async function getUser_Simple({ accessToken }: UserSimpleProps) {
 	if (accessToken === "") return false;
 
-	const controller = new AbortController();
-	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
-
 	try {
-		const response = await fetch("http://gateway-service:8080/dialosoft-api/user-service/get-simpleuser-info", {
-			method: "GET",
-			headers: {
-				"Authorization": "Bearer " + accessToken
-			},
-			signal: controller.signal,
-			next: {
-				revalidate: (5 * 60) // 5 minutes
+		const response = await axios.get("http://gateway-service:8080/dialosoft-api/user-service/get-simpleuser-info",
+			{
+				headers: {
+					"Authorization": "Bearer " + accessToken,
+				},
+				timeout: (30 * 1000), // 30 seconds
 			}
-		});
+		);
 
-		clearTimeout(timeoutId);
-
-		if (!response.ok) {
-			return false;
-		}
-
-		const data = await response.json();
-		return data.data;
+		return response.data.data;
 	} catch (error) {
 		return false;
 	}

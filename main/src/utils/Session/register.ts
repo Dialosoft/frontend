@@ -1,5 +1,6 @@
 "use server";
 
+import axios from "axios";
 import registerSchema from "@/schemas/Session/register";
 
 interface RegisterProps {
@@ -17,35 +18,29 @@ export default async function Register_Database({ username, email, password, con
 
 	const { username: validUsername, email: validEmail, password: validPassword } = result.data;
 
-	const controller = new AbortController();
-	const timeoutId = setTimeout(() => controller.abort(), (1 * 60 * 1000)); // 1 minute
-
 	try {
-		const response = await fetch("http://gateway-service:8080/dialosoft-api/auth/register", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			signal: controller.signal,
-			body: JSON.stringify({
+		await axios.post("http://gateway-service:8080/dialosoft-api/auth/register",
+			{
 				username: validUsername.toLowerCase(),
 				email: validEmail.toLowerCase(),
 				password: validPassword
-			})
-		});
-
-		clearTimeout(timeoutId);
-
-		if (!response.ok) {
-			if (response.status === 409) {
-				return { success: false, message: "Username or Email already exists." };
-			} else {
-				return { success: false, message: "An unexpected error occurred. Please try again later." };
+			},
+			{
+				headers: {
+					"Content-Type": "application/json"
+				},
+				timeout: (60 * 1000) // 1 minute
 			}
-		}
+		);
 
 		return { success: true };
 	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.status === 409) {
+				return { success: false, message: "Username or Email already exists." };
+			}
+		}
+
 		return { success: false, message: "A network error occurred. Please check your connection and try again." };
 	}
 

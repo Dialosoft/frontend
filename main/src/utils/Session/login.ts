@@ -1,5 +1,6 @@
 "use server";
 
+import axios from "axios";
 import { cookies } from "next/headers";
 import loginSchema from "@/schemas/Session/login";
 
@@ -16,34 +17,21 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 
 	const { UserOrEmail: validUserOrEmail, password: validPassword } = result.data;
 
-	const controller = new AbortController();
-	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
-
 	try {
-		const response = await fetch("http://gateway-service:8080/dialosoft-api/auth/login", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
-			signal: controller.signal,
-			body: JSON.stringify({
+		const response = await axios.post("http://gateway-service:8080/dialosoft-api/auth/login",
+			{
 				username: validUserOrEmail.toLowerCase(),
 				password: validPassword
-			})
-		});
-
-		clearTimeout(timeoutId);
-
-		if (!response.ok) {
-			if (response.status === 401) {
-				return { success: false, message: "Invalid username, email or password." };
-			} else {
-				return { success: false, message: "An unexpected error occurred. Please try again later." };
+			},
+			{
+				headers: {
+					"Content-Type": "application/json"
+				},
+				timeout: (30 * 1000) // 30 seconds
 			}
-		}
+		);
 
-		const data = await response.json();
-		const tokens = data.data;
+		const tokens = response.data;
 		
 		// Set cookies
 		const cookieStore = cookies();
@@ -73,6 +61,12 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 		
 		return { success: true };
 	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.status === 401) {
+				return { success: false, message: "Invalid username, email or password." };
+			}
+		}
+
 		return { success: false, message: "A network error occurred. Please check your connection and try again." };
 	}
 }
