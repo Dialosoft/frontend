@@ -5,3 +5,9 @@ export const Menu_sk = () => (
 		<div className="w-[1.5rem] h-[1.5rem] rounded-full bg-black-500 bg-opacity-40"></div>
 	</div>
 );
+
+export const Section_sk = () => (
+	<div className="animate-pulse">
+		<div className="w-[1.5rem] h-[1.5rem] rounded-full bg-black-500 bg-opacity-40"></div>
+	</div>
+);
