@@ -10,7 +10,7 @@ export default function Home() {
 	return (
 		<>
 			{width < 1024 ? (
-				<div className=" container flex justify-center space-x-4   mt-16">
+				<div className="  flex justify-center space-x-4 mx-4 mt-8  ">
 					<Categories />
 					<Aside />
 				</div>

@@ -6,13 +6,14 @@ import Aside from "@/components/Forum/side_info/main";
 import Post from "@/components/Forum/Category_Section/post";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-
+import getWidth from "@/utils/getWidth";
 type Props = {
 	params: {
 		categoryID: string;
 	};
 };
 export default function Category({ params }: Props) {
+	
 	const CategoryInfo = [
 		{
 			id: "1",
@@ -81,9 +82,9 @@ export default function Category({ params }: Props) {
 		return <div>¿Que haces?</div>;
 	}
 	return (
-		<div className=" container flex justify-center  mt-16">
+		<div className=" lg:container max-lg:mx-4 flex justify-center space-x-4 mt-8  lg:mt-16">
 			<div className="w-full -my-1">
-				<div className="flex items-start justify-between w-full  max-w-[1110px] ">
+				<div className="flex  max-sm:flex-col items-start justify-between w-full  max-w-[1110px] ">
 					<div className="text-3xl font-semibold">
 						{Category.title}
 						<div className=" max-h-4 h-4 -mt-1 mb-2 font-medium text-black-500 flex items-center text-sm">
@@ -97,9 +98,9 @@ export default function Category({ params }: Props) {
 						</div>
 					</div>
 
-					<div className="flex items-center font-medium space-x-2 mt-2">
-						<div className="text-black-500 flex items-center space-x-2">
-							<div>Sort by:</div>
+					<div className="flex items-center max-sm:justify-between max-sm:w-full max-sm:mb-4 font-medium space-x-2 mt-2">
+						<div className="text-black-500 flex items-center sm:space-x-2">
+							<div className="max-md:hidden">Sort by:</div>
 							<button className="flex  items-center hover:bg-black-300 hover:bg-opacity-25 px-2 py-1 rounded-lg">
 								<span>Best</span>
 								<ChevronDown className="w-4 h-4" />
@@ -108,7 +109,9 @@ export default function Category({ params }: Props) {
 						<Link href={`${params.categoryID}/create`}>
 							<button className="flex items-center py-1 px-2 rounded-lg bg-primary-400 hover:bg-primary-500 text-black-900 space-x-1">
 								<Plus className="w-4 h-4" />
-								<span className="">Create a post</span>
+								<span className="">
+									Create <span className=""> a post</span>
+								</span>
 							</button>
 						</Link>
 					</div>
