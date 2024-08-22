@@ -125,7 +125,7 @@ export default function Login_Form() {
 						{errors.UserOrEmail && <span className={tw_error}>{errors.UserOrEmail}</span>}
 					</div>
 
-					<input className={`${tw_input} ${errors.UserOrEmail && "border-red"}`} placeholder="Enter your username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} maxLength={254} required />
+					<input className={`${tw_input} ${errors.UserOrEmail && "border-red"}`} placeholder="Enter your username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} minLength={4} maxLength={254} required />
 				</div>
 
 				{/* Password */}

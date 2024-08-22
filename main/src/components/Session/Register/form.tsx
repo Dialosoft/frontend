@@ -201,7 +201,7 @@ export default function Register_Form() {
 						{errors.username && <span className={tw_error}>{errors.username}</span>}
 					</div>
 
-					<input className={`${tw_input} ${errors.username && "border-red"}`} placeholder="Choose your username" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} maxLength={20} required />
+					<input className={`${tw_input} ${errors.username && "border-red"}`} placeholder="Choose your username" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} minLength={4} maxLength={20} required />
 				</div>
 
 				{/* Email */}
