@@ -13,7 +13,7 @@ interface NotificationsProps {
 
 export default function Notify({ notifyTemplate, clearNotifications }: NotificationsProps) {
 	return (
-		<div className="absolute overflow-hidden w-96 top-full mt-[1rem] right-0 rounded-lg bg-black-700 border border-opacity-25 border-black-300 text-black-500">
+		<div className="absolute overflow-hidden w-80 lg:w-96 top-full mt-[1rem] right-0 rounded-lg bg-black-700 border border-opacity-25 border-black-300 text-black-500">
 			<div className="m-[1rem] flex flex-col items-center justify-start space-y-[1rem]">
 				<div className="flex items-center justify-center space-x-[.5rem] text-secondary text-lg">
 					<Bell size={20} />
