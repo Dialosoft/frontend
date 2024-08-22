@@ -24,8 +24,8 @@ export default async function RefreshToken() {
 			}
 		);
 
-		const data = response.data;
-		return { token: data.data.accessToken, time: data.data.accessTokenExpiresInSeconds };
+		const data = response.data.data;
+		return { token: data.accessToken, time: data.accessTokenExpiresInSeconds };
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			if (error.response?.status === 401) {
