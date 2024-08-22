@@ -30,7 +30,7 @@ export default function Post({
 }: CategoryProps) {
 	return (
 		<>
-			<div className="flex justify-between space-x-2 items-center hover:bg-black-300 py-2 px-4 rounded-md hover:bg-opacity-25">
+			<div className="flex justify-between space-x-2 items-center hover:bg-black-300 py-2 px-2 sm:px-4 rounded-md hover:bg-opacity-25">
 				<div className="border border-primary-400  rounded-full aspect-square h-12  " />
 
 				<div className="w-full flex-col">
@@ -43,7 +43,7 @@ export default function Post({
 					</div>
 				</div>
 
-				<div className="flex space-x-4 w-full justify-end items-center">
+				<div className="flex space-x-4 w-fit justify-end items-center max-[550px]:hidden">
 					<div className="flex space-x-4">
 						<div className="flex-col">
 							<div className="text-black-500 text-xs">Answers</div>
