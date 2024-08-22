@@ -7,8 +7,6 @@ import UserPosts from "@/components/Forum/Account/Profile_Section/user_posts";
 import AccountMovileNav from "@/components/Forum/Account/movilenav";
 import Aside from "@/components/Forum/side_info/main";
 export default function ProfileSection() {
-
-	
 	const User = {
 		name: "Alejandro",
 		username: "@alejandro",
@@ -58,9 +56,9 @@ export default function ProfileSection() {
 		],
 	};
 	const feedCommentsCount = User.feed_comments.length;
-const UserPostCount = User.user_posts.length;
+	const UserPostCount = User.user_posts.length;
 
-		const [activeSection, setActiveSection] = useState("feed");
+	const [activeSection, setActiveSection] = useState("feed");
 
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16">
@@ -147,7 +145,6 @@ const UserPostCount = User.user_posts.length;
 					<UserPosts messages={User.user_posts} />
 				)}
 			</div>
-			
 		</div>
 	);
 }
