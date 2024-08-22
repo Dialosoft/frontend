@@ -35,31 +35,45 @@ export default function Comments({user, username, rate, best, message, answers, 
 							{username}
 						</div>
 					</div>
-					<div className="flex rounded-full bg-black-300 bg-opacity-25 p-1 space-x-1">
+					<div className=" flex rounded-full bg-black-300 bg-opacity-25 p-1 space-x-1">
 						<div className="rounded-full bg-black-300 h-6 w-6 flex justify-center items-center text-black-500 bg-opacity-25 hover:text-secondary hover:bg-opacity-75">
 							<ArrowBigUp className="h-5 w-5" />
 						</div>
 
-						<div className={rate>999?'text-yellow':rate>249?'text-red':rate>99?'text-green':rate>9?'text-primary-400':''}>{rate}</div>
+						<div
+							className={
+								rate > 999
+									? "text-yellow"
+									: rate > 249
+									? "text-red"
+									: rate > 99
+									? "text-green"
+									: rate > 9
+									? "text-primary-400"
+									: ""
+							}
+						>
+							{rate}
+						</div>
 						<div className="rounded-full bg-black-300 h-6 w-6 flex justify-center items-center text-black-500 bg-opacity-25 hover:text-secondary hover:bg-opacity-75">
 							<ArrowBigDown className="h-5 w-5" />
 						</div>
 					</div>
-					{best&&<div className="flex items-center space-x-1 text-yellow border h-6 border-yellow bg-yellow bg-opacity-25 py-1 px-2 rounded-md">
-						<Trophy className="aspect-square w-4 h-4" />
+					{best && (
+						<div className="flex items-center space-x-1 text-yellow border h-6 border-yellow bg-yellow bg-opacity-25 py-1 px-2 rounded-md">
+							<Trophy className="aspect-square w-4 h-4" />
 
-						<span className="text-xs">Best</span>
-					</div>}
+							<span className="text-xs max-sm:hidden">Best</span>
+						</div>
+					)}
 				</div>
 				<div className="flex space-x-2 text-black-500">
-					<div className="text-sm">{date}</div>
+					<div className="text-sm max-sm:hidden">{date}</div>
 					<Share2 className="h-5 w-5 hover:text-secondary" />
 					<Ellipsis className="h-5 w-5 hover:text-secondary " />
 				</div>
 			</div>
-			<p className="font-normal">
-				{message}
-			</p>
+			<p className="font-normal">{message}</p>
 			<div className="flex justify-between items-center text-black-500">
 				<div className="flex space-x-2">
 					<div className="flex space-x-1 items-center">
@@ -72,7 +86,7 @@ export default function Comments({user, username, rate, best, message, answers, 
 						<div>{formatNumber(likes)}</div>
 					</div>
 				</div>
-				<Bookmark className="h-5 w-5 hover:text-secondary hover:fill-secondary" />
+				<Bookmark className="h-5 w-5 hover:text-primary-400 hover:fill-primary-400" />
 			</div>
 		</div>
 	);
