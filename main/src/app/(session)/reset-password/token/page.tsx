@@ -4,11 +4,11 @@ import dynamic from "next/dynamic";
 
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-	title: "Register",
-	alternates: { canonical: "register" }
+	title: "Change Password",
+	alternates: { canonical: "reset-password/token" }
 };
 
-const Form = dynamic(() => import("@/components/Session/Register/form"), { ssr: false });
+const Token = dynamic(() => import("@/components/Session/Reset-Password/token"), { ssr: false });
 
 export default function Register() {
 	return (
@@ -18,7 +18,7 @@ export default function Register() {
 				<h1 className="order-2 select-none font-medium text-[4rem] xl:text-[6rem]">{process.env.Name}</h1>
 			</Link>
 
-			<Form />
+			<Token />
 		</div>
 	);
 }

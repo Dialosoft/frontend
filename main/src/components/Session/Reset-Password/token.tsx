@@ -1,19 +1,24 @@
 "use client";
 
-import Link from "next/link";
-import debounce from "just-debounce-it";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { Eye, EyeOff } from "lucide-react";
 
-import loginSchema from "@/schemas/Session/login";
-import loginDatabase from "@/utils/Session/login";
+import { Change_Password } from "@/utils/Session/resetPassword";
+import changePasswordSchema from "@/schemas/Session/changePassword";
 
-export default function Login_Form() {
+export default function Reset_Token() {
 	const router = useRouter();
 
-	const [UserOrEmail, setUserOrEmail] = useState("");
+	const searchParams = useSearchParams();
+	const token = searchParams.get("id");
+	const username = searchParams.get("user");
+
+	if (!token || !username) {
+		return null;
+	}
+
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -21,15 +26,9 @@ export default function Login_Form() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
 
+	const [showOkModal, setShowOkModal] = useState(false);
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
-
-	/* Username or Email */
-	const debounced_setUserOrEmail = useCallback(debounce((value: string) => {
-		setUserOrEmail(value);
-		validateField("UserOrEmail", value);
-	}, 30), [setUserOrEmail]);
-	const handle_UserOrEmail_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUserOrEmail(e.target.value);
 
 	/* Password */
 	const handle_Password_Change = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,10 +43,7 @@ export default function Login_Form() {
 
 	/* Validate individual fields */
 	const validateField = (field: string, value: string) => {
-		const result = loginSchema.safeParse({
-			UserOrEmail: field === "UserOrEmail" ? value : UserOrEmail,
-			password: field === "password" ? value : password
-		});
+		const result = changePasswordSchema.safeParse({ password: field === "password" ? value : password });
 
 		if (result.success) {
 			setErrors((prev) => {
@@ -73,28 +69,37 @@ export default function Login_Form() {
 	/* Button */
 	useEffect(() => {
 		const noErrors = Object.keys(errors).length === 0;
-		const allFieldsFilled = UserOrEmail && password;
+		const allFieldsFilled = password;
 		setIsDisabled(!(noErrors && allFieldsFilled));
-	}, [errors, UserOrEmail, password]);
+	}, [errors, password]);
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		setIsSubmitting(true);
 
-		const result = loginSchema.safeParse({ UserOrEmail, password });
+		const result = changePasswordSchema.safeParse({ password });
 		if (result.success) {
-			const status = await loginDatabase({ UserOrEmail: UserOrEmail, password: password });
+			const status = await Change_Password({ password: password, token: token as string });
 			if (!status.success) {
 				setErrorMessage(status.message as string);
 				setShowErrorModal(true);
 				setIsSubmitting(false);
+				setIsDisabled(true);
 				
 				return setTimeout(() => {
 					setShowErrorModal(false);
-				}, 10 * 1000); // 10 seconds
+					router.push("/reset-password");
+				}, 5 * 1000); // 5 seconds
 			}
 
-			router.push("/");
+			setShowOkModal(true);
+			setIsSubmitting(false);
+			setIsDisabled(true);
+
+			return setTimeout(() => {
+				setShowOkModal(false);
+				router.push("/login");
+			}, 5 * 1000); // 5 seconds
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
 
@@ -118,20 +123,19 @@ export default function Login_Form() {
 		<>
 		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
-				{/* Username or Email */}
+				{/* Username */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
-						<label className={tw_label} htmlFor="UsernameOrEmail">Username</label>
-						{errors.UserOrEmail && <span className={tw_error}>{errors.UserOrEmail}</span>}
+						<label className={tw_label}>Username</label>
 					</div>
 
-					<input className={`${tw_input} ${errors.UserOrEmail && "border-red"}`} placeholder="Enter your username" type="text" value={UserOrEmail} id="UsernameOrEmail" autoComplete="username" onChange={handle_UserOrEmail_Change} maxLength={254} required />
+					<input className={tw_input} type="text" value={username.substring(0, 20)} autoComplete="off" maxLength={20} disabled />
 				</div>
 
-				{/* Password */}
+				{/* New Password */}
 				<div className="w-full flex flex-col space-y-[.2rem]">
 					<div className="flex items-center justify-between">
-						<label className={tw_label} htmlFor="password">Password</label>
+						<label className={tw_label} htmlFor="password">New Password</label>
 						{errors.password && <span className={tw_error}>{errors.password}</span>}
 					</div>
 					
@@ -142,25 +146,20 @@ export default function Login_Form() {
 				</div>
 			</div>
 
-			<div className="w-full flex flex-col items-center space-y-[.5rem]">
-				<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
-					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Login"}</span>
-				</button>
-
-				<div className="w-full flex flex-col items-center">
-					<Link className="inline-block text-black-500 transition-colors ease-in-out duration-300 hover:text-primary-400" href="/reset-password" prefetch={false}><span>Forgot your password?</span></Link>
-
-					<div className="select-none flex space-x-2">
-						<p className="text-black-500">Don't have an account?</p>
-						<Link className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100" href="/register">Register</Link>
-					</div>
-				</div>
-			</div>
+			<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
+				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Change Password"}</span>
+			</button>
 		</form>
 
 		{showErrorModal && (
 			<div className="fixed right-[2rem] bottom-[2rem] bg-red py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
 				<span>{errorMessage}</span>
+			</div>
+		)}
+
+		{showOkModal && (
+			<div className="fixed right-[2rem] bottom-[2rem] bg-green py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
+				<span>Your password has been changed successfully.</span>
 			</div>
 		)}
 		</>

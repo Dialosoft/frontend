@@ -38,9 +38,19 @@ export async function middleware(req: NextRequest) {
 	const normalizedUrl = req.nextUrl.pathname.toLowerCase();
 
 	// Session
-	if ([ "/login", "/register" ].includes(normalizedUrl)) {
+	if ([ "/login", "/register", "/reset-password" ].includes(normalizedUrl)) {
 		if (req.cookies.has("_rtkn")) {
 			return NextResponse.redirect(new URL("/", req.url));
+		}
+	}
+
+	// Session: Reset password
+	if (normalizedUrl.startsWith("/reset-password/token")) {
+		const token = req.nextUrl.searchParams.get("id");
+		const username = req.nextUrl.searchParams.get("user");
+
+		if (!token || !username) {
+			return NextResponse.redirect(new URL("/reset-password", req.url));	
 		}
 	}
 

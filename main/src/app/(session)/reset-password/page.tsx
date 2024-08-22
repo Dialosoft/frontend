@@ -4,11 +4,11 @@ import dynamic from "next/dynamic";
 
 import type { Metadata } from "next";
 export const metadata: Metadata = {
-	title: "Register",
-	alternates: { canonical: "register" }
+	title: "Reset Password",
+	alternates: { canonical: "reset-password" }
 };
 
-const Form = dynamic(() => import("@/components/Session/Register/form"), { ssr: false });
+const Form = dynamic(() => import("@/components/Session/Reset-Password/form"), { ssr: false });
 
 export default function Register() {
 	return (

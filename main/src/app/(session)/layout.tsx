@@ -34,7 +34,7 @@ const SetTheme = dynamic(() => import("@/components/Hooks/useDark"), { ssr: fals
 export default function SessionLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
 	return (
 		<html lang="en">
-			<body className={`${poppins.className} antialiased dark text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex`}>
+			<body className={`${poppins.className} antialiased bg-black-900 text-secondary min-h-screen flex`}>
 				<SetTheme />
 				<main className="flex-grow">{children}</main>
 			</body>

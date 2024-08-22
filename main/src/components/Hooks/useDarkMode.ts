@@ -1,6 +1,5 @@
 "use client";
 
-import debounce from "just-debounce-it";
 import { useEffect, useState } from "react";
 
 export default function useDarkMode() {
@@ -10,24 +9,23 @@ export default function useDarkMode() {
 			return storedTheme ? storedTheme : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 		}
 
-		return "light";
+		return "dark";
 	});
 
 	const colorTheme = theme === "dark" ? "light" : "dark";
 
 	useEffect(() => {
-		const root = window.document.documentElement;
-	
-		const applyTheme = () => {
-			root.classList.remove(colorTheme);
-			root.classList.add(theme);
-			localStorage.setItem("theme", theme);
-		};
-	
-		const debouncedApplyTheme = debounce(applyTheme, 200);
-		debouncedApplyTheme();
-		return () => debouncedApplyTheme.cancel();
+		const rootHtml = window.document.documentElement;
+		const rootBody = window.document.body;
+
+		rootHtml.classList.remove(colorTheme);
+		rootBody.classList.remove(colorTheme);
+
+		rootHtml.classList.add(theme);
+		rootBody.classList.add(theme);
+
+		localStorage.setItem("theme", theme);
 	}, [theme, colorTheme]);
 
-	return [colorTheme, setTheme] as const;
+	return [theme, setTheme] as const;
 }
