@@ -105,10 +105,7 @@ export default function Login_Form() {
 		});
 
 		if (result.success) {
-			const status = await Reset_Password({
-				username: username,
-				seeds: seeds,
-			});
+			const status = await Reset_Password({ username: username, seeds: seedsValue, });
 			if (!status.success) {
 				setErrorMessage(status.message as string);
 				setShowErrorModal(true);
