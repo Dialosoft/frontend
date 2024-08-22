@@ -10,7 +10,6 @@ import {
 import { ArrowBigUp } from "lucide-react";
 import { ArrowBigDown } from "lucide-react";
 import { useState } from "react";
-import PostVotingChip from "../../Post/voting_chip";
 interface CommentsProps {
 	user: string;
 	username: string;
