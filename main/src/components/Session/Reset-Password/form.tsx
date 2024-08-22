@@ -4,7 +4,7 @@ import debounce from "just-debounce-it";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-import resetPassword from "@/utils/Session/resetPassword";
+import { Reset_Password } from "@/utils/Session/resetPassword";
 import resetPasswordSchema from "@/schemas/Session/resetPassword";
 
 export default function Login_Form() {
@@ -76,7 +76,7 @@ export default function Login_Form() {
 
 		const result = resetPasswordSchema.safeParse({ username, seeds: seeds.trim() });
 		if (result.success) {
-			const status = await resetPassword({ username: username, seeds: seeds });
+			const status = await Reset_Password({ username: username, seeds: seeds });
 			if (!status.success) {
 				setErrorMessage(status.message as string);
 				setShowErrorModal(true);
@@ -87,7 +87,7 @@ export default function Login_Form() {
 				}, 10 * 1000); // 10 seconds
 			}
 
-			router.push("/reset-pasword/token?id=" + status.token);
+			router.push("/reset-password/token?id=" + status.token + "&user=" + username);
 			setIsSubmitting(false);
 		} else {
 			const fieldErrors: { [key: string]: string } = {};

@@ -44,6 +44,16 @@ export async function middleware(req: NextRequest) {
 		}
 	}
 
+	// Session: Reset password
+	if (normalizedUrl.startsWith("/reset-password/token")) {
+		const token = req.nextUrl.searchParams.get("id");
+		const username = req.nextUrl.searchParams.get("user");
+
+		if (!token || !username) {
+			return NextResponse.redirect(new URL("/reset-password", req.url));	
+		}
+	}
+
 	// Account
 	if (normalizedUrl.startsWith("/a")) {
 		if (normalizedUrl === "/a"){
