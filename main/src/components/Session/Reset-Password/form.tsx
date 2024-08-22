@@ -137,11 +137,11 @@ export default function Login_Form() {
 		}
 	};
 	const handleInputChange = (value: string, index: number) => {
-		// Actualizar el estado con el nuevo valor en la posición correcta
+		
 		setRecoverList(currentList => {
-			const newList = [...currentList]; // Copiar el array actual para no mutar el estado directamente
-			newList[index] = value; // Actualizar el valor en la posición correspondiente
-			return newList; // Devolver el nuevo array como el próximo estado
+			const newList = [...currentList]; 
+			newList[index] = value; 
+			return newList; 
 		});
 	};
 	/* Styles */
