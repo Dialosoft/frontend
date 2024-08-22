@@ -1,24 +1,17 @@
 
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { Bell } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
-import { Suspense, useState } from "react";
 
 const Template = dynamic(() => import("@/components/Forum/Header/Notify/template"));
 
-export default function Notify() {
-	const [notifyTemplate, setNotifyTemplate] = useState([
-		{ photo: "", name: "SirLikesALot", type: "liked your post... again", time: "1h", link: "" },
-		{ photo: "", name: "CaptainObvious", type: "replied to your thread with more questions", time: "30m", link: "" },
-		{ photo: "", name: "MissClickQueen", type: "accidentally reported your comment", time: "15m", link: "" },
-		{ photo: "", name: "DrGrammar", type: "corrected your grammar in a reply", time: "45m", link: "" },
-		{ photo: "", name: "MrEcho", type: "reposted your exact words in another thread", time: "2h", link: "" }
-	]);
+interface NotificationsProps {
+	notifyTemplate: Array<{ photo: string; name: string; type: string; time: string; link: string }>;
+	clearNotifications: () => void;
+}
 
-	const clearNotifications = () => {
-		setNotifyTemplate([]);
-	};
-
+export default function Notify({ notifyTemplate, clearNotifications }: NotificationsProps) {
 	return (
 		<div className="absolute overflow-hidden w-96 top-full mt-[1rem] right-0 rounded-lg bg-black-700 border border-opacity-25 border-black-300 text-black-500">
 			<div className="m-[1rem] flex flex-col items-center justify-start space-y-[1rem]">

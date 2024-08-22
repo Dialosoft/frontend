@@ -10,6 +10,14 @@ export default function Notify_Header() {
 	const notifyRef = useRef<HTMLDivElement>(null);
 	const [showNotifications, setNotifications] = useState(false);
 
+	const [notifyTemplate, setNotifyTemplate] = useState([
+		{ photo: "", name: "SirLikesALot", type: "liked your post... again", time: "1h", link: "" },
+		{ photo: "", name: "CaptainObvious", type: "replied to your thread with more questions", time: "30m", link: "" },
+		{ photo: "", name: "MissClickQueen", type: "accidentally reported your comment", time: "15m", link: "" },
+		{ photo: "", name: "DrGrammar", type: "corrected your grammar in a reply", time: "45m", link: "" },
+		{ photo: "", name: "MrEcho", type: "reposted your exact words in another thread", time: "2h", link: "" }
+	]);
+
 	const toggleNotify = () => {
 		setNotifications(!showNotifications);
 	};
@@ -30,6 +38,10 @@ export default function Notify_Header() {
 		return () => document.removeEventListener("pointerdown", handleClickOutside);
 	}, [showNotifications]);
 
+	const clearNotifications = () => {
+		setNotifyTemplate([]);
+	};
+
 	return (
 		<div className="relative flex items-center justify-center" ref={notifyRef}>
 			<button onClick={toggleNotify}>
@@ -38,7 +50,7 @@ export default function Notify_Header() {
 
 			{ showNotifications && (
 				<Suspense>
-					<Notify />
+					<Notify notifyTemplate={notifyTemplate} clearNotifications={clearNotifications} />
 				</Suspense>
 			)}
 		</div>
