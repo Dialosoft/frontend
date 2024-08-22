@@ -40,7 +40,9 @@ export default function Post({}: PostProps) {
 						<div>
 							<div className="flex space-x-2">
 								<div>{User.name}</div>
-								<Rol rol={User.rol} />
+								<div className="max-sm:hidden">
+									<Rol rol={User.rol} />
+								</div>
 							</div>
 							<div className="text-sm text-black-500 -mt-1">
 								{User.username}
@@ -48,7 +50,9 @@ export default function Post({}: PostProps) {
 						</div>
 					</div>
 					<div className="flex space-x-2 text-black-500">
-						<div className="text-sm">{PostContent.date}</div>
+						<div className="text-sm max-sm:hidden">
+							{PostContent.date}
+						</div>
 						<Share2 className="h-5 w-5 hover:text-secondary" />
 						<Ellipsis className="h-5 w-5 hover:text-secondary " />
 					</div>
@@ -66,7 +70,7 @@ export default function Post({}: PostProps) {
 							<div>{formatNumber(PostContent.likes)}</div>
 						</div>
 					</div>
-					<Bookmark className="h-5 w-5 hover:text-secondary hover:fill-secondary" />
+					<Bookmark className="h-5 w-5 hover:text-primary-400 hover:fill-primary-400" />
 				</div>
 			</div>
 		</>
