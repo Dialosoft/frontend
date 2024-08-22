@@ -54,7 +54,7 @@ date_saved,
 				
 				</div>
 				<div className="flex space-x-2 text-black-500">
-					<div className="text-sm">{date}</div>
+					<div className="text-sm max-sm:hidden">{date}</div>
 					<Share2 className="h-5 w-5 hover:text-secondary" />
 					<Ellipsis className="h-5 w-5 hover:text-secondary " />
 				</div>

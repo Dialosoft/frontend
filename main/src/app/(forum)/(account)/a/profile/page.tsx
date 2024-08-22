@@ -4,6 +4,8 @@ import { useState } from "react";
 import AccountSideNav from "@/components/Forum/Account/sidenav";
 import FeedPost from "@/components/Forum/Account/Profile_Section/feed_comments";
 import UserPosts from "@/components/Forum/Account/Profile_Section/user_posts";
+import AccountMovileNav from "@/components/Forum/Account/movilenav";
+import Aside from "@/components/Forum/side_info/main";
 export default function ProfileSection() {
 
 	
@@ -12,7 +14,7 @@ export default function ProfileSection() {
 		username: "@alejandro",
 		role: "Admin",
 		pronoun: "she/her",
-		registration_date: "28 February 2020",
+		registration_date: "28 Feb. 2020",
 		answers: 313, //
 		feed: 21, //
 		posts: 32, //
@@ -61,8 +63,9 @@ const UserPostCount = User.user_posts.length;
 		const [activeSection, setActiveSection] = useState("feed");
 
 	return (
-		<div className="container   flex  space-x-4 mt-16">
-			<div className="max-w-[317px] w-full">
+		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16">
+			<AccountMovileNav />
+			<div className="lg:max-w-[317px] mr-4 w-fit lg:w-full min-w-[60px] max-sm:hidden max-lg:sm:mr-4">
 				<AccountSideNav />
 			</div>
 
@@ -144,6 +147,7 @@ const UserPostCount = User.user_posts.length;
 					<UserPosts messages={User.user_posts} />
 				)}
 			</div>
+			
 		</div>
 	);
 }

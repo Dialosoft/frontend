@@ -7,6 +7,7 @@ import AccountSideNav from "@/components/Forum/Account/sidenav";
 import SavedComment from "@/components/Forum/Account/Saved_Section/SvdComment";
 import { ChevronDown, Search } from "lucide-react";
 import Aside from "@/components/Forum/side_info/main";
+import AccountMovileNav from "@/components/Forum/Account/movilenav";
 type UserType = {
 	user: string;
 	username: string;
@@ -68,11 +69,12 @@ export default function SavedSection() {
 							.includes(searchTerm.toLowerCase())
 				);
 	return (
-		<div className="container   flex  space-x-4 mt-16">
-			<div className="max-w-[317px] w-full">
+		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16">
+			<AccountMovileNav/>
+			<div className="lg:max-w-[317px] w-fit mr-4 lg:w-full min-w-[60px] max-sm:hidden max-lg:sm:mr-4">
 				<AccountSideNav />
 			</div>
-			<div className="w-[778px] max-w-[778px]">
+			<div className=" w-full lg:w-[778px] lg:max-w-[778px] lg:mr-4">
 				<div className=" flex justify-between mb-4 w-full ">
 					<div className="flex items-center bg-black-300 bg-opacity-25 rounded-full p-2  space-x-2">
 						<Search className="text-primary-400 h-5 w-5" />
@@ -85,7 +87,7 @@ export default function SavedSection() {
 						/>
 					</div>
 					<div className="text-black-500 flex items-center space-x-2 ">
-						<div>Sort by:</div>
+						<div className="max-sm:hidden">Sort by:</div>
 						<button className="flex  items-center hover:bg-black-300 hover:bg-opacity-25 px-2 py-1 rounded-lg">
 							<span>Best</span>
 							<ChevronDown className="w-4 h-4" />
