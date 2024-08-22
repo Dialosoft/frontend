@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
 import { UserRound, Bookmark, Settings, Moon, Sun, LogOut } from "lucide-react";
 
+import Session_LogOut from "@/utils/Session/logOut";
 import useDarkMode from "@/components/Hooks/useDarkMode";
 
 const Role = dynamic(() => import("@/components/Forum/Header/User/role"));
@@ -41,6 +42,11 @@ export default function User({ name, admin, mod }: UserProps) {
 		}
 	];
 
+	const handle_Logout = async () => {
+		await Session_LogOut();
+		window.location.reload();
+	};
+
 	return (
 		<div className="absolute overflow-hidden w-72 top-full mt-[1rem] right-0 rounded-lg bg-secondary dark:bg-black-700 border border-opacity-25 border-black-300 text-black-500">
 			<div className="m-[1rem] flex flex-col items-center justify-start space-y-[1rem]">
@@ -74,7 +80,7 @@ export default function User({ name, admin, mod }: UserProps) {
 						</div>
 					</button>
 
-					<button className="w-full p-2 rounded-md flex items-center justify-start space-x-[.5rem] transition-all ease-in-out duration-300 hover:text-red hover:bg-black-300 hover:bg-opacity-25">
+					<button onClick={handle_Logout} className="w-full p-2 rounded-md flex items-center justify-start space-x-[.5rem] transition-all ease-in-out duration-300 hover:text-red hover:bg-black-300 hover:bg-opacity-25">
 						<LogOut size={24} />
 						<span className="select-none">Log Out</span>
 					</button>
