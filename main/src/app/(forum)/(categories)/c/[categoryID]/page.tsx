@@ -82,7 +82,7 @@ export default function Category({ params }: Props) {
 		return <div>¿Que haces?</div>;
 	}
 	return (
-		<div className=" lg:container max-lg:mx-4 flex justify-center space-x-4 mt-8  lg:mt-16">
+		<div className="lg:container max-lg:mx-4 flex justify-center space-x-4 mt-8 lg:mt-16">
 			<div className="w-full -my-1">
 				<div className="flex  max-sm:flex-col items-start justify-between w-full  max-w-[1110px] ">
 					<div className="text-3xl font-semibold">

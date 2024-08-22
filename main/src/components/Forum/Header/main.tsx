@@ -11,7 +11,7 @@ export default function Main_Header() {
 	const session = cookies().has("_rtkn");
 
 	return (
-		<header className="py-[1rem] border-b border-black-500">
+		<header className="py-[1rem] border-b border-black-500 border-opacity-50">
 			<div className="container z-10 flex items-center justify-between">
 				<Link className="flex items-center justify-center space-x-2" href="/">
 					<Image className="order-1 select-none" src="/logo.png" alt="Forum Logo" width={35} height={35} style={{ width: "100%", height: "auto" }} />
