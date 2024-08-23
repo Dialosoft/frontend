@@ -1,11 +1,15 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
-import SavedPost from "@/components/Forum/Account/Saved_Section/SvfPost";
 import { useState } from "react";
-import AccountSideNav from "@/components/Forum/Account/sidenav";
 import { ChevronDown, Search } from "lucide-react";
-import Aside from "@/components/Forum/side_info/main";
-import AccountMovileNav from "@/components/Forum/Account/movilenav";
+
+const SavedPost = dynamic(() => import("@/components/Forum/Account/Saved_Section/SvfPost"));
+const AccountSideNav = dynamic(() => import("@/components/Forum/Account/sidenav"));
+const Aside = dynamic(() => import("@/components/Forum/side_info/main"));
+const AccountMovileNav = dynamic(() => import("@/components/Forum/Account/movilenav"));
+
 type UserType = {
 	user: string;
 	username: string;
@@ -16,6 +20,7 @@ type UserType = {
 	likes: number;
 	date: string;
 };
+
 type PostsType = {
 	id: number;
 	user: string;
@@ -27,6 +32,7 @@ type PostsType = {
 	date: string;
 	date_saved: string;
 };
+
 type CommentType = UserType & { id: string; type: string };
 
 type UnifiedType = (CommentType & { type: "comment" }) | (PostsType & { type: "post" });
@@ -44,11 +50,13 @@ const initialPosts: PostsType[] = [
 		date_saved: "22 August 2024",
 	},
 ];
+
 export default function SavedSection() {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	const [PostsList, setPostsList] = useState<PostsType[]>(initialPosts);
 	const filteredPosts = PostsList.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()) || post.message.toLowerCase().includes(searchTerm.toLowerCase()));
+
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16 mb-4 max-sm:mb-20">
 			<AccountMovileNav />

@@ -1,4 +1,5 @@
 "use client";
+
 import { UserRound, Bookmark, Settings, LogOut } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
@@ -8,6 +9,7 @@ import getWidth from "@/utils/getWidth";
 export default function AccountMovileNav() {
 	const pathname = usePathname();
 	const width = getWidth();
+	
 	const menuItems = [
 		{
 			icon: <UserRound className={`h-5 w-5 ${pathname === "/a/profile" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`} />,

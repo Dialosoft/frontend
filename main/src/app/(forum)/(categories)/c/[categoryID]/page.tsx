@@ -1,15 +1,17 @@
-import { ChevronRight } from "lucide-react";
-import { ChevronDown } from "lucide-react";
-import { Plus } from "lucide-react";
-import Aside from "@/components/Forum/side_info/main";
-import Post from "@/components/Forum/Category_Section/post";
+import { ChevronRight, ChevronDown, Plus } from "lucide-react";
+import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
+
+const Aside = dynamic(() => import("@/components/Forum/side_info/main"));
+const Post = dynamic(() => import("@/components/Forum/Category_Section/post"));
+
 type Props = {
 	params: {
 		categoryID: string;
 	};
 };
+
 export default function Category({ params }: Props) {
 	const CategoryInfo = [
 		{
@@ -25,6 +27,7 @@ export default function Category({ params }: Props) {
 			title: "Rules & FAQs",
 		},
 	];
+
 	const PostsInfo = [
 		{
 			id: 1,
@@ -72,10 +75,12 @@ export default function Category({ params }: Props) {
 			fixed: false,
 		},
 	];
+
 	const Category = CategoryInfo.find(category => category.id === params.categoryID);
 	if (!Category) {
-		return <div>¿Que haces?</div>;
+		return null;
 	}
+
 	return (
 		<div className="lg:container max-lg:mx-4 flex justify-center space-x-4 mt-8 lg:mt-16">
 			<div className="w-full -my-1">

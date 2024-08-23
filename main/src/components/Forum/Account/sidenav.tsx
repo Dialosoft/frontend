@@ -1,14 +1,14 @@
 "use client";
+
 import { UserRound, Bookmark, Settings, LogOut } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Session_LogOut from "@/utils/Session/logOut";
-import getWidth from "@/utils/getWidth";
 
 export default function AccountSideNav() {
 	const pathname = usePathname();
-	const width = getWidth();
+
 	const menuItems = [
 		{
 			icon: <UserRound className={`h-5 w-5 ${pathname === "/a/profile" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`} />,
@@ -27,10 +27,12 @@ export default function AccountSideNav() {
 			link: "/a/settings/account",
 		},
 	];
+
 	const handle_Logout = async () => {
 		await Session_LogOut();
 		window.location.reload();
 	};
+
 	return (
 		<>
 			<div className="bg-black-300 bg-opacity-25 rounded-xl p-1 xl:p-2 grid grid-cols-1 gap-2">

@@ -1,6 +1,7 @@
 "use client";
 import { Share2, Ellipsis, MessageSquare, Heart, Bookmark } from "lucide-react";
 import { useState } from "react";
+
 interface PostProps {
 	user: string;
 	username: string;
@@ -11,13 +12,15 @@ interface PostProps {
 	date: string;
 	date_saved: string;
 }
+
 const formatNumber = (num: number): string => {
 	if (num < 1000) {
 		return num.toString();
 	}
 	return (num / 1000).toFixed(1) + "k";
 };
-export default function SavedPost({ user, username, title, date_saved, message, answers, likes, date }: PostProps) {
+
+export default function SavedPost({ user, username, title, message, answers, likes, date }: PostProps) {
 	const [saved, setSaved] = useState(true);
 	const [liked, setLiked] = useState(false);
 

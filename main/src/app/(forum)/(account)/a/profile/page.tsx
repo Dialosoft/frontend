@@ -1,12 +1,13 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 
-import Profile from "@/components/Forum/Account/Profile_Section/profile";
-import AccountSideNav from "@/components/Forum/Account/sidenav";
-import FeedPost from "@/components/Forum/Account/Profile_Section/feed_comments";
-import UserPosts from "@/components/Forum/Account/Profile_Section/user_posts";
-import AccountMovileNav from "@/components/Forum/Account/movilenav";
+const Profile = dynamic(() => import("@/components/Forum/Account/Profile_Section/profile"));
+const AccountSideNav = dynamic(() => import("@/components/Forum/Account/sidenav"));
+const FeedPost = dynamic(() => import("@/components/Forum/Account/Profile_Section/feed_comments"));
+const UserPosts = dynamic(() => import("@/components/Forum/Account/Profile_Section/user_posts"));
+const AccountMovileNav = dynamic(() => import("@/components/Forum/Account/movilenav"));
 
 import { getUser } from "@/utils/User/getUser";
 
