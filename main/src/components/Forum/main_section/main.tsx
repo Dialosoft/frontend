@@ -1,17 +1,21 @@
-"use client"
-import Category from "./category";
+"use client";
+
+import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import { getUser } from "@/utils/User/getUser";
 import { Settings } from "lucide-react";
-import ManageCategory from "./manage_category";
 import { useState, useEffect } from "react";
 
+const Category = dynamic(() => import("./category"));
+const ManageCategory = dynamic(() => import("./manage_category"));
+
+import { getUser } from "@/utils/User/getUser";
 
 export default function MainSection() {
-const [title, setTitle]=useState('')
+	const [title, setTitle] = useState("");
 	const [user, setUser] = useState<any>(null);
- const [showManage, setShowManage]=useState(false)
+	const [showManage, setShowManage] = useState(false);
+
 	useEffect(() => {
 		const fetchUser = async () => {
 			const userData = await getUser();
@@ -20,6 +24,7 @@ const [title, setTitle]=useState('')
 
 		fetchUser();
 	}, []);
+
 	const category = [
 		{
 			id: "1",
@@ -44,9 +49,10 @@ const [title, setTitle]=useState('')
 		},
 	];
 
-const handleInputChange = (newValue: string) => {
-	setTitle(newValue);
-};
+	const handleInputChange = (newValue: string) => {
+		setTitle(newValue);
+	};
+
 	return (
 		<div className="w-full space-y-4">
 			<div className="flex justify-between">
@@ -54,7 +60,9 @@ const handleInputChange = (newValue: string) => {
 
 				{true && (
 					<button
-						onClick={() => {setShowManage(!showManage), setTitle(title)}}  
+						onClick={() => {
+							setShowManage(!showManage), setTitle(title);
+						}}
 						className="bg-black-300 bg-opacity-25 border space-x-1 flex font-medium items-center border-black-300 border-opacity-25 text-black-500 hover:text-secondary h-9 px-2 rounded-lg "
 					>
 						<Settings />
@@ -66,12 +74,7 @@ const handleInputChange = (newValue: string) => {
 			<div className="w-full bg-black-300 bg-opacity-25 p-2 grid grid-cols-1 gap-2 rounded-lg">
 				{category.map(category => (
 					<Link href={`c/${category.id}`} key={uuidv4()}>
-						<Category
-							type={category.type}
-							title={category.title}
-							posts={category.posts}
-							comments={category.comments}
-						/>
+						<Category type={category.type} title={category.title} posts={category.posts} comments={category.comments} />
 					</Link>
 				))}
 			</div>
@@ -85,13 +88,7 @@ const handleInputChange = (newValue: string) => {
 					</button>
 				)}
 			</div>
-			{showManage && (
-				<ManageCategory
-					onClose={() => setShowManage(false)}
-					title={title}
-					onChange={newValue => handleInputChange(newValue)}
-				/>
-			)}
+			{showManage && <ManageCategory onClose={() => setShowManage(false)} title={title} onChange={newValue => handleInputChange(newValue)} />}
 		</div>
 	);
 }

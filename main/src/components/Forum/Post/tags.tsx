@@ -1,16 +1,9 @@
 export default function PostTags() {
-	const tagsList = [
-		{ name: "veggie" },
-		{ name: "discord" },
-		{ name: "english" },
-	];
+	const tagsList = [{ name: "veggie" }, { name: "discord" }, { name: "english" }];
 
 	function tagElement(name: string, i: number) {
 		return (
-			<p
-				className="px-3 bg-black-500 bg-opacity-25 rounded-full border"
-				key={`${name}-${i}`}
-			>
+			<p className="px-3 bg-black-500 bg-opacity-25 rounded-full border" key={`${name}-${i}`}>
 				{name}
 			</p>
 		);

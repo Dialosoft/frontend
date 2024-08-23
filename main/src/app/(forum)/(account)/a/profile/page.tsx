@@ -10,18 +10,6 @@ import AccountMovileNav from "@/components/Forum/Account/movilenav";
 
 import { getUser } from "@/utils/User/getUser";
 
-function formatDate(dateString: string) {
-    const date = new Date(dateString);
-    
-    const options: Intl.DateTimeFormatOptions = { 
-        day: "numeric", 
-        month: "short", 
-        year: "numeric" 
-    };
-    
-    return new Intl.DateTimeFormat("en-US", options).format(date);
-}
-
 export default function ProfileSection() {
 	const [user, setUser] = useState<any>(null);
 	const [activeSection, setActiveSection] = useState("feed");
@@ -37,6 +25,18 @@ export default function ProfileSection() {
 
 	if (!user) {
 		return <div>Loading...</div>;
+	}
+
+	function formatDate(dateString: string) {
+		const date = new Date(dateString);
+
+		const options: Intl.DateTimeFormatOptions = {
+			day: "numeric",
+			month: "short",
+			year: "numeric",
+		};
+
+		return new Intl.DateTimeFormat("en-UK", options).format(date);
 	}
 
 	user.created_at = formatDate(user.created_at);
@@ -94,53 +94,42 @@ export default function ProfileSection() {
 	const UserPostCount = User.user_posts.length;
 
 	return (
-		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16">
+		<div className="lg:container max-lg:mx-4 max-sm:flex-col max-sm:mb-20 flex mt-8 lg:mt-16">
 			<AccountMovileNav />
-			<div className="lg:max-w-[317px] mr-4 w-fit lg:w-full min-w-[60px] max-sm:hidden max-lg:sm:mr-4">
+			<div className="xl:max-w-[317px] mr-4 w-fit xl:w-full min-w-[60px] max-sm:hidden max-xl:sm:mr-4">
 				<AccountSideNav />
 			</div>
 
 			<div className="space-y-4">
-				<Profile id={user.uuid} name={String(user.username).toUpperCase()} username={"@"+user.username} role={{ mod: user.role.mod_role, admin: user.role.admin_role }} pronoun="" registration_date={user.created_at} description={User.description} answers={User.answers} likes={User.likes} best_answers={User.best_answers}/>
-				
+				<Profile
+					id={user.uuid}
+					name={String(user.username).toUpperCase()}
+					username={"@" + user.username}
+					role={{ mod: user.role.mod_role, admin: user.role.admin_role }}
+					pronoun=""
+					registration_date={user.created_at}
+					description={User.description}
+					answers={User.answers}
+					likes={User.likes}
+					best_answers={User.best_answers}
+				/>
+
 				<div className="flex space-x-4 select-none ">
 					<div
 						onClick={() => setActiveSection("feed")}
 						className={`rounded-md bg-black-300 flex space-x-2 px-4 py-3 border border-black-300 border-opacity-25 ${
-							activeSection === "feed"
-								? "bg-opacity-50 "
-								: "bg-opacity-25 border "
+							activeSection === "feed" ? "bg-opacity-50 " : "bg-opacity-25 border "
 						}`}
 					>
 						<div className="font-medium">User Feed</div>
-						<div
-							className={
-								activeSection === "feed"
-									? "text-primary-400"
-									: "text-black-500"
-							}
-						>
-							{feedCommentsCount}
-						</div>
+						<div className={activeSection === "feed" ? "text-primary-400" : "text-black-500"}>{feedCommentsCount}</div>
 					</div>
 					<div
 						onClick={() => setActiveSection("posts")}
-						className={`rounded-md bg-black-300 flex space-x-2 px-4 py-3 border border-black-300 border-opacity-25 ${
-							activeSection === "posts"
-								? "bg-opacity-50"
-								: "bg-opacity-25"
-						}`}
+						className={`rounded-md bg-black-300 flex space-x-2 px-4 py-3 border border-black-300 border-opacity-25 ${activeSection === "posts" ? "bg-opacity-50" : "bg-opacity-25"}`}
 					>
 						<div className="font-medium">Posts</div>
-						<div
-							className={
-								activeSection === "posts"
-									? "text-primary-400"
-									: "text-black-500"
-							}
-						>
-							{UserPostCount}
-						</div>
+						<div className={activeSection === "posts" ? "text-primary-400" : "text-black-500"}>{UserPostCount}</div>
 					</div>
 					{/* <div
 						onClick={() => setActiveSection("answers")}
@@ -163,13 +152,9 @@ export default function ProfileSection() {
 					</div> */}
 				</div>
 
-				{activeSection === "feed" && (
-					<FeedPost messages={User.feed_comments} />
-				)}
+				{activeSection === "feed" && <FeedPost messages={User.feed_comments} />}
 
-				{activeSection === "posts" && (
-					<UserPosts messages={User.user_posts} />
-				)}
+				{activeSection === "posts" && <UserPosts messages={User.user_posts} />}
 			</div>
 		</div>
 	);

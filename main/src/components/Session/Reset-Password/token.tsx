@@ -15,10 +15,6 @@ export default function Reset_Token() {
 	const token = searchParams.get("id");
 	const username = searchParams.get("user");
 
-	if (!token || !username) {
-		return null;
-	}
-
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -29,6 +25,17 @@ export default function Reset_Token() {
 	const [showOkModal, setShowOkModal] = useState(false);
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
+
+	/* Button */
+	useEffect(() => {
+		const noErrors = Object.keys(errors).length === 0;
+		const allFieldsFilled = password;
+		setIsDisabled(!(noErrors && allFieldsFilled));
+	}, [errors, password]);
+
+	if (!token || !username) {
+		return null;
+	}
 
 	/* Password */
 	const handle_Password_Change = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,18 +53,18 @@ export default function Reset_Token() {
 		const result = changePasswordSchema.safeParse({ password: field === "password" ? value : password });
 
 		if (result.success) {
-			setErrors((prev) => {
+			setErrors(prev => {
 				const newErrors = { ...prev };
 				delete newErrors[field];
 				return newErrors;
 			});
 		} else {
-			const fieldError = result.error.errors.find((error) => error.path[0] === field);
+			const fieldError = result.error.errors.find(error => error.path[0] === field);
 
 			if (fieldError) {
-				setErrors((prev) => ({ ...prev, [field]: fieldError.message }));
+				setErrors(prev => ({ ...prev, [field]: fieldError.message }));
 			} else {
-				setErrors((prev) => {
+				setErrors(prev => {
 					const newErrors = { ...prev };
 					delete newErrors[field];
 					return newErrors;
@@ -65,13 +72,6 @@ export default function Reset_Token() {
 			}
 		}
 	};
-
-	/* Button */
-	useEffect(() => {
-		const noErrors = Object.keys(errors).length === 0;
-		const allFieldsFilled = password;
-		setIsDisabled(!(noErrors && allFieldsFilled));
-	}, [errors, password]);
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
@@ -85,7 +85,7 @@ export default function Reset_Token() {
 				setShowErrorModal(true);
 				setIsSubmitting(false);
 				setIsDisabled(true);
-				
+
 				return setTimeout(() => {
 					setShowErrorModal(false);
 					router.push("/reset-password");
@@ -103,7 +103,7 @@ export default function Reset_Token() {
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
 
-			result.error.errors.forEach((error) => {
+			result.error.errors.forEach(error => {
 				if (error.path.length) {
 					fieldErrors[error.path[0]] = error.message;
 				}
@@ -116,52 +116,85 @@ export default function Reset_Token() {
 
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
-	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
+	const tw_input =
+		"appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
 	const tw_error = "select-none text-red text-sm";
 
 	return (
 		<>
-		<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
-			<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
-				{/* Username */}
-				<div className="w-full flex flex-col space-y-[.2rem]">
-					<div className="flex items-center justify-between">
-						<label className={tw_label}>Username</label>
+			<form
+				onSubmit={handleSubmit}
+				className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]"
+				noValidate
+			>
+				<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
+					{/* Username */}
+					<div className="w-full flex flex-col space-y-[.2rem]">
+						<div className="flex items-center justify-between">
+							<label className={tw_label}>Username</label>
+						</div>
+
+						<input className={tw_input} type="text" value={username.substring(0, 20)} autoComplete="off" maxLength={20} disabled />
 					</div>
 
-					<input className={tw_input} type="text" value={username.substring(0, 20)} autoComplete="off" maxLength={20} disabled />
+					{/* New Password */}
+					<div className="w-full flex flex-col space-y-[.2rem]">
+						<div className="flex items-center justify-between">
+							<label className={tw_label} htmlFor="password">
+								New Password
+							</label>
+							{errors.password && <span className={tw_error}>{errors.password}</span>}
+						</div>
+
+						<div className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}>
+							<input
+								className="w-full appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-transparent mr-2"
+								placeholder="Enter your password"
+								type={showPassword ? "text" : "password"}
+								value={password}
+								id="password"
+								autoComplete="current-password"
+								onChange={handle_Password_Change}
+								minLength={8}
+								maxLength={50}
+								required
+							/>
+							<button type="button" onClick={togglePasswordVisibility}>
+								{showPassword ? (
+									<EyeOff
+										className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary"
+										size={20}
+									/>
+								) : (
+									<Eye className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />
+								)}
+							</button>
+						</div>
+					</div>
 				</div>
 
-				{/* New Password */}
-				<div className="w-full flex flex-col space-y-[.2rem]">
-					<div className="flex items-center justify-between">
-						<label className={tw_label} htmlFor="password">New Password</label>
-						{errors.password && <span className={tw_error}>{errors.password}</span>}
-					</div>
-					
-					<div className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}>
-						<input className="w-full appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-transparent mr-2" placeholder="Enter your password" type={showPassword ? "text" : "password"} value={password} id="password" autoComplete="current-password" onChange={handle_Password_Change} minLength={8} maxLength={50} required />
-						<button type="button" onClick={togglePasswordVisibility}>{showPassword ? <EyeOff className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} /> : <Eye className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />}</button>
-					</div>
+				<button
+					className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`}
+					type="submit"
+					disabled={isDisabled || isSubmitting}
+				>
+					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">
+						{isSubmitting ? "Submitting..." : "Change Password"}
+					</span>
+				</button>
+			</form>
+
+			{showErrorModal && (
+				<div className="fixed right-[2rem] bottom-[2rem] bg-red py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
+					<span>{errorMessage}</span>
 				</div>
-			</div>
+			)}
 
-			<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
-				<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Change Password"}</span>
-			</button>
-		</form>
-
-		{showErrorModal && (
-			<div className="fixed right-[2rem] bottom-[2rem] bg-red py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
-				<span>{errorMessage}</span>
-			</div>
-		)}
-
-		{showOkModal && (
-			<div className="fixed right-[2rem] bottom-[2rem] bg-green py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
-				<span>Your password has been changed successfully.</span>
-			</div>
-		)}
+			{showOkModal && (
+				<div className="fixed right-[2rem] bottom-[2rem] bg-green py-[1rem] px-[1.5rem] rounded-md shadow-lg transition-opacity duration-1000 opacity-100">
+					<span>Your password has been changed successfully.</span>
+				</div>
+			)}
 		</>
 	);
 }

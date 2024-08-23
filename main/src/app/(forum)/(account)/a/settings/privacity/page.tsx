@@ -1,4 +1,3 @@
-
 import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
 import AccountSideNav from "@/components/Forum/Account/sidenav";
 

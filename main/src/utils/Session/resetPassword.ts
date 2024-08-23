@@ -5,8 +5,8 @@ import resetPasswordSchema from "@/schemas/Session/resetPassword";
 import changePasswordSchema from "@/schemas/Session/changePassword";
 
 interface ResetProps {
-	username: string,
-	seeds: string
+	username: string;
+	seeds: string;
 }
 
 export async function Reset_Password({ username, seeds }: ResetProps) {
@@ -18,16 +18,17 @@ export async function Reset_Password({ username, seeds }: ResetProps) {
 	const { username: validUsername, seeds: validSeeds } = result.data;
 
 	try {
-		const response = await axios.post("http://gateway-service:8080/dialosoft-api/auth/recover-token",
+		const response = await axios.post(
+			"http://gateway-service:8080/dialosoft-api/auth/recover-token",
 			{
 				username: validUsername.toLowerCase(),
-				seedPhrase: validSeeds.split(" ")
+				seedPhrase: validSeeds.split(" "),
 			},
 			{
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
 				},
-				timeout: (30 * 1000) // 30 seconds
+				timeout: 30 * 1000, // 30 seconds
 			}
 		);
 
@@ -38,15 +39,14 @@ export async function Reset_Password({ username, seeds }: ResetProps) {
 				return { success: false, message: "Invalid username or seeds." };
 			}
 		}
-		
+
 		return { success: false, message: "A network error occurred. Please check your connection and try again." };
 	}
-
 }
 
 interface ChangeProps {
-	password: string,
-	token: string
+	password: string;
+	token: string;
 }
 
 export async function Change_Password({ password, token }: ChangeProps) {
@@ -58,16 +58,17 @@ export async function Change_Password({ password, token }: ChangeProps) {
 	const { password: validPassword } = result.data;
 
 	try {
-		await axios.put("http://gateway-service:8080/dialosoft-api/auth/recover-password",
+		await axios.put(
+			"http://gateway-service:8080/dialosoft-api/auth/recover-password",
 			{
-				newPassword: validPassword
+				newPassword: validPassword,
 			},
 			{
 				headers: {
 					"Content-Type": "application/json",
-					"Recover": token as string
+					Recover: token as string,
 				},
-				timeout: (30 * 1000) // 30 seconds
+				timeout: 30 * 1000, // 30 seconds
 			}
 		);
 

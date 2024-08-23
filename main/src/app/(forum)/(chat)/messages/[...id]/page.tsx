@@ -12,7 +12,7 @@ export default function Chat({ params }) {
 	const user = getUser(username);
 
 	function getUser(username: string) {
-		let user = usersList.find(user => user.username === username) || {};
+		const user = usersList.find(user => user.username === username) || {};
 
 		return user;
 	}

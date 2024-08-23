@@ -25,11 +25,7 @@ function ChatMessages() {
 	return (
 		<div className="flex flex-col h-full px-3 py-3.5 gap-1 justify-end">
 			{messages.map(({ content }, i) => (
-				<ChatMessage
-					key={i}
-					recipient={isRecipient()}
-					content={content}
-				/>
+				<ChatMessage key={i} recipient={isRecipient()} content={content} />
 			))}
 		</div>
 	);
@@ -39,14 +35,7 @@ export default function ChatView({ name, username, photo }: ChatViewProps) {
 	return (
 		<div className="flex flex-col h-full">
 			<div className="border-black-500 border rounded-t-xl border-opacity-25 py-1 px-3 h-12">
-				<UserChip
-					name={name}
-					username={username}
-					photo={photo}
-					nameSize="m"
-					usernameBeside={true}
-					size="xs"
-				/>
+				<UserChip name={name} username={username} photo={photo} nameSize="m" usernameBeside={true} size="xs" />
 			</div>
 			<ChatMessages />
 			<div className="flex items-center border-black-500 border rounded-b-xl border-opacity-25 py-1 px-3 h-16 gap-3">
@@ -61,4 +50,3 @@ export default function ChatView({ name, username, photo }: ChatViewProps) {
 		</div>
 	);
 }
-

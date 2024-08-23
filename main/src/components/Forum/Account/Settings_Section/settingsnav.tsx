@@ -1,16 +1,8 @@
 "use client";
-import {
-	UserRoundCog,
-	Shield,
-	Bell,
-	MonitorCog,
-	ScrollText,
-	CircleHelp,
-    HelpCircle,
-} from "lucide-react";
+import { UserRoundCog, Shield, Bell, MonitorCog, ScrollText, HelpCircle } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function SettingsNav() {
 	const pathname = usePathname();
@@ -19,11 +11,7 @@ export default function SettingsNav() {
 		{
 			icon: (
 				<UserRoundCog
-					className={`h-5 w-5 ${
-						pathname == "/a/settings/account"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
-					}`}
+					className={`h-5 w-5 ${pathname === "/a/settings/account" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`}
 				/>
 			),
 			label: "Account",
@@ -32,11 +20,7 @@ export default function SettingsNav() {
 		{
 			icon: (
 				<Shield
-					className={`h-5 w-5 ${
-						pathname == "/a/settings/security"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
-					}`}
+					className={`h-5 w-5 ${pathname === "/a/settings/security" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`}
 				/>
 			),
 			label: "Security",
@@ -45,11 +29,7 @@ export default function SettingsNav() {
 		{
 			icon: (
 				<Bell
-					className={`h-5 w-5 ${
-						pathname == "/a/settings/notifications"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
-					}`}
+					className={`h-5 w-5 ${pathname === "/a/settings/notifications" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`}
 				/>
 			),
 			label: "Notifications",
@@ -58,11 +38,7 @@ export default function SettingsNav() {
 		{
 			icon: (
 				<MonitorCog
-					className={`h-5 w-5 ${
-						pathname == "/a/settings/apparence"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
-					}`}
+					className={`h-5 w-5 ${pathname === "/a/settings/apparence" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`}
 				/>
 			),
 			label: "Apparence",
@@ -71,11 +47,7 @@ export default function SettingsNav() {
 		{
 			icon: (
 				<ScrollText
-					className={`h-5 w-5 ${
-						pathname == "/a/settings/privacity"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
-					}`}
+					className={`h-5 w-5 ${pathname === "/a/settings/privacity" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`}
 				/>
 			),
 			label: "Privacity",
@@ -84,11 +56,7 @@ export default function SettingsNav() {
 		{
 			icon: (
 				<HelpCircle
-					className={`h-5 w-5 ${
-						pathname == "/a/settings/help"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
-					}`}
+					className={`h-5 w-5 ${pathname === "/a/settings/help" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`}
 				/>
 			),
 			label: "Help Center",
@@ -103,19 +71,11 @@ export default function SettingsNav() {
 					<Link href={item.link} className="w-full" key={uuidv4()}>
 						<div
 							className={`flex group justify-start items-center w-full space-x-2 px-4 hover:text-secondary hover:bg-black-300 hover:bg-opacity-25 rounded-md h-14 ${
-								pathname == item.link
-									? "text-primary-400"
-									: "text-black-500 group-hover:text-secondary"
+								pathname === item.link ? "text-primary-400" : "text-black-500 group-hover:text-secondary"
 							}`}
 						>
 							{item.icon}
-							<div
-								className={`${
-									pathname == item.link
-										? "text-primary-400"
-										: "text-black-500 group-hover:text-secondary"
-								}`}
-							>
+							<div className={`${pathname === item.link ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`}>
 								{item.label}
 							</div>
 						</div>

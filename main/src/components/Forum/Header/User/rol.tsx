@@ -1,6 +1,4 @@
-import { Crown } from "lucide-react";
-import { Sword } from "lucide-react";
-import { UserRound } from "lucide-react";
+import { Crown, Sword, UserRound } from "lucide-react";
 
 interface RolProps {
 	rol: string;
@@ -32,8 +30,6 @@ export default function Rol({ rol }: RolProps) {
 					<span className="text-xs">{rol}</span>
 				</div>
 			);
-	
-			
 
 		default:
 			return null;

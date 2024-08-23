@@ -2,19 +2,7 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import {
-  ChevronRight,
-  ChevronLeft,
-  BellRing,
-  BellPlus,
-  BellOff,
-  Smile,
-  Image,
-  Paperclip,
-  Send,
-  ChevronDown,
-  Search,
-} from "lucide-react";
+import { ChevronRight, ChevronLeft, BellRing, Smile, Image as ImageIcon, Paperclip, Send, ChevronDown, Search } from "lucide-react";
 import Aside from "@/components/Forum/side_info/main";
 import Post from "@/components/Forum/Post_Section/post";
 import Comments from "@/components/Forum/Post_Section/comments";
@@ -78,28 +66,27 @@ export default function PostPage({ params }: Props) {
 	const width = getWidth();
 	const [user, setUser] = useState<UserType>(initialUser);
 	const [inputValue, setInputValue] = useState<string>("");
-	const [commentsList, setCommentsList] =
-		useState<CommentType[]>(initialComments);
+	const [commentsList, setCommentsList] = useState<CommentType[]>(initialComments);
 	const handleSubmit = () => {
-		if (!inputValue.trim()) return;  
+		if (!inputValue.trim()) {
+			return;
+		}
 
 		const newComment: CommentType = {
 			...user, //esta vaina copia todo lo de user al nuevo comentario (user, username, etc.)
 			id: (commentsList.length + 1).toString(), //agrega id al comentario
-			message: inputValue, 
+			message: inputValue,
 			date: new Date()
 				.toLocaleDateString("en-GB", {
 					day: "2-digit",
 					month: "short",
 					year: "numeric",
 				})
-				.replace(/ /g, ". "), 
+				.replace(/ /g, ". "),
 		};
 
-	
 		setCommentsList([...commentsList, newComment]);
 
-		
 		setInputValue("");
 		setUser({ ...initialUser });
 	};
@@ -145,9 +132,7 @@ export default function PostPage({ params }: Props) {
 		},
 	];
 
-	const Category = CategoryInfo.find(
-		category => category.id === params.categoryID
-	);
+	const Category = CategoryInfo.find(category => category.id === params.categoryID);
 	const [categoryID, setCategoryID] = useState(params.postID);
 
 	useEffect(() => {
@@ -181,25 +166,14 @@ export default function PostPage({ params }: Props) {
 								Main category
 							</Link>
 							<ChevronRight className="w-4 h-4" />
-							<Link
-								href={`/c/${params.categoryID}`}
-								className="hover:text-secondary"
-							>
-								{width > 640 ? (
-									<span>{Category?.title}</span>
-								) : (
-									<span>...</span>
-								)}
+							<Link href={`/c/${params.categoryID}`} className="hover:text-secondary">
+								{width > 640 ? <span>{Category?.title}</span> : <span>...</span>}
 							</Link>
 							<ChevronRight className="w-4 h-4" />
-							<span className="text-secondary">
-								{PostID?.title}
-							</span>
+							<span className="text-secondary">{PostID?.title}</span>
 						</div>
 						<div className="flex justify-between items-end">
-							<div className="text-3xl font-semibold w-fit">
-								{PostID?.title}
-							</div>
+							<div className="text-3xl font-semibold w-fit">{PostID?.title}</div>
 							<button className="max-md:hidden h-9 flex items-center bg-black-300 bg-opacity-25 border border-black-300 border-opacity-25 rounded-lg px-2 py-1 text-black-500 hover:text-secondary ">
 								<BellRing className="w-4 h-4" />
 								<span className="">Follow Post</span>
@@ -217,12 +191,9 @@ export default function PostPage({ params }: Props) {
 						value={inputValue}
 						onChange={e => setInputValue(e.target.value)}
 					/>
-					<Image className="h-6 w-6 hover:text-secondary" />
+					<ImageIcon className="h-6 w-6 hover:text-secondary" />
 					<Paperclip className="h-6 w-6 hover:text-secondary" />
-					<Send
-						onClick={handleSubmit}
-						className="h-6 w-6 text-primary-400 hover:text-primary-500"
-					/>
+					<Send onClick={handleSubmit} className="h-6 w-6 text-primary-400 hover:text-primary-500" />
 				</div>
 				<div className="mt-1 flex max-sm:justify-between">
 					<div className="text-black-500 flex  items-center md:space-x-2 ">
@@ -234,11 +205,7 @@ export default function PostPage({ params }: Props) {
 					</div>
 					<div className="flex items-center bg-black-300 bg-opacity-25 rounded-full p-2  space-x-2">
 						<Search className="text-primary-400 h-5 w-5" />
-						<input
-							type="text"
-							className="bg-transparent outline-none placeholder:text-black-500"
-							placeholder="Search comment..."
-						/>
+						<input type="text" className="bg-transparent outline-none placeholder:text-black-500" placeholder="Search comment..." />
 					</div>
 				</div>
 				{commentsList.map(CommentsList => (

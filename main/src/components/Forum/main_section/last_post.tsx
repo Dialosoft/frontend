@@ -1,4 +1,3 @@
-
 interface PostProps {
 	title: string;
 	user: string;

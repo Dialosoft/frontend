@@ -1,5 +1,7 @@
-import LastArticles from "./last_articles/main";
-import Members from "./members/main";
+import dynamic from "next/dynamic";
+
+const LastArticles = dynamic(() => import("./last_articles/main"));
+const Members = dynamic(() => import("./members/main"));
 
 export default function Aside() {
 	return (

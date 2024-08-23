@@ -1,11 +1,10 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import "./create.css";
 import InputText from "@/components/Forum/Account/Settings_Section/input_text";
 import TextEditor from "@/components/Post_Section/create/text_editor";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import Category from "../page";
 type Props = {
 	params: {
 		categoryID: string;
@@ -13,7 +12,7 @@ type Props = {
 	};
 };
 export default function Create({ params }: Props) {
-	const [title, setTitle]= useState('')
+	const [title, setTitle] = useState("");
 	const CategoryInfo = [
 		{
 			id: "1",
@@ -28,16 +27,14 @@ export default function Create({ params }: Props) {
 			title: "Rules & FAQs",
 		},
 	];
-	const Category = CategoryInfo.find(
-		category => category.id === params.categoryID
-	);
+	const Category = CategoryInfo.find(category => category.id === params.categoryID);
 	const [categoryID, setCategoryID] = useState(params.postID);
 	useEffect(() => {
 		const urlSegments = window.location.pathname.split("/");
 		const lastSegment = urlSegments[urlSegments.length - 1];
 		setCategoryID(lastSegment);
 	}, []);
-	
+
 	return (
 		<div className="container mt-4 space-y-4">
 			<div className="  font-medium ">
@@ -52,10 +49,7 @@ export default function Create({ params }: Props) {
 						Main category
 					</Link>
 					<ChevronRight className="w-4 h-4" />
-					<Link
-						href={`/c/${params.categoryID}`}
-						className="hover:text-secondary"
-					>
+					<Link href={`/c/${params.categoryID}`} className="hover:text-secondary">
 						{Category?.title}
 					</Link>
 					<ChevronRight className="w-4 h-4" />
@@ -67,9 +61,7 @@ export default function Create({ params }: Props) {
 				<InputText
 					value={title}
 					placeholder="Enter title..."
-					onChange={newValue =>
-					setTitle(newValue)
-					}
+					onChange={newValue => setTitle(newValue)}
 					background="bg-black-300 bg-opacity-25"
 				/>
 			</div>

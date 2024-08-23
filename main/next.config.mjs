@@ -4,8 +4,8 @@ const nextConfig = {
 	env: {
 		HOST: process.env.HOST,
 		Name: process.env.Name,
-		Description: process.env.Description
-	}
+		Description: process.env.Description,
+	},
 };
 
 export default nextConfig;

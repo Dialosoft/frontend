@@ -12,10 +12,16 @@ export default function Notify_Header() {
 
 	const [notifyTemplate, setNotifyTemplate] = useState([
 		{ photo: "", name: "SirLikesALot", type: "liked your post... again", time: "1h", link: "" },
-		{ photo: "", name: "CaptainObvious", type: "replied to your thread with more questions", time: "30m", link: "" },
+		{
+			photo: "",
+			name: "CaptainObvious",
+			type: "replied to your thread with more questions",
+			time: "30m",
+			link: "",
+		},
 		{ photo: "", name: "MissClickQueen", type: "accidentally reported your comment", time: "15m", link: "" },
 		{ photo: "", name: "DrGrammar", type: "corrected your grammar in a reply", time: "45m", link: "" },
-		{ photo: "", name: "MrEcho", type: "reposted your exact words in another thread", time: "2h", link: "" }
+		{ photo: "", name: "MrEcho", type: "reposted your exact words in another thread", time: "2h", link: "" },
 	]);
 
 	const toggleNotify = () => {
@@ -45,10 +51,12 @@ export default function Notify_Header() {
 	return (
 		<div className="relative flex items-center justify-center" ref={notifyRef}>
 			<button onClick={toggleNotify}>
-				<Bell className={`stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary ${showNotifications && "stroke-secondary"}`} />
+				<Bell
+					className={`stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary ${showNotifications && "stroke-secondary"}`}
+				/>
 			</button>
 
-			{ showNotifications && (
+			{showNotifications && (
 				<Suspense>
 					<Notify notifyTemplate={notifyTemplate} clearNotifications={clearNotifications} />
 				</Suspense>

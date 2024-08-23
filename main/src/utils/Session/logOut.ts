@@ -14,13 +14,13 @@ export default async function Session_LogOut() {
 	try {
 		await axios.get("http://gateway-service:8080/dialosoft-api/auth/logout", {
 			headers: {
-				"Authorization": "Bearer " + refreshToken?.value
+				Authorization: "Bearer " + refreshToken?.value,
 			},
-			timeout: (30 * 1000) // 30 seconds 
+			timeout: 30 * 1000, // 30 seconds
 		});
 
 		return true;
-	} catch (error) {
+	} catch {
 		return false;
 	}
 }

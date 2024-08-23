@@ -15,14 +15,12 @@ import TiptapUnderline from "@tiptap/extension-underline";
 import Color from "@tiptap/extension-color";
 import TiptapCode from "@tiptap/extension-code";
 import Link from "@tiptap/extension-link";
-import Document from "@tiptap/extension-document";
-import ListItem from "@tiptap/extension-list-item";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
 import TextStyle from "@tiptap/extension-text-style";
 import { Heading } from "@tiptap/extension-heading"; // Importa la extensión Heading
 
-import {Heading1,Heading2,
+import {
+	Heading1,
+	Heading2,
 	Bold,
 	Underline,
 	Italic,
@@ -75,7 +73,7 @@ export default function BasicEditor() {
 				levels: [1, 2, 3, 4, 5, 6],
 			}),
 		],
-		
+
 		editorProps: {
 			attributes: {
 				class: "outline-none bg-black-300 bg-opacity-25 rounded-lg min-h-[150px] p-4 border border-black-300 border-opacity-25",
@@ -86,12 +84,7 @@ export default function BasicEditor() {
 		if (editor) {
 			const url = prompt("Enter the URL");
 			if (url) {
-				editor
-					.chain()
-					.focus()
-					.extendMarkRange("link")
-					.setLink({ href: url })
-					.run();
+				editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
 			}
 		}
 	};
@@ -110,24 +103,22 @@ export default function BasicEditor() {
 
 	const handleColorButtonClick = () => {
 		if (colorInputRef.current) {
-			colorInputRef.current.click(); 
+			colorInputRef.current.click();
 		}
 	};
-	const handleHeadingChange = (
-		event: React.ChangeEvent<HTMLSelectElement>
-	) => {
-		const level = parseInt(event.target.value, 10);
+	// const handleHeadingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+	// 	const level = parseInt(event.target.value, 10);
 
-		if (level >= 1 && level <= 6) {
-			if (editor) {
-				editor
-					.chain()
-					.focus()
-					.toggleHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 })
-					.run();
-			}
-		}
-	};
+	// 	if (level >= 1 && level <= 6) {
+	// 		if (editor) {
+	// 			editor
+	// 				.chain()
+	// 				.focus()
+	// 				.toggleHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 })
+	// 				.run();
+	// 		}
+	// 	}
+	// };
 	if (!editor) {
 		return null;
 	}
@@ -136,104 +127,56 @@ export default function BasicEditor() {
 		<div className="w-full space-y-4 ">
 			<div className="flex items-center button-group space-x-4">
 				<button
-					onClick={() =>
-						editor.chain().focus().toggleHeading({ level: 1 }).run()
-					}
-					className={
-						editor.isActive("heading", { level: 1 })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}
+					onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+					className={editor.isActive("heading", { level: 1 }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}
 				>
 					<Heading1 className="h-5 w-5" />
 				</button>
 				<button
-					onClick={() =>
-						editor.chain().focus().toggleHeading({ level: 2 }).run()
-					}
-					className={
-						editor.isActive("heading", { level: 2 })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}
+					onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+					className={editor.isActive("heading", { level: 2 }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}
 				>
 					<Heading2 className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleBold().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("bold")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("bold") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Bold className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleItalic().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("italic")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("italic") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Italic className="h-5 w-5" />
 				</button>
 				<button
-					onClick={() =>
-						editor.chain().focus().setTextAlign("left").run()
-					}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive({ textAlign: "left" })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					onClick={() => editor.chain().focus().setTextAlign("left").run()}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive({ textAlign: "left" }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<AlignLeft className="h-5 w-5" />
 				</button>
 				<button
-					onClick={() =>
-						editor.chain().focus().setTextAlign("center").run()
-					}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive({ textAlign: "center" })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					onClick={() => editor.chain().focus().setTextAlign("center").run()}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive({ textAlign: "center" }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<AlignCenter className="h-5 w-5" />
 				</button>
 				<button
-					onClick={() =>
-						editor.chain().focus().setTextAlign("right").run()
-					}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive({ textAlign: "right" })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					onClick={() => editor.chain().focus().setTextAlign("right").run()}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive({ textAlign: "right" }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<AlignRight className="h-5 w-5" />
 				</button>
 				<button
-					onClick={() =>
-						editor.chain().focus().toggleUnderline().run()
-					}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("underline")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					onClick={() => editor.chain().focus().toggleUnderline().run()}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("underline") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Underline className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleStrike().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("strike")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("strike") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Strikethrough className="h-5 w-5" />
 				</button>
@@ -249,16 +192,8 @@ export default function BasicEditor() {
 					<input
 						ref={colorInputRef}
 						type="color"
-						onInput={event =>
-							editor
-								.chain()
-								.focus()
-								.setColor(event.currentTarget.value)
-								.run()
-						}
-						value={
-							editor.getAttributes("textStyle").color || "#D3D3ED"
-						}
+						onInput={event => editor.chain().focus().setColor(event.currentTarget.value).run()}
+						value={editor.getAttributes("textStyle").color || "#D3D3ED"}
 						data-testid="setColor"
 						className="w-2"
 						id="style1"
@@ -266,48 +201,26 @@ export default function BasicEditor() {
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleCode().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("code")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("code") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Code className="h-5 w-5" />
 				</button>
 
 				<button
-					onClick={() =>
-						editor.chain().focus().toggleBulletList().run()
-					}
-					className={
-						editor.isActive("bulletList")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}
+					onClick={() => editor.chain().focus().toggleBulletList().run()}
+					className={editor.isActive("bulletList") ? "text-primary-400" : "text-black-500 hover:text-secondary"}
 				>
 					<List className="h-5 w-5" />
 				</button>
 				<button
-					onClick={() =>
-						editor.chain().focus().toggleOrderedList().run()
-					}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("orderedList")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					onClick={() => editor.chain().focus().toggleOrderedList().run()}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("orderedList") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<ListOrdered className="h-5 w-5" />
 				</button>
 				<button
-					onClick={() =>
-						editor.chain().focus().toggleBlockquote().run()
-					}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("blockquote")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					onClick={() => editor.chain().focus().toggleBlockquote().run()}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("blockquote") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Quote className="h-5 w-5" />
 				</button>
@@ -324,11 +237,7 @@ export default function BasicEditor() {
 				</button>
 				<button
 					onClick={editor.isActive("link") ? removeLink : addLink}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("link")
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("link") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Link2 className="h-5 w-5" />
 				</button>
