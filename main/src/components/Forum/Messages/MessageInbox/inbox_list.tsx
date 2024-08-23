@@ -1,4 +1,6 @@
-import InboxChatPreview from "./chat_preview";
+import dynamic from "next/dynamic";
+
+const InboxChatPreview = dynamic(() => import("./chat_preview"));
 
 function SearchDummyComponent() {
 	return (

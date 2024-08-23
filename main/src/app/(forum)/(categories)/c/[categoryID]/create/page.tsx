@@ -1,16 +1,21 @@
 "use client";
+
+import "./create.module.css";
 import { useState, useEffect } from "react";
-import "./create.css";
-import InputText from "@/components/Forum/Account/Settings_Section/input_text";
-import TextEditor from "@/components/Post_Section/create/text_editor";
+import dynamic from "next/dynamic";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+
+const InputText = dynamic(() => import("@/components/Forum/Account/Settings_Section/input_text"));
+const TextEditor = dynamic(() => import("@/components/Post_Section/create/text_editor"));
+
 type Props = {
 	params: {
 		categoryID: string;
 		postID: string;
 	};
 };
+
 export default function Create({ params }: Props) {
 	const [title, setTitle] = useState("");
 	const CategoryInfo = [
@@ -27,8 +32,10 @@ export default function Create({ params }: Props) {
 			title: "Rules & FAQs",
 		},
 	];
+
 	const Category = CategoryInfo.find(category => category.id === params.categoryID);
 	const [categoryID, setCategoryID] = useState(params.postID);
+
 	useEffect(() => {
 		const urlSegments = window.location.pathname.split("/");
 		const lastSegment = urlSegments[urlSegments.length - 1];

@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 
 interface InputProps {
@@ -20,7 +21,7 @@ export default function InputText({ value, placeholder, onChange, background }: 
 		<>
 			<input
 				type="text"
-				value={value}
+				value={inputValue}
 				placeholder={placeholder}
 				onChange={handleChange}
 				className={`${background} border border-black-300 rounded-md outline-none px-2 h-9 font-normal w-full appearance-none placeholder:text-black-500`}

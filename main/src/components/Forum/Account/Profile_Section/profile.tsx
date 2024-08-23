@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import { Settings, User, Edit } from "lucide-react";
 
-import Role from "@/components/Forum/Header/User/role";
+const Role = dynamic(() => import("@/components/Forum/Header/User/role"));
 import { getUser_Avatar } from "@/utils/User/getUser";
 
 interface ProfileProps {
@@ -21,6 +22,7 @@ interface ProfileProps {
 	best_answers: number;
 	description: string;
 }
+
 export default function Profile({ id, name, username, role, pronoun, registration_date, answers, likes, best_answers, description }: ProfileProps) {
 	useEffect(() => {
 		const fetchUser = async () => {

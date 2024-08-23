@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import { ChevronRight, ChevronLeft, BellRing, Smile, Image as ImageIcon, Paperclip, Send, ChevronDown, Search } from "lucide-react";
-import Aside from "@/components/Forum/side_info/main";
-import Post from "@/components/Forum/Post_Section/post";
-import Comments from "@/components/Forum/Post_Section/comments";
+import dynamic from "next/dynamic";
+
+const Aside = dynamic(() => import("@/components/Forum/side_info/main"));
+const Post = dynamic(() => import("@/components/Forum/Post_Section/post"));
+const Comments = dynamic(() => import("@/components/Forum/Post_Section/comments"));
 
 import getWidth from "@/utils/getWidth";
 

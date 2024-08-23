@@ -1,13 +1,17 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import { useState } from "react";
-import AccountSideNav from "@/components/Forum/Account/sidenav";
-import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
-import InputText from "@/components/Forum/Account/Settings_Section/input_text";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import AccountMovileNav from "@/components/Forum/Account/movilenav";
 import Link from "next/link";
 
+const AccountSideNav = dynamic(() => import("@/components/Forum/Account/sidenav"));
+const SettingsNav = dynamic(() => import("@/components/Forum/Account/Settings_Section/settingsnav"));
+const InputText = dynamic(() => import("@/components/Forum/Account/Settings_Section/input_text"));
+const AccountMovileNav = dynamic(() => import("@/components/Forum/Account/movilenav"));
+
 import getWidth from "@/utils/getWidth";
+
 export default function StgsAccount() {
 	const width = getWidth(); // Get the window width using the hook
 

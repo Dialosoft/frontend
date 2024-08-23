@@ -25,7 +25,7 @@ export default function ManageCategory({ onClose, title, onChange }: Props) {
 						<div className=" font-medium">Category</div>
 						<input
 							type="text"
-							value={title}
+							value={inputValue}
 							onChange={handleChange}
 							className="border bg-black-900 border-black-300 rounded-md outline-none px-2 h-9 font-normal w-full appearance-none placeholder:text-black-500"
 						/>
