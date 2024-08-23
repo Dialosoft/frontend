@@ -10,7 +10,7 @@ interface MemberProps {
 }
 
 export default function Member({ name, username, rol, photo }: MemberProps) {
-	
+
 	return (
 		<>
 			<div className="flex space-x-2 items-center hover:bg-black-300 p-2 rounded-sm hover:bg-opacity-25">

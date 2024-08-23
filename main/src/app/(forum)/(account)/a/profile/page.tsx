@@ -29,13 +29,13 @@ export default function ProfileSection() {
 
 	function formatDate(dateString: string) {
 		const date = new Date(dateString);
-		
-		const options: Intl.DateTimeFormatOptions = { 
-			day: "numeric", 
-			month: "short", 
-			year: "numeric" 
+
+		const options: Intl.DateTimeFormatOptions = {
+			day: "numeric",
+			month: "short",
+			year: "numeric",
 		};
-		
+
 		return new Intl.DateTimeFormat("en-UK", options).format(date);
 	}
 
@@ -102,7 +102,7 @@ export default function ProfileSection() {
 
 			<div className="space-y-4">
 				<Profile id={user.uuid} name={String(user.username).toUpperCase()} username={"@"+user.username} role={{ mod: user.role.mod_role, admin: user.role.admin_role }} pronoun="" registration_date={user.created_at} description={User.description} answers={User.answers} likes={User.likes} best_answers={User.best_answers}/>
-				
+
 				<div className="flex space-x-4 select-none ">
 					<div
 						onClick={() => setActiveSection("feed")}

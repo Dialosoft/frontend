@@ -45,7 +45,7 @@ export default function User_Header({ id, username, role }: UserProps) {
 	return (
 		<div className="relative flex items-center justify-center" ref={userRef}>
 			<button onClick={toggleUser}>test</button>
-			
+
 			{ showUser && (
 				<Suspense>
 					<User name={username} admin={role.admin} mod={role.mod} />

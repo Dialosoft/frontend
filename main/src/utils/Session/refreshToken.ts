@@ -14,11 +14,11 @@ export default async function RefreshToken() {
 	try {
 		const response = await axios.post("http://gateway-service:8080/dialosoft-api/auth/refresh-token",
 			{
-				refreshToken: refreshToken?.value
+				refreshToken: refreshToken?.value,
 			},
 			{
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
 				},
 				timeout: (30 * 1000), // 30 seconds
 			}

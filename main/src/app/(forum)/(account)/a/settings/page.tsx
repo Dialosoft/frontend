@@ -9,85 +9,85 @@ export default function SettingsPage() {
     	const pathname = usePathname();
 
     	const menuItems = [
-			{
-				icon: (
-					<UserRoundCog
-						className={`h-5 w-5 ${
-							pathname == "/a/settings/account"
-								? "text-primary-400"
-								: "text-black-500 group-hover:text-secondary"
-						}`}
-					/>
-				),
-				label: "Account",
-				link: "/a/settings/account",
-			},
-			{
-				icon: (
-					<Shield
-						className={`h-5 w-5 ${
-							pathname == "/a/settings/security"
-								? "text-primary-400"
-								: "text-black-500 group-hover:text-secondary"
-						}`}
-					/>
-				),
-				label: "Security",
-				link: "/a/settings/security",
-			},
-			{
-				icon: (
-					<Bell
-						className={`h-5 w-5 ${
-							pathname == "/a/settings/notifications"
-								? "text-primary-400"
-								: "text-black-500 group-hover:text-secondary"
-						}`}
-					/>
-				),
-				label: "Notifications",
-				link: "/a/settings/notifications",
-			},
-			{
-				icon: (
-					<MonitorCog
-						className={`h-5 w-5 ${
-							pathname == "/a/settings/apparence"
-								? "text-primary-400"
-								: "text-black-500 group-hover:text-secondary"
-						}`}
-					/>
-				),
-				label: "Apparence",
-				link: "/a/settings/apparence",
-			},
-			{
-				icon: (
-					<ScrollText
-						className={`h-5 w-5 ${
-							pathname == "/a/settings/privacity"
-								? "text-primary-400"
-								: "text-black-500 group-hover:text-secondary"
-						}`}
-					/>
-				),
-				label: "Privacity",
-				link: "/a/settings/privacity",
-			},
-			{
-				icon: (
-					<HelpCircle
-						className={`h-5 w-5 ${
-							pathname == "/a/settings/help"
-								? "text-primary-400"
-								: "text-black-500 group-hover:text-secondary"
-						}`}
-					/>
-				),
-				label: "Help Center",
-				link: "/a/settings/help",
-			},
-		];
+		{
+			icon: (
+				<UserRoundCog
+					className={`h-5 w-5 ${
+						pathname == "/a/settings/account"
+							? "text-primary-400"
+							: "text-black-500 group-hover:text-secondary"
+					}`}
+				/>
+			),
+			label: "Account",
+			link: "/a/settings/account",
+		},
+		{
+			icon: (
+				<Shield
+					className={`h-5 w-5 ${
+						pathname == "/a/settings/security"
+							? "text-primary-400"
+							: "text-black-500 group-hover:text-secondary"
+					}`}
+				/>
+			),
+			label: "Security",
+			link: "/a/settings/security",
+		},
+		{
+			icon: (
+				<Bell
+					className={`h-5 w-5 ${
+						pathname == "/a/settings/notifications"
+							? "text-primary-400"
+							: "text-black-500 group-hover:text-secondary"
+					}`}
+				/>
+			),
+			label: "Notifications",
+			link: "/a/settings/notifications",
+		},
+		{
+			icon: (
+				<MonitorCog
+					className={`h-5 w-5 ${
+						pathname == "/a/settings/apparence"
+							? "text-primary-400"
+							: "text-black-500 group-hover:text-secondary"
+					}`}
+				/>
+			),
+			label: "Apparence",
+			link: "/a/settings/apparence",
+		},
+		{
+			icon: (
+				<ScrollText
+					className={`h-5 w-5 ${
+						pathname == "/a/settings/privacity"
+							? "text-primary-400"
+							: "text-black-500 group-hover:text-secondary"
+					}`}
+				/>
+			),
+			label: "Privacity",
+			link: "/a/settings/privacity",
+		},
+		{
+			icon: (
+				<HelpCircle
+					className={`h-5 w-5 ${
+						pathname == "/a/settings/help"
+							? "text-primary-400"
+							: "text-black-500 group-hover:text-secondary"
+					}`}
+				/>
+			),
+			label: "Help Center",
+			link: "/a/settings/help",
+		},
+	];
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-4 lg:mt-16">
 			<AccountMovileNav />

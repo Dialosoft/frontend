@@ -17,7 +17,7 @@ type UserType = {
 	answers: number;
 	likes: number;
 	date: string;
-	
+
 };
 type PostsType = {
 	id:number
@@ -29,7 +29,7 @@ type PostsType = {
 	likes: number;
 	date: string;
 	date_saved: string
-	
+
 };
 type CommentType = UserType & { id: string, type:string };
 
@@ -40,7 +40,7 @@ type UnifiedType =
 
 const initialPosts: PostsType[] = [
 	{
-		
+
 		id: 321,
 		user: "Flussen",
 		username: "flussen",
@@ -50,24 +50,24 @@ const initialPosts: PostsType[] = [
 		answers: 324,
 		likes: 432,
 		date: "24. Feb. 2002",
-		date_saved:"22 August 2024"
+		date_saved:"22 August 2024",
 	},
 ];
 export default function SavedSection() {
 
 	    const [searchTerm, setSearchTerm] = useState<string>("");
 
-		const [PostsList, setPostsList] =
+	const [PostsList, setPostsList] =
 			useState<PostsType[]>(initialPosts);
 			  const filteredPosts = PostsList.filter(
-					post =>
-						post.title
-							.toLowerCase()
-							.includes(searchTerm.toLowerCase()) ||
+		post =>
+			post.title
+				.toLowerCase()
+				.includes(searchTerm.toLowerCase()) ||
 						post.message
 							.toLowerCase()
 							.includes(searchTerm.toLowerCase())
-				);
+	);
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16  max-sm:mb-20">
 			<AccountMovileNav />

@@ -17,21 +17,21 @@ const formatNumber = (num: number): string => {
 	return (num / 1000).toFixed(1) + "k";
 };
 
-export default function Category({ title, posts, comments , type}: CategoryProps) {
+export default function Category({ title, posts, comments , type }: CategoryProps) {
 	const post = [
 		{ title: "Invade Event: Poland", user: "@alejandro", date: "2h" },
 	];
 
 	const renderIcon = () => {
 		switch (type) {
-			case "Event":
-				return <Calendar />;
-			case "Help":
-				return <MessageCircleQuestion />;
-			case "Info":
-				return <ScrollText />;
-			default:
-				return null;
+		case "Event":
+			return <Calendar />;
+		case "Help":
+			return <MessageCircleQuestion />;
+		case "Info":
+			return <ScrollText />;
+		default:
+			return null;
 		}
 	};
 

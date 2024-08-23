@@ -9,18 +9,18 @@ export const metadata: Metadata = {
 	metadataBase: new URL(SITE),
 	title: {
 		template: "%s | " + process.env.Name,
-		default: "Session - " + process.env.Name
+		default: "Session - " + process.env.Name,
 	},
 	category: "forum",
 	robots: {
 		index: false,
 		follow: false,
-		nocache: false
+		nocache: false,
 	},
 	icons: {
 		icon: "/favicon.ico",
-		apple: "/logo.png"
-	}
+		apple: "/logo.png",
+	},
 };
 
 /* FONT */

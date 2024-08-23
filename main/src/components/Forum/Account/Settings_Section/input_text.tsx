@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 
 interface InputProps {
@@ -8,15 +8,15 @@ interface InputProps {
 	background:string
 }
 
-export default function InputText({value, placeholder, onChange, background}:InputProps) {
-     const [inputValue, setInputValue] = useState(value);
+export default function InputText({ value, placeholder, onChange, background }:InputProps) {
+	const [inputValue, setInputValue] = useState(value);
 
-		const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-			const newValue = e.target.value;
-			setInputValue(newValue);
-			onChange(newValue); 
-		};
-    return (
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.target.value;
+		setInputValue(newValue);
+		onChange(newValue);
+	};
+	return (
 		<>
 			<input
 				type="text"

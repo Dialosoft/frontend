@@ -23,13 +23,13 @@ export default async function Register_Database({ username, email, password, con
 			{
 				username: validUsername.toLowerCase(),
 				email: validEmail.toLowerCase(),
-				password: validPassword
+				password: validPassword,
 			},
 			{
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
 				},
-				timeout: (60 * 1000) // 1 minute
+				timeout: (60 * 1000), // 1 minute
 			}
 		);
 

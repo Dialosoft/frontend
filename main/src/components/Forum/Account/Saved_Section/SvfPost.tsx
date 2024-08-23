@@ -11,7 +11,7 @@ import { ArrowBigUp } from "lucide-react";
 import { ArrowBigDown } from "lucide-react";
 import { useState } from "react";
 interface PostProps {
-	
+
 	user: string;
 	username: string;
 	title: string;
@@ -31,7 +31,7 @@ export default function SavedPost({
 	user,
 	username,
 	title,
-date_saved,
+	date_saved,
 	message,
 	answers,
 	likes,
@@ -51,7 +51,7 @@ date_saved,
 							{username}
 						</div>
 					</div>
-				
+
 				</div>
 				<div className="flex space-x-2 text-black-500">
 					<div className="text-sm max-sm:hidden">{date}</div>

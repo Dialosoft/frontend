@@ -15,7 +15,7 @@ export default function Notify_Header() {
 		{ photo: "", name: "CaptainObvious", type: "replied to your thread with more questions", time: "30m", link: "" },
 		{ photo: "", name: "MissClickQueen", type: "accidentally reported your comment", time: "15m", link: "" },
 		{ photo: "", name: "DrGrammar", type: "corrected your grammar in a reply", time: "45m", link: "" },
-		{ photo: "", name: "MrEcho", type: "reposted your exact words in another thread", time: "2h", link: "" }
+		{ photo: "", name: "MrEcho", type: "reposted your exact words in another thread", time: "2h", link: "" },
 	]);
 
 	const toggleNotify = () => {

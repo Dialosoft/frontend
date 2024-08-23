@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
@@ -60,7 +60,7 @@ export default function MainSection() {
 
 				{true && (
 					<button
-						onClick={() => {setShowManage(!showManage), setTitle(title)}}  
+						onClick={() => {setShowManage(!showManage), setTitle(title);}}
 						className="bg-black-300 bg-opacity-25 border space-x-1 flex font-medium items-center border-black-300 border-opacity-25 text-black-500 hover:text-secondary h-9 px-2 rounded-lg "
 					>
 						<Settings />

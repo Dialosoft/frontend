@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 export const metadata: Metadata = {
 	title: "Change Password",
-	alternates: { canonical: "reset-password/token" }
+	alternates: { canonical: "reset-password/token" },
 };
 
 const Token = dynamic(() => import("@/components/Session/Reset-Password/token"), { ssr: false });

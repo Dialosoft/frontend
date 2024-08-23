@@ -1,15 +1,15 @@
-"use client"
+"use client";
 import { UserRound, Bookmark, Settings, LogOut } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from "next/navigation";
 import Session_LogOut from "@/utils/Session/logOut";
 import getWidth from "@/utils/getWidth";
 
 
 export default function AccountSideNav() {
-const pathname = usePathname()
-const width = getWidth()
+	const pathname = usePathname();
+	const width = getWidth();
 	const menuItems = [
 		{
 			icon: (
@@ -48,16 +48,16 @@ const width = getWidth()
 				/>
 			),
 			label: "Settings",
-			
+
 			link: "/a/settings/account",
 		},
-		
+
 	];
 	const handle_Logout = async () => {
 		await Session_LogOut();
 		window.location.reload();
 	};
-  return (
+	return (
 		<>
 			<div className="bg-black-300 bg-opacity-25 rounded-xl p-1 xl:p-2 grid grid-cols-1 gap-2">
 				{menuItems.map(item => (
@@ -88,14 +88,14 @@ const width = getWidth()
 				))}
 				<button
 					onClick={handle_Logout}
-					className={`flex group justify-start items-center w-full space-x-2 px-4 hover:text-red hover:bg-black-300 hover:bg-opacity-25 rounded-md h-14 text-black-500 group-hover:text-red  `}
+					className={"flex group justify-start items-center w-full space-x-2 px-4 hover:text-red hover:bg-black-300 hover:bg-opacity-25 rounded-md h-14 text-black-500 group-hover:text-red  "}
 				>
 					<LogOut
-						className={`h-5 w-5 text-black-500 group-hover:text-red`}
+						className={"h-5 w-5 text-black-500 group-hover:text-red"}
 					/>
-					<div className={`max-xl:hidden `}>Logout</div>
+					<div className={"max-xl:hidden "}>Logout</div>
 				</button>
 			</div>
 		</>
-  );
+	);
 }

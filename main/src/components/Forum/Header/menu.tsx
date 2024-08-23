@@ -12,7 +12,7 @@ const Messages = dynamic(() => import("@/components/Forum/Header/Options/message
 
 export default async function Menu_Header() {
 	const user = await getUser_Simple();
-	if (!user) return null;
+	if (!user) {return null;}
 
 	return (
 		<div className="flex items-center justify-center space-x-[1rem]">

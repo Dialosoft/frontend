@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 export const metadata: Metadata = {
 	title: "Reset Password",
-	alternates: { canonical: "reset-password" }
+	alternates: { canonical: "reset-password" },
 };
 
 const Form = dynamic(() => import("@/components/Session/Reset-Password/form"), { ssr: false });

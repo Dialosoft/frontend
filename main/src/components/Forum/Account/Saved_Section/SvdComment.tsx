@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
 	User,
 	Share2,
@@ -37,7 +37,7 @@ export default function SavedComment({
 	date,
 }: CommentsProps) {
 
-	const [saved, setSaved]=useState(true)
+	const [saved, setSaved]=useState(true);
 	const [liked, setLiked] = useState(false);
 
 	return (
@@ -61,12 +61,12 @@ export default function SavedComment({
 								rate > 999
 									? "text-yellow"
 									: rate > 249
-									? "text-red"
-									: rate > 99
-									? "text-green"
-									: rate > 9
-									? "text-primary-400"
-									: ""
+										? "text-red"
+										: rate > 99
+											? "text-green"
+											: rate > 9
+												? "text-primary-400"
+												: ""
 							}
 						>
 							{rate}

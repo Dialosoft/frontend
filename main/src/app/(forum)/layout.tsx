@@ -9,19 +9,19 @@ export const metadata: Metadata = {
 	metadataBase: new URL(SITE),
 	title: {
 		template: "%s | " + process.env.Name,
-		default: "Home - " + process.env.Name
+		default: "Home - " + process.env.Name,
 	},
 	description: process.env.Description,
 	category: "forum",
 	robots: {
 		index: true,
 		follow: true,
-		nocache: false
+		nocache: false,
 	},
 	icons: {
 		icon: "/favicon.ico",
-		apple: "/logo.png"
-	}
+		apple: "/logo.png",
+	},
 };
 
 /* FONT */

@@ -7,7 +7,7 @@ import getWidth from "@/utils/getWidth";
 
 export default function AccountMovileNav() {
 	const pathname = usePathname();
-const width = getWidth();
+	const width = getWidth();
 	const menuItems = [
 		{
 			icon: (

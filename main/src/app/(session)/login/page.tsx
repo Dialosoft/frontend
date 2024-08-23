@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 export const metadata: Metadata = {
 	title: "Login",
-	alternates: { canonical: "login" }
+	alternates: { canonical: "login" },
 };
 
 const Form = dynamic(() => import("@/components/Session/Login/form"), { ssr: false });

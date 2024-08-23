@@ -22,7 +22,7 @@ import Text from "@tiptap/extension-text";
 import TextStyle from "@tiptap/extension-text-style";
 import { Heading } from "@tiptap/extension-heading"; // Importa la extensión Heading
 
-import {Heading1,Heading2,
+import { Heading1,Heading2,
 	Bold,
 	Underline,
 	Italic,
@@ -75,7 +75,7 @@ export default function BasicEditor() {
 				levels: [1, 2, 3, 4, 5, 6],
 			}),
 		],
-		
+
 		editorProps: {
 			attributes: {
 				class: "outline-none bg-black-300 bg-opacity-25 rounded-lg min-h-[150px] p-4 border border-black-300 border-opacity-25",
@@ -110,7 +110,7 @@ export default function BasicEditor() {
 
 	const handleColorButtonClick = () => {
 		if (colorInputRef.current) {
-			colorInputRef.current.click(); 
+			colorInputRef.current.click();
 		}
 	};
 	const handleHeadingChange = (

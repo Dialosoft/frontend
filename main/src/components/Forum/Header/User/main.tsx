@@ -39,7 +39,7 @@ export default function User({ name, admin, mod }: UserProps) {
 			icon: <Settings size={24} />,
 			label: "Settings",
 			link: "/a/settings/account",
-		}
+		},
 	];
 
 	const handle_Logout = async () => {
@@ -69,7 +69,7 @@ export default function User({ name, admin, mod }: UserProps) {
 						<div className="flex items-center justify-start space-x-[.5rem] transition-all ease-in-out duration-300 group-hover:text-secondary">
 							<div>{theme === "dark" ? (<Moon size={24} />) : (<Sun size={24} />)}</div>
 							<span className="select-none">{theme === "dark" ? "Dark Mode" : "Light Mode"}</span>
-							
+
 							<div className="text-yellow rounded-md border border-yellow bg-yellow bg-opacity-25 px-1 py-0.5 flex items-center justify-center">
 								<span className="select-none text-xs">Beta</span>
 							</div>

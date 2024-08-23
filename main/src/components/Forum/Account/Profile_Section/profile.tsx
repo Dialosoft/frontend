@@ -16,12 +16,12 @@ interface ProfileProps{
 		pronoun: string,
 		registration_date: string,
 		answers: number,
-		
+
 		likes: number,
 		best_answers: number,
 		description: string
 }
-export default function Profile({id, name, username, role, pronoun, registration_date, answers, likes, best_answers, description}:ProfileProps) {
+export default function Profile({ id, name, username, role, pronoun, registration_date, answers, likes, best_answers, description }:ProfileProps) {
 	useEffect(() => {
 		const fetchUser = async () => {
 			const userData = await getUser_Avatar(id);
@@ -38,11 +38,11 @@ export default function Profile({id, name, username, role, pronoun, registration
 			const validImageTypes = ["image/jpeg", "image/png"];
 
 			if (validImageTypes.includes(file.type)) {
-				
+
 			}
 		}
 	}
-	
+
 	return (
 		<div className="max-w-[778px]  w-full  bg-black-300 bg-opacity-25 space-y-4 rounded-lg p-4 relative min-h-[264px]">
 			<div className="flex items-center space-x-4 ">

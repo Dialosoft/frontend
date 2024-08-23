@@ -26,7 +26,7 @@ export default function Notify({ notifyTemplate, clearNotifications }: Notificat
 							<Template name={notify.name} link={notify.link} type={notify.type} time={notify.time} />
 						</Suspense>
 					))}
-					
+
 					{!notifyTemplate.length && (
 						<span className="flex items-center justify-center select-none py-[1rem]">No notifications</span>
 					)}

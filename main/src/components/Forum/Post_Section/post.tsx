@@ -16,12 +16,12 @@ const formatNumber = (num: number): string => {
 };
 
 export default function Post({}: PostProps) {
-	
+
 	const User = {
 		name: "Flussen",
 		username: "@flussen",
 		rol: "Moderator",
-		
+
 	};
 	const PostContent = {
 		message:

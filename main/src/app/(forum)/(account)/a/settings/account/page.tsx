@@ -48,7 +48,7 @@ export default function StgsAccount() {
 			</div>
 
 			<div className="xl:max-w-[778px] w-full space-y-4">
-				<Link href={`/a/settings`}>
+				<Link href={"/a/settings"}>
 					<button className="flex sm:hidden mb-2 h-9 items-center bg-black-300 bg-opacity-25 border border-black-300 border-opacity-25 rounded-lg px-2 py-1 text-black-500 hover:text-secondary ">
 						<ChevronLeft className="w-4 h-4" />
 						<span className="">Return</span>

@@ -12,7 +12,7 @@ interface FeedComment {
 interface FeedProps {
 	messages: FeedComment[];
 }
-export default function FeedPost({messages}:FeedProps) {
+export default function FeedPost({ messages }:FeedProps) {
 	return (
 		<>
 			{messages.map((msg) => (

@@ -22,7 +22,7 @@ const formatNumber = (num: number): string => {
 	}
 	return (num / 1000).toFixed(1) + "k";
 };
-export default function Comments({user, username, rate, best, message, answers, likes, date}:CommentsProps) {
+export default function Comments({ user, username, rate, best, message, answers, likes, date }:CommentsProps) {
 
 	return (
 		<div className="mt-1 bg-black-300 bg-opacity-25 max-w-[1110px] p-4 space-y-4 rounded-lg">
@@ -45,12 +45,12 @@ export default function Comments({user, username, rate, best, message, answers, 
 								rate > 999
 									? "text-yellow"
 									: rate > 249
-									? "text-red"
-									: rate > 99
-									? "text-green"
-									: rate > 9
-									? "text-primary-400"
-									: ""
+										? "text-red"
+										: rate > 99
+											? "text-green"
+											: rate > 9
+												? "text-primary-400"
+												: ""
 							}
 						>
 							{rate}
@@ -90,6 +90,6 @@ export default function Comments({user, username, rate, best, message, answers, 
 			</div>
 		</div>
 	);
-	
+
 
 }

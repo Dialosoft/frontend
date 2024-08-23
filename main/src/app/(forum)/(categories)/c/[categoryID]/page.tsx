@@ -13,7 +13,7 @@ type Props = {
 	};
 };
 export default function Category({ params }: Props) {
-	
+
 	const CategoryInfo = [
 		{
 			id: "1",

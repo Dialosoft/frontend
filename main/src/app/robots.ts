@@ -9,8 +9,8 @@ export default function robots(): MetadataRoute.Robots {
 				"/login",
 				"/register",
 				"/reset-password",
-				"/a"
-			]
-		}
-	}
+				"/a",
+			],
+		},
+	};
 }

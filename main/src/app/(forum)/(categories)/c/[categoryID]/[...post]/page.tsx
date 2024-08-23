@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import {
-  ChevronRight,
-  ChevronLeft,
-  BellRing,
-  BellPlus,
-  BellOff,
-  Smile,
-  Image,
-  Paperclip,
-  Send,
-  ChevronDown,
-  Search,
+	ChevronRight,
+	ChevronLeft,
+	BellRing,
+	BellPlus,
+	BellOff,
+	Smile,
+	Image,
+	Paperclip,
+	Send,
+	ChevronDown,
+	Search,
 } from "lucide-react";
 import Aside from "@/components/Forum/side_info/main";
 import Post from "@/components/Forum/Post_Section/post";
@@ -81,25 +81,25 @@ export default function PostPage({ params }: Props) {
 	const [commentsList, setCommentsList] =
 		useState<CommentType[]>(initialComments);
 	const handleSubmit = () => {
-		if (!inputValue.trim()) return;  
+		if (!inputValue.trim()) {return;}
 
 		const newComment: CommentType = {
 			...user, //esta vaina copia todo lo de user al nuevo comentario (user, username, etc.)
 			id: (commentsList.length + 1).toString(), //agrega id al comentario
-			message: inputValue, 
+			message: inputValue,
 			date: new Date()
 				.toLocaleDateString("en-GB", {
 					day: "2-digit",
 					month: "short",
 					year: "numeric",
 				})
-				.replace(/ /g, ". "), 
+				.replace(/ /g, ". "),
 		};
 
-	
+
 		setCommentsList([...commentsList, newComment]);
 
-		
+
 		setInputValue("");
 		setUser({ ...initialUser });
 	};

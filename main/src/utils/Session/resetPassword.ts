@@ -21,13 +21,13 @@ export async function Reset_Password({ username, seeds }: ResetProps) {
 		const response = await axios.post("http://gateway-service:8080/dialosoft-api/auth/recover-token",
 			{
 				username: validUsername.toLowerCase(),
-				seedPhrase: validSeeds.split(" ")
+				seedPhrase: validSeeds.split(" "),
 			},
 			{
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
 				},
-				timeout: (30 * 1000) // 30 seconds
+				timeout: (30 * 1000), // 30 seconds
 			}
 		);
 
@@ -38,7 +38,7 @@ export async function Reset_Password({ username, seeds }: ResetProps) {
 				return { success: false, message: "Invalid username or seeds." };
 			}
 		}
-		
+
 		return { success: false, message: "A network error occurred. Please check your connection and try again." };
 	}
 
@@ -60,14 +60,14 @@ export async function Change_Password({ password, token }: ChangeProps) {
 	try {
 		await axios.put("http://gateway-service:8080/dialosoft-api/auth/recover-password",
 			{
-				newPassword: validPassword
+				newPassword: validPassword,
 			},
 			{
 				headers: {
 					"Content-Type": "application/json",
-					"Recover": token as string
+					"Recover": token as string,
 				},
-				timeout: (30 * 1000) // 30 seconds
+				timeout: (30 * 1000), // 30 seconds
 			}
 		);
 
