@@ -53,7 +53,7 @@ export default function SavedSection() {
 		post => post.title.toLowerCase().includes(searchTerm.toLowerCase()) || post.message.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 	return (
-		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16  max-sm:mb-20">
+		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16 mb-4 max-sm:mb-20">
 			<AccountMovileNav />
 			<div className="xl:max-w-[317px] w-fit mr-4 xl:w-full min-w-[60px] max-sm:hidden ">
 				<AccountSideNav />
