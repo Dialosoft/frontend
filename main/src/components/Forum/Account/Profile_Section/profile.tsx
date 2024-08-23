@@ -1,10 +1,18 @@
-import { Settings } from "lucide-react";
 import Link from "next/link";
+import { useEffect } from "react";
+import { Settings } from "lucide-react";
+
+import Role from "@/components/Forum/Header/User/role";
+import { getUser_Avatar } from "@/utils/User/getUser";
 
 interface ProfileProps{
+	id: string,
 	name: string,
 		username:string,
-		role: string,
+		role: {
+			mod: boolean,
+			admin: boolean
+		},
 		pronoun: string,
 		registration_date: string,
 		answers: number,
@@ -13,7 +21,15 @@ interface ProfileProps{
 		best_answers: number,
 		description: string
 }
-export default function Profile({name, username, role, pronoun, registration_date, answers, likes, best_answers, description}:ProfileProps) {
+export default function Profile({id, name, username, role, pronoun, registration_date, answers, likes, best_answers, description}:ProfileProps) {
+	useEffect(() => {
+		const fetchUser = async () => {
+			const userData = await getUser_Avatar(id);
+			console.log(userData);
+		};
+
+		fetchUser();
+	}, []);
 	
 	return (
 		<div className="max-w-[778px]  w-full  bg-black-300 bg-opacity-25 space-y-4 rounded-lg p-4 relative min-h-[264px]">
@@ -23,6 +39,7 @@ export default function Profile({name, username, role, pronoun, registration_dat
 					<div className="space-y-1">
 						<div className="flex items-center space-x-2">
 							<div className="text-3xl font-semibold">{name}</div>
+							<Role mod={role.mod} admin={role.admin} />
 						</div>
 						<div className="flex items-center space-x-2 text-black-500">
 							<div>{username}</div>
