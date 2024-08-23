@@ -38,9 +38,14 @@ export async function changePass(newPassword: string, actualPassword: string) {
 			}
 		);
 
-		return response.data.data;
-	} catch (e){
-		console.log(e)
-		return false;
+		return { success: true, token: response.data.data.recoverToken };
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.status === 401) {
+				return { success: false, message: "Error" };
+			}
+		}
+
+		return { success: false, message: "A network error occurred. Please check your connection and try again." };
 	}
 }
