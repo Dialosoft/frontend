@@ -95,6 +95,38 @@ export async function updateCategory({ name, description, id }: CategoryProps) {
 	}
 }
 
+interface CategoryDelete {
+	id: string;
+}
+
+export async function deleteCategory({ id }: CategoryDelete) {
+	const sessionUser = cookies().get("_atkn");
+	if (!sessionUser?.value) {
+		return { success: false };
+	}
+
+	try {
+		await axios.delete("http://gateway-service:8080/dialosoft-api/management-service/categories/delete-category/" + id, {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + sessionUser.value,
+			},
+			timeout: 60 * 1000, // 1 minute
+		});
+		return { success: true };
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.status === 400) {
+				return { success: false, message: "Invalid UUID" };
+			} else if (error.response?.status === 404) {
+				return { success: false, message: "Category Not Found" };
+			}
+		}
+
+		return { success: false, message: "A network error occurred. Please check your connection and try again." };
+	}
+}
+
 export async function getForums() {
 	try {
 		const response = await axios.get("http://gateway-service:8080/dialosoft-api/management-service/forums/get-all-forums");

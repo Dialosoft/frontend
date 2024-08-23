@@ -10,7 +10,7 @@ const ManageCategory = dynamic(() => import("./manage_category"));
 const AddForum = dynamic(() => import("./addForum"));
 const CategoryForum = dynamic(() => import("./category"));
 
-import { getCategories, createCategory, updateCategory, createForum, getForums } from "@/utils/Categories/getCategories";
+import { getCategories, createCategory, updateCategory, createForum, getForums, deleteCategory } from "@/utils/Categories/getCategories";
 import categorySchema from "@/schemas/Categories/category";
 
 interface Category {
@@ -125,6 +125,22 @@ export default function MainSection() {
 		setTimeout(() => setShowErrorModal(false), 5000);
 	};
 
+	// Handle the deletion of a category
+	const handleDeleteCategory = async () => {
+		if (categoryId) {
+			const result = await deleteCategory({ id: categoryId });
+			if (result.success) {
+				const categoriesData = await getCategories();
+				if (categoriesData.success) {
+					setCategories(categoriesData.data);
+				}
+				setShowEdit(false);
+			} else {
+				displayError(result.message);
+			}
+		}
+	};
+
 	// Handle the creation of a new forum
 	const handleSubmitForum = async (event: React.FormEvent) => {
 		event.preventDefault();
@@ -177,7 +193,7 @@ export default function MainSection() {
 						)}
 					</div>
 
-					{(forums.filter(forum => forum.category_id === category.id).length > 0) && (
+					{forums.filter(forum => forum.category_id === category.id).length > 0 && (
 						<div className="w-full bg-black-300 bg-opacity-25 p-2 grid grid-cols-1 gap-2 rounded-lg">
 							{forums
 								.filter(forum => forum.category_id === category.id)
@@ -202,7 +218,9 @@ export default function MainSection() {
 				</div>
 			)}
 
-			{showEdit && IsLogged && <ManageCategory onSubmit={handleManageCategory} onClose={() => setShowEdit(false)} title={title} onChange={handleInputChange} isEditMode={true} />}
+			{showEdit && IsLogged && (
+				<ManageCategory onSubmit={handleManageCategory} onClose={() => setShowEdit(false)} title={title} onChange={handleInputChange} isEditMode={true} onDelete={handleDeleteCategory} />
+			)}
 
 			{showManage && IsLogged && <ManageCategory onSubmit={handleSubmitCategory} onClose={() => setShowManage(false)} title={title} onChange={handleInputChange} isEditMode={false} />}
 
