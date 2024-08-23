@@ -11,6 +11,8 @@ interface PostProps {
 	likes: number;
 	date: string;
 	date_saved: string;
+	isFavorite: boolean;
+	setIsFavorite: (isFavorite: boolean) => void;
 }
 
 const formatNumber = (num: number): string => {
@@ -20,8 +22,8 @@ const formatNumber = (num: number): string => {
 	return (num / 1000).toFixed(1) + "k";
 };
 
-export default function SavedPost({ username, title, message, answers, likes, date }: PostProps) {
-	const [saved, setSaved] = useState(true);
+export default function SavedPost({  username, title, message, answers, likes, date, isFavorite, setIsFavorite }: PostProps) {
+	
 	const [liked, setLiked] = useState(false);
 
 	return (
@@ -53,7 +55,7 @@ export default function SavedPost({ username, title, message, answers, likes, da
 						<div>{formatNumber(likes)}</div>
 					</div>
 				</div>
-				<Bookmark onClick={() => setSaved(!saved)} className={`h-5 w-5 ${saved ? "text-primary-400 fill-primary-400" : "text-black-500 hover:text-primary-500 "} `} />
+				<Bookmark onClick={() => setIsFavorite(!isFavorite)} className={`h-5 w-5 ${isFavorite ? "text-primary-400 fill-primary-400" : "text-black-500 hover:text-primary-500 "} `} />
 			</div>
 		</div>
 	);
