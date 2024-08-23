@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import Categories from "@/components/Forum/main_section/main";
 import Aside from "@/components/Forum/side_info/main";
-import getWidth from "@/utils/getWidth"
+import getWidth from "@/utils/getWidth";
 
 
 export default function Home() {
-	const width = getWidth()
-	
+	const width = getWidth();
+
 	return (
 		<>
 			{width < 1024 ? (

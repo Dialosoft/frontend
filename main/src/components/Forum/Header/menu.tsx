@@ -13,13 +13,13 @@ const Messages = dynamic(() => import("@/components/Forum/Header/Options/message
 
 export default async function Menu_Header() {
 	const session = cookies().has("_rtkn");
-	if (!session) return null;
-	
+	if (!session) {return null;}
+
 	const sessionUser = cookies().get("_atkn");
-	if (!sessionUser?.value) return null;
+	if (!sessionUser?.value) {return null;}
 
 	const user = await getUser_Simple({ accessToken: sessionUser.value });
-	if (!user) return null;
+	if (!user) {return null;}
 
 	return (
 		<div className="flex items-center justify-center space-x-[1rem]">

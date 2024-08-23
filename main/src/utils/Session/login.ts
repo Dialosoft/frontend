@@ -20,16 +20,16 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
 
 	try {
-		const response = await fetch("http://gateway-service:8080/dialosoft-api/auth/login", {
+		const response = await fetch("http://192.168.0.143:8080/dialosoft-api/auth/login", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
 			},
 			signal: controller.signal,
 			body: JSON.stringify({
 				username: validUserOrEmail.toLowerCase(),
-				password: validPassword
-			})
+				password: validPassword,
+			}),
 		});
 
 		clearTimeout(timeoutId);
@@ -43,8 +43,8 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 		}
 
 		const data = await response.json();
-		const tokens = data.data;
-		
+		const tokens = data.metadata;
+
 		// Set cookies
 		const cookieStore = cookies();
 
@@ -52,14 +52,14 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 		if (cookieStore.has("_rtkn")) {
 			return { success: true };
 		}
-		
+
 		// Refresh token
 		cookieStore.set("_rtkn", tokens.refreshToken, {
 			httpOnly: true,
 			secure: false,
 			sameSite: "strict",
 			maxAge: tokens.refreshTokenExpiresInSeconds,
-			path: "/"
+			path: "/",
 		});
 
 		// Access token
@@ -68,9 +68,9 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 			secure: false,
 			sameSite: "strict",
 			maxAge: tokens.accessTokenExpiresInSeconds,
-			path: "/"
+			path: "/",
 		});
-		
+
 		return { success: true };
 	} catch (error) {
 		return { success: false, message: "A network error occurred. Please check your connection and try again." };

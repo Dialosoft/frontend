@@ -1,5 +1,5 @@
 import { Crown } from "lucide-react";
-import Rol from "@/components/Forum/User/rol";
+// import Rol from "@/components/Forum/User/rol";
 interface MemberProps {
 	name: string;
 	username: string;
@@ -8,7 +8,7 @@ interface MemberProps {
 }
 
 export default function Member({ name, username, rol, photo }: MemberProps) {
-	
+
 	return (
 		<>
 			<div className="flex space-x-2 items-center hover:bg-black-300 p-2 rounded-sm hover:bg-opacity-25">
@@ -19,7 +19,7 @@ export default function Member({ name, username, rol, photo }: MemberProps) {
 						{username}
 					</div>
 				</div>
-				<Rol rol={rol} />
+				{/* <Rol rol={rol} /> */}
 			</div>
 		</>
 	);

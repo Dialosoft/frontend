@@ -20,7 +20,7 @@ export async function getPostById({ postId }: PostControllerProps) {
 	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
 
 	try {
-		const response = await fetch(`http://gateway-service:8080/dialosoft-api/v1/post-manager/get-post/${postId}`, {
+		const response = await fetch(`http://192.168.0.143:8080/dialosoft-api/v1/post-manager/get-post/${postId}`, {
 			method: "GET",
 			headers: {
 				"Authorization": "Bearer " + accessToken,
