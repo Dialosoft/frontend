@@ -52,8 +52,7 @@ export default function ProfileSection() {
 		posts: 32, //
 		likes: 3232,
 		best_answers: 323,
-		description:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae scelerisque tortor. Maecenas aliquet libero vitae nisl lobortis.",
+		description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae scelerisque tortor. Maecenas aliquet libero vitae nisl lobortis.",
 		feed_comments: [
 			{
 				user: "Pedro",

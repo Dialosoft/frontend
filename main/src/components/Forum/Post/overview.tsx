@@ -15,17 +15,12 @@ export default function PostOverview() {
 			<div>
 				<h1 className="font-medium text-lg">{"No se como centrar un div"}</h1>
 				<p className="text-black-500 text-sm">
-					{
-						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime harum totam modi nihil. Impedit consectetur reiciendis velit id, totam earum pariatur a quos?"
-					}
+					{"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime harum totam modi nihil. Impedit consectetur reiciendis velit id, totam earum pariatur a quos?"}
 				</p>
 			</div>
 			<div className="flex">
 				<PostInteractions />
-				<a
-					href="#"
-					className="flex items-center gap-2 px-3 justify-center bg-primary-500 rounded-full h-auto text-black-900 ml-auto font-bold hover:bg-primary-600 transition-colors"
-				>
+				<a href="#" className="flex items-center gap-2 px-3 justify-center bg-primary-500 rounded-full h-auto text-black-900 ml-auto font-bold hover:bg-primary-600 transition-colors">
 					<ResponseIcon className="text-center" />
 					<p>Responder</p>
 				</a>

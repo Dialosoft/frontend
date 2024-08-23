@@ -83,9 +83,7 @@ export default function User({ name, admin, mod }: UserProps) {
 						</div>
 
 						<div className="bg-black-300 bg-opacity-25 rounded-full h-5 w-10">
-							<div
-								className={`bg-primary-400 rounded-full aspect-square h-full ease-in duration-100 ${theme === "dark" && "translate-x-5"}`}
-							></div>
+							<div className={`bg-primary-400 rounded-full aspect-square h-full ease-in duration-100 ${theme === "dark" && "translate-x-5"}`}></div>
 						</div>
 					</button>
 

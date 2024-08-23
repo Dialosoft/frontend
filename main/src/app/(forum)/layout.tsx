@@ -39,9 +39,7 @@ const SetTheme = dynamic(() => import("@/components/Hooks/useDark"), { ssr: fals
 export default function ForumLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${poppins.className} antialiased text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex flex-col`}
-			>
+			<body className={`${poppins.className} antialiased text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex flex-col`}>
 				<SetTheme />
 				<Header />
 				<main className="flex-grow">{children}</main>
