@@ -1,12 +1,8 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-	content: [
-		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-	],
-	darkMode: "selector",
+	content: ["./src/pages/**/*.{js,ts,jsx,tsx,mdx}", "./src/components/**/*.{js,ts,jsx,tsx,mdx}", "./src/app/**/*.{js,ts,jsx,tsx,mdx}"],
+	darkMode: "class",
 	theme: {
 		extend: {
 			colors: {
@@ -35,11 +31,6 @@ const config: Config = {
 				yellow: "#D29827",
 			},
 			screens: {
-				sm: "100%",
-				md: "768px",
-				lg: "1024px",
-				xl: "1280px",
-				"2xl": "1536px",
 				"3xl": "1920px",
 				"4xl": "2560px",
 			},

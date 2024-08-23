@@ -38,18 +38,28 @@ export async function middleware(req: NextRequest) {
 	const normalizedUrl = req.nextUrl.pathname.toLowerCase();
 
 	// Session
-	if ([ "/login", "/register" ].includes(normalizedUrl)) {
+	if (["/login", "/register"].includes(normalizedUrl)) {
 		if (req.cookies.has("_rtkn")) {
 			return NextResponse.redirect(new URL("/", req.url));
 		}
 	}
 
+	// Session: Reset password
+	if (normalizedUrl.startsWith("/reset-password/token")) {
+		const token = req.nextUrl.searchParams.get("id");
+		const username = req.nextUrl.searchParams.get("user");
+
+		if (!token || !username) {
+			return NextResponse.redirect(new URL("/reset-password", req.url));
+		}
+	}
+
 	// Account
 	if (normalizedUrl.startsWith("/a")) {
-		if (normalizedUrl === "/a"){
+		if (normalizedUrl === "/a") {
 			return NextResponse.redirect(new URL("/a/profile", req.url));
 		}
-		
+
 		// Verify cookies
 		if (!req.cookies.has("_rtkn")) {
 			return NextResponse.redirect(new URL("/", req.url));
@@ -57,7 +67,7 @@ export async function middleware(req: NextRequest) {
 	}
 
 	/* Server - Headers */
-	const response = NextResponse.next({ request: { headers: requestHeaders }});
+	const response = NextResponse.next({ request: { headers: requestHeaders } });
 
 	// Verify Session: Access Token
 	if (req.cookies.has("_atkn")) {
@@ -93,7 +103,7 @@ export async function middleware(req: NextRequest) {
 					secure: false,
 					sameSite: "strict",
 					maxAge: statusRefresh.time,
-					path: "/"
+					path: "/",
 				});
 			}
 		}
@@ -116,5 +126,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"]
+	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

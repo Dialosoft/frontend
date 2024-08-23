@@ -1,9 +1,11 @@
-import LastArticles from "./last_articles/main";
-import Members from "./members/main";
+import dynamic from "next/dynamic";
+
+const LastArticles = dynamic(() => import("./last_articles/main"));
+const Members = dynamic(() => import("./members/main"));
 
 export default function Aside() {
 	return (
-		<div className="flex-col space-y-4 w-full max-w-[317px]">
+		<div className="flex-col space-y-4 max-lg:hidden">
 			<LastArticles />
 			<Members />
 		</div>

@@ -1,4 +1,6 @@
-import InboxChatPreview from "./chat_preview";
+import dynamic from "next/dynamic";
+
+const InboxChatPreview = dynamic(() => import("./chat_preview"));
 
 function SearchDummyComponent() {
 	return (
@@ -22,15 +24,7 @@ function InboxList() {
 	const InboxChatPreviews = () => (
 		<div className="flex flex-col bg-black-300 bg-opacity-25 gap-1 rounded-xl p-1.5">
 			{usersList.map(function renderChips(user) {
-				return (
-					<InboxChatPreview
-						key={user.username}
-						name={user.name}
-						username={user.username}
-						photo={user.photo}
-						opened={isOpened()}
-					/>
-				);
+				return <InboxChatPreview key={user.username} name={user.name} username={user.username} photo={user.photo} opened={isOpened()} />;
 			})}
 		</div>
 	);
@@ -47,4 +41,3 @@ function InboxList() {
 }
 
 export default InboxList;
-
