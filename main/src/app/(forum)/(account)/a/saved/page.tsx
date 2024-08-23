@@ -2,77 +2,102 @@
 
 import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown, Search } from "lucide-react";
-
+import { getAllSaved } from "@/utils/Saved/getFavorites";
 const SavedPost = dynamic(() => import("@/components/Forum/Account/Saved_Section/SvfPost"));
 const AccountSideNav = dynamic(() => import("@/components/Forum/Account/sidenav"));
 const Aside = dynamic(() => import("@/components/Forum/side_info/main"));
 const AccountMovileNav = dynamic(() => import("@/components/Forum/Account/movilenav"));
+import { changeFavorite } from "@/utils/Saved/changeFavorite";
 
-type UserType = {
-	user: string;
+interface Comment {
+	id: string;
 	username: string;
-	rate: number;
-	best: boolean;
-	message: string;
-	answers: number;
-	likes: number;
-	date: string;
-};
+	content: string;
+	positiveReaction: number;
+	negativeReaction: number;
+	creationTime: string;
+	parentCommentId?: string;
+}
 
-type PostsType = {
-	id: number;
-	user: string;
-	username: string;
-	title: string;
-	message: string;
-	answers: number;
-	likes: number;
-	date: string;
-	date_saved: string;
-};
+interface Post {
+	postOwner: string;
+	content: string;
+	image: string;
+	comments: Comment[];
+	postId: string;
+	positiveReaction: number;
+	negativeReaction: number;
+	creationTime: string;
+	isFavorite: boolean;
+	saveTime: string;
+}
 
-type CommentType = UserType & { id: string; type: string };
+type PostsArray = Post[];
 
-type UnifiedType = (CommentType & { type: "comment" }) | (PostsType & { type: "post" });
-
-const initialPosts: PostsType[] = [
-	{
-		id: 321,
-		user: "Flussen",
-		username: "flussen",
-		title: "Invade Event: Party",
-		message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
-		answers: 324,
-		likes: 432,
-		date: "24. Feb. 2002",
-		date_saved: "22 August 2024",
-	},
-];
 
 export default function SavedSection() {
+	const [username, setUsername] = useState<string>("Busta");
 	const [searchTerm, setSearchTerm] = useState<string>("");
-	const [PostsList, setPostsList] = useState<PostsType[]>(initialPosts);
+	const [postsList, setPostsList] = useState<PostsArray>([]);
+	const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
-	const filteredPosts = PostsList.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()) || post.message.toLowerCase().includes(searchTerm.toLowerCase()));
 
-	// Función para agregar un nuevo post de ejemplo
-	const addNewPost = () => {
-		const newPost: PostsType = {
-			id: Date.now(),
-			user: "NewUser",
-			username: "newuser123",
-			title: "Nuevo Evento",
-			message: "Este es un nuevo post añadido dinámicamente.",
-			answers: 0,
-			likes: 0,
-			date: "23. Aug. 2024",
-			date_saved: "23 August 2024",
+	useEffect(() => {
+		const fetchSaved = async () => {
+			const userData = await getAllSaved(username);
+			setPostsList(userData);
 		};
 
-		setPostsList(prevPosts => [newPost, ...prevPosts]);
-	};
+		fetchSaved();
+		
+	}, [username]);
+
+
+	useEffect(() => {
+		if (selectedPostId) {
+			const updateFavoriteStatus = async () => {
+				const result = await changeFavorite({ postId: selectedPostId, isFavorite });
+
+				if (result && "success" in result) {
+					
+					if (result.success) {
+						console.log("Favorite status updated successfully.");
+					} else {
+						console.error("Failed to update favorite status:", result.message);
+					}
+				} else {
+					console.error("Unexpected response format:", result);
+				}
+			};
+
+			updateFavoriteStatus();
+		}
+	}, [selectedPostId, isFavorite]);
+
+	if (!postsList.length) {
+		return <div>Loading...</div>; 
+	}
+	   const sortedPosts = postsList.sort((a, b) => new Date(b.saveTime).getTime() - new Date(a.saveTime).getTime());
+
+		
+		const filteredPosts = sortedPosts.filter(
+			post => post.content.toLowerCase().includes(searchTerm.toLowerCase()) || post.comments.some(comment => comment.content.toLowerCase().includes(searchTerm.toLowerCase()))
+		);
+		
+		function formatDate(dateString: string) {
+			const date = new Date(dateString);
+
+			const options: Intl.DateTimeFormatOptions = {
+				day: "numeric",
+				month: "short",
+				year: "numeric",
+			};
+
+			return new Intl.DateTimeFormat("en-UK", options).format(date);
+		}
 
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col flex mt-8 lg:mt-16 mb-4 max-sm:mb-20">
@@ -102,22 +127,24 @@ export default function SavedSection() {
 				</div>
 				{filteredPosts.map(post => (
 					<SavedPost
-						key={uuidv4()}
-						user={post.user}
-						username={post.username}
-						title={post.title}
-						message={post.message}
-						answers={post.answers}
-						likes={post.likes}
-						date={post.date}
-						date_saved={post.date_saved}
+						key={post.postId}
+						user={post.postOwner}
+						username={post.postOwner}
+						title={post.content}
+						message={post.content}
+						answers={post.comments.length}
+						likes={post.positiveReaction}
+						date={formatDate(post.creationTime)}
+						date_saved={formatDate(post.saveTime)}
+						isFavorite={post.isFavorite}
+						setIsFavorite={newIsFavorite => {
+							setIsFavorite(newIsFavorite);
+							setSelectedPostId(post.postId);
+						}}
 					/>
 				))}
 
-				{/* Botón para añadir un nuevo post */}
-				<button onClick={addNewPost} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg">
-					Add New Post
-				</button>
+				
 			</div>
 			<Aside />
 		</div>
