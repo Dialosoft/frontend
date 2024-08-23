@@ -1,12 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AccountSideNav from "@/components/Forum/Account/sidenav";
 import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
 import InputText from "@/components/Forum/Account/Settings_Section/input_text";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import AccountMovileNav from "@/components/Forum/Account/movilenav";
 import Link from "next/link";
+
+import getWidth from "@/utils/getWidth";
 export default function StgsAccount() {
+	       const width = getWidth(); // Get the window width using the hook
+
 	const [hasChanges, setHasChanges] = useState(false);
 
 	const initialUserInfo = {
@@ -35,7 +39,7 @@ export default function StgsAccount() {
 		});
 	};
 	return (
-		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16 max-sm:mb-20">
+		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16 mb-4 max-sm:mb-20">
 			<AccountMovileNav />
 			<div className="xl:max-w-[317px] w-fit mr-4 xl:w-full min-w-[60px] max-sm:hidden max-xl:sm:mr-4">
 				<AccountSideNav />
@@ -45,13 +49,16 @@ export default function StgsAccount() {
 				<SettingsNav />
 			</div>
 
-			<div className="xl:max-w-[778px] w-full space-y-4">
-				<Link href={"/a/settings"}>
-					<button className="flex sm:hidden mb-2 h-9 items-center bg-black-300 bg-opacity-25 border border-black-300 border-opacity-25 rounded-lg px-2 py-1 text-black-500 hover:text-secondary ">
-						<ChevronLeft className="w-4 h-4" />
-						<span className="">Return</span>
-					</button>
-				</Link>
+			<div id="account" className="xl:max-w-[778px] w-full space-y-4  ">
+				 {typeof window !== "undefined" && width < 640 && (
+                    <Link href={"/a/settings"}>
+                        <button className="flex mb-2 h-9 items-center bg-black-300 bg-opacity-25 border border-black-300 border-opacity-25 rounded-lg px-2 py-1 text-black-500 hover:text-secondary">
+                            <ChevronLeft className="w-4 h-4" />
+                            <span>Return</span>
+                        </button>
+                    </Link>
+                )}
+				
 				<div className="flex justify-between items-end">
 					<h2 className="text-4xl font-semibold">Account Information</h2>
 					{hasChanges && (
@@ -101,7 +108,7 @@ export default function StgsAccount() {
 				<div className="flex items-end">
 					<h2 className="text-4xl font-semibold">Change Password </h2>
 				</div>
-				<div className="flex items-center group  bg-black-300 bg-opacity-25 space-x-2 rounded-lg p-4 h-fit hover:bg-opacity-50 cursor-pointer ">
+				<Link href={'/a/settings/account/change_password'}><div id="change password" className="flex items-center group  bg-black-300 bg-opacity-25 space-x-2 rounded-lg p-4 h-fit hover:bg-opacity-50 cursor-pointer ">
 					<div className="w-full">
 						<div>Change Password</div>
 
@@ -111,7 +118,8 @@ export default function StgsAccount() {
 						</p>
 					</div>
 					<ChevronRight className="text-black-500 group-hover:text-secondary h-6 w-6" />
-				</div>
+				</div></Link>
+				
 			</div>
 		</div>
 	);
