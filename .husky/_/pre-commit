@@ -1,6 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/h"
 
+echo "Running Husky pre-commit hook"
+pwd
+
 cd ../main
 npx eslint --fix .
 npx prettier --write .
