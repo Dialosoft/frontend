@@ -5,7 +5,6 @@ import InputText from "@/components/Forum/Account/Settings_Section/input_text";
 import TextEditor from "@/components/Post_Section/create/text_editor";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import Category from "../page";
 type Props = {
 	params: {
 		categoryID: string;

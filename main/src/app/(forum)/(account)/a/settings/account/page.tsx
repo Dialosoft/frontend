@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AccountSideNav from "@/components/Forum/Account/sidenav";
 import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
 import InputText from "@/components/Forum/Account/Settings_Section/input_text";

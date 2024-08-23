@@ -2,19 +2,7 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import {
-	ChevronRight,
-	ChevronLeft,
-	BellRing,
-	BellPlus,
-	BellOff,
-	Smile,
-	Image,
-	Paperclip,
-	Send,
-	ChevronDown,
-	Search,
-} from "lucide-react";
+import { ChevronRight, ChevronLeft, BellRing, Smile, Image, Paperclip, Send, ChevronDown, Search } from "lucide-react";
 import Aside from "@/components/Forum/side_info/main";
 import Post from "@/components/Forum/Post_Section/post";
 import Comments from "@/components/Forum/Post_Section/comments";

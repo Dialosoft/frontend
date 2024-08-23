@@ -1,13 +1,24 @@
 {
 	"parser": "@typescript-eslint/parser",
 	"extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
-	"plugins": ["prettier"],
+	"plugins": ["prettier", "unused-imports"],
 	"rules": {
 		"prettier/prettier": ["error", { "endOfLine": "crlf" }],
 		"semi": ["error", "always"],
 		"quotes": ["error", "double"],
 		"indent": ["error", "tab"],
-		"no-unused-vars": ["error"],
+		"no-unused-vars": "off", // Desactiva la regla original de no-unused-vars
+		"@typescript-eslint/no-unused-vars": "off", // Desactiva la regla de no-unused-vars para TypeScript
+		"unused-imports/no-unused-imports": "error", // Elimina automáticamente importaciones no utilizadas
+		"unused-imports/no-unused-vars": [
+			"error",
+			{
+				"vars": "all",
+				"varsIgnorePattern": "^_", // Variables que empiezan con _ no se considerarán como no usadas
+				"args": "after-used",
+				"argsIgnorePattern": "^_"
+			}
+		],
 		"no-console": ["warn"],
 		"eqeqeq": ["error", "always"],
 		"curly": ["error", "all"],

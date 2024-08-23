@@ -1,8 +1,8 @@
 "use client";
-import { UserRoundCog, Shield, Bell, MonitorCog, ScrollText, CircleHelp, HelpCircle } from "lucide-react";
+import { UserRoundCog, Shield, Bell, MonitorCog, ScrollText, HelpCircle } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function SettingsNav() {
 	const pathname = usePathname();

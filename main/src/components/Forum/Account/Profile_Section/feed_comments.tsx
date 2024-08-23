@@ -1,4 +1,4 @@
-import { ArrowBigDown, ArrowBigUp, Bookmark, Ellipsis, Heart, MessageSquare, Trophy } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 
 interface FeedComment {

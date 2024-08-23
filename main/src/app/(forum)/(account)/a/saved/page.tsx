@@ -1,10 +1,8 @@
 "use client";
 import { v4 as uuidv4 } from "uuid";
 import SavedPost from "@/components/Forum/Account/Saved_Section/SvfPost";
-import Profile from "@/components/Forum/Account/Profile_Section/profile";
 import { useState } from "react";
 import AccountSideNav from "@/components/Forum/Account/sidenav";
-import SavedComment from "@/components/Forum/Account/Saved_Section/SvdComment";
 import { ChevronDown, Search } from "lucide-react";
 import Aside from "@/components/Forum/side_info/main";
 import AccountMovileNav from "@/components/Forum/Account/movilenav";

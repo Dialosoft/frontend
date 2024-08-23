@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
 import { UserRound, Bookmark, Settings, Moon, Sun, LogOut } from "lucide-react";

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Suspense, useRef, useEffect, useState } from "react";
 

@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 import { ChevronRight } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { Plus } from "lucide-react";
@@ -6,7 +5,6 @@ import Aside from "@/components/Forum/side_info/main";
 import Post from "@/components/Forum/Category_Section/post";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import getWidth from "@/utils/getWidth";
 type Props = {
 	params: {
 		categoryID: string;

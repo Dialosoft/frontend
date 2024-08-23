@@ -2,7 +2,7 @@
 import { UserRound, Bookmark, Settings, LogOut } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import getWidth from "@/utils/getWidth";
 
 export default function AccountMovileNav() {

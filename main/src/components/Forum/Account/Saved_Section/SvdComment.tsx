@@ -1,5 +1,5 @@
 "use client";
-import { User, Share2, Ellipsis, MessageSquare, Heart, Bookmark } from "lucide-react";
+import { Share2, Ellipsis, MessageSquare, Heart, Bookmark } from "lucide-react";
 import { ArrowBigUp } from "lucide-react";
 import { ArrowBigDown } from "lucide-react";
 import { useState } from "react";

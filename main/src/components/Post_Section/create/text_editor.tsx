@@ -15,10 +15,6 @@ import TiptapUnderline from "@tiptap/extension-underline";
 import Color from "@tiptap/extension-color";
 import TiptapCode from "@tiptap/extension-code";
 import Link from "@tiptap/extension-link";
-import Document from "@tiptap/extension-document";
-import ListItem from "@tiptap/extension-list-item";
-import Paragraph from "@tiptap/extension-paragraph";
-import Text from "@tiptap/extension-text";
 import TextStyle from "@tiptap/extension-text-style";
 import { Heading } from "@tiptap/extension-heading"; // Importa la extensión Heading
 

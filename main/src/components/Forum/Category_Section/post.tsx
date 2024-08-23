@@ -1,6 +1,3 @@
-import { Calendar } from "lucide-react";
-import { ScrollText } from "lucide-react";
-import { MessageCircleQuestion } from "lucide-react";
 import { Pin } from "lucide-react";
 
 interface CategoryProps {

@@ -1,5 +1,4 @@
 import Rol from "../Header/User/rol";
-import { Sword } from "lucide-react";
 import { Share2 } from "lucide-react";
 import { Ellipsis } from "lucide-react";
 import ProfileRol from "../Header/User/profile_rol";

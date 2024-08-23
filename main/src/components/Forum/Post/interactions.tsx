@@ -4,7 +4,6 @@ import {
 	Share2 as ShareIcon,
 	Ellipsis as EllipsisIcon,
 } from "lucide-react";
-import { ReactElement } from "react";
 
 interface ActionButtonProps {
 	Icon: any;
