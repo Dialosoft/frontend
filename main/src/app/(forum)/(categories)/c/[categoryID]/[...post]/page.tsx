@@ -1,27 +1,15 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
+import { ChevronRight, ChevronLeft, BellRing, Smile, Image as ImageIcon, Paperclip, Send, ChevronDown, Search } from "lucide-react";
+import dynamic from "next/dynamic";
 
-import {
-	ChevronRight,
-	ChevronLeft,
-	BellRing,
-	BellPlus,
-	BellOff,
-	Smile,
-	Image,
-	Paperclip,
-	Send,
-	ChevronDown,
-	Search,
-} from "lucide-react";
-import Aside from "@/components/Forum/side_info/main";
-import Post from "@/components/Forum/Post_Section/post";
-import Comments from "@/components/Forum/Post_Section/comments";
-import { getPostById } from "@/utils/Post/getPost";
+const Aside = dynamic(() => import("@/components/Forum/side_info/main"));
+const Post = dynamic(() => import("@/components/Forum/Post_Section/post"));
+const Comments = dynamic(() => import("@/components/Forum/Post_Section/comments"));
 
+import getWidth from "@/utils/getWidth";
 
 type Props = {
 	params: {
@@ -29,27 +17,9 @@ type Props = {
 		postID: string;
 	};
 };
-
-type PostType = {
-	postId: string,
-	postOwner: string,
-	content: string,
-	comments: Comment[],
-	positiveReaction: boolean,
-	creationTime: string
-}
-
-type Comment = {
-	id: string,
-	username: string | undefined,
-	content: string,
-	positiveReaction: boolean,
-	negativeReaction: boolean,
-	creationTime: string,
-}
-
 type UserType = {
-	username: string | undefined;
+	user: string;
+	username: string;
 	rate: number;
 	best: boolean;
 	message: string;
@@ -57,9 +27,10 @@ type UserType = {
 	likes: number;
 	date: string;
 };
-
+type CommentType = UserType & { id: string };
 const initialUser: UserType = {
-	username: "Alejandro",
+	user: "Alejandro",
+	username: "@alejandro",
 	rate: 0,
 	best: false,
 	message: "",
@@ -67,32 +38,55 @@ const initialUser: UserType = {
 	likes: 0,
 	date: "",
 };
-
+const initialComments: CommentType[] = [
+	{
+		id: "1",
+		user: "Alejandro",
+		username: "@alejandro",
+		rate: 321,
+		best: true,
+		message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
+		answers: 234,
+		likes: 1234,
+		date: "11. Sep. 2001",
+	},
+	{
+		id: "2",
+		user: "Busta",
+		username: "@bustalover",
+		rate: 221,
+		best: false,
+		message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
+		answers: 24,
+		likes: 243,
+		date: "24. Feb. 2002",
+	},
+];
 export default function PostPage({ params }: Props) {
-	const [postData, setPostData] = useState<PostType>();
-	const [user, setUser] = useState<UserType>();
+	const width = getWidth();
+	const [user, setUser] = useState<UserType>(initialUser);
 	const [inputValue, setInputValue] = useState<string>("");
-	const [commentsList,setCommentsList] = useState<Comment[]>([]);
-
+	const [commentsList, setCommentsList] = useState<CommentType[]>(initialComments);
 	const handleSubmit = () => {
-		if (!inputValue.trim()) {return;}
+		if (!inputValue.trim()) {
+			return;
+		}
 
-		const newComment: Comment = {
-			username: user?.username, //esta vaina copia todo lo de user al nuevo comentario (user, username, etc.)
-			id: (commentsList?.length + 1).toString(), //agrega id al comentario
-			content: inputValue,
-			creationTime: new Date()
+		const newComment: CommentType = {
+			...user, //esta vaina copia todo lo de user al nuevo comentario (user, username, etc.)
+			id: (commentsList.length + 1).toString(), //agrega id al comentario
+			message: inputValue,
+			date: new Date()
 				.toLocaleDateString("en-GB", {
 					day: "2-digit",
 					month: "short",
 					year: "numeric",
 				})
 				.replace(/ /g, ". "),
-			negativeReaction: false,
-			positiveReaction: false,
 		};
 
 		setCommentsList([...commentsList, newComment]);
+
 		setInputValue("");
 		setUser({ ...initialUser });
 	};
@@ -144,20 +138,8 @@ export default function PostPage({ params }: Props) {
 	useEffect(() => {
 		const urlSegments = window.location.pathname.split("/");
 		const lastSegment = urlSegments[urlSegments.length - 1];
-
-		getPostById({ postId: "7ed677a7-e5da-4a2a-92d1-82c2c73c388e" }).then((data) => {
-		  		setPostData(data);
-			setCommentsList(postData?.comments || []);
-		});
 		setCategoryID(lastSegment);
 	}, []);
-
-	useEffect(() => {
-		if(postData === undefined) {return;}
-
-		setCommentsList(postData?.comments || []);
-
-	},[postData]);
 
 	const PostID = PostInfo.find(category => category.id === categoryID);
 
@@ -199,7 +181,7 @@ export default function PostPage({ params }: Props) {
 						</div>
 					</div>
 				</div>
-				{postData ? <Post postId={postData.postId} postOwner={postData.postOwner} content={postData.content} creationTime={postData.creationTime} positiveReaction={postData.positiveReaction}/> : <></>}
+				<Post />
 				<div className="flex w-full space-x-4 items-center text-black-500 bg-black-300 bg-opacity-25 max-w-[1110px] rounded-lg mt-1 h-12 px-4 ">
 					<Smile className="h-6 w-6 hover:text-secondary" />
 					<input
@@ -226,12 +208,17 @@ export default function PostPage({ params }: Props) {
 						<input type="text" className="bg-transparent outline-none placeholder:text-black-500" placeholder="Search comment..." />
 					</div>
 				</div>
-				{commentsList.map(comment => (
+				{commentsList.map(CommentsList => (
 					<Comments
-						key={comment.id}
-						username={comment.username || ""}
-						content={comment.content}
-						date={comment.creationTime}
+						key={uuidv4()}
+						user={CommentsList.user}
+						username={CommentsList.username}
+						rate={CommentsList.rate}
+						best={CommentsList.best}
+						message={CommentsList.message}
+						answers={CommentsList.answers}
+						likes={CommentsList.likes}
+						date={CommentsList.date}
 					/>
 				))}
 			</div>
