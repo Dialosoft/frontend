@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import AccountSideNav from "@/components/Forum/Account/sidenav";
 import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
 import InputText from "@/components/Forum/Account/Settings_Section/input_text";
-import { ChevronRight } from "lucide-react";
-
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import AccountMovileNav from "@/components/Forum/Account/movilenav";
+import Link from "next/link";
 export default function StgsAccount() {
 	const [hasChanges, setHasChanges] = useState(false);
 
@@ -36,15 +37,23 @@ export default function StgsAccount() {
 		});
 	};
 	return (
-		<div className="container   flex  space-x-4 mt-16">
-			<div className="max-w-[317px] w-full">
+		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16 max-sm:mb-20">
+			<AccountMovileNav />
+			<div className="xl:max-w-[317px] w-fit mr-4 xl:w-full min-w-[60px] max-sm:hidden max-xl:sm:mr-4">
 				<AccountSideNav />
 			</div>
-			<div className="max-w-[317px] w-full space-y-4">
+			<div className="max-w-[317px] w-96 lg:w-full space-y-4 mr-4 max-sm:hidden">
 				<div className="h-10 rounded-full bg-black-300 bg-opacity-25"></div>
 				<SettingsNav />
 			</div>
-			<div className="max-w-[778px] w-full space-y-4">
+
+			<div className="xl:max-w-[778px] w-full space-y-4">
+				<Link href={`/a/settings`}>
+					<button className="flex sm:hidden mb-2 h-9 items-center bg-black-300 bg-opacity-25 border border-black-300 border-opacity-25 rounded-lg px-2 py-1 text-black-500 hover:text-secondary ">
+						<ChevronLeft className="w-4 h-4" />
+						<span className="">Return</span>
+					</button>
+				</Link>
 				<div className="flex justify-between items-end">
 					<h2 className="text-4xl font-semibold">
 						Account Information

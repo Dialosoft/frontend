@@ -69,12 +69,12 @@ export default function SavedSection() {
 							.includes(searchTerm.toLowerCase())
 				);
 	return (
-		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16">
-			<AccountMovileNav/>
-			<div className="lg:max-w-[317px] w-fit mr-4 lg:w-full min-w-[60px] max-sm:hidden max-lg:sm:mr-4">
+		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16  max-sm:mb-20">
+			<AccountMovileNav />
+			<div className="xl:max-w-[317px] w-fit mr-4 xl:w-full min-w-[60px] max-sm:hidden ">
 				<AccountSideNav />
 			</div>
-			<div className=" w-full lg:w-[778px] lg:max-w-[778px] lg:mr-4">
+			<div className=" w-full xl:w-[778px] xl:max-w-[778px] lg:mr-4">
 				<div className=" flex justify-between mb-4 w-full ">
 					<div className="flex items-center bg-black-300 bg-opacity-25 rounded-full p-2  space-x-2">
 						<Search className="text-primary-400 h-5 w-5" />
