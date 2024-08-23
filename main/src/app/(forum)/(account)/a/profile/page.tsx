@@ -1,12 +1,46 @@
 "use client";
+
+import { useState, useEffect } from "react";
+
 import Profile from "@/components/Forum/Account/Profile_Section/profile";
-import { useState } from "react";
 import AccountSideNav from "@/components/Forum/Account/sidenav";
 import FeedPost from "@/components/Forum/Account/Profile_Section/feed_comments";
 import UserPosts from "@/components/Forum/Account/Profile_Section/user_posts";
 import AccountMovileNav from "@/components/Forum/Account/movilenav";
-import Aside from "@/components/Forum/side_info/main";
+
+import { getUser } from "@/utils/User/getUser";
+
+function formatDate(dateString: string) {
+    const date = new Date(dateString);
+    
+    const options: Intl.DateTimeFormatOptions = { 
+        day: "numeric", 
+        month: "short", 
+        year: "numeric" 
+    };
+    
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+}
+
 export default function ProfileSection() {
+	const [user, setUser] = useState<any>(null);
+	const [activeSection, setActiveSection] = useState("feed");
+
+	useEffect(() => {
+		const fetchUser = async () => {
+			const userData = await getUser();
+			setUser(userData);
+		};
+
+		fetchUser();
+	}, []);
+
+	if (!user) {
+		return <div>Loading...</div>;
+	}
+
+	user.created_at = formatDate(user.created_at);
+
 	const User = {
 		name: "Alejandro",
 		username: "@alejandro",
@@ -55,10 +89,9 @@ export default function ProfileSection() {
 			},
 		],
 	};
+
 	const feedCommentsCount = User.feed_comments.length;
 	const UserPostCount = User.user_posts.length;
-
-	const [activeSection, setActiveSection] = useState("feed");
 
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16">
@@ -68,17 +101,8 @@ export default function ProfileSection() {
 			</div>
 
 			<div className="space-y-4">
-				<Profile
-					name={User.name}
-					username={User.username}
-					role={User.role}
-					pronoun={User.pronoun}
-					registration_date={User.registration_date}
-					description={User.description}
-					answers={User.answers}
-					likes={User.likes}
-					best_answers={User.best_answers}
-				/>
+				<Profile id={user.uuid} name={String(user.username).toUpperCase()} username={"@"+user.username} role={{ mod: user.role.mod_role, admin: user.role.admin_role }} pronoun="" registration_date={user.created_at} description={User.description} answers={User.answers} likes={User.likes} best_answers={User.best_answers}/>
+				
 				<div className="flex space-x-4 select-none ">
 					<div
 						onClick={() => setActiveSection("feed")}
@@ -138,9 +162,11 @@ export default function ProfileSection() {
 						</div>
 					</div> */}
 				</div>
+
 				{activeSection === "feed" && (
 					<FeedPost messages={User.feed_comments} />
 				)}
+
 				{activeSection === "posts" && (
 					<UserPosts messages={User.user_posts} />
 				)}
