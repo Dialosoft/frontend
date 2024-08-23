@@ -22,8 +22,7 @@ const formatNumber = (num: number): string => {
 	return (num / 1000).toFixed(1) + "k";
 };
 
-export default function SavedPost({  username, title, message, answers, likes, date, isFavorite, setIsFavorite }: PostProps) {
-	
+export default function SavedPost({ username, title, message, answers, likes, date, isFavorite, setIsFavorite }: PostProps) {
 	const [liked, setLiked] = useState(false);
 
 	return (

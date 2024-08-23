@@ -21,7 +21,7 @@ const formatNumber = (num: number): string => {
 };
 export default function Comments({ user, username, rate, best, message, answers, likes, date }: CommentsProps) {
 	return (
-		<div className="mt-1 bg-black-300 bg-opacity-25 max-w-[1110px] p-4 space-y-4 rounded-lg">
+		<div className="mt-1 bg-black-300 bg-opacity-25 p-4 space-y-4 rounded-lg">
 			<div className="w-full flex justify-between">
 				<div className="flex items-center space-x-2">
 					<div className="aspect-square rounded-full  border border-primary-400 h-14 " />

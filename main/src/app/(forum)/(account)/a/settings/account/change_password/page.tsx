@@ -91,7 +91,7 @@ export default function StgsChangePass() {
 			if (password !== confirmPassword) {
 				throw new Error("Passwords do not match");
 			}
-			
+
 			const response = await changePass(password, actualPass);
 			if (response.success) {
 				setPassword("");

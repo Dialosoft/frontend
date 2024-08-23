@@ -146,7 +146,7 @@ export default function PostPage({ params }: Props) {
 	return (
 		<div className=" lg:container max-lg:mx-4 flex justify-center space-x-4 font-medium mt-16">
 			<div className="w-full  -mt-12 ">
-				<div className="flex items-end justify-between w-full  max-w-[1110px] ">
+				<div className="flex items-end justify-between w-full">
 					<div className="  font-medium w-full ">
 						<div className="flex justify-between">
 							<Link href={`/c/${params.categoryID}`}>
@@ -182,7 +182,7 @@ export default function PostPage({ params }: Props) {
 					</div>
 				</div>
 				<Post />
-				<div className="flex w-full space-x-4 items-center text-black-500 bg-black-300 bg-opacity-25 max-w-[1110px] rounded-lg mt-1 h-12 px-4 ">
+				<div className="flex w-full space-x-4 items-center text-black-500 bg-black-300 bg-opacity-25 rounded-lg mt-1 h-12 px-4 ">
 					<Smile className="h-6 w-6 hover:text-secondary" />
 					<input
 						type="text"

@@ -25,16 +25,16 @@ export async function changePass(newPassword: string, actualPassword: string) {
 
 	try {
 		await axios.put(
-			`http://gateway-service:8080/dialosoft-api/auth/change-password`,
+			"http://gateway-service:8080/dialosoft-api/auth/change-password",
 			{
 				oldPassword: actualPassword,
-				newPassword: newPassword, 
+				newPassword: newPassword,
 			},
 			{
 				headers: {
 					Authorization: "Bearer " + sessionUser,
 				},
-				timeout: 30 * 1000, 
+				timeout: 30 * 1000,
 			}
 		);
 
