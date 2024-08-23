@@ -38,7 +38,7 @@ export async function createPost({ id, title, username, content, image, forumId 
 				// id: id,
 				username: username,
 				title: title,
-				content: content.substring(0, 150),
+				content: content,
 				image: image,
 				forumId: forumId,
 			},

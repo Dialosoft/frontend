@@ -32,27 +32,17 @@ export default function PostPage({ params }: Props) {
 	// Fetch forum data
 	useEffect(() => {
 		const fetchForumAndPostData = async () => {
-			try {
-				const forumsData = await getCategory(params.categoryID);
-				if (forumsData.success) {
-					setForum(forumsData.data);
-				} else {
-					setError("Failed to load forum data.");
-					return;
-				}
-
-				const postData = await getPost(params.post[0]);
-				if (postData.success) {
-					setPost(postData.data);
-				} else {
-					setError("Failed to load post data.");
-				}
-			} catch (error) {
-				console.error("Failed to fetch data", error);
-				setError("An unexpected error occurred. Please try again later.");
-			} finally {
-				setIsLoading(false);
+			const forumsData = await getCategory(params.categoryID);
+			if (forumsData.success) {
+				setForum(forumsData.data);
 			}
+			
+			const postData = await getPost(params.post[0]);
+			if (postData.success) {
+				setPost(postData.data);
+			}
+			
+			setIsLoading(false);
 		};
 
 		fetchForumAndPostData();
@@ -61,6 +51,8 @@ export default function PostPage({ params }: Props) {
 	if (isLoading) {
 		return <div className="container">Loading...</div>;
 	}
+
+	console.log(forum, post)
 
 	if (error) {
 		return <div className="container">{error}</div>;
