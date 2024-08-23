@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import changePassSchema from "@/schemas/Session/changePass";
-
+import { changePass } from "@/utils/Session/changePassword";
 const AccountSideNav = dynamic(() => import("@/components/Forum/Account/sidenav"));
 const SettingsNav = dynamic(() => import("@/components/Forum/Account/Settings_Section/settingsnav"));
 const AccountMovileNav = dynamic(() => import("@/components/Forum/Account/movilenav"));
@@ -16,7 +16,7 @@ export default function StgsChangePass() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
-	const [isSubmitting, _setIsSubmitting] = useState(false);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
 
 	type FieldName = "password" | "confirmPassword";
@@ -65,6 +65,8 @@ export default function StgsChangePass() {
 		}
 	};
 
+
+
 	const togglePasswordVisibility = () => {
 		setShowPassword(!showPassword);
 	};
@@ -79,12 +81,29 @@ export default function StgsChangePass() {
 		validateField("confirmPassword", e.target.value);
 	};
 
+
+
 	useEffect(() => {
 		const noErrors = Object.keys(errors).length === 0;
 		const allFieldsFilled = password && confirmPassword;
 		setIsDisabled(!(noErrors && allFieldsFilled));
 	}, [errors, password, confirmPassword]);
 
+	const handleSubmit = async () => {
+		setIsSubmitting(true);
+		try {
+			if (password !== confirmPassword) {
+				throw new Error("Passwords do not match");
+			}
+			const response = await changePass(password, actualPass);
+			
+			console.log(response);
+		} catch (error) {
+			console.error("Failed to change password:", error);
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
 	const tw_label = "select-none font-medium text-sm lg:text-base";
 	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
 	const tw_error = "select-none text-red text-sm";
@@ -192,6 +211,7 @@ export default function StgsChangePass() {
 						className={`w-fit bg-primary-400 px-2 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`}
 						type="submit"
 						disabled={isDisabled || isSubmitting}
+						onClick={handleSubmit}
 					>
 						<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Update"}</span>
 					</button>
