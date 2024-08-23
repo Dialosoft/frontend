@@ -34,7 +34,13 @@ export default function Comments({ user, username, rate, best, message, answers,
 							<ArrowBigUp className="h-5 w-5" />
 						</div>
 
-						<div className={rate > 999 ? "text-yellow" : rate > 249 ? "text-red" : rate > 99 ? "text-green" : rate > 9 ? "text-primary-400" : ""}>{rate}</div>
+						<div
+							className={
+								rate > 999 ? "text-yellow" : rate > 249 ? "text-red" : rate > 99 ? "text-green" : rate > 9 ? "text-primary-400" : ""
+							}
+						>
+							{rate}
+						</div>
 						<div className="rounded-full bg-black-300 h-6 w-6 flex justify-center items-center text-black-500 bg-opacity-25 hover:text-secondary hover:bg-opacity-75">
 							<ArrowBigDown className="h-5 w-5" />
 						</div>

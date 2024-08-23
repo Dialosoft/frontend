@@ -51,7 +51,9 @@ export default function Notify_Header() {
 	return (
 		<div className="relative flex items-center justify-center" ref={notifyRef}>
 			<button onClick={toggleNotify}>
-				<Bell className={`stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary ${showNotifications && "stroke-secondary"}`} />
+				<Bell
+					className={`stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary ${showNotifications && "stroke-secondary"}`}
+				/>
 			</button>
 
 			{showNotifications && (

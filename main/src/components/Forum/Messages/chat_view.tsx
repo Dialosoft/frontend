@@ -7,7 +7,8 @@ const messages = [
 	{ content: "I hate grapes" },
 	{ content: "My mom stopped loving me" },
 	{
-		content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat atque facilis, facere hic doloribus nobis praesentium. Provident quidem at unde dolores, saepe a.",
+		content:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat atque facilis, facere hic doloribus nobis praesentium. Provident quidem at unde dolores, saepe a.",
 	},
 ];
 
@@ -39,7 +40,11 @@ export default function ChatView({ name, username, photo }: ChatViewProps) {
 			<ChatMessages />
 			<div className="flex items-center border-black-500 border rounded-b-xl border-opacity-25 py-1 px-3 h-16 gap-3">
 				<Smile className="text-black-500" />
-				<input type="search" placeholder="Enter message..." className="w-full text-sm bg-transparent placeholder:text-black-500 focus:outline-none appearance-none" />
+				<input
+					type="search"
+					placeholder="Enter message..."
+					className="w-full text-sm bg-transparent placeholder:text-black-500 focus:outline-none appearance-none"
+				/>
 				<Send className="text-black-500" />
 			</div>
 		</div>

@@ -58,7 +58,12 @@ export default function Create({ params }: Props) {
 			</div>
 			<div className="w-80">
 				<div>Title</div>
-				<InputText value={title} placeholder="Enter title..." onChange={newValue => setTitle(newValue)} background="bg-black-300 bg-opacity-25" />
+				<InputText
+					value={title}
+					placeholder="Enter title..."
+					onChange={newValue => setTitle(newValue)}
+					background="bg-black-300 bg-opacity-25"
+				/>
 			</div>
 			<TextEditor />
 		</div>

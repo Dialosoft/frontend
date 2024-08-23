@@ -11,7 +11,11 @@ const pSpecialCharRegex = /(?=.*[@$!%*?&.,;#^_~()[\]{}|\\\-+=<>/'":`])/;
 
 const registerSchema = z
 	.object({
-		username: z.string().min(4, { message: "Min 4 chars" }).max(20, { message: "Max 20 chars" }).regex(usernameRegex, { message: "Letters & numbers only" }),
+		username: z
+			.string()
+			.min(4, { message: "Min 4 chars" })
+			.max(20, { message: "Max 20 chars" })
+			.regex(usernameRegex, { message: "Letters & numbers only" }),
 		email: z.string().email({ message: "Invalid email" }).max(254, { message: "Invalid email" }),
 		password: z
 			.string()

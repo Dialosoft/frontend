@@ -116,12 +116,17 @@ export default function Reset_Token() {
 
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
-	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
+	const tw_input =
+		"appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
 	const tw_error = "select-none text-red text-sm";
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
+			<form
+				onSubmit={handleSubmit}
+				className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]"
+				noValidate
+			>
 				<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 					{/* Username */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
@@ -156,7 +161,10 @@ export default function Reset_Token() {
 							/>
 							<button type="button" onClick={togglePasswordVisibility}>
 								{showPassword ? (
-									<EyeOff className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />
+									<EyeOff
+										className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary"
+										size={20}
+									/>
 								) : (
 									<Eye className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />
 								)}
@@ -165,8 +173,14 @@ export default function Reset_Token() {
 					</div>
 				</div>
 
-				<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
-					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Change Password"}</span>
+				<button
+					className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`}
+					type="submit"
+					disabled={isDisabled || isSubmitting}
+				>
+					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">
+						{isSubmitting ? "Submitting..." : "Change Password"}
+					</span>
 				</button>
 			</form>
 

@@ -37,7 +37,11 @@ export default async function Menu_Header() {
 			</Suspense>
 
 			<Suspense fallback={<Section_sk />}>
-				<User username={user.username} id={user.id} role={{ type: user.role.role_type, admin: user.role.admin_role, mod: user.role.mod_role }} />
+				<User
+					username={user.username}
+					id={user.id}
+					role={{ type: user.role.role_type, admin: user.role.admin_role, mod: user.role.mod_role }}
+				/>
 			</Suspense>
 		</div>
 	);

@@ -45,7 +45,9 @@ export default function Profile({ id, name, username, role, pronoun, registratio
 	return (
 		<div className="max-w-[778px]  w-full  bg-black-300 bg-opacity-25 space-y-4 rounded-lg p-4 relative min-h-[264px]">
 			<div className="flex items-center space-x-4 ">
-				<div className={`rounded-full flex-shrink-0 aspect-square border-2 border-primary-400 ${role.admin && "border-yellow"} ${role.mod && "border-green"}`}>
+				<div
+					className={`rounded-full flex-shrink-0 aspect-square border-2 border-primary-400 ${role.admin && "border-yellow"} ${role.mod && "border-green"}`}
+				>
 					<label className="inline-block rounded-full flex-shrink-0 aspect-square p-[2rem] group cursor-pointer">
 						<User size={50} className="group-hover:hidden" />
 

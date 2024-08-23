@@ -46,7 +46,13 @@ export default function SavedComment({
 							<ArrowBigUp className="h-5 w-5" />
 						</div>
 
-						<div className={rate > 999 ? "text-yellow" : rate > 249 ? "text-red" : rate > 99 ? "text-green" : rate > 9 ? "text-primary-400" : ""}>{rate}</div>
+						<div
+							className={
+								rate > 999 ? "text-yellow" : rate > 249 ? "text-red" : rate > 99 ? "text-green" : rate > 9 ? "text-primary-400" : ""
+							}
+						>
+							{rate}
+						</div>
 						<div className="rounded-full bg-black-300 h-6 w-6 flex justify-center items-center text-black-500 bg-opacity-25 hover:text-secondary hover:bg-opacity-75">
 							<ArrowBigDown className="h-5 w-5" />
 						</div>
@@ -67,11 +73,17 @@ export default function SavedComment({
 					</div>
 
 					<div className="flex space-x-1 items-center">
-						<Heart onClick={() => setLiked(!liked)} className={`h-5 w-5 ${liked ? "text-red fill-red" : "text-black-500 hover:text-red "} `} />
+						<Heart
+							onClick={() => setLiked(!liked)}
+							className={`h-5 w-5 ${liked ? "text-red fill-red" : "text-black-500 hover:text-red "} `}
+						/>
 						<div>{formatNumber(likes)}</div>
 					</div>
 				</div>
-				<Bookmark onClick={() => setSaved(!saved)} className={`h-5 w-5 ${saved ? "text-primary-400 fill-primary-400" : "text-black-500 hover:text-primary-500 "} `} />
+				<Bookmark
+					onClick={() => setSaved(!saved)}
+					className={`h-5 w-5 ${saved ? "text-primary-400 fill-primary-400" : "text-black-500 hover:text-primary-500 "} `}
+				/>
 			</div>
 		</div>
 	);

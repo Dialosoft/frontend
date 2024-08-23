@@ -18,7 +18,24 @@ import Link from "@tiptap/extension-link";
 import TextStyle from "@tiptap/extension-text-style";
 import { Heading } from "@tiptap/extension-heading"; // Importa la extensión Heading
 
-import { Heading1, Heading2, Bold, Underline, Italic, AlignLeft, AlignCenter, RemoveFormatting, AlignRight, List, ListOrdered, Strikethrough, Code, Quote, Link2, Palette } from "lucide-react";
+import {
+	Heading1,
+	Heading2,
+	Bold,
+	Underline,
+	Italic,
+	AlignLeft,
+	AlignCenter,
+	RemoveFormatting,
+	AlignRight,
+	List,
+	ListOrdered,
+	Strikethrough,
+	Code,
+	Quote,
+	Link2,
+	Palette,
+} from "lucide-react";
 
 export default function BasicEditor() {
 	const editor = useEditor({
@@ -189,7 +206,10 @@ export default function BasicEditor() {
 					<Code className="h-5 w-5" />
 				</button>
 
-				<button onClick={() => editor.chain().focus().toggleBulletList().run()} className={editor.isActive("bulletList") ? "text-primary-400" : "text-black-500 hover:text-secondary"}>
+				<button
+					onClick={() => editor.chain().focus().toggleBulletList().run()}
+					className={editor.isActive("bulletList") ? "text-primary-400" : "text-black-500 hover:text-secondary"}
+				>
 					<List className="h-5 w-5" />
 				</button>
 				<button

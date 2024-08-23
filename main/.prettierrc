@@ -8,7 +8,7 @@
 	"jsxSingleQuote": false,
 	"bracketSpacing": true,
 	"endOfLine": "crlf",
-	"printWidth": 200,
+	"printWidth": 150,
 	"bracketSameLine": false,
 	"insertPragma": false,
 	"quoteProps": "as-needed",

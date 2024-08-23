@@ -46,11 +46,17 @@ export default function SavedPost({ user, username, title, date_saved, message, 
 					</div>
 
 					<div className="flex space-x-1 items-center">
-						<Heart onClick={() => setLiked(!liked)} className={`h-5 w-5 ${liked ? "text-red fill-red" : "text-black-500 hover:text-red "} `} />
+						<Heart
+							onClick={() => setLiked(!liked)}
+							className={`h-5 w-5 ${liked ? "text-red fill-red" : "text-black-500 hover:text-red "} `}
+						/>
 						<div>{formatNumber(likes)}</div>
 					</div>
 				</div>
-				<Bookmark onClick={() => setSaved(!saved)} className={`h-5 w-5 ${saved ? "text-primary-400 fill-primary-400" : "text-black-500 hover:text-primary-500 "} `} />
+				<Bookmark
+					onClick={() => setSaved(!saved)}
+					className={`h-5 w-5 ${saved ? "text-primary-400 fill-primary-400" : "text-black-500 hover:text-primary-500 "} `}
+				/>
 			</div>
 		</div>
 	);

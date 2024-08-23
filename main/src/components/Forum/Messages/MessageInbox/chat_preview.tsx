@@ -16,7 +16,9 @@ function ChatPreview({ name, username, photo, opened }: ChatPreviewProps) {
 	const lastMessageTimestamp = randomDate;
 
 	return (
-		<div className={`relative hover:bg-black-300 hover:bg-opacity-25 overflow-hidden gap-2 rounded-lg p-1 ${opened ? "border-r-[3px] border-primary-500 bg-black-300 bg-opacity-25" : ""}`}>
+		<div
+			className={`relative hover:bg-black-300 hover:bg-opacity-25 overflow-hidden gap-2 rounded-lg p-1 ${opened ? "border-r-[3px] border-primary-500 bg-black-300 bg-opacity-25" : ""}`}
+		>
 			<Link className="flex items-center gap-2 p-1" href={`/messages/${username}`}>
 				<Image className="h-8 w-8 rounded-full border" src={""} alt={""} />
 				<div className="flex flex-col">
