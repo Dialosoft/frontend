@@ -29,7 +29,7 @@ export default function Post({ title, answers, views, user, date, fixed }: Categ
 						<h3 className=" text-secondary font-medium">{title}</h3>
 					</div>
 					<div className="flex space-x-2 text-sm text-black-500 font-medium">
-						<div>{user}</div> <div> {date} ago </div>
+						<div>{user}</div> <div className="font-bold"> {date}</div>
 					</div>
 				</div>
 

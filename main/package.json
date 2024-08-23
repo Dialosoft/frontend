@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev -p 3030",
-		"build": "next build",
+		"build": "next lint && next build",
 		"start": "next start -p 3030",
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx .",
 		"lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
@@ -31,6 +31,7 @@
 		"@tiptap/react": "^2.6.4",
 		"@tiptap/starter-kit": "^2.6.4",
 		"axios": "^1.7.4",
+		"date-fns": "^3.6.0",
 		"just-debounce-it": "^3.2.0",
 		"lucide-react": "^0.429.0",
 		"next": "14.2.6",

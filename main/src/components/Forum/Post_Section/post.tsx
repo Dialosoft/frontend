@@ -27,7 +27,7 @@ export default function Post() {
 
 	return (
 		<>
-			<div className="mt-2 bg-black-300 bg-opacity-25 max-w-[1110px] p-4 space-y-4 rounded-lg">
+			<div className="mt-2 bg-black-300 bg-opacity-25 p-4 space-y-4 rounded-lg">
 				<div className="w-full flex justify-between">
 					<div className="flex items-center space-x-2">
 						<ProfileRol rol={User.rol} />

@@ -19,6 +19,15 @@ export async function getCategories() {
 	}
 }
 
+export async function getCategory(id: string) {
+	try {
+		const response = await axios.get("http://gateway-service:8080/dialosoft-api/management-service/forums/get-forum-id/" + id);
+		return { success: true, data: response.data.data };
+	} catch (error) {
+		return { success: false };
+	}
+}
+
 interface CategoryProps {
 	name: string;
 	description: string;
@@ -136,6 +145,15 @@ export async function getForums() {
 	}
 }
 
+export async function getForumbyId(id: string) {
+	try {
+		const response = await axios.get("http://gateway-service:8080/dialosoft-api/v1/post-manager/get-post-from-forum?forumId=" + id);
+		return { success: true, data: response.data };
+	} catch {
+		return { success: false };
+	}
+}
+
 interface CreateProps {
 	name: string;
 	category: string;
@@ -160,7 +178,6 @@ export async function createForum({ name, category, description, type }: CreateP
 			},
 			{
 				headers: {
-					"Content-Type": "application/json",
 					Authorization: "Bearer " + sessionUser.value,
 				},
 				timeout: 60 * 1000, // 1 minute

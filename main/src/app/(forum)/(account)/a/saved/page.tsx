@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { v4 as uuidv4 } from "uuid";
 import { useState, useEffect } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import { getAllSaved } from "@/utils/Saved/getFavorites";
@@ -36,14 +35,12 @@ interface Post {
 
 type PostsArray = Post[];
 
-
 export default function SavedSection() {
 	const [username, setUsername] = useState<string>("Busta");
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [postsList, setPostsList] = useState<PostsArray>([]);
 	const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
 	const [isFavorite, setIsFavorite] = useState<boolean>(false);
-
 
 	useEffect(() => {
 		const fetchSaved = async () => {
@@ -52,9 +49,7 @@ export default function SavedSection() {
 		};
 
 		fetchSaved();
-		
 	}, [username]);
-
 
 	useEffect(() => {
 		if (selectedPostId) {
@@ -62,7 +57,6 @@ export default function SavedSection() {
 				const result = await changeFavorite({ postId: selectedPostId, isFavorite });
 
 				if (result && "success" in result) {
-					
 					if (result.success) {
 						console.log("Favorite status updated successfully.");
 					} else {
@@ -78,26 +72,25 @@ export default function SavedSection() {
 	}, [selectedPostId, isFavorite]);
 
 	if (!postsList.length) {
-		return <div>Loading...</div>; 
+		return <div>Loading...</div>;
 	}
-	   const sortedPosts = postsList.sort((a, b) => new Date(b.saveTime).getTime() - new Date(a.saveTime).getTime());
+	const sortedPosts = postsList.sort((a, b) => new Date(b.saveTime).getTime() - new Date(a.saveTime).getTime());
 
-		
-		const filteredPosts = sortedPosts.filter(
-			post => post.content.toLowerCase().includes(searchTerm.toLowerCase()) || post.comments.some(comment => comment.content.toLowerCase().includes(searchTerm.toLowerCase()))
-		);
-		
-		function formatDate(dateString: string) {
-			const date = new Date(dateString);
+	const filteredPosts = sortedPosts.filter(
+		post => post.content.toLowerCase().includes(searchTerm.toLowerCase()) || post.comments.some(comment => comment.content.toLowerCase().includes(searchTerm.toLowerCase()))
+	);
 
-			const options: Intl.DateTimeFormatOptions = {
-				day: "numeric",
-				month: "short",
-				year: "numeric",
-			};
+	function formatDate(dateString: string) {
+		const date = new Date(dateString);
 
-			return new Intl.DateTimeFormat("en-UK", options).format(date);
-		}
+		const options: Intl.DateTimeFormatOptions = {
+			day: "numeric",
+			month: "short",
+			year: "numeric",
+		};
+
+		return new Intl.DateTimeFormat("en-UK", options).format(date);
+	}
 
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col flex mt-8 lg:mt-16 mb-4 max-sm:mb-20">
@@ -143,8 +136,6 @@ export default function SavedSection() {
 						}}
 					/>
 				))}
-
-				
 			</div>
 			<Aside />
 		</div>

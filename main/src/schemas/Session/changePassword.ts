@@ -1,51 +1,20 @@
-"use server";
+import { z } from "zod";
 
-import axios from "axios";
-import { cookies } from "next/headers";
+/* Password */
+const pUppercaseRegex = /(?=.*[A-Z])/;
+const pLowercaseRegex = /(?=.*[a-z])/;
+const pNumberRegex = /(?=.*\d)/;
+const pSpecialCharRegex = /(?=.*[@$!%*?&.,;#^_~()[\]{}|\\\-+=<>/'":`])/;
 
-async function Verify_Cookie() {
-	const session = cookies().has("_rtkn");
-	if (!session) {
-		return false;
-	}
+const changePasswordSchema = z.object({
+	password: z
+		.string()
+		.min(8, { message: "Min 8 chars" })
+		.max(50, { message: "Max 50 chars" })
+		.regex(pUppercaseRegex, { message: "1 uppercase" })
+		.regex(pLowercaseRegex, { message: "1 lowercase" })
+		.regex(pNumberRegex, { message: "1 number" })
+		.regex(pSpecialCharRegex, { message: "1 special char" }),
+});
 
-	const sessionUser = cookies().get("_atkn");
-	if (!sessionUser?.value) {
-		return false;
-	}
-
-	return sessionUser.value;
-}
-
-export async function changePass(newPassword: string, actualPassword: string) {
-	const sessionUser = await Verify_Cookie();
-	if (!sessionUser) {
-		return false;
-	}
-
-	try {
-		const response = await axios.post(
-			`http://gateway-service:8080/dialosoft-api/auth/recover-password`,
-			{
-				oldPassword: actualPassword,
-				newPassword: newPassword, 
-			},
-			{
-				headers: {
-					Authorization: "Bearer " + sessionUser,
-				},
-				timeout: 30 * 1000, 
-			}
-		);
-
-		return { success: true, token: response.data.data.recoverToken };
-	} catch (error) {
-		if (axios.isAxiosError(error)) {
-			if (error.response?.status === 401) {
-				return { success: false, message: "Error" };
-			}
-		}
-
-		return { success: false, message: "A network error occurred. Please check your connection and try again." };
-	}
-}
+export default changePasswordSchema;
