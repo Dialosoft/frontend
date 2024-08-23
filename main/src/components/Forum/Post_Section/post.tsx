@@ -1,13 +1,20 @@
-import Rol from "../User/rol";
+// import Rol from "../User/rol";
+import { formatDateDayMonthYear } from "@/utils/formatTime";
 import { Sword } from "lucide-react";
 import { Share2 } from "lucide-react";
 import { Ellipsis } from "lucide-react";
-import ProfileRol from "../User/profile_rol";
+// import ProfileRol from "../User/profile_rol";
 import { Heart } from "lucide-react";
 import { MessageSquare } from "lucide-react";
 import { Bookmark } from "lucide-react";
 
-interface PostProps {}
+interface PostProps {
+	postId: string,
+	postOwner: string,
+	content: string,
+	creationTime: string,
+	positiveReaction: boolean
+}
 const formatNumber = (num: number): string => {
 	if (num < 1000) {
 		return num.toString();
@@ -15,20 +22,19 @@ const formatNumber = (num: number): string => {
 	return (num / 1000).toFixed(1) + "k";
 };
 
-export default function Post({}: PostProps) {
-	
+export default function Post({ postId, postOwner, content, creationTime, positiveReaction }: PostProps) {
+
 	const User = {
-		name: "Flussen",
-		username: "@flussen",
-		rol: "Moderator",
-		
+		name: postOwner,
+		username: `@${postOwner}`,
+		// rol: "Moderator",
+
 	};
 	const PostContent = {
-		message:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum vestibulum aliquet. Praesent in consequat est. Nam mollis non turpis consequat ornare. Nam lobortis, ligula quam feugiat ex, vel ornare est felis quiseros. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+		message: content,
 		comments: 423,
 		likes: 3241,
-		date: "12. Jun. 2000",
+		date: creationTime, //TODO parse to Date
 	};
 
 	return (
@@ -36,11 +42,11 @@ export default function Post({}: PostProps) {
 			<div className="mt-2 bg-black-300 bg-opacity-25 max-w-[1110px] p-4 space-y-4 rounded-lg">
 				<div className="w-full flex justify-between">
 					<div className="flex items-center space-x-2">
-						<ProfileRol rol={User.rol} />
+						{/* <ProfileRol rol={User.rol} /> */}
 						<div>
 							<div className="flex space-x-2">
 								<div>{User.name}</div>
-								<Rol rol={User.rol} />
+								{/* <Rol rol={User.rol} /> */}
 							</div>
 							<div className="text-sm text-black-500 -mt-1">
 								{User.username}
@@ -48,7 +54,7 @@ export default function Post({}: PostProps) {
 						</div>
 					</div>
 					<div className="flex space-x-2 text-black-500">
-						<div className="text-sm">{PostContent.date}</div>
+						<div className="text-sm">{formatDateDayMonthYear(PostContent.date)}</div>
 						<Share2 className="h-5 w-5 hover:text-secondary" />
 						<Ellipsis className="h-5 w-5 hover:text-secondary " />
 					</div>

@@ -28,19 +28,26 @@ type Props = {
 	};
 };
 
-type Post = {
+type PostType = {
 	postId: string,
 	postOwner: string,
 	content: string,
-	comments: any[],
+	comments: Comment[],
 	positiveReaction: boolean,
-	negativeReaction: boolean,
 	creationTime: string
 }
 
+type Comment = {
+	id: string,
+	username: string | undefined,
+	content: string,
+	positiveReaction: boolean,
+	negativeReaction: boolean,
+	creationTime: string,
+}
+
 type UserType = {
-	user: string;
-	username: string;
+	username: string | undefined;
 	rate: number;
 	best: boolean;
 	message: string;
@@ -48,10 +55,9 @@ type UserType = {
 	likes: number;
 	date: string;
 };
-type CommentType = UserType & { id: string };
+
 const initialUser: UserType = {
-	user: "Alejandro",
-	username: "@alejandro",
+	username: "Alejandro",
 	rate: 0,
 	best: false,
 	message: "",
@@ -59,52 +65,29 @@ const initialUser: UserType = {
 	likes: 0,
 	date: "",
 };
-const initialComments: CommentType[] = [
-	{
-		id: "1",
-		user: "Alejandro",
-		username: "@alejandro",
-		rate: 321,
-		best: true,
-		message:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
-		answers: 234,
-		likes: 1234,
-		date: "11. Sep. 2001",
-	},
-	{
-		id: "2",
-		user: "Busta",
-		username: "@bustalover",
-		rate: 221,
-		best: false,
-		message:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
-		answers: 24,
-		likes: 243,
-		date: "24. Feb. 2002",
-	},
-];
+
 export default function PostPage({ params }: Props) {
-	const [postData, setPostData] = useState<Post>();
-	const [user, setUser] = useState<UserType>(initialUser);
+	const [postData, setPostData] = useState<PostType>();
+	const [user, setUser] = useState<UserType>();
 	const [inputValue, setInputValue] = useState<string>("");
-	const [commentsList, setCommentsList] =
-		useState<CommentType[]>(initialComments);
+	const [commentsList,setCommentsList] = useState<Comment[]>([]);
+
 	const handleSubmit = () => {
 		if (!inputValue.trim()) {return;}
 
-		const newComment: CommentType = {
-			...user, //esta vaina copia todo lo de user al nuevo comentario (user, username, etc.)
-			id: (commentsList.length + 1).toString(), //agrega id al comentario
-			message: inputValue,
-			date: new Date()
+		const newComment: Comment = {
+			username: user?.username, //esta vaina copia todo lo de user al nuevo comentario (user, username, etc.)
+			id: (commentsList?.length + 1).toString(), //agrega id al comentario
+			content: inputValue,
+			creationTime: new Date()
 				.toLocaleDateString("en-GB", {
 					day: "2-digit",
 					month: "short",
 					year: "numeric",
 				})
 				.replace(/ /g, ". "),
+			negativeReaction: false,
+			positiveReaction: false,
 		};
 
 
@@ -167,9 +150,17 @@ export default function PostPage({ params }: Props) {
 
 		getPostById({ postId: "7ed677a7-e5da-4a2a-92d1-82c2c73c388e" }).then((data) => {
 		  		setPostData(data);
+			setCommentsList(postData?.comments || []);
 		});
 		setCategoryID(lastSegment);
 	}, []);
+
+	useEffect(() => {
+		if(postData === undefined) {return;}
+
+		setCommentsList(postData?.comments || []);
+
+	},[postData]);
 
 	const PostID = PostInfo.find(category => category.id === categoryID);
 
@@ -209,7 +200,7 @@ export default function PostPage({ params }: Props) {
 						<span className="">Follow Post</span>
 					</button>
 				</div>
-				{postData ? <Post postId={postData.postId} postOwner={postData.postOwner} content={postData.content} creationTime={postData.creationTime} /> : <></>}
+				{postData ? <Post postId={postData.postId} postOwner={postData.postOwner} content={postData.content} creationTime={postData.creationTime} positiveReaction={postData.positiveReaction}/> : <></>}
 				<div className="flex w-full space-x-4 items-center text-black-500 bg-black-300 bg-opacity-25 max-w-[1110px] rounded-lg mt-1 h-12 px-4 ">
 					<Smile className="h-6 w-6 hover:text-secondary" />
 					<input
@@ -243,17 +234,12 @@ export default function PostPage({ params }: Props) {
 						/>
 					</div>
 				</div>
-				{commentsList.map(CommentsList => (
+				{commentsList.map(comment => (
 					<Comments
-						key={uuidv4()}
-						user={CommentsList.user}
-						username={CommentsList.username}
-						rate={CommentsList.rate}
-						best={CommentsList.best}
-						message={CommentsList.message}
-						answers={CommentsList.answers}
-						likes={CommentsList.likes}
-						date={CommentsList.date}
+						key={comment.id}
+						username={comment.username || ""}
+						content={comment.content}
+						date={comment.creationTime}
 					/>
 				))}
 			</div>
