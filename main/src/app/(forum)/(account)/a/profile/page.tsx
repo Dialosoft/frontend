@@ -10,18 +10,6 @@ import AccountMovileNav from "@/components/Forum/Account/movilenav";
 
 import { getUser } from "@/utils/User/getUser";
 
-function formatDate(dateString: string) {
-    const date = new Date(dateString);
-    
-    const options: Intl.DateTimeFormatOptions = { 
-        day: "numeric", 
-        month: "short", 
-        year: "numeric" 
-    };
-    
-    return new Intl.DateTimeFormat("en-UK", options).format(date);
-}
-
 export default function ProfileSection() {
 	const [user, setUser] = useState<any>(null);
 	const [activeSection, setActiveSection] = useState("feed");
@@ -37,6 +25,18 @@ export default function ProfileSection() {
 
 	if (!user) {
 		return <div>Loading...</div>;
+	}
+
+	function formatDate(dateString: string) {
+		const date = new Date(dateString);
+		
+		const options: Intl.DateTimeFormatOptions = { 
+			day: "numeric", 
+			month: "short", 
+			year: "numeric" 
+		};
+		
+		return new Intl.DateTimeFormat("en-UK", options).format(date);
 	}
 
 	user.created_at = formatDate(user.created_at);
