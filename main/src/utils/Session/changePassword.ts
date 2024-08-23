@@ -1,41 +1,48 @@
 "use server";
 
 import axios from "axios";
-import changePasswordSchema from "@/schemas/Session/changePassword";
+import { cookies } from "next/headers";
 
-interface ChangeProps {
-	password: string;
-	token: string;
-}
-
-export async function Change_Password({ password, token }: ChangeProps) {
-	const result = changePasswordSchema.safeParse({ password });
-	if (!result.success) {
-		return { success: false, message: "Validation failed" };
+async function Verify_Cookie() {
+	const session = cookies().has("_rtkn");
+	if (!session) {
+		return false;
 	}
 
-	const { password: validPassword } = result.data;
+	const sessionUser = cookies().get("_atkn");
+	if (!sessionUser?.value) {
+		return false;
+	}
+
+	return sessionUser.value;
+}
+
+export async function changePass(newPassword: string, actualPassword: string) {
+	const sessionUser = await Verify_Cookie();
+	if (!sessionUser) {
+		return false;
+	}
 
 	try {
-		await axios.put(
-			"http://gateway-service:8080/dialosoft-api/auth/recover-password",
+		const response = await axios.post(
+			`http://gateway-service:8080/dialosoft-api/auth/recover-password`,
 			{
-				newPassword: validPassword,
+				oldPassword: actualPassword,
+				newPassword: newPassword, 
 			},
 			{
 				headers: {
-					"Content-Type": "application/json",
-					Recover: token as string,
+					Authorization: "Bearer " + sessionUser,
 				},
-				timeout: 30 * 1000, // 30 seconds
+				timeout: 30 * 1000, 
 			}
 		);
 
-		return { success: true };
+		return { success: true, token: response.data.data.recoverToken };
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
-			if (error.response?.data.message === "Recover password failed") {
-				return { success: false, message: "The reset token has expired. Please request a new one." };
+			if (error.response?.status === 401) {
+				return { success: false, message: "Error" };
 			}
 		}
 
