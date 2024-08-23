@@ -177,16 +177,17 @@ export default function MainSection() {
 						)}
 					</div>
 
-					{/* {() && ()} */}
-					<div className="w-full bg-black-300 bg-opacity-25 p-2 grid grid-cols-1 gap-2 rounded-lg">
-						{forums
-							.filter(forum => forum.category_id === category.id)
-							.map(forum => (
-								<Link href={`c/${forum.id}`} key={uuidv4()}>
-									<CategoryForum type={forum.type} title={forum.name} posts={forum.post_count} comments={0} />
-								</Link>
-							))}
-					</div>
+					{(forums.filter(forum => forum.category_id === category.id).length > 0) && (
+						<div className="w-full bg-black-300 bg-opacity-25 p-2 grid grid-cols-1 gap-2 rounded-lg">
+							{forums
+								.filter(forum => forum.category_id === category.id)
+								.map(forum => (
+									<Link href={`c/${forum.id}`} key={uuidv4()}>
+										<CategoryForum type={forum.type} title={forum.name} posts={forum.post_count} comments={0} />
+									</Link>
+								))}
+						</div>
+					)}
 				</div>
 			))}
 
