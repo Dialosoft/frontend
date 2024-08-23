@@ -10,23 +10,6 @@ export default async function RefreshToken() {
 	}
 
 	const refreshToken = cookies().get("_rtkn");
-<<<<<<< HEAD
-
-	const controller = new AbortController();
-	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
-
-	try {
-		const response = await fetch("http://192.168.0.143:8080/dialosoft-api/auth/refresh-token", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			signal: controller.signal,
-			body: JSON.stringify({
-				refreshToken: refreshToken?.value,
-			}),
-		});
-=======
 
 	try {
 		const response = await axios.post(
@@ -41,7 +24,6 @@ export default async function RefreshToken() {
 				timeout: 30 * 1000, // 30 seconds
 			}
 		);
->>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 
 		const data = response.data.data;
 		return { token: data.accessToken, time: data.accessTokenExpiresInSeconds };

@@ -19,20 +19,6 @@ export default async function Register_Database({ username, email, password, con
 	const { username: validUsername, email: validEmail, password: validPassword } = result.data;
 
 	try {
-<<<<<<< HEAD
-		const response = await fetch("http://192.168.0.143:8080/dialosoft-api/auth/register", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			signal: controller.signal,
-			body: JSON.stringify({
-				username: validUsername.toLowerCase(),
-				email: validEmail.toLowerCase(),
-				password: validPassword,
-			}),
-		});
-=======
 		const response = await axios.post(
 			"http://gateway-service:8080/dialosoft-api/auth/register",
 			{
@@ -47,7 +33,6 @@ export default async function Register_Database({ username, email, password, con
 				timeout: 60 * 1000, // 1 minute
 			}
 		);
->>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 
 		return { success: true, seeds: response.data.data.seedPhrase };
 	} catch (error) {

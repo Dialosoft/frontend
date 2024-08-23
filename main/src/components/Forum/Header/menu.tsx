@@ -11,21 +11,10 @@ const Notify = dynamic(() => import("@/components/Forum/Header/Options/notify"),
 const Messages = dynamic(() => import("@/components/Forum/Header/Options/messages"), { loading: () => <Section_sk /> });
 
 export default async function Menu_Header() {
-<<<<<<< HEAD
-	const session = cookies().has("_rtkn");
-	if (!session) {return null;}
-
-	const sessionUser = cookies().get("_atkn");
-	if (!sessionUser?.value) {return null;}
-
-	const user = await getUser_Simple({ accessToken: sessionUser.value });
-	if (!user) {return null;}
-=======
 	const user = await getUser_Simple();
 	if (!user) {
 		return null;
 	}
->>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 
 	return (
 		<div className="flex items-center justify-center space-x-[1rem]">
