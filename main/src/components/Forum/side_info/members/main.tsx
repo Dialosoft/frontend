@@ -1,5 +1,8 @@
-import Member from "./member";
+import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
+
+const Member = dynamic(() => import("./member"));
+
 export default function Members() {
 	const member = [
 		{ name: "Alejandro", username: "@alejandro", rol: "Admin", photo: "W" },
@@ -12,7 +15,7 @@ export default function Members() {
 			<h2 className=" text-3xl font-semibold">Members</h2>
 			<div className="bg-black-300 bg-opacity-25  p-2 space-y-2 rounded-lg">
 				{member.map((member) => (
-					<Member						key={uuidv4()}
+					<Member	key={uuidv4()}
 						name={member.name}
 						username={member.username}
 						rol={member.rol}

@@ -1,5 +1,7 @@
-import { Crown } from "lucide-react";
-import Rol from "@/components/Forum/Header/User/rol";
+import dynamic from "next/dynamic";
+
+const Rol = dynamic(() => import("@/components/Forum/Header/User/rol"));
+
 interface MemberProps {
 	name: string;
 	username: string;

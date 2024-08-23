@@ -1,6 +1,4 @@
-import { Crown } from "lucide-react";
-import { Sword } from "lucide-react";
-import { UserRound } from "lucide-react";
+import { Crown, Sword, UserRound } from "lucide-react";
 
 interface RolProps {
 	rol: string;
