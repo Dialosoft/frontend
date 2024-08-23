@@ -7,10 +7,11 @@ import { Settings, Plus } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getCategories } from "@/utils/Categories/getCategories";
 const Category = dynamic(() => import("./category"));
-const ManageCategory = dynamic(() => import("./manage_category"));
+const CreateCategory = dynamic(() => import("./manage_category"));
 const AddForum = dynamic(() => import("./addForum"));
-
 import { getUser } from "@/utils/User/getUser";
+import categorySchema from "@/schemas/Categories/category";
+const EditCategory = dynamic(() => import("./newCategory"));
 
 interface UserProps {
 	created_at: string;
@@ -21,34 +22,44 @@ interface UserProps {
 		mod_role: boolean;
 	};
 }
-interface CategoriesProps{
-
-}
+interface CategoriesProps {}
 
 export default function MainSection() {
 	const [title, setTitle] = useState("");
 	const [user, setUser] = useState<UserProps | null>(null);
 	const [showManage, setShowManage] = useState(false);
 	const [showAddForum, setShowAddForum] = useState(false);
-	const [categories, setCategories] = useState([])
+	const [categories, setCategories] = useState([]);
+	const [showEdit, setShowEdit] = useState(false);
+	const [description, setDescription] = useState("");
+
 	useEffect(() => {
 		const fetchUser = async () => {
 			const userData = await getUser();
-			console.log('Perr: '+userData)
+			console.log("Perr: " + userData);
 			setUser(userData);
 		};
 
 		fetchUser();
 	}, []);
-useEffect(() => {
+
+	useEffect(() => {
 		const fetchCategories = async () => {
 			const userData = await getCategories();
-			console.log('Perr: '+userData)
+			console.log("Perr: " + userData);
 		};
 
 		fetchCategories();
 	}, []);
 
+	const handleSubmitCategory = async (event: React.FormEvent) => {
+		event.preventDefault();
+		const result = categorySchema.safeParse({ title, description });
+		if (result.success) {
+			console.log("succed");
+			setShowManage(false);
+		}
+	};
 	const category = [
 		{
 			id: "1",
@@ -97,7 +108,6 @@ useEffect(() => {
 
 						<button
 							onClick={() => {
-								setShowManage(!showManage);
 								setTitle(title);
 							}}
 							className="bg-black-300 bg-opacity-25 border space-x-1 flex font-medium items-center border-black-300 border-opacity-25 text-black-500 hover:text-secondary h-9 px-2 rounded-lg "
@@ -108,7 +118,6 @@ useEffect(() => {
 					</div>
 				)}
 			</div>
-
 			<div className="w-full bg-black-300 bg-opacity-25 p-2 grid grid-cols-1 gap-2 rounded-lg">
 				{category.map(category => (
 					<Link href={`c/${category.id}`} key={uuidv4()}>
@@ -125,8 +134,9 @@ useEffect(() => {
 						New Category
 					</button>
 				)}
-			</div>
-			{showManage && <ManageCategory onClose={() => setShowManage(false)} title={title} onChange={newValue => handleInputChange(newValue)} />}
+			</div>{" "}
+			{showEdit && <EditCategory onSubmit={handleSubmitCategory} onClose={() => setShowManage(false)} title={title} onChange={newValue => handleInputChange(newValue)} />}
+			{showManage && <CreateCategory onSubmit={handleSubmitCategory} onClose={() => setShowManage(false)} title={title} onChange={newValue => handleInputChange(newValue)} />}
 			{showAddForum && <AddForum onClose={() => setShowAddForum(false)} title={title} onChange={newValue => handleInputChange(newValue)} />}
 		</div>
 	);

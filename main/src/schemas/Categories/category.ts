@@ -1,12 +1,8 @@
 import { z } from "zod";
 
-
-const loginSchema = z.object({
+const categorySchema = z.object({
 	title: z.string().min(4, { message: "Min 4 chars" }).max(254, { message: "Invalid title" }),
-	description: z
-		.string()
-	
-		
+	description: z.string(),
 });
 
-export default loginSchema;
+export default categorySchema;

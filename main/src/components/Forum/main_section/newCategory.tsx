@@ -9,7 +9,7 @@ interface Props {
 	onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export default function ManageCategory({ onClose, title, onChange, onSubmit }: Props) {
+export default function editCategory({ onClose, title, onChange, onSubmit }: Props) {
 	const [inputValue, setInputValue] = useState(title);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,7 @@ export default function ManageCategory({ onClose, title, onChange, onSubmit }: P
 			<div className="fixed inset-0  flex justify-center items-center ">
 				<form onSubmit={onSubmit} className="rounded-lg bg-black-700   space-y-4 p-4 z-50">
 					<div className="space-y-2">
-						<div className=" font-medium">Category</div>
+						<div className=" font-medium">Create Category</div>
 						<input
 							type="text"
 							value={inputValue}
