@@ -32,7 +32,7 @@ export default function Category({ params }: Props) {
 		{
 			id: 1,
 			user: "@alejandro",
-			title: "Invade Event: Poland",
+			title: "Invade Event: Party",
 			answers: 52,
 			views: 2133,
 			date: "2h",
@@ -41,7 +41,7 @@ export default function Category({ params }: Props) {
 		{
 			id: 2,
 			user: "@alejandro",
-			title: "Invade Event: Poland",
+			title: "Invade Event: Party",
 			answers: 52,
 			views: 1833,
 			date: "2h",
@@ -50,7 +50,7 @@ export default function Category({ params }: Props) {
 		{
 			id: 3,
 			user: "@alejandro",
-			title: "Invade Event: Poland",
+			title: "Invade Event: Party",
 			answers: 52,
 			views: 1133,
 			date: "2h",
@@ -59,7 +59,7 @@ export default function Category({ params }: Props) {
 		{
 			id: 4,
 			user: "@alejandro",
-			title: "Invade Event: Poland",
+			title: "Invade Event: Party",
 			answers: 52,
 			views: 1133,
 			date: "2h",
@@ -68,7 +68,7 @@ export default function Category({ params }: Props) {
 		{
 			id: 5,
 			user: "@alejandro",
-			title: "Invade Event: Poland",
+			title: "Invade Event: Party",
 			answers: 52,
 			views: 1133,
 			date: "2h",

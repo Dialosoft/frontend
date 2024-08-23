@@ -9,7 +9,7 @@ interface Props {
 	onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export default function editCategory({ onClose, title, onChange, onSubmit }: Props) {
+export default function EditCategory({ onClose, title, onChange, onSubmit }: Props) {
 	const [inputValue, setInputValue] = useState(title);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

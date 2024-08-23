@@ -5,12 +5,12 @@ const Article = dynamic(() => import("./article"));
 
 export default function LastArticles() {
 	const article = [
-		{ title: "Invade Event: Poland", user: "@alejandro", date: "2h" },
-		{ title: "Invade Event: Poland", user: "@alejandro", date: "2h" },
+		{ title: "Invade Event: Party", user: "@alejandro", date: "2h" },
+		{ title: "Invade Event: Party", user: "@alejandro", date: "2h" },
 		,
-		{ title: "Invade Event: Poland", user: "@alejandro", date: "2h" },
+		{ title: "Invade Event: Party", user: "@alejandro", date: "2h" },
 		,
-		{ title: "Invade Event: Poland", user: "@alejandro", date: "2h" },
+		{ title: "Invade Event: Party", user: "@alejandro", date: "2h" },
 	];
 
 	return (

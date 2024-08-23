@@ -94,27 +94,27 @@ export default function PostPage({ params }: Props) {
 	const PostInfo = [
 		{
 			id: "1",
-			title: " Invade Event: Poland 1",
+			title: " Invade Event: Party 1",
 		},
 		{
 			id: "2",
-			title: "Invade Event: Poland 2",
+			title: "Invade Event: Party 2",
 		},
 		{
 			id: "3",
-			title: "Invade Event: Poland 3",
+			title: "Invade Event: Party 3",
 		},
 		{
 			id: "4",
-			title: "Invade Event: Poland 4",
+			title: "Invade Event: Party 4",
 		},
 		{
 			id: "5",
-			title: "Invade Event: Poland 5",
+			title: "Invade Event: Party 5",
 		},
 		{
 			id: "6",
-			title: "Invade Event: Poland 6",
+			title: "Invade Event: Party 6",
 		},
 	];
 	const CategoryInfo = [
