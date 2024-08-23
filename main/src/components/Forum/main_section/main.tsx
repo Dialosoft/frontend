@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import { Settings, Plus } from "lucide-react";
 import { useState, useEffect } from "react";
-
+import { getCategories } from "@/utils/Categories/getCategories";
 const Category = dynamic(() => import("./category"));
 const ManageCategory = dynamic(() => import("./manage_category"));
 const AddForum = dynamic(() => import("./addForum"));
@@ -21,20 +21,32 @@ interface UserProps {
 		mod_role: boolean;
 	};
 }
+interface CategoriesProps{
+
+}
 
 export default function MainSection() {
 	const [title, setTitle] = useState("");
 	const [user, setUser] = useState<UserProps | null>(null);
 	const [showManage, setShowManage] = useState(false);
 	const [showAddForum, setShowAddForum] = useState(false);
-
+	const [categories, setCategories] = useState([])
 	useEffect(() => {
 		const fetchUser = async () => {
 			const userData = await getUser();
+			console.log('Perr: '+userData)
 			setUser(userData);
 		};
 
 		fetchUser();
+	}, []);
+useEffect(() => {
+		const fetchCategories = async () => {
+			const userData = await getCategories();
+			console.log('Perr: '+userData)
+		};
+
+		fetchCategories();
 	}, []);
 
 	const category = [
