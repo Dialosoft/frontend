@@ -10,16 +10,16 @@ const AccountSideNav = dynamic(() => import("@/components/Forum/Account/sidenav"
 const Aside = dynamic(() => import("@/components/Forum/side_info/main"));
 const AccountMovileNav = dynamic(() => import("@/components/Forum/Account/movilenav"));
 
-type UserType = {
-	user: string;
-	username: string;
-	rate: number;
-	best: boolean;
-	message: string;
-	answers: number;
-	likes: number;
-	date: string;
-};
+// type UserType = {
+// 	user: string;
+// 	username: string;
+// 	rate: number;
+// 	best: boolean;
+// 	message: string;
+// 	answers: number;
+// 	likes: number;
+// 	date: string;
+// };
 
 type PostsType = {
 	id: number;
@@ -33,9 +33,9 @@ type PostsType = {
 	date_saved: string;
 };
 
-type CommentType = UserType & { id: string; type: string };
+// type CommentType = UserType & { id: string; type: string };
 
-type UnifiedType = (CommentType & { type: "comment" }) | (PostsType & { type: "post" });
+// type UnifiedType = (CommentType & { type: "comment" }) | (PostsType & { type: "post" });
 
 const initialPosts: PostsType[] = [
 	{

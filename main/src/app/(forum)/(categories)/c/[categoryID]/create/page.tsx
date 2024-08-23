@@ -34,7 +34,7 @@ export default function Create({ params }: Props) {
 	];
 
 	const Category = CategoryInfo.find(category => category.id === params.categoryID);
-	const [categoryID, setCategoryID] = useState(params.postID);
+	const [_categoryID, setCategoryID] = useState(params.postID);
 
 	useEffect(() => {
 		const urlSegments = window.location.pathname.split("/");

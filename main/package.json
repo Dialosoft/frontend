@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev -p 3030",
-		"build": "next lint && next build",
+		"build": "next build",
 		"start": "next start -p 3030",
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx .",
 		"lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",

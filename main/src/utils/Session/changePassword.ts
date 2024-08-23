@@ -1,9 +1,7 @@
 "use server";
 
 import axios from "axios";
-import resetPasswordSchema from "@/schemas/Session/resetPassword";
 import changePasswordSchema from "@/schemas/Session/changePassword";
-
 
 interface ChangeProps {
 	password: string;
