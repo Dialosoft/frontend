@@ -1,11 +1,12 @@
 "use server";
 
+import axios from "axios";
 import { cookies } from "next/headers";
 import loginSchema from "@/schemas/Session/login";
 
 interface LoginProps {
-	UserOrEmail: string,
-	password: string
+	UserOrEmail: string;
+	password: string;
 }
 
 export default async function Login_Database({ UserOrEmail, password }: LoginProps) {
@@ -16,10 +17,8 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 
 	const { UserOrEmail: validUserOrEmail, password: validPassword } = result.data;
 
-	const controller = new AbortController();
-	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
-
 	try {
+<<<<<<< HEAD
 		const response = await fetch("http://192.168.0.143:8080/dialosoft-api/auth/login", {
 			method: "POST",
 			headers: {
@@ -39,12 +38,30 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 				return { success: false, message: "Invalid username, email or password." };
 			} else {
 				return { success: false, message: "An unexpected error occurred. Please try again later." };
+=======
+		const response = await axios.post(
+			"http://gateway-service:8080/dialosoft-api/auth/login",
+			{
+				username: validUserOrEmail.toLowerCase(),
+				password: validPassword,
+			},
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+				timeout: 30 * 1000, // 30 seconds
+>>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 			}
-		}
+		);
 
+		const tokens = response.data.data;
+
+<<<<<<< HEAD
 		const data = await response.json();
 		const tokens = data.metadata;
 
+=======
+>>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 		// Set cookies
 		const cookieStore = cookies();
 
@@ -73,6 +90,12 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 
 		return { success: true };
 	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.status === 401) {
+				return { success: false, message: "Invalid username, email or password." };
+			}
+		}
+
 		return { success: false, message: "A network error occurred. Please check your connection and try again." };
 	}
 }

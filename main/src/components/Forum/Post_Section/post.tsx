@@ -15,6 +15,7 @@ interface PostProps {
 	creationTime: string,
 	positiveReaction: boolean
 }
+
 const formatNumber = (num: number): string => {
 	if (num < 1000) {
 		return num.toString();
@@ -28,7 +29,6 @@ export default function Post({ postId, postOwner, content, creationTime, positiv
 		name: postOwner,
 		username: `@${postOwner}`,
 		// rol: "Moderator",
-
 	};
 	const PostContent = {
 		message: content,
@@ -51,6 +51,7 @@ export default function Post({ postId, postOwner, content, creationTime, positiv
 							<div className="text-sm text-black-500 -mt-1">
 								{User.username}
 							</div>
+							<div className="text-sm text-black-500 -mt-1">{User.username}</div>
 						</div>
 					</div>
 					<div className="flex space-x-2 text-black-500">
@@ -72,7 +73,7 @@ export default function Post({ postId, postOwner, content, creationTime, positiv
 							<div>{formatNumber(PostContent.likes)}</div>
 						</div>
 					</div>
-					<Bookmark className="h-5 w-5 hover:text-secondary hover:fill-secondary" />
+					<Bookmark className="h-5 w-5 hover:text-primary-400 hover:fill-primary-400" />
 				</div>
 			</div>
 		</>

@@ -1,5 +1,6 @@
 "use server";
 
+import axios from "axios";
 import { cookies } from "next/headers";
 
 export default async function RefreshToken() {
@@ -9,6 +10,7 @@ export default async function RefreshToken() {
 	}
 
 	const refreshToken = cookies().get("_rtkn");
+<<<<<<< HEAD
 
 	const controller = new AbortController();
 	const timeoutId = setTimeout(() => controller.abort(), (30 * 1000)); // 30 seconds
@@ -24,20 +26,32 @@ export default async function RefreshToken() {
 				refreshToken: refreshToken?.value,
 			}),
 		});
+=======
 
-		clearTimeout(timeoutId);
+	try {
+		const response = await axios.post(
+			"http://gateway-service:8080/dialosoft-api/auth/refresh-token",
+			{
+				refreshToken: refreshToken?.value,
+			},
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+				timeout: 30 * 1000, // 30 seconds
+			}
+		);
+>>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 
-		if (!response.ok) {
-			if (response.status === 401) {
+		const data = response.data.data;
+		return { token: data.accessToken, time: data.accessTokenExpiresInSeconds };
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.status === 401) {
 				return { status: "delete" };
-			} else {
-				return { redirect: true };
 			}
 		}
 
-		const data = await response.json();
-		return { token: data.data.accessToken, time: data.data.accessTokenExpiresInSeconds };
-	} catch (error) {
 		return { redirect: true };
 	}
 }

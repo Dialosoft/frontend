@@ -1,7 +1,9 @@
+
 import { formatDateDayMonthYear } from "@/utils/formatTime";
 import { User, Share2, Ellipsis, CodeSquare, Heart, Bookmark } from "lucide-react";
 // import ProfileRol from "../User/profile_rol";
 // import Rol from "../User/rol";
+
 import { ArrowBigUp } from "lucide-react";
 import { ArrowBigDown } from "lucide-react";
 import { Trophy } from "lucide-react";
@@ -19,7 +21,6 @@ import { Trophy } from "lucide-react";
 // };
 export default function Comments({ username, content, date }:CommentsProps) {
 	const rate = 0;
-
 	return (
 		<div className="mt-1 bg-black-300 bg-opacity-25 max-w-[1110px] p-4 space-y-4 rounded-lg">
 			<div className="w-full flex justify-between">
@@ -31,7 +32,7 @@ export default function Comments({ username, content, date }:CommentsProps) {
 							{username}
 						</div> */}
 					</div>
-					<div className="flex rounded-full bg-black-300 bg-opacity-25 p-1 space-x-1">
+					<div className=" flex rounded-full bg-black-300 bg-opacity-25 p-1 space-x-1">
 						<div className="rounded-full bg-black-300 h-6 w-6 flex justify-center items-center text-black-500 bg-opacity-25 hover:text-secondary hover:bg-opacity-75">
 							<ArrowBigUp className="h-5 w-5" />
 						</div>
@@ -68,10 +69,8 @@ export default function Comments({ username, content, date }:CommentsProps) {
 						<div>{formatNumber(likes)}</div>
 					</div> */}
 				</div>
-				<Bookmark className="h-5 w-5 hover:text-secondary hover:fill-secondary" />
+				<Bookmark className="h-5 w-5 hover:text-primary-400 hover:fill-primary-400" />
 			</div>
 		</div>
 	);
-
-
 }

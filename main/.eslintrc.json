@@ -1,17 +1,23 @@
 {
-  	"extends": "next/core-web-vitals",
-  	"rules": {
+	"parser": "@typescript-eslint/parser",
+	"extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
+	"plugins": ["prettier", "unused-imports"],
+	"rules": {
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
+		"prettier/prettier": ["error", { "endOfLine": "crlf", "useTabs": true }],
 		"semi": ["error", "always"],
 		"quotes": ["error", "double"],
-		"indent": ["error", "tab"],
-		"no-unused-vars": ["error"],
-		"no-console": ["warn"],
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
+		"unused-imports/no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
+		"unused-imports/no-unused-imports": "error",
 		"eqeqeq": ["error", "always"],
 		"curly": ["error", "all"],
 		"comma-dangle": ["error", "always-multiline"],
 		"no-trailing-spaces": ["error"],
 		"object-curly-spacing": ["error", "always"],
 		"array-bracket-spacing": ["error", "never"],
-		"arrow-spacing": ["error", { "before": true, "after": true }]
+		"arrow-spacing": ["error", { "before": true, "after": true }],
+		"no-multi-spaces": ["error", { "ignoreEOLComments": false }]
 	}
 }
