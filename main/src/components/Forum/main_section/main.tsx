@@ -1,17 +1,21 @@
 "use client"
-import Category from "./category";
+
+import dynamic from "next/dynamic";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import { getUser } from "@/utils/User/getUser";
 import { Settings } from "lucide-react";
-import ManageCategory from "./manage_category";
 import { useState, useEffect } from "react";
 
+const Category = dynamic(() => import("./category"));
+const ManageCategory = dynamic(() => import("./manage_category"));
+
+import { getUser } from "@/utils/User/getUser";
 
 export default function MainSection() {
-const [title, setTitle]=useState('')
+	const [title, setTitle]=useState("");
 	const [user, setUser] = useState<any>(null);
- const [showManage, setShowManage]=useState(false)
+ 	const [showManage, setShowManage]=useState(false);
+
 	useEffect(() => {
 		const fetchUser = async () => {
 			const userData = await getUser();
@@ -20,6 +24,7 @@ const [title, setTitle]=useState('')
 
 		fetchUser();
 	}, []);
+
 	const category = [
 		{
 			id: "1",
@@ -44,9 +49,10 @@ const [title, setTitle]=useState('')
 		},
 	];
 
-const handleInputChange = (newValue: string) => {
-	setTitle(newValue);
-};
+	const handleInputChange = (newValue: string) => {
+		setTitle(newValue);
+	};
+
 	return (
 		<div className="w-full space-y-4">
 			<div className="flex justify-between">

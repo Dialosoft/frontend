@@ -1,5 +1,5 @@
 "use client";
-import InputText from "../Account/Settings_Section/input_text";
+
 import { useState } from "react";
 
 interface Props {
@@ -9,7 +9,6 @@ interface Props {
 }
 
 export default function ManageCategory({onClose, title, onChange}:Props) {
-	
 	const [inputValue, setInputValue] = useState(title);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

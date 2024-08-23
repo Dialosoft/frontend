@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
-const Categories = dynamic(() => import("@/components/Forum/main_section/main" ), { ssr: false });
-const Aside = dynamic(() => import("@/components/Forum/side_info/main" ));
+const Categories = dynamic(() => import("@/components/Forum/main_section/main"), { ssr: false });
+const Aside = dynamic(() => import("@/components/Forum/side_info/main"));
 
 export default function Home() {
 	return (

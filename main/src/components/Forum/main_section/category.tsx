@@ -1,8 +1,8 @@
-import { Calendar } from "lucide-react";
-import { ScrollText } from "lucide-react";
-import { MessageCircleQuestion } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Calendar, ScrollText, MessageCircleQuestion } from "lucide-react";
 
-import LastPost from "./last_post";
+const LastPost = dynamic(() => import("./last_post"));
+
 interface CategoryProps {
 	type: string
 	title: string;
@@ -16,10 +16,12 @@ const formatNumber = (num: number): string => {
 	}
 	return (num / 1000).toFixed(1) + "k";
 };
+
 export default function Category({ title, posts, comments , type}: CategoryProps) {
 	const post = [
 		{ title: "Invade Event: Poland", user: "@alejandro", date: "2h" },
 	];
+
 	const renderIcon = () => {
 		switch (type) {
 			case "Event":
