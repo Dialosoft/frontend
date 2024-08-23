@@ -22,14 +22,14 @@ export default function Category({ title, posts, comments, type }: CategoryProps
 
 	const renderIcon = () => {
 		switch (type) {
-		case "Event":
-			return <Calendar />;
-		case "Help":
-			return <MessageCircleQuestion />;
-		case "Info":
-			return <ScrollText />;
-		default:
-			return null;
+			case "Event":
+				return <Calendar />;
+			case "Help":
+				return <MessageCircleQuestion />;
+			case "Info":
+				return <ScrollText />;
+			default:
+				return null;
 		}
 	};
 

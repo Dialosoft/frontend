@@ -1,12 +1,8 @@
 {
 	"parser": "@typescript-eslint/parser",
-  	"extends": [
-		"next/core-web-vitals",
-		"plugin:@typescript-eslint/recommended",
-		"prettier"
-	],
+	"extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
 	"plugins": ["prettier"],
-  	"rules": {
+	"rules": {
 		"prettier/prettier": ["error", { "endOfLine": "crlf" }],
 		"semi": ["error", "always"],
 		"quotes": ["error", "double"],
