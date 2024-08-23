@@ -132,7 +132,7 @@ export default function StgsChangePass() {
 						/>
 					</div>
 					<div className="w-full flex justify-end">
-						<Link href={"/"}>Forget Password?</Link>
+						<Link href="/reset-password">Forget Password?</Link>
 					</div>
 
 					<div className="w-full flex flex-col space-y-[.2rem]">

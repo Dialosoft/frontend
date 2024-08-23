@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Suspense, useRef, useEffect, useState } from "react";
+import { User as UserIcon } from "lucide-react";
 
 const User = dynamic(() => import("@/components/Forum/Header/User/main"), { ssr: false });
 
@@ -17,7 +18,7 @@ interface RoleProps {
 	mod: boolean;
 }
 
-export default function User_Header({ id, username, role }: UserProps) {
+export default function User_Header({ username, role }: UserProps) {
 	const userRef = useRef<HTMLDivElement>(null);
 	const [showUser, setUser] = useState(false);
 
@@ -43,7 +44,9 @@ export default function User_Header({ id, username, role }: UserProps) {
 
 	return (
 		<div className="relative flex items-center justify-center" ref={userRef}>
-			<button onClick={toggleUser}>test</button>
+			<button className={`border rounded-full group border-primary-400 ${role.admin && "border-yellow"} ${role.mod && "border-green"}`} onClick={toggleUser}>
+				<UserIcon className="m-2 stroke-black-300 transition-colors ease-in-out duration-300 group-hover:stroke-secondary" size={24} />
+			</button>
 
 			{showUser && (
 				<Suspense>
