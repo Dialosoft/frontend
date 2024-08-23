@@ -4,10 +4,10 @@ import axios from "axios";
 import registerSchema from "@/schemas/Session/register";
 
 interface RegisterProps {
-	username: string,
-	email: string,
-	password: string,
-	confirmPassword: string
+	username: string;
+	email: string;
+	password: string;
+	confirmPassword: string;
 }
 
 export default async function Register_Database({ username, email, password, confirmPassword }: RegisterProps) {
@@ -19,7 +19,8 @@ export default async function Register_Database({ username, email, password, con
 	const { username: validUsername, email: validEmail, password: validPassword } = result.data;
 
 	try {
-		const response = await axios.post("http://gateway-service:8080/dialosoft-api/auth/register",
+		const response = await axios.post(
+			"http://gateway-service:8080/dialosoft-api/auth/register",
 			{
 				username: validUsername.toLowerCase(),
 				email: validEmail.toLowerCase(),
@@ -29,7 +30,7 @@ export default async function Register_Database({ username, email, password, con
 				headers: {
 					"Content-Type": "application/json",
 				},
-				timeout: (60 * 1000), // 1 minute
+				timeout: 60 * 1000, // 1 minute
 			}
 		);
 
@@ -43,5 +44,4 @@ export default async function Register_Database({ username, email, password, con
 
 		return { success: false, message: "A network error occurred. Please check your connection and try again." };
 	}
-
 }

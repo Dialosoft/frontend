@@ -55,9 +55,7 @@ export default function StgsAccount() {
 					</button>
 				</Link>
 				<div className="flex justify-between items-end">
-					<h2 className="text-4xl font-semibold">
-						Account Information
-					</h2>
+					<h2 className="text-4xl font-semibold">Account Information</h2>
 					{hasChanges && (
 						<button className="bg-primary-400 font-medium hover:bg-primary-500 h-10 text-black-700 rounded-lg px-4">
 							Update
@@ -71,9 +69,7 @@ export default function StgsAccount() {
 							<InputText
 								value={userInfo.name}
 								placeholder="Enter name..."
-								onChange={newValue =>
-									handleInputChange("name", newValue)
-								}
+								onChange={newValue => handleInputChange("name", newValue)}
 								background="bg-transparent"
 							/>
 						</div>
@@ -82,9 +78,7 @@ export default function StgsAccount() {
 							<InputText
 								value={userInfo.pronoun}
 								placeholder="Enter pronoun..."
-								onChange={newValue =>
-									handleInputChange("pronoun", newValue)
-								}
+								onChange={newValue => handleInputChange("pronoun", newValue)}
 								background="bg-transparent"
 							/>
 						</div>
@@ -94,9 +88,7 @@ export default function StgsAccount() {
 						<InputText
 							value={userInfo.username}
 							placeholder="Enter username..."
-							onChange={newValue =>
-								handleInputChange("username", newValue)
-							}
+							onChange={newValue => handleInputChange("username", newValue)}
 							background="bg-transparent"
 						/>
 					</div>
@@ -105,9 +97,7 @@ export default function StgsAccount() {
 						<InputText
 							value={userInfo.email}
 							placeholder="Enter email..."
-							onChange={newValue =>
-								handleInputChange("email", newValue)
-							}
+							onChange={newValue => handleInputChange("email", newValue)}
 							background="bg-transparent"
 						/>
 					</div>
@@ -120,10 +110,8 @@ export default function StgsAccount() {
 						<div>Change Password</div>
 
 						<p className="text-black-500">
-							Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Nam interdum vestibulum aliquet. Praesent in
-							consequat est. Nam mollis non turpis consequat
-							ornare.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam interdum vestibulum aliquet.
+							Praesent in consequat est. Nam mollis non turpis consequat ornare.
 						</p>
 					</div>
 					<ChevronRight className="text-black-500 group-hover:text-secondary h-6 w-6" />

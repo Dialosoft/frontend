@@ -1,13 +1,5 @@
 "use client";
-import {
-	UserRoundCog,
-	Shield,
-	Bell,
-	MonitorCog,
-	ScrollText,
-	CircleHelp,
-	HelpCircle,
-} from "lucide-react";
+import { UserRoundCog, Shield, Bell, MonitorCog, ScrollText, CircleHelp, HelpCircle } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -103,9 +95,7 @@ export default function SettingsNav() {
 					<Link href={item.link} className="w-full" key={uuidv4()}>
 						<div
 							className={`flex group justify-start items-center w-full space-x-2 px-4 hover:text-secondary hover:bg-black-300 hover:bg-opacity-25 rounded-md h-14 ${
-								pathname == item.link
-									? "text-primary-400"
-									: "text-black-500 group-hover:text-secondary"
+								pathname == item.link ? "text-primary-400" : "text-black-500 group-hover:text-secondary"
 							}`}
 						>
 							{item.icon}

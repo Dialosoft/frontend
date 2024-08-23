@@ -1,8 +1,4 @@
-import {
-	ArrowBigUp as UpIcon,
-	ArrowBigDown as DownIcon,
-	Flame as VoteIcon,
-} from "lucide-react";
+import { ArrowBigUp as UpIcon, ArrowBigDown as DownIcon, Flame as VoteIcon } from "lucide-react";
 
 export default function PostVotingChip() {
 	const arrowsStyle =

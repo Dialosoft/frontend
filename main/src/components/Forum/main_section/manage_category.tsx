@@ -8,7 +8,7 @@ interface Props {
 	onChange: (newValue: string) => void;
 }
 
-export default function ManageCategory({ onClose, title, onChange }:Props) {
+export default function ManageCategory({ onClose, title, onChange }: Props) {
 	const [inputValue, setInputValue] = useState(title);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -5,8 +5,8 @@ import { cookies } from "next/headers";
 import loginSchema from "@/schemas/Session/login";
 
 interface LoginProps {
-	UserOrEmail: string,
-	password: string
+	UserOrEmail: string;
+	password: string;
 }
 
 export default async function Login_Database({ UserOrEmail, password }: LoginProps) {
@@ -18,7 +18,8 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 	const { UserOrEmail: validUserOrEmail, password: validPassword } = result.data;
 
 	try {
-		const response = await axios.post("http://gateway-service:8080/dialosoft-api/auth/login",
+		const response = await axios.post(
+			"http://gateway-service:8080/dialosoft-api/auth/login",
 			{
 				username: validUserOrEmail.toLowerCase(),
 				password: validPassword,
@@ -27,7 +28,7 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 				headers: {
 					"Content-Type": "application/json",
 				},
-				timeout: (30 * 1000), // 30 seconds
+				timeout: 30 * 1000, // 30 seconds
 			}
 		);
 

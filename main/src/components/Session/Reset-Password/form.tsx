@@ -28,8 +28,7 @@ export default function Login_Form() {
 		}, 30),
 		[setUsername]
 	);
-	const handle_Username_Change = (e: React.ChangeEvent<HTMLInputElement>) =>
-		debounced_setUsername(e.target.value);
+	const handle_Username_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUsername(e.target.value);
 
 	/* Seeds */
 	const handle_Seeds_Change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -72,9 +71,7 @@ export default function Login_Form() {
 				return newErrors;
 			});
 		} else {
-			const fieldError = result.error.errors.find(
-				error => error.path[0] === field
-			);
+			const fieldError = result.error.errors.find(error => error.path[0] === field);
 			if (fieldError) {
 				setErrors(prev => ({ ...prev, [field]: fieldError.message }));
 			} else {
@@ -90,8 +87,7 @@ export default function Login_Form() {
 	/* Button */
 	useEffect(() => {
 		const noErrors = Object.keys(errors).length === 0;
-		const allFieldsFilled =
-			username && recoverList.every(item => item.trim() !== "");
+		const allFieldsFilled = username && recoverList.every(item => item.trim() !== "");
 		setIsDisabled(!(noErrors && allFieldsFilled));
 	}, [errors, username, recoverList]);
 
@@ -116,9 +112,7 @@ export default function Login_Form() {
 				}, 10 * 1000); // 10 seconds
 			}
 
-			router.push(
-				"/reset-password/token?id=" + status.token + "&user=" + username
-			);
+			router.push("/reset-password/token?id=" + status.token + "&user=" + username);
 			setIsSubmitting(false);
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
@@ -134,7 +128,6 @@ export default function Login_Form() {
 		}
 	};
 	const handleInputChange = (value: string, index: number) => {
-
 		setRecoverList(currentList => {
 			const newList = [...currentList];
 			newList[index] = value;
@@ -158,23 +151,14 @@ export default function Login_Form() {
 					{/* Username or Email */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
 						<div className="flex items-center justify-between">
-							<label
-								className={tw_label}
-								htmlFor="UsernameOrEmail"
-							>
+							<label className={tw_label} htmlFor="UsernameOrEmail">
 								Username
 							</label>
-							{errors.username && (
-								<span className={tw_error}>
-									{errors.username}
-								</span>
-							)}
+							{errors.username && <span className={tw_error}>{errors.username}</span>}
 						</div>
 
 						<input
-							className={`${tw_input} ${
-								errors.username && "border-red"
-							}`}
+							className={`${tw_input} ${errors.username && "border-red"}`}
 							placeholder="Enter your username"
 							type="text"
 							value={username}
@@ -192,9 +176,7 @@ export default function Login_Form() {
 							<label className={tw_label} htmlFor="seeds">
 								Seeds
 							</label>
-							{errors.seeds && (
-								<span className={tw_error}>{errors.seeds}</span>
-							)}
+							{errors.seeds && <span className={tw_error}>{errors.seeds}</span>}
 						</div>
 						<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4    gap-4 p-5  bg-black-300 bg-opacity-25 border border-black-300 border-opacity-25 rounded-lg">
 							{Array.from({ length: 12 }).map((_, index) => (
@@ -202,24 +184,13 @@ export default function Login_Form() {
 									key={index}
 									className="flex items-center text-center rounded-lg w-40 space-x-2 text-secondary"
 								>
-									<div className="text-black w-4">
-										{index + 1}
-									</div>
+									<div className="text-black w-4">{index + 1}</div>
 									<input
 										type="text"
 										className="rounded-lg h-12 w-32 bg-black-900 outline-none pl-2"
 										value={recoverList[index]}
-										onChange={e =>
-											handleInputChange(
-												e.target.value,
-												index
-											)
-										}
-										onPaste={
-											index === 0
-												? handlePaste
-												: undefined
-										}
+										onChange={e => handleInputChange(e.target.value, index)}
+										onPaste={index === 0 ? handlePaste : undefined}
 									/>
 								</div>
 							))}

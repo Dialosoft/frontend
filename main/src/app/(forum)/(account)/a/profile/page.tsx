@@ -101,44 +101,39 @@ export default function ProfileSection() {
 			</div>
 
 			<div className="space-y-4">
-				<Profile id={user.uuid} name={String(user.username).toUpperCase()} username={"@"+user.username} role={{ mod: user.role.mod_role, admin: user.role.admin_role }} pronoun="" registration_date={user.created_at} description={User.description} answers={User.answers} likes={User.likes} best_answers={User.best_answers}/>
+				<Profile
+					id={user.uuid}
+					name={String(user.username).toUpperCase()}
+					username={"@" + user.username}
+					role={{ mod: user.role.mod_role, admin: user.role.admin_role }}
+					pronoun=""
+					registration_date={user.created_at}
+					description={User.description}
+					answers={User.answers}
+					likes={User.likes}
+					best_answers={User.best_answers}
+				/>
 
 				<div className="flex space-x-4 select-none ">
 					<div
 						onClick={() => setActiveSection("feed")}
 						className={`rounded-md bg-black-300 flex space-x-2 px-4 py-3 border border-black-300 border-opacity-25 ${
-							activeSection === "feed"
-								? "bg-opacity-50 "
-								: "bg-opacity-25 border "
+							activeSection === "feed" ? "bg-opacity-50 " : "bg-opacity-25 border "
 						}`}
 					>
 						<div className="font-medium">User Feed</div>
-						<div
-							className={
-								activeSection === "feed"
-									? "text-primary-400"
-									: "text-black-500"
-							}
-						>
+						<div className={activeSection === "feed" ? "text-primary-400" : "text-black-500"}>
 							{feedCommentsCount}
 						</div>
 					</div>
 					<div
 						onClick={() => setActiveSection("posts")}
 						className={`rounded-md bg-black-300 flex space-x-2 px-4 py-3 border border-black-300 border-opacity-25 ${
-							activeSection === "posts"
-								? "bg-opacity-50"
-								: "bg-opacity-25"
+							activeSection === "posts" ? "bg-opacity-50" : "bg-opacity-25"
 						}`}
 					>
 						<div className="font-medium">Posts</div>
-						<div
-							className={
-								activeSection === "posts"
-									? "text-primary-400"
-									: "text-black-500"
-							}
-						>
+						<div className={activeSection === "posts" ? "text-primary-400" : "text-black-500"}>
 							{UserPostCount}
 						</div>
 					</div>
@@ -163,13 +158,9 @@ export default function ProfileSection() {
 					</div> */}
 				</div>
 
-				{activeSection === "feed" && (
-					<FeedPost messages={User.feed_comments} />
-				)}
+				{activeSection === "feed" && <FeedPost messages={User.feed_comments} />}
 
-				{activeSection === "posts" && (
-					<UserPosts messages={User.user_posts} />
-				)}
+				{activeSection === "posts" && <UserPosts messages={User.user_posts} />}
 			</div>
 		</div>
 	);

@@ -47,4 +47,3 @@ function InboxList() {
 }
 
 export default InboxList;
-

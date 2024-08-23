@@ -13,9 +13,7 @@ export default function PostOverview() {
 				<PostTags />
 			</div>
 			<div>
-				<h1 className="font-medium text-lg">
-					{"No se como centrar un div"}
-				</h1>
+				<h1 className="font-medium text-lg">{"No se como centrar un div"}</h1>
 				<p className="text-black-500 text-sm">
 					{
 						"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime harum totam modi nihil. Impedit consectetur reiciendis velit id, totam earum pariatur a quos?"

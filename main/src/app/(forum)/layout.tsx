@@ -26,17 +26,22 @@ export const metadata: Metadata = {
 
 /* FONT */
 import { Poppins } from "next/font/google";
-const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
+const poppins = Poppins({
+	subsets: ["latin"],
+	weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 /* Components */
 import "@/app/globals.css";
 const Header = dynamic(() => import("@/components/Forum/Header/main"));
 const SetTheme = dynamic(() => import("@/components/Hooks/useDark"), { ssr: false });
 
-export default function ForumLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
+export default function ForumLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en">
-			<body className={`${poppins.className} antialiased text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex flex-col`}>
+			<body
+				className={`${poppins.className} antialiased text-black-900 bg-secondary dark:text-secondary dark:bg-black-900 min-h-screen flex flex-col`}
+			>
 				<SetTheme />
 				<Header />
 				<main className="flex-grow">{children}</main>

@@ -13,9 +13,7 @@ export default function AccountMovileNav() {
 			icon: (
 				<UserRound
 					className={`h-5 w-5 ${
-						pathname == "/a/profile"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
+						pathname == "/a/profile" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"
 					}`}
 				/>
 			),
@@ -26,9 +24,7 @@ export default function AccountMovileNav() {
 			icon: (
 				<Bookmark
 					className={`h-5 w-5 ${
-						pathname == "/a/saved"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
+						pathname == "/a/saved" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"
 					}`}
 				/>
 			),
@@ -52,9 +48,7 @@ export default function AccountMovileNav() {
 			icon: (
 				<LogOut
 					className={`h-5 w-5 ${
-						pathname == "/a/logout"
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
+						pathname == "/a/logout" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"
 					}`}
 				/>
 			),
@@ -71,8 +65,7 @@ export default function AccountMovileNav() {
 						<div
 							className={`flex group justify-center items-center w-full space-x-2 px-4 hover:text-secondary hover:bg-black-300 hover:bg-opacity-25 rounded-md h-14 ${
 								pathname == item.link ||
-								(item.link == "/a/settings/account" &&
-									pathname.startsWith("/a/settings"))
+								(item.link == "/a/settings/account" && pathname.startsWith("/a/settings"))
 									? "text-primary-400"
 									: "text-black-500 group-hover:text-secondary"
 							}`}
@@ -81,8 +74,7 @@ export default function AccountMovileNav() {
 							<div
 								className={`max-lg:hidden ${
 									pathname == item.link ||
-									(item.link == "/a/settings/account" &&
-										pathname.startsWith("/a/settings"))
+									(item.link == "/a/settings/account" && pathname.startsWith("/a/settings"))
 										? "text-primary-400"
 										: "text-black-500 group-hover:text-secondary"
 								}`}

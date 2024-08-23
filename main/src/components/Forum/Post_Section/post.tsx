@@ -16,12 +16,10 @@ const formatNumber = (num: number): string => {
 };
 
 export default function Post({}: PostProps) {
-
 	const User = {
 		name: "Flussen",
 		username: "@flussen",
 		rol: "Moderator",
-
 	};
 	const PostContent = {
 		message:
@@ -44,15 +42,11 @@ export default function Post({}: PostProps) {
 									<Rol rol={User.rol} />
 								</div>
 							</div>
-							<div className="text-sm text-black-500 -mt-1">
-								{User.username}
-							</div>
+							<div className="text-sm text-black-500 -mt-1">{User.username}</div>
 						</div>
 					</div>
 					<div className="flex space-x-2 text-black-500">
-						<div className="text-sm max-sm:hidden">
-							{PostContent.date}
-						</div>
+						<div className="text-sm max-sm:hidden">{PostContent.date}</div>
 						<Share2 className="h-5 w-5 hover:text-secondary" />
 						<Ellipsis className="h-5 w-5 hover:text-secondary " />
 					</div>

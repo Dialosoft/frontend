@@ -15,14 +15,18 @@ function ActionButton({ Icon, children }: ActionButtonProps) {
 	const bgStyles = "bg-black-500 bg-opacity-25";
 	return (
 		<div
-			className={`${children !== undefined ? bgStyles+" pl-1" : ""} flex items-center rounded-full cursor-pointer group`}
+			className={`${children !== undefined ? bgStyles + " pl-1" : ""} flex items-center rounded-full cursor-pointer group`}
 		>
 			<Icon
 				className={`${
 					children !== undefined ? "" : bgStyles
 				} rounded-full text-black-500 fill-current size-9 px-2 transition-colors group-hover:text-secondary`}
 			/>
-			{children ? <p className="pr-3 text-black-500 font-bold group-hover:text-secondary transition-colors">{children}</p> : <></>}
+			{children ? (
+				<p className="pr-3 text-black-500 font-bold group-hover:text-secondary transition-colors">{children}</p>
+			) : (
+				<></>
+			)}
 		</div>
 	);
 }

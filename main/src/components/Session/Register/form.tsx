@@ -32,17 +32,23 @@ export default function Register_Form() {
 	const [errorMessage, setErrorMessage] = useState("");
 
 	/* Username */
-	const debounced_setUsername = useCallback(debounce((value: string) => {
-		setUsername(value);
-		validateField("username", value);
-	}, 30), [setUsername]);
+	const debounced_setUsername = useCallback(
+		debounce((value: string) => {
+			setUsername(value);
+			validateField("username", value);
+		}, 30),
+		[setUsername]
+	);
 	const handle_Username_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUsername(e.target.value);
 
 	/* Email */
-	const debounced_setEmail = useCallback(debounce((value: string) => {
-		setEmail(value);
-		validateField("email", value);
-	}, 30), [setEmail]);
+	const debounced_setEmail = useCallback(
+		debounce((value: string) => {
+			setEmail(value);
+			validateField("email", value);
+		}, 30),
+		[setEmail]
+	);
 	const handle_Email_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setEmail(e.target.value);
 
 	/* Password */
@@ -65,17 +71,20 @@ export default function Register_Form() {
 	/* Copy seeds */
 	const copyToClipboard = () => {
 		const seedText = seeds.join(" ");
-		navigator.clipboard.writeText(seedText).then(() => {
-			setIsCopied(true);
-			setTimeout(() => setIsCopied(false), 2000);
-		}).catch();
+		navigator.clipboard
+			.writeText(seedText)
+			.then(() => {
+				setIsCopied(true);
+				setTimeout(() => setIsCopied(false), 2000);
+			})
+			.catch();
 	};
 
 	/* Redirect to Login */
 	useEffect(() => {
 		if (showSeedsModal) {
 			const timer = setInterval(() => {
-				setCountdown((prev) => prev - 1);
+				setCountdown(prev => prev - 1);
 			}, 1000);
 
 			setTimeout(() => {
@@ -105,7 +114,7 @@ export default function Register_Form() {
 		});
 
 		if (result.success) {
-			setErrors((prev) => {
+			setErrors(prev => {
 				const newErrors = { ...prev };
 				delete newErrors[field];
 
@@ -118,12 +127,12 @@ export default function Register_Form() {
 				return newErrors;
 			});
 		} else {
-			const fieldError = result.error.errors.find((error) => error.path[0] === field);
+			const fieldError = result.error.errors.find(error => error.path[0] === field);
 
 			if (fieldError) {
-				setErrors((prev) => ({ ...prev, [field]: fieldError.message }));
+				setErrors(prev => ({ ...prev, [field]: fieldError.message }));
 			} else {
-				setErrors((prev) => {
+				setErrors(prev => {
 					const newErrors = { ...prev };
 					delete newErrors[field];
 					return newErrors;
@@ -132,7 +141,7 @@ export default function Register_Form() {
 
 			if (field === "password" || field === "confirmPassword") {
 				if (data.password !== data.confirmPassword) {
-					setErrors((prev) => ({ ...prev, confirmPassword: "Passwords must match" }));
+					setErrors(prev => ({ ...prev, confirmPassword: "Passwords must match" }));
 				}
 			}
 		}
@@ -151,7 +160,12 @@ export default function Register_Form() {
 
 		const result = registerSchema.safeParse({ username, email, password, confirmPassword });
 		if (result.success) {
-			const status = await registerDatabase({ username: username, email: email, password: password, confirmPassword: confirmPassword });
+			const status = await registerDatabase({
+				username: username,
+				email: email,
+				password: password,
+				confirmPassword: confirmPassword,
+			});
 			if (!status.success) {
 				setErrorMessage(status.message as string);
 				setShowErrorModal(true);
@@ -174,7 +188,7 @@ export default function Register_Form() {
 		} else {
 			const fieldErrors: { [key: string]: string } = {};
 
-			result.error.errors.forEach((error) => {
+			result.error.errors.forEach(error => {
 				if (error.path.length) {
 					fieldErrors[error.path[0]] = error.message;
 				}
@@ -187,65 +201,146 @@ export default function Register_Form() {
 
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
-	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
+	const tw_input =
+		"appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
 	const tw_error = "select-none text-red text-sm";
 
 	return (
 		<>
-			<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
+			<form
+				onSubmit={handleSubmit}
+				className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]"
+				noValidate
+			>
 				<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 					{/* Username */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
 						<div className="flex items-center justify-between">
-							<label className={tw_label} htmlFor="username">Username</label>
+							<label className={tw_label} htmlFor="username">
+								Username
+							</label>
 							{errors.username && <span className={tw_error}>{errors.username}</span>}
 						</div>
 
-						<input className={`${tw_input} ${errors.username && "border-red"}`} placeholder="Choose your username" type="text" value={username} id="username" autoComplete="username" onChange={handle_Username_Change} minLength={4} maxLength={20} required />
+						<input
+							className={`${tw_input} ${errors.username && "border-red"}`}
+							placeholder="Choose your username"
+							type="text"
+							value={username}
+							id="username"
+							autoComplete="username"
+							onChange={handle_Username_Change}
+							minLength={4}
+							maxLength={20}
+							required
+						/>
 					</div>
 
 					{/* Email */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
 						<div className="flex items-center justify-between">
-							<label className={tw_label} htmlFor="email">Email</label>
+							<label className={tw_label} htmlFor="email">
+								Email
+							</label>
 							{errors.email && <span className={tw_error}>{errors.email}</span>}
 						</div>
 
-						<input className={`${tw_input} ${errors.email && "border-red"}`} placeholder="Enter your email" type="email" value={email} id="email" autoComplete="email" onChange={handle_Email_Change} maxLength={254} required />
+						<input
+							className={`${tw_input} ${errors.email && "border-red"}`}
+							placeholder="Enter your email"
+							type="email"
+							value={email}
+							id="email"
+							autoComplete="email"
+							onChange={handle_Email_Change}
+							maxLength={254}
+							required
+						/>
 					</div>
 
 					{/* Password */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
 						<div className="flex items-center justify-between">
-							<label className={tw_label} htmlFor="password">Password</label>
+							<label className={tw_label} htmlFor="password">
+								Password
+							</label>
 							{errors.password && <span className={tw_error}>{errors.password}</span>}
 						</div>
 
-						<div className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}>
-							<input className="w-full appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-transparent mr-2" placeholder="Create a password" type={showPassword ? "text" : "password"} value={password} id="password" autoComplete="current-password" onChange={handle_Password_Change} minLength={8} maxLength={50} required />
-							<button type="button" onClick={togglePasswordVisibility}>{showPassword ? <EyeOff className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} /> : <Eye className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />}</button>
+						<div
+							className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}
+						>
+							<input
+								className="w-full appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-transparent mr-2"
+								placeholder="Create a password"
+								type={showPassword ? "text" : "password"}
+								value={password}
+								id="password"
+								autoComplete="current-password"
+								onChange={handle_Password_Change}
+								minLength={8}
+								maxLength={50}
+								required
+							/>
+							<button type="button" onClick={togglePasswordVisibility}>
+								{showPassword ? (
+									<EyeOff
+										className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary"
+										size={20}
+									/>
+								) : (
+									<Eye
+										className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary"
+										size={20}
+									/>
+								)}
+							</button>
 						</div>
 					</div>
 
 					{/* Confirm Password */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
 						<div className="flex items-center justify-between">
-							<label className={tw_label} htmlFor="confirm-password">Confirm Password</label>
+							<label className={tw_label} htmlFor="confirm-password">
+								Confirm Password
+							</label>
 							{errors.confirmPassword && <span className={tw_error}>{errors.confirmPassword}</span>}
 						</div>
 
-						<input className={`${tw_input} ${errors.confirmPassword && "border-red"}`} placeholder="Repeat your password" type={showPassword ? "text" : "password"} value={confirmPassword} id="confirm-password" autoComplete="current-password" onChange={handle_ConfirmPassword_Change} minLength={8} maxLength={50} required />
+						<input
+							className={`${tw_input} ${errors.confirmPassword && "border-red"}`}
+							placeholder="Repeat your password"
+							type={showPassword ? "text" : "password"}
+							value={confirmPassword}
+							id="confirm-password"
+							autoComplete="current-password"
+							onChange={handle_ConfirmPassword_Change}
+							minLength={8}
+							maxLength={50}
+							required
+						/>
 					</div>
 				</div>
 
 				<div className="w-full flex flex-col items-center space-y-[.5rem]">
-					<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
-						<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Register"}</span>
+					<button
+						className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`}
+						type="submit"
+						disabled={isDisabled || isSubmitting}
+					>
+						<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">
+							{isSubmitting ? "Submitting..." : "Register"}
+						</span>
 					</button>
 
 					<div className="select-none flex space-x-2">
 						<p className="text-black-500">Already have an account?</p>
-						<Link className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100" href="/login">Login</Link>
+						<Link
+							className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100"
+							href="/login"
+						>
+							Login
+						</Link>
 					</div>
 				</div>
 			</form>
@@ -256,7 +351,10 @@ export default function Register_Form() {
 						<div className="w-fit flex flex-col items-center justify-center space-y-[3rem] rounded-lg p-[4rem] bg-black-700 border border-opacity-25 border-black-300">
 							<div className="flex flex-col items-center justify-center">
 								<span className="font-semibold text-2xl text-red">IMPORTANT</span>
-								<span>Here are your recovery words in case you forget your password. It's crucial to keep them safe and secure. Don't lose them.</span>
+								<span>
+									Here are your recovery words in case you forget your password. It's crucial to keep
+									them safe and secure. Don't lose them.
+								</span>
 							</div>
 
 							<div className="p-[1rem] bg-black-700 border border-opacity-25 border-black-300 rounded-lg space-y-[1rem]">
@@ -264,21 +362,40 @@ export default function Register_Form() {
 									{seeds.map((seed, index) => (
 										<div className="flex items-center justify-start p-2" key={uuidv4()}>
 											<span className="font-medium text-black-500">
-												{`${index + 1}.`} <span className="text-secondary font-normal">{seed}</span>
+												{`${index + 1}.`}{" "}
+												<span className="text-secondary font-normal">{seed}</span>
 											</span>
 										</div>
 									))}
 								</div>
 
-								<button className="w-full flex items-center justify-center space-x-2 text-black-500 transition-colors ease-in-out duration-150 group hover:text-primary-400" onClick={copyToClipboard}>
-									{isCopied ? <Check className="text-primary-400" size={20} /> : <Copy className="transition-colors ease-in-out duration-150 group-hover:text-primary-400" size={20} />}
-									<span className="transition-colors ease-in-out duration-150 group-hover:text-primary-400">{isCopied ? <span className="text-primary-400">Copied!</span> : "Copy to Clipboard"}</span>
+								<button
+									className="w-full flex items-center justify-center space-x-2 text-black-500 transition-colors ease-in-out duration-150 group hover:text-primary-400"
+									onClick={copyToClipboard}
+								>
+									{isCopied ? (
+										<Check className="text-primary-400" size={20} />
+									) : (
+										<Copy
+											className="transition-colors ease-in-out duration-150 group-hover:text-primary-400"
+											size={20}
+										/>
+									)}
+									<span className="transition-colors ease-in-out duration-150 group-hover:text-primary-400">
+										{isCopied ? (
+											<span className="text-primary-400">Copied!</span>
+										) : (
+											"Copy to Clipboard"
+										)}
+									</span>
 								</button>
 							</div>
 
 							{canRedirect ? (
 								<Link href="/login" prefetch={false}>
-									<button className="bg-primary-400 text-black-900 px-4 py-2 rounded-md hover:bg-primary-500 transition-colors">Continue</button>
+									<button className="bg-primary-400 text-black-900 px-4 py-2 rounded-md hover:bg-primary-500 transition-colors">
+										Continue
+									</button>
 								</Link>
 							) : (
 								<span className="text-black-500">Please wait {countdown} seconds...</span>

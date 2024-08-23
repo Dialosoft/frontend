@@ -1,17 +1,9 @@
 "use client";
-import {
-	User,
-	Share2,
-	Ellipsis,
-	MessageSquare,
-	Heart,
-	Bookmark,
-} from "lucide-react";
+import { User, Share2, Ellipsis, MessageSquare, Heart, Bookmark } from "lucide-react";
 import { ArrowBigUp } from "lucide-react";
 import { ArrowBigDown } from "lucide-react";
 import { useState } from "react";
 interface PostProps {
-
 	user: string;
 	username: string;
 	title: string;
@@ -19,7 +11,7 @@ interface PostProps {
 	answers: number;
 	likes: number;
 	date: string;
-	date_saved:string
+	date_saved: string;
 }
 const formatNumber = (num: number): string => {
 	if (num < 1000) {
@@ -27,16 +19,7 @@ const formatNumber = (num: number): string => {
 	}
 	return (num / 1000).toFixed(1) + "k";
 };
-export default function SavedPost({
-	user,
-	username,
-	title,
-	date_saved,
-	message,
-	answers,
-	likes,
-	date,
-}: PostProps) {
+export default function SavedPost({ user, username, title, date_saved, message, answers, likes, date }: PostProps) {
 	const [saved, setSaved] = useState(true);
 	const [liked, setLiked] = useState(false);
 
@@ -47,11 +30,8 @@ export default function SavedPost({
 					<div className="aspect-square rounded-full  border border-primary-400 h-14 " />
 					<div>
 						<div className="flex space-x-2 text-xl font-semibold">{title}</div>
-						<div className="text-sm text-black-500 -mt-1">
-							{username}
-						</div>
+						<div className="text-sm text-black-500 -mt-1">{username}</div>
 					</div>
-
 				</div>
 				<div className="flex space-x-2 text-black-500">
 					<div className="text-sm max-sm:hidden">{date}</div>
@@ -70,11 +50,7 @@ export default function SavedPost({
 					<div className="flex space-x-1 items-center">
 						<Heart
 							onClick={() => setLiked(!liked)}
-							className={`h-5 w-5 ${
-								liked
-									? "text-red fill-red"
-									: "text-black-500 hover:text-red "
-							} `}
+							className={`h-5 w-5 ${liked ? "text-red fill-red" : "text-black-500 hover:text-red "} `}
 						/>
 						<div>{formatNumber(likes)}</div>
 					</div>
@@ -82,9 +58,7 @@ export default function SavedPost({
 				<Bookmark
 					onClick={() => setSaved(!saved)}
 					className={`h-5 w-5 ${
-						saved
-							? "text-primary-400 fill-primary-400"
-							: "text-black-500 hover:text-primary-500 "
+						saved ? "text-primary-400 fill-primary-400" : "text-black-500 hover:text-primary-500 "
 					} `}
 				/>
 			</div>

@@ -5,10 +5,10 @@ interface InputProps {
 	value: string;
 	placeholder: string;
 	onChange: (newValue: string) => void;
-	background:string
+	background: string;
 }
 
-export default function InputText({ value, placeholder, onChange, background }:InputProps) {
+export default function InputText({ value, placeholder, onChange, background }: InputProps) {
 	const [inputValue, setInputValue] = useState(value);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

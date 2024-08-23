@@ -15,13 +15,7 @@ export default function UserChip({ highlighted }: UserChipProps) {
 				alt={""}
 			/>
 			<div>
-				<p
-					className={`${
-						highlighted ? "text-primary-500" : "text-secondary"
-					} text-sm`}
-				>
-					{"Scrum Master"}
-				</p>
+				<p className={`${highlighted ? "text-primary-500" : "text-secondary"} text-sm`}>{"Scrum Master"}</p>
 				<p className={"text-black-500 text-sm"}>{`@${"Flussen"}`}</p>
 			</div>
 		</div>

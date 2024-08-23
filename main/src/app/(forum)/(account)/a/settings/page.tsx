@@ -6,9 +6,9 @@ import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import { usePathname } from "next/navigation";
 export default function SettingsPage() {
-    	const pathname = usePathname();
+	const pathname = usePathname();
 
-    	const menuItems = [
+	const menuItems = [
 		{
 			icon: (
 				<UserRoundCog
@@ -96,11 +96,7 @@ export default function SettingsPage() {
 				<div className="h-10 rounded-full bg-black-300 bg-opacity-25"></div>
 				<div className="bg-black-300 bg-opacity-25 rounded-lg p-2 grid grid-cols-1 gap-2">
 					{menuItems.map(item => (
-						<Link
-							href={item.link}
-							className="w-full"
-							key={uuidv4()}
-						>
+						<Link href={item.link} className="w-full" key={uuidv4()}>
 							<div
 								className={`flex group justify-start items-center w-full space-x-2 px-4 hover:text-secondary hover:bg-black-300 hover:bg-opacity-25 rounded-md h-14 ${
 									pathname == item.link

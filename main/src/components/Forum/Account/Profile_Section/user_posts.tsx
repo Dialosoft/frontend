@@ -1,12 +1,4 @@
-import {
-	ArrowBigDown,
-	ArrowBigUp,
-	Bookmark,
-	Ellipsis,
-	Heart,
-	MessageSquare,
-	Trophy,
-} from "lucide-react";
+import { ArrowBigDown, ArrowBigUp, Bookmark, Ellipsis, Heart, MessageSquare, Trophy } from "lucide-react";
 import { v4 as uuidv4 } from "uuid";
 
 interface PostComment {
@@ -33,9 +25,7 @@ export default function UserPosts({ messages }: PostProps) {
 
 					<div className="w-full flex-col">
 						<div className="flex w-full items-center text-primary-400 space-x-1">
-							<h3 className=" text-secondary font-medium">
-								{msg.title}
-							</h3>
+							<h3 className=" text-secondary font-medium">{msg.title}</h3>
 						</div>
 						<div className="flex space-x-2 text-sm text-black-500 font-medium">
 							<div> {msg.date} ago </div>
@@ -45,15 +35,11 @@ export default function UserPosts({ messages }: PostProps) {
 					<div className="flex space-x-4 w-full justify-end items-center">
 						<div className="flex space-x-4">
 							<div className="flex-col">
-								<div className="text-black-500 text-xs">
-									Answers
-								</div>
+								<div className="text-black-500 text-xs">Answers</div>
 								<span>{msg.answers}</span>
 							</div>
 							<div className="flex-col">
-								<div className="text-black-500 text-xs">
-									Views
-								</div>
+								<div className="text-black-500 text-xs">Views</div>
 								<span>{formatNumber(msg.views)}</span>
 							</div>
 						</div>

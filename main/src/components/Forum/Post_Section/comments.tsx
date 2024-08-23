@@ -6,24 +6,23 @@ import { ArrowBigDown } from "lucide-react";
 import { Trophy } from "lucide-react";
 
 import PostVotingChip from "../Post/voting_chip";
- interface CommentsProps {
-		user: string;
-		username: string;
-		rate: number;
-		best: boolean;
-		message: string;
-		answers: number;
-		likes: number;
-		date:string
- }
+interface CommentsProps {
+	user: string;
+	username: string;
+	rate: number;
+	best: boolean;
+	message: string;
+	answers: number;
+	likes: number;
+	date: string;
+}
 const formatNumber = (num: number): string => {
 	if (num < 1000) {
 		return num.toString();
 	}
 	return (num / 1000).toFixed(1) + "k";
 };
-export default function Comments({ user, username, rate, best, message, answers, likes, date }:CommentsProps) {
-
+export default function Comments({ user, username, rate, best, message, answers, likes, date }: CommentsProps) {
 	return (
 		<div className="mt-1 bg-black-300 bg-opacity-25 max-w-[1110px] p-4 space-y-4 rounded-lg">
 			<div className="w-full flex justify-between">
@@ -31,9 +30,7 @@ export default function Comments({ user, username, rate, best, message, answers,
 					<div className="aspect-square rounded-full  border border-primary-400 h-14 " />
 					<div>
 						<div className="flex space-x-2">{user}</div>
-						<div className="text-sm text-black-500 -mt-1">
-							{username}
-						</div>
+						<div className="text-sm text-black-500 -mt-1">{username}</div>
 					</div>
 					<div className=" flex rounded-full bg-black-300 bg-opacity-25 p-1 space-x-1">
 						<div className="rounded-full bg-black-300 h-6 w-6 flex justify-center items-center text-black-500 bg-opacity-25 hover:text-secondary hover:bg-opacity-75">
@@ -90,6 +87,4 @@ export default function Comments({ user, username, rate, best, message, answers,
 			</div>
 		</div>
 	);
-
-
 }

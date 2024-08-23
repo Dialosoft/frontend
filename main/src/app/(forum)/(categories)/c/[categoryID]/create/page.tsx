@@ -13,7 +13,7 @@ type Props = {
 	};
 };
 export default function Create({ params }: Props) {
-	const [title, setTitle]= useState("");
+	const [title, setTitle] = useState("");
 	const CategoryInfo = [
 		{
 			id: "1",
@@ -28,9 +28,7 @@ export default function Create({ params }: Props) {
 			title: "Rules & FAQs",
 		},
 	];
-	const Category = CategoryInfo.find(
-		category => category.id === params.categoryID
-	);
+	const Category = CategoryInfo.find(category => category.id === params.categoryID);
 	const [categoryID, setCategoryID] = useState(params.postID);
 	useEffect(() => {
 		const urlSegments = window.location.pathname.split("/");
@@ -52,10 +50,7 @@ export default function Create({ params }: Props) {
 						Main category
 					</Link>
 					<ChevronRight className="w-4 h-4" />
-					<Link
-						href={`/c/${params.categoryID}`}
-						className="hover:text-secondary"
-					>
+					<Link href={`/c/${params.categoryID}`} className="hover:text-secondary">
 						{Category?.title}
 					</Link>
 					<ChevronRight className="w-4 h-4" />
@@ -67,9 +62,7 @@ export default function Create({ params }: Props) {
 				<InputText
 					value={title}
 					placeholder="Enter title..."
-					onChange={newValue =>
-						setTitle(newValue)
-					}
+					onChange={newValue => setTitle(newValue)}
 					background="bg-black-300 bg-opacity-25"
 				/>
 			</div>

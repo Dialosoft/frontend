@@ -31,8 +31,6 @@ export default function Rol({ rol }: RolProps) {
 			</div>
 		);
 
-
-
 	default:
 		return null;
 	}

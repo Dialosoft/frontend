@@ -19,15 +19,7 @@ const formatNumber = (num: number): string => {
 	}
 	return (num / 1000).toFixed(1) + "k";
 };
-export default function Post({
-	id,
-	title,
-	answers,
-	views,
-	user,
-	date,
-	fixed,
-}: CategoryProps) {
+export default function Post({ id, title, answers, views, user, date, fixed }: CategoryProps) {
 	return (
 		<>
 			<div className="flex justify-between space-x-2 items-center hover:bg-black-300 py-2 px-2 sm:px-4 rounded-md hover:bg-opacity-25">
@@ -35,7 +27,7 @@ export default function Post({
 
 				<div className="w-full flex-col">
 					<div className="flex w-full items-center text-primary-400 space-x-1">
-						{fixed&&(<Pin className="h-4 w-4" />)}
+						{fixed && <Pin className="h-4 w-4" />}
 						<h3 className=" text-secondary font-medium">{title}</h3>
 					</div>
 					<div className="flex space-x-2 text-sm text-black-500 font-medium">

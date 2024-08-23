@@ -13,7 +13,6 @@ type Props = {
 	};
 };
 export default function Category({ params }: Props) {
-
 	const CategoryInfo = [
 		{
 			id: "1",
@@ -75,9 +74,7 @@ export default function Category({ params }: Props) {
 			fixed: false,
 		},
 	];
-	const Category = CategoryInfo.find(
-		category => category.id === params.categoryID
-	);
+	const Category = CategoryInfo.find(category => category.id === params.categoryID);
 	if (!Category) {
 		return <div>¿Que haces?</div>;
 	}
@@ -92,9 +89,7 @@ export default function Category({ params }: Props) {
 								Main category
 							</Link>
 							<ChevronRight className="w-4 h-4" />
-							<span className="text-secondary">
-								{Category.title}
-							</span>
+							<span className="text-secondary">{Category.title}</span>
 						</div>
 					</div>
 
@@ -118,10 +113,7 @@ export default function Category({ params }: Props) {
 				</div>
 				<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 					{PostsInfo.filter(post => post.fixed).map(post => (
-						<Link
-							href={`${params.categoryID}/${post.id}`}
-							key={uuidv4()}
-						>
+						<Link href={`${params.categoryID}/${post.id}`} key={uuidv4()}>
 							<Post
 								id={post.id}
 								user={post.user}
@@ -139,10 +131,7 @@ export default function Category({ params }: Props) {
 				</div>
 				<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 					{PostsInfo.filter(post => !post.fixed).map(post => (
-						<Link
-							href={`${params.categoryID}/${post.id}`}
-							key={uuidv4()}
-						>
+						<Link href={`${params.categoryID}/${post.id}`} key={uuidv4()}>
 							<Post
 								id={post.id}
 								user={post.user}

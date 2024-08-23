@@ -1,8 +1,8 @@
 import { Crown, Sword, UserRound } from "lucide-react";
 
 interface RoleProps {
-	admin: boolean,
-	mod: boolean
+	admin: boolean;
+	mod: boolean;
 }
 
 export default function Role({ admin, mod }: RoleProps) {

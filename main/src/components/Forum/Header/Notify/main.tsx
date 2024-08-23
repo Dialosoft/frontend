@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { Bell } from "lucide-react";
@@ -21,7 +20,7 @@ export default function Notify({ notifyTemplate, clearNotifications }: Notificat
 				</div>
 
 				<div className="w-full">
-					{notifyTemplate.map((notify) => (
+					{notifyTemplate.map(notify => (
 						<Suspense key={uuidv4()}>
 							<Template name={notify.name} link={notify.link} type={notify.type} time={notify.time} />
 						</Suspense>
@@ -33,7 +32,9 @@ export default function Notify({ notifyTemplate, clearNotifications }: Notificat
 				</div>
 
 				<div className="w-full flex items-center justify-between text-sm">
-					<span onClick={clearNotifications} className="select-none hover:text-red cursor-pointer">Delete</span>
+					<span onClick={clearNotifications} className="select-none hover:text-red cursor-pointer">
+						Delete
+					</span>
 					<span className="select-none hover:text-secondary cursor-pointer">See More</span>
 				</div>
 			</div>

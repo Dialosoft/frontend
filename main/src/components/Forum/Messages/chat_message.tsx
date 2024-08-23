@@ -6,21 +6,14 @@ interface ChatMessageProps {
 }
 
 const recipientMsgStyling = "bg-black-500 rounded-tl-none";
-const senderMsgStyling =
-	"bg-primary-500 rounded-tr-none text-black-900 font-medium";
+const senderMsgStyling = "bg-primary-500 rounded-tr-none text-black-900 font-medium";
 
 export default function ChatMessage({ recipient, content }: ChatMessageProps) {
-	let time = formatTime(new Date());
+	const time = formatTime(new Date());
 
 	return (
 		<div className={`${recipient ? "" : "ml-auto"} max-w-[85%]`}>
-			<p
-				className={`text-xs text-black-500 ${
-					recipient ? "" : "text-right"
-				}`}
-			>
-				{time}
-			</p>
+			<p className={`text-xs text-black-500 ${recipient ? "" : "text-right"}`}>{time}</p>
 			<p
 				className={`${
 					recipient ? recipientMsgStyling : senderMsgStyling
@@ -31,4 +24,3 @@ export default function ChatMessage({ recipient, content }: ChatMessageProps) {
 		</div>
 	);
 }
-

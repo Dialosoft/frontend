@@ -1,12 +1,5 @@
 "use client";
-import {
-	User,
-	Share2,
-	Ellipsis,
-	MessageSquare,
-	Heart,
-	Bookmark,
-} from "lucide-react";
+import { User, Share2, Ellipsis, MessageSquare, Heart, Bookmark } from "lucide-react";
 import { ArrowBigUp } from "lucide-react";
 import { ArrowBigDown } from "lucide-react";
 import { useState } from "react";
@@ -36,8 +29,7 @@ export default function SavedComment({
 	likes,
 	date,
 }: CommentsProps) {
-
-	const [saved, setSaved]=useState(true);
+	const [saved, setSaved] = useState(true);
 	const [liked, setLiked] = useState(false);
 
 	return (
@@ -47,9 +39,7 @@ export default function SavedComment({
 					<div className="aspect-square rounded-full  border border-primary-400 h-14 " />
 					<div>
 						<div className="flex space-x-2">{user}</div>
-						<div className="text-sm text-black-500 -mt-1">
-							{username}
-						</div>
+						<div className="text-sm text-black-500 -mt-1">{username}</div>
 					</div>
 					<div className="flex rounded-full bg-black-300 bg-opacity-25 p-1 space-x-1">
 						<div className="rounded-full bg-black-300 h-6 w-6 flex justify-center items-center text-black-500 bg-opacity-25 hover:text-secondary hover:bg-opacity-75">
@@ -93,11 +83,7 @@ export default function SavedComment({
 					<div className="flex space-x-1 items-center">
 						<Heart
 							onClick={() => setLiked(!liked)}
-							className={`h-5 w-5 ${
-								liked
-									? "text-red fill-red"
-									: "text-black-500 hover:text-red "
-							} `}
+							className={`h-5 w-5 ${liked ? "text-red fill-red" : "text-black-500 hover:text-red "} `}
 						/>
 						<div>{formatNumber(likes)}</div>
 					</div>
@@ -105,9 +91,7 @@ export default function SavedComment({
 				<Bookmark
 					onClick={() => setSaved(!saved)}
 					className={`h-5 w-5 ${
-						saved
-							? "text-primary-400 fill-primary-400"
-							: "text-black-500 hover:text-primary-500 "
+						saved ? "text-primary-400 fill-primary-400" : "text-black-500 hover:text-primary-500 "
 					} `}
 				/>
 			</div>

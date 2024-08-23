@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 const useWindowWidth = () => {
 	const isClient = typeof window === "object";
-	const [windowWidth, setWindowWidth] = useState<number>(() => isClient ? window.innerWidth : 0);
+	const [windowWidth, setWindowWidth] = useState<number>(() => (isClient ? window.innerWidth : 0));
 
 	useEffect(() => {
 		const handleResize = debounce(() => setWindowWidth(window.innerWidth), 300);

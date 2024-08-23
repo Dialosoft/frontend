@@ -17,10 +17,9 @@ type UserType = {
 	answers: number;
 	likes: number;
 	date: string;
-
 };
 type PostsType = {
-	id:number
+	id: number;
 	user: string;
 	username: string;
 	title: string;
@@ -28,19 +27,14 @@ type PostsType = {
 	answers: number;
 	likes: number;
 	date: string;
-	date_saved: string
-
+	date_saved: string;
 };
-type CommentType = UserType & { id: string, type:string };
+type CommentType = UserType & { id: string; type: string };
 
-type UnifiedType =
-	| (CommentType & { type: "comment" })
-	| (PostsType & { type: "post" });
-
+type UnifiedType = (CommentType & { type: "comment" }) | (PostsType & { type: "post" });
 
 const initialPosts: PostsType[] = [
 	{
-
 		id: 321,
 		user: "Flussen",
 		username: "flussen",
@@ -50,23 +44,17 @@ const initialPosts: PostsType[] = [
 		answers: 324,
 		likes: 432,
 		date: "24. Feb. 2002",
-		date_saved:"22 August 2024",
+		date_saved: "22 August 2024",
 	},
 ];
 export default function SavedSection() {
+	const [searchTerm, setSearchTerm] = useState<string>("");
 
-	    const [searchTerm, setSearchTerm] = useState<string>("");
-
-	const [PostsList, setPostsList] =
-			useState<PostsType[]>(initialPosts);
-			  const filteredPosts = PostsList.filter(
+	const [PostsList, setPostsList] = useState<PostsType[]>(initialPosts);
+	const filteredPosts = PostsList.filter(
 		post =>
-			post.title
-				.toLowerCase()
-				.includes(searchTerm.toLowerCase()) ||
-						post.message
-							.toLowerCase()
-							.includes(searchTerm.toLowerCase())
+			post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+			post.message.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16  max-sm:mb-20">
