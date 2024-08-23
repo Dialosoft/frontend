@@ -1,13 +1,13 @@
 "use client";
 
-import "./create.module.css";
+import "./create.css";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-const InputText = dynamic(() => import("@/components/Forum/Account/Settings_Section/input_text"));
-const TextEditor = dynamic(() => import("@/components/Post_Section/create/text_editor"));
+const InputText = dynamic(() => import("@/components/Forum/Account/Settings_Section/input_text"), { ssr: false });
+const TextEditor = dynamic(() => import("@/components/Post_Section/create/text_editor"), { ssr: false });
 
 type Props = {
 	params: {
