@@ -1,5 +1,31 @@
 "use server";
 
+<<<<<<< HEAD
+interface UserSimpleProps {
+	accessToken: string;
+}
+
+export async function getUser_Simple({ accessToken }: UserSimpleProps) {
+	if (accessToken === "") {return false;}
+
+	const controller = new AbortController();
+	const timeoutId = setTimeout(() => controller.abort(), 30 * 1000); // 30 seconds
+
+	try {
+		const response = await fetch(
+			"http://gateway-service:8080/dialosoft-api/user-service/get-simpleuser-info",
+			{
+				method: "GET",
+				headers: {
+					Authorization: "Bearer " + accessToken,
+				},
+				signal: controller.signal,
+				next: {
+					revalidate: 5 * 60, // 5 minutes
+				},
+			}
+		);
+=======
 import axios from "axios";
 import { cookies } from "next/headers";
 
@@ -30,6 +56,7 @@ export async function getUser_Simple() {
 			},
 			timeout: 30 * 1000, // 30 seconds
 		});
+>>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 
 		return response.data.data;
 	} catch {
@@ -37,6 +64,10 @@ export async function getUser_Simple() {
 	}
 }
 
+<<<<<<< HEAD
+export async function getUser({ accessToken }: UserSimpleProps) {
+	console.log(accessToken);
+=======
 export async function getUser() {
 	const sessionUser = await Verify_Cookie();
 	if (!sessionUser) {
@@ -75,4 +106,5 @@ export async function getUser_Avatar(id: string) {
 	} catch {
 		return false;
 	}
+>>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 }

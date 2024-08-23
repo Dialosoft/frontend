@@ -8,5 +8,11 @@
 	"prettier.trailingComma": "es5",
 	"prettier.semi": true,
 	"prettier.useTabs": true,
-	"prettier.arrowParens": "avoid"
+	"prettier.arrowParens": "avoid",
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
 }

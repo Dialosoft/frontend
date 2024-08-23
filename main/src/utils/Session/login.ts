@@ -18,6 +18,27 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 	const { UserOrEmail: validUserOrEmail, password: validPassword } = result.data;
 
 	try {
+<<<<<<< HEAD
+		const response = await fetch("http://192.168.0.143:8080/dialosoft-api/auth/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			signal: controller.signal,
+			body: JSON.stringify({
+				username: validUserOrEmail.toLowerCase(),
+				password: validPassword,
+			}),
+		});
+
+		clearTimeout(timeoutId);
+
+		if (!response.ok) {
+			if (response.status === 401) {
+				return { success: false, message: "Invalid username, email or password." };
+			} else {
+				return { success: false, message: "An unexpected error occurred. Please try again later." };
+=======
 		const response = await axios.post(
 			"http://gateway-service:8080/dialosoft-api/auth/login",
 			{
@@ -29,11 +50,18 @@ export default async function Login_Database({ UserOrEmail, password }: LoginPro
 					"Content-Type": "application/json",
 				},
 				timeout: 30 * 1000, // 30 seconds
+>>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 			}
 		);
 
 		const tokens = response.data.data;
 
+<<<<<<< HEAD
+		const data = await response.json();
+		const tokens = data.metadata;
+
+=======
+>>>>>>> 44ea55c50ce7b94e68336a682c78472099261e2c
 		// Set cookies
 		const cookieStore = cookies();
 
