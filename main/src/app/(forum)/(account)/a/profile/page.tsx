@@ -92,7 +92,7 @@ export default function ProfileSection() {
 				views: 8567,
 			},
 			{
-				title: "Invade Event: Poland",
+				title: "Invade Event: Party",
 				answers: 33,
 				date: "7 April 2021",
 				views: 757,

@@ -1,4 +1,5 @@
 "use client"; // Solo si usas Next.js con React 18 y arriba.
+
 import { useRef } from "react";
 import Placeholder from "@tiptap/extension-placeholder";
 

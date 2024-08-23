@@ -47,7 +47,7 @@ export default function User({ name, admin, mod }: UserProps) {
 	};
 
 	return (
-		<div className="absolute overflow-hidden w-72 top-full mt-[1rem] right-0 rounded-lg bg-secondary dark:bg-black-700 border border-opacity-25 border-black-300 text-black-500">
+		<div className="absolute overflow-hidden w-72 top-full mt-[1rem] right-0 rounded-lg z-50 bg-secondary dark:bg-black-700 border border-opacity-25 border-black-300 text-black-500">
 			<div className="m-[1rem] flex flex-col items-center justify-start space-y-[1rem]">
 				<div className="w-full flex items-center justify-between">
 					<span className="select-none text-secondary font-semibold">{name}</span>

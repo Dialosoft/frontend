@@ -42,7 +42,7 @@ const initialPosts: PostsType[] = [
 		id: 321,
 		user: "Flussen",
 		username: "flussen",
-		title: "Invade Event: Poland",
+		title: "Invade Event: Party",
 		message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
 		answers: 324,
 		likes: 432,

@@ -18,7 +18,7 @@ const formatNumber = (num: number): string => {
 };
 
 export default function Category({ title, posts, comments, type }: CategoryProps) {
-	const post = [{ title: "Invade Event: Poland", user: "@alejandro", date: "2h" }];
+	const post = [{ title: "Invade Event: Party", user: "@alejandro", date: "2h" }];
 
 	const renderIcon = () => {
 		switch (type) {
