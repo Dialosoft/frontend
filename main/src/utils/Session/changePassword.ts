@@ -20,12 +20,12 @@ async function Verify_Cookie() {
 export async function changePass(newPassword: string, actualPassword: string) {
 	const sessionUser = await Verify_Cookie();
 	if (!sessionUser) {
-		return false;
+		return { success: false };
 	}
 
 	try {
-		const response = await axios.post(
-			`http://gateway-service:8080/dialosoft-api/auth/recover-password`,
+		await axios.put(
+			`http://gateway-service:8080/dialosoft-api/auth/change-password`,
 			{
 				oldPassword: actualPassword,
 				newPassword: newPassword, 
@@ -38,7 +38,7 @@ export async function changePass(newPassword: string, actualPassword: string) {
 			}
 		);
 
-		return { success: true, token: response.data.data.recoverToken };
+		return { success: true };
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			if (error.response?.status === 401) {

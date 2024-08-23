@@ -65,8 +65,6 @@ export default function StgsChangePass() {
 		}
 	};
 
-
-
 	const togglePasswordVisibility = () => {
 		setShowPassword(!showPassword);
 	};
@@ -81,8 +79,6 @@ export default function StgsChangePass() {
 		validateField("confirmPassword", e.target.value);
 	};
 
-
-
 	useEffect(() => {
 		const noErrors = Object.keys(errors).length === 0;
 		const allFieldsFilled = password && confirmPassword;
@@ -95,9 +91,13 @@ export default function StgsChangePass() {
 			if (password !== confirmPassword) {
 				throw new Error("Passwords do not match");
 			}
-			const response = await changePass(password, actualPass);
 			
-			console.log(response);
+			const response = await changePass(password, actualPass);
+			if (response.success) {
+				setPassword("");
+				setConfirmPassword("");
+				setActualPass("");
+			}
 		} catch (error) {
 			console.error("Failed to change password:", error);
 		} finally {
