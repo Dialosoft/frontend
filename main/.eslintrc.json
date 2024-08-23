@@ -4,7 +4,7 @@
 	"plugins": ["prettier", "unused-imports"],
 	"rules": {
 		"indent": ["error", "tab", { "SwitchCase": 1 }],
-  		"prettier/prettier": ["error", { "endOfLine": "crlf", "useTabs": true }],
+		"prettier/prettier": ["error", { "endOfLine": "crlf", "useTabs": true }],
 		"semi": ["error", "always"],
 		"quotes": ["error", "double"],
 		"no-unused-vars": "off",

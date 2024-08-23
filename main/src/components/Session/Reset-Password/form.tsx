@@ -176,14 +176,8 @@ export default function Login_Form() {
 					</div>
 				</div>
 
-				<button
-					className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`}
-					type="submit"
-					disabled={isDisabled || isSubmitting}
-				>
-					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">
-						{isSubmitting ? "Submitting..." : "Reset Password"}
-					</span>
+				<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
+					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Reset Password"}</span>
 				</button>
 			</form>
 

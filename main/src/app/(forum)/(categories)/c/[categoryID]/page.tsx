@@ -112,15 +112,7 @@ export default function Category({ params }: Props) {
 				<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 					{PostsInfo.filter(post => post.fixed).map(post => (
 						<Link href={`${params.categoryID}/${post.id}`} key={uuidv4()}>
-							<Post
-								id={post.id}
-								user={post.user}
-								title={post.title}
-								answers={post.answers}
-								views={post.views}
-								date={post.date}
-								fixed={post.fixed}
-							/>
+							<Post id={post.id} user={post.user} title={post.title} answers={post.answers} views={post.views} date={post.date} fixed={post.fixed} />
 						</Link>
 					))}
 				</div>
@@ -130,15 +122,7 @@ export default function Category({ params }: Props) {
 				<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 space-y-2 rounded-lg">
 					{PostsInfo.filter(post => !post.fixed).map(post => (
 						<Link href={`${params.categoryID}/${post.id}`} key={uuidv4()}>
-							<Post
-								id={post.id}
-								user={post.user}
-								title={post.title}
-								answers={post.answers}
-								views={post.views}
-								date={post.date}
-								fixed={post.fixed}
-							/>
+							<Post id={post.id} user={post.user} title={post.title} answers={post.answers} views={post.views} date={post.date} fixed={post.fixed} />
 						</Link>
 					))}
 				</div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronUp, ChevronDown } from 'lucide-react';
+import { ChevronDown } from "lucide-react";
 
 interface Props {
 	onClose: () => void;
@@ -11,8 +11,8 @@ interface Props {
 
 export default function ManageCategory({ onClose, title, onChange }: Props) {
 	const [inputValue, setInputValue] = useState(title);
-const [showOptions, setShowOptions] = useState(false)
-const [option, setOption] = useState('chose type')
+	const [showOptions, setShowOptions] = useState(false);
+	const [option, setOption] = useState("chose type");
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = e.target.value;
 		setInputValue(newValue);
@@ -27,43 +27,39 @@ const [option, setOption] = useState('chose type')
 						<div className=" font-medium">Forum Title</div>
 						<input
 							type="text"
-							value={title}
-                            placeholder="Write Forum title..."
+							value={inputValue}
+							placeholder="Write Forum title..."
 							onChange={handleChange}
 							className="border bg-black-900 border-black-300 rounded-md outline-none px-2 h-9 font-normal w-full appearance-none placeholder:text-black-500"
 						/>
-                        <div>
-                            <div>
-                                Chose forum type
-                            </div>
-                            <div className="relative select-none">
-                                <div onClick={()=>setShowOptions(!showOptions)} className="p-1">
-<div className="h-9 px-1 hover:bg-black-300 border border-black-300 border-opacity-50 bg-black-300 bg-opacity-25 flex w-40  justify-between  items-center rounded-md  ">
-                                      <span>
-                                        {option}
-                                        </span> 
-<ChevronDown className="h-4 w-4 "/>
-                                    </div>
-                                </div>
-                                
-                                {showOptions &&
-                                <div className=" left-1 w-40 bg-black-700 border rounded-md border-black-300 border-opacity-50 absolute">
-                                    <div onClick={()=>setOption('documentation')} className="h-9 px-1 hover:bg-black-300 flex items-center rounded-md  ">
-                                        documentation
-                                    </div>
-                                   <div onClick={()=>setOption('events')}  className="h-9 px-1 hover:bg-black-300 flex items-center rounded-md ">
-                                        events
-                                    </div>
-                                  <div onClick={()=>setOption('help')}  className="h-9 px-1 hover:bg-black-300 flex items-center rounded-md ">
-                                        help
-                                    </div>
-                                     <div onClick={()=>setOption('discussion')}  className="h-9 px-1 hover:bg-black-300 flex items-center rounded-md ">
-                                        discussion
-                                    </div>
-                                </div>
-                                }
-                            </div>
-                        </div>
+						<div>
+							<div>Chose forum type</div>
+							<div className="relative select-none">
+								<div onClick={() => setShowOptions(!showOptions)} className="p-1">
+									<div className="h-9 px-1 hover:bg-black-300 border border-black-300 border-opacity-50 bg-black-300 bg-opacity-25 flex w-40  justify-between  items-center rounded-md  ">
+										<span>{option}</span>
+										<ChevronDown className="h-4 w-4 " />
+									</div>
+								</div>
+
+								{showOptions && (
+									<div className=" left-1 w-40 bg-black-700 border rounded-md border-black-300 border-opacity-50 absolute">
+										<div onClick={() => setOption("documentation")} className="h-9 px-1 hover:bg-black-300 flex items-center rounded-md  ">
+											documentation
+										</div>
+										<div onClick={() => setOption("events")} className="h-9 px-1 hover:bg-black-300 flex items-center rounded-md ">
+											events
+										</div>
+										<div onClick={() => setOption("help")} className="h-9 px-1 hover:bg-black-300 flex items-center rounded-md ">
+											help
+										</div>
+										<div onClick={() => setOption("discussion")} className="h-9 px-1 hover:bg-black-300 flex items-center rounded-md ">
+											discussion
+										</div>
+									</div>
+								)}
+							</div>
+						</div>
 					</div>
 
 					<div className="flex space-x-4 ">
