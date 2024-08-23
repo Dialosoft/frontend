@@ -4,11 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import { usePathname, useSearchParams } from 'next/navigation'
 import Session_LogOut from "@/utils/Session/logOut";
+import getWidth from "@/utils/getWidth";
 
 
 export default function AccountSideNav() {
 const pathname = usePathname()
-
+const width = getWidth()
 	const menuItems = [
 		{
 			icon: (
@@ -47,6 +48,7 @@ const pathname = usePathname()
 				/>
 			),
 			label: "Settings",
+			
 			link: "/a/settings/account",
 		},
 		
@@ -57,7 +59,7 @@ const pathname = usePathname()
 	};
   return (
 		<>
-			<div className="bg-black-300 bg-opacity-25 rounded-lg p-1 lg:p-2 grid grid-cols-1 gap-2">
+			<div className="bg-black-300 bg-opacity-25 rounded-xl p-1 xl:p-2 grid grid-cols-1 gap-2">
 				{menuItems.map(item => (
 					<Link href={item.link} className="w-full" key={uuidv4()}>
 						<div
@@ -71,7 +73,7 @@ const pathname = usePathname()
 						>
 							{item.icon}
 							<div
-								className={`max-lg:hidden ${
+								className={`max-xl:hidden ${
 									pathname == item.link ||
 									(item.link == "/a/settings/account" &&
 										pathname.startsWith("/a/settings"))
@@ -91,7 +93,7 @@ const pathname = usePathname()
 					<LogOut
 						className={`h-5 w-5 text-black-500 group-hover:text-red`}
 					/>
-					<div className={`max-lg:hidden `}>Logout</div>
+					<div className={`max-xl:hidden `}>Logout</div>
 				</button>
 			</div>
 		</>
