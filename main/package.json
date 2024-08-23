@@ -6,7 +6,8 @@
 		"dev": "next dev -p 3030",
 		"build": "next lint && next build",
 		"start": "next start -p 3030",
-		"lint": "next lint --fix"
+		"lint": "next lint --fix",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"@tiptap/extension-blockquote": "^2.6.4",

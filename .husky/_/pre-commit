@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+cd ../main
+npx eslint --fix .
+npx prettier --write .
+git add .
