@@ -142,11 +142,7 @@ export default function Login_Form() {
 
 	return (
 		<>
-			<form
-				onSubmit={handleSubmit}
-				className="max-w-[750px] mx-1 sm:mx-4 flex flex-col items-center justify-center space-y-[2rem]"
-				noValidate
-			>
+			<form onSubmit={handleSubmit} className="max-w-[750px] mx-1 sm:mx-4 flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 				<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 					{/* Username or Email */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
@@ -180,10 +176,7 @@ export default function Login_Form() {
 						</div>
 						<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4    gap-4 p-5  bg-black-300 bg-opacity-25 border border-black-300 border-opacity-25 rounded-lg">
 							{Array.from({ length: 12 }).map((_, index) => (
-								<div
-									key={index}
-									className="flex items-center text-center rounded-lg w-40 space-x-2 text-secondary"
-								>
+								<div key={index} className="flex items-center text-center rounded-lg w-40 space-x-2 text-secondary">
 									<div className="text-black w-4">{index + 1}</div>
 									<input
 										type="text"
@@ -198,16 +191,8 @@ export default function Login_Form() {
 					</div>
 				</div>
 
-				<button
-					className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${
-						isSubmitting && "animate-pulse"
-					}`}
-					type="submit"
-					disabled={isDisabled || isSubmitting}
-				>
-					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">
-						{isSubmitting ? "Submitting..." : "Reset Password"}
-					</span>
+				<button className={`w-full bg-primary-400 rounded-md py-[.4rem] group disabled:bg-black-300 ${isSubmitting && "animate-pulse"}`} type="submit" disabled={isDisabled || isSubmitting}>
+					<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Reset Password"}</span>
 				</button>
 			</form>
 

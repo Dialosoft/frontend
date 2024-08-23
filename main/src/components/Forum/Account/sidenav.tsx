@@ -11,37 +11,17 @@ export default function AccountSideNav() {
 	const width = getWidth();
 	const menuItems = [
 		{
-			icon: (
-				<UserRound
-					className={`h-5 w-5 ${
-						pathname == "/a/profile" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"
-					}`}
-				/>
-			),
+			icon: <UserRound className={`h-5 w-5 ${pathname == "/a/profile" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`} />,
 			label: "Profile",
 			link: "/a/profile",
 		},
 		{
-			icon: (
-				<Bookmark
-					className={`h-5 w-5 ${
-						pathname == "/a/saved" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"
-					}`}
-				/>
-			),
+			icon: <Bookmark className={`h-5 w-5 ${pathname == "/a/saved" ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`} />,
 			label: "Saved",
 			link: "/a/saved",
 		},
 		{
-			icon: (
-				<Settings
-					className={`h-5 w-5 ${
-						pathname.startsWith("/a/settings")
-							? "text-primary-400"
-							: "text-black-500 group-hover:text-secondary"
-					}`}
-				/>
-			),
+			icon: <Settings className={`h-5 w-5 ${pathname.startsWith("/a/settings") ? "text-primary-400" : "text-black-500 group-hover:text-secondary"}`} />,
 			label: "Settings",
 
 			link: "/a/settings/account",
@@ -58,17 +38,13 @@ export default function AccountSideNav() {
 					<Link href={item.link} className="w-full" key={uuidv4()}>
 						<div
 							className={`flex group justify-start items-center w-full space-x-2 px-4 hover:text-secondary hover:bg-black-300 hover:bg-opacity-25 rounded-md h-14 ${
-								pathname == item.link ||
-								(item.link == "/a/settings/account" && pathname.startsWith("/a/settings"))
-									? "text-primary-400"
-									: "text-black-500 group-hover:text-secondary"
+								pathname == item.link || (item.link == "/a/settings/account" && pathname.startsWith("/a/settings")) ? "text-primary-400" : "text-black-500 group-hover:text-secondary"
 							}`}
 						>
 							{item.icon}
 							<div
 								className={`max-xl:hidden ${
-									pathname == item.link ||
-									(item.link == "/a/settings/account" && pathname.startsWith("/a/settings"))
+									pathname == item.link || (item.link == "/a/settings/account" && pathname.startsWith("/a/settings"))
 										? "text-primary-400"
 										: "text-black-500 group-hover:text-secondary"
 								}`}

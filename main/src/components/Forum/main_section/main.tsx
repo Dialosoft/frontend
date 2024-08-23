@@ -74,12 +74,7 @@ export default function MainSection() {
 			<div className="w-full bg-black-300 bg-opacity-25 p-2 grid grid-cols-1 gap-2 rounded-lg">
 				{category.map(category => (
 					<Link href={`c/${category.id}`} key={uuidv4()}>
-						<Category
-							type={category.type}
-							title={category.title}
-							posts={category.posts}
-							comments={category.comments}
-						/>
+						<Category type={category.type} title={category.title} posts={category.posts} comments={category.comments} />
 					</Link>
 				))}
 			</div>
@@ -93,13 +88,7 @@ export default function MainSection() {
 					</button>
 				)}
 			</div>
-			{showManage && (
-				<ManageCategory
-					onClose={() => setShowManage(false)}
-					title={title}
-					onChange={newValue => handleInputChange(newValue)}
-				/>
-			)}
+			{showManage && <ManageCategory onClose={() => setShowManage(false)} title={title} onChange={newValue => handleInputChange(newValue)} />}
 		</div>
 	);
 }

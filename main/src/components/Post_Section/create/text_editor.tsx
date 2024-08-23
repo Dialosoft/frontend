@@ -18,24 +18,7 @@ import Link from "@tiptap/extension-link";
 import TextStyle from "@tiptap/extension-text-style";
 import { Heading } from "@tiptap/extension-heading"; // Importa la extensión Heading
 
-import {
-	Heading1,
-	Heading2,
-	Bold,
-	Underline,
-	Italic,
-	AlignLeft,
-	AlignCenter,
-	RemoveFormatting,
-	AlignRight,
-	List,
-	ListOrdered,
-	Strikethrough,
-	Code,
-	Quote,
-	Link2,
-	Palette,
-} from "lucide-react";
+import { Heading1, Heading2, Bold, Underline, Italic, AlignLeft, AlignCenter, RemoveFormatting, AlignRight, List, ListOrdered, Strikethrough, Code, Quote, Link2, Palette } from "lucide-react";
 
 export default function BasicEditor() {
 	const editor = useEditor({
@@ -128,83 +111,55 @@ export default function BasicEditor() {
 			<div className="flex items-center button-group space-x-4">
 				<button
 					onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-					className={
-						editor.isActive("heading", { level: 1 })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}
+					className={editor.isActive("heading", { level: 1 }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}
 				>
 					<Heading1 className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-					className={
-						editor.isActive("heading", { level: 2 })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}
+					className={editor.isActive("heading", { level: 2 }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}
 				>
 					<Heading2 className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleBold().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("bold") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("bold") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Bold className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleItalic().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("italic") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("italic") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Italic className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().setTextAlign("left").run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive({ textAlign: "left" })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive({ textAlign: "left" }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<AlignLeft className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().setTextAlign("center").run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive({ textAlign: "center" })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive({ textAlign: "center" }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<AlignCenter className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().setTextAlign("right").run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive({ textAlign: "right" })
-							? "text-primary-400"
-							: "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive({ textAlign: "right" }) ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<AlignRight className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleUnderline().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("underline") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("underline") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Underline className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleStrike().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("strike") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("strike") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Strikethrough className="h-5 w-5" />
 				</button>
@@ -229,34 +184,23 @@ export default function BasicEditor() {
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleCode().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("code") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("code") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Code className="h-5 w-5" />
 				</button>
 
-				<button
-					onClick={() => editor.chain().focus().toggleBulletList().run()}
-					className={
-						editor.isActive("bulletList") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}
-				>
+				<button onClick={() => editor.chain().focus().toggleBulletList().run()} className={editor.isActive("bulletList") ? "text-primary-400" : "text-black-500 hover:text-secondary"}>
 					<List className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleOrderedList().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("orderedList") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("orderedList") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<ListOrdered className="h-5 w-5" />
 				</button>
 				<button
 					onClick={() => editor.chain().focus().toggleBlockquote().run()}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("blockquote") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("blockquote") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Quote className="h-5 w-5" />
 				</button>
@@ -273,9 +217,7 @@ export default function BasicEditor() {
 				</button>
 				<button
 					onClick={editor.isActive("link") ? removeLink : addLink}
-					className={`h-6 w-6 flex items-center justify-center ${
-						editor.isActive("link") ? "text-primary-400" : "text-black-500 hover:text-secondary"
-					}`}
+					className={`h-6 w-6 flex items-center justify-center ${editor.isActive("link") ? "text-primary-400" : "text-black-500 hover:text-secondary"}`}
 				>
 					<Link2 className="h-5 w-5" />
 				</button>

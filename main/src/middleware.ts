@@ -120,10 +120,7 @@ export async function middleware(req: NextRequest) {
 	response.headers.set("X-Download-Options", "noopen");
 	response.headers.set("X-Permitted-Cross-Domain-Policies", "none");
 	response.headers.set("Origin-Agent-Cluster", "?1");
-	response.headers.set(
-		"Permissions-Policy",
-		"camera=(), display-capture=(), fullscreen=(), geolocation=(), microphone=()"
-	);
+	response.headers.set("Permissions-Policy", "camera=(), display-capture=(), fullscreen=(), geolocation=(), microphone=()");
 
 	return response;
 }

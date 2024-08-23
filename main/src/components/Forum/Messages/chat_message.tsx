@@ -14,13 +14,7 @@ export default function ChatMessage({ recipient, content }: ChatMessageProps) {
 	return (
 		<div className={`${recipient ? "" : "ml-auto"} max-w-[85%]`}>
 			<p className={`text-xs text-black-500 ${recipient ? "" : "text-right"}`}>{time}</p>
-			<p
-				className={`${
-					recipient ? recipientMsgStyling : senderMsgStyling
-				} text-sm leading-tight rounded p-1 w-max max-w-full`}
-			>
-				{content}
-			</p>
+			<p className={`${recipient ? recipientMsgStyling : senderMsgStyling} text-sm leading-tight rounded p-1 w-max max-w-full`}>{content}</p>
 		</div>
 	);
 }

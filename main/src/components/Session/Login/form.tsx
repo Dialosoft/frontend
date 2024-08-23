@@ -32,8 +32,7 @@ export default function Login_Form() {
 		}, 30),
 		[setUserOrEmail]
 	);
-	const handle_UserOrEmail_Change = (e: React.ChangeEvent<HTMLInputElement>) =>
-		debounced_setUserOrEmail(e.target.value);
+	const handle_UserOrEmail_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUserOrEmail(e.target.value);
 
 	/* Password */
 	const handle_Password_Change = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,17 +114,12 @@ export default function Login_Form() {
 
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
-	const tw_input =
-		"appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
+	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
 	const tw_error = "select-none text-red text-sm";
 
 	return (
 		<>
-			<form
-				onSubmit={handleSubmit}
-				className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]"
-				noValidate
-			>
+			<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 				<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 					{/* Username or Email */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
@@ -159,9 +153,7 @@ export default function Login_Form() {
 							{errors.password && <span className={tw_error}>{errors.password}</span>}
 						</div>
 
-						<div
-							className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}
-						>
+						<div className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}>
 							<input
 								className="w-full appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-transparent mr-2"
 								placeholder="Enter your password"
@@ -176,15 +168,9 @@ export default function Login_Form() {
 							/>
 							<button type="button" onClick={togglePasswordVisibility}>
 								{showPassword ? (
-									<EyeOff
-										className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary"
-										size={20}
-									/>
+									<EyeOff className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />
 								) : (
-									<Eye
-										className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary"
-										size={20}
-									/>
+									<Eye className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />
 								)}
 							</button>
 						</div>
@@ -197,26 +183,17 @@ export default function Login_Form() {
 						type="submit"
 						disabled={isDisabled || isSubmitting}
 					>
-						<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">
-							{isSubmitting ? "Submitting..." : "Login"}
-						</span>
+						<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Login"}</span>
 					</button>
 
 					<div className="w-full flex flex-col items-center">
-						<Link
-							className="inline-block text-black-500 transition-colors ease-in-out duration-300 hover:text-primary-400"
-							href="/reset-password"
-							prefetch={false}
-						>
+						<Link className="inline-block text-black-500 transition-colors ease-in-out duration-300 hover:text-primary-400" href="/reset-password" prefetch={false}>
 							<span>Forgot your password?</span>
 						</Link>
 
 						<div className="select-none flex space-x-2">
 							<p className="text-black-500">Don't have an account?</p>
-							<Link
-								className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100"
-								href="/register"
-							>
+							<Link className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100" href="/register">
 								Register
 							</Link>
 						</div>

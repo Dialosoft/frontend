@@ -37,8 +37,7 @@ const initialPosts: PostsType[] = [
 		user: "Flussen",
 		username: "flussen",
 		title: "Invade Event: Poland",
-		message:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
+		message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
 		answers: 324,
 		likes: 432,
 		date: "24. Feb. 2002",
@@ -49,11 +48,7 @@ export default function SavedSection() {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	const [PostsList, setPostsList] = useState<PostsType[]>(initialPosts);
-	const filteredPosts = PostsList.filter(
-		post =>
-			post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			post.message.toLowerCase().includes(searchTerm.toLowerCase())
-	);
+	const filteredPosts = PostsList.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()) || post.message.toLowerCase().includes(searchTerm.toLowerCase()));
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16  max-sm:mb-20">
 			<AccountMovileNav />

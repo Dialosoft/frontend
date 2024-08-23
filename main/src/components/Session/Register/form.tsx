@@ -201,17 +201,12 @@ export default function Register_Form() {
 
 	/* Styles */
 	const tw_label = "select-none font-medium text-sm lg:text-base";
-	const tw_input =
-		"appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
+	const tw_input = "appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-black-300 bg-opacity-25 border border-black-300 rounded-md px-[.6rem] py-[.4rem]";
 	const tw_error = "select-none text-red text-sm";
 
 	return (
 		<>
-			<form
-				onSubmit={handleSubmit}
-				className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]"
-				noValidate
-			>
+			<form onSubmit={handleSubmit} className="w-[90%] md:w-1/2 lg:w-[25rem] flex flex-col items-center justify-center space-y-[2rem]" noValidate>
 				<div className="w-full flex flex-col items-center justify-center space-y-[1rem]">
 					{/* Username */}
 					<div className="w-full flex flex-col space-y-[.2rem]">
@@ -267,9 +262,7 @@ export default function Register_Form() {
 							{errors.password && <span className={tw_error}>{errors.password}</span>}
 						</div>
 
-						<div
-							className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}
-						>
+						<div className={`${tw_input} ${errors.password && "border-red"} flex items-center justify-between`}>
 							<input
 								className="w-full appearance-none placeholder:font-light placeholder:text-sm focus:outline-none bg-transparent mr-2"
 								placeholder="Create a password"
@@ -284,15 +277,9 @@ export default function Register_Form() {
 							/>
 							<button type="button" onClick={togglePasswordVisibility}>
 								{showPassword ? (
-									<EyeOff
-										className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary"
-										size={20}
-									/>
+									<EyeOff className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />
 								) : (
-									<Eye
-										className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary"
-										size={20}
-									/>
+									<Eye className="stroke-black-300 transition-colors ease-in-out duration-300 hover:stroke-secondary" size={20} />
 								)}
 							</button>
 						</div>
@@ -328,17 +315,12 @@ export default function Register_Form() {
 						type="submit"
 						disabled={isDisabled || isSubmitting}
 					>
-						<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">
-							{isSubmitting ? "Submitting..." : "Register"}
-						</span>
+						<span className="select-none text-black-900 font-normal text-sm lg:text-base group-disabled:text-secondary">{isSubmitting ? "Submitting..." : "Register"}</span>
 					</button>
 
 					<div className="select-none flex space-x-2">
 						<p className="text-black-500">Already have an account?</p>
-						<Link
-							className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100"
-							href="/login"
-						>
+						<Link className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100" href="/login">
 							Login
 						</Link>
 					</div>
@@ -351,10 +333,7 @@ export default function Register_Form() {
 						<div className="w-fit flex flex-col items-center justify-center space-y-[3rem] rounded-lg p-[4rem] bg-black-700 border border-opacity-25 border-black-300">
 							<div className="flex flex-col items-center justify-center">
 								<span className="font-semibold text-2xl text-red">IMPORTANT</span>
-								<span>
-									Here are your recovery words in case you forget your password. It's crucial to keep
-									them safe and secure. Don't lose them.
-								</span>
+								<span>Here are your recovery words in case you forget your password. It's crucial to keep them safe and secure. Don't lose them.</span>
 							</div>
 
 							<div className="p-[1rem] bg-black-700 border border-opacity-25 border-black-300 rounded-lg space-y-[1rem]">
@@ -362,8 +341,7 @@ export default function Register_Form() {
 									{seeds.map((seed, index) => (
 										<div className="flex items-center justify-start p-2" key={uuidv4()}>
 											<span className="font-medium text-black-500">
-												{`${index + 1}.`}{" "}
-												<span className="text-secondary font-normal">{seed}</span>
+												{`${index + 1}.`} <span className="text-secondary font-normal">{seed}</span>
 											</span>
 										</div>
 									))}
@@ -376,26 +354,17 @@ export default function Register_Form() {
 									{isCopied ? (
 										<Check className="text-primary-400" size={20} />
 									) : (
-										<Copy
-											className="transition-colors ease-in-out duration-150 group-hover:text-primary-400"
-											size={20}
-										/>
+										<Copy className="transition-colors ease-in-out duration-150 group-hover:text-primary-400" size={20} />
 									)}
 									<span className="transition-colors ease-in-out duration-150 group-hover:text-primary-400">
-										{isCopied ? (
-											<span className="text-primary-400">Copied!</span>
-										) : (
-											"Copy to Clipboard"
-										)}
+										{isCopied ? <span className="text-primary-400">Copied!</span> : "Copy to Clipboard"}
 									</span>
 								</button>
 							</div>
 
 							{canRedirect ? (
 								<Link href="/login" prefetch={false}>
-									<button className="bg-primary-400 text-black-900 px-4 py-2 rounded-md hover:bg-primary-500 transition-colors">
-										Continue
-									</button>
+									<button className="bg-primary-400 text-black-900 px-4 py-2 rounded-md hover:bg-primary-500 transition-colors">Continue</button>
 								</Link>
 							) : (
 								<span className="text-black-500">Please wait {countdown} seconds...</span>

@@ -43,8 +43,7 @@ const initialComments: CommentType[] = [
 		username: "@alejandro",
 		rate: 321,
 		best: true,
-		message:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
+		message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
 		answers: 234,
 		likes: 1234,
 		date: "11. Sep. 2001",
@@ -55,8 +54,7 @@ const initialComments: CommentType[] = [
 		username: "@bustalover",
 		rate: 221,
 		best: false,
-		message:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
+		message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit condimentum risus in consectetur. Nullam placerat diam in imperdiet varius.",
 		answers: 24,
 		likes: 243,
 		date: "24. Feb. 2002",
@@ -205,11 +203,7 @@ export default function PostPage({ params }: Props) {
 					</div>
 					<div className="flex items-center bg-black-300 bg-opacity-25 rounded-full p-2  space-x-2">
 						<Search className="text-primary-400 h-5 w-5" />
-						<input
-							type="text"
-							className="bg-transparent outline-none placeholder:text-black-500"
-							placeholder="Search comment..."
-						/>
+						<input type="text" className="bg-transparent outline-none placeholder:text-black-500" placeholder="Search comment..." />
 					</div>
 				</div>
 				{commentsList.map(CommentsList => (

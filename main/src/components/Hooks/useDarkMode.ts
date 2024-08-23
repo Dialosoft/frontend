@@ -6,11 +6,7 @@ export default function useDarkMode() {
 	const [theme, setTheme] = useState(() => {
 		if (typeof window !== "undefined") {
 			const storedTheme = localStorage.getItem("theme");
-			return storedTheme
-				? storedTheme
-				: window.matchMedia("(prefers-color-scheme: dark)").matches
-					? "dark"
-					: "light";
+			return storedTheme ? storedTheme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 		}
 
 		return "dark";

@@ -26,9 +26,7 @@ export default function Notify({ notifyTemplate, clearNotifications }: Notificat
 						</Suspense>
 					))}
 
-					{!notifyTemplate.length && (
-						<span className="flex items-center justify-center select-none py-[1rem]">No notifications</span>
-					)}
+					{!notifyTemplate.length && <span className="flex items-center justify-center select-none py-[1rem]">No notifications</span>}
 				</div>
 
 				<div className="w-full flex items-center justify-between text-sm">

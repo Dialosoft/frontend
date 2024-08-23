@@ -21,18 +21,7 @@ interface ProfileProps {
 	best_answers: number;
 	description: string;
 }
-export default function Profile({
-	id,
-	name,
-	username,
-	role,
-	pronoun,
-	registration_date,
-	answers,
-	likes,
-	best_answers,
-	description,
-}: ProfileProps) {
+export default function Profile({ id, name, username, role, pronoun, registration_date, answers, likes, best_answers, description }: ProfileProps) {
 	useEffect(() => {
 		const fetchUser = async () => {
 			const userData = await getUser_Avatar(id);
@@ -56,9 +45,7 @@ export default function Profile({
 	return (
 		<div className="max-w-[778px]  w-full  bg-black-300 bg-opacity-25 space-y-4 rounded-lg p-4 relative min-h-[264px]">
 			<div className="flex items-center space-x-4 ">
-				<div
-					className={`rounded-full flex-shrink-0 aspect-square border-2 border-primary-400 ${role.admin && "border-yellow"} ${role.mod && "border-green"}`}
-				>
+				<div className={`rounded-full flex-shrink-0 aspect-square border-2 border-primary-400 ${role.admin && "border-yellow"} ${role.mod && "border-green"}`}>
 					<label className="inline-block rounded-full flex-shrink-0 aspect-square p-[2rem] group cursor-pointer">
 						<User size={50} className="group-hover:hidden" />
 
@@ -66,12 +53,7 @@ export default function Profile({
 							<Edit size={50} />
 						</div>
 
-						<input
-							type="file"
-							accept="image/png, image/jpeg"
-							className="hidden"
-							onChange={handleImageUpload}
-						/>
+						<input type="file" accept="image/png, image/jpeg" className="hidden" onChange={handleImageUpload} />
 					</label>
 					{/* <div className="flex-shrink-0 aspect-square w-28 lg:w-32 xl:w-36 bg-black-900"></div> */}
 				</div>

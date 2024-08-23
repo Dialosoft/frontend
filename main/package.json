@@ -8,7 +8,8 @@
 		"start": "next start -p 3030",
 		"lint": "eslint --ext .js,.jsx,.ts,.tsx .",
 		"lint:fix": "eslint --ext .js,.jsx,.ts,.tsx . --fix",
-		"precommit": "lint-staged"
+		"precommit": "lint-staged",
+		"format": "prettier --write ."
 	},
 	"dependencies": {
 		"@tiptap/extension-blockquote": "^2.6.4",
