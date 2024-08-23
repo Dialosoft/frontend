@@ -12,11 +12,22 @@ const AddForum = dynamic(() => import("./addForum"));
 
 import { getUser } from "@/utils/User/getUser";
 
+interface UserProps {
+	created_at: string;
+	uuid: string;
+	username: string;
+	role: {
+		admin_role: boolean;
+		mod_role: boolean;
+	};
+}
+
 export default function MainSection() {
 	const [title, setTitle] = useState("");
-	const [user, setUser] = useState<any>(null);
+	const [user, setUser] = useState<UserProps | null>(null);
 	const [showManage, setShowManage] = useState(false);
 	const [showAddForum, setShowAddForum] = useState(false);
+
 	useEffect(() => {
 		const fetchUser = async () => {
 			const userData = await getUser();
@@ -63,7 +74,8 @@ export default function MainSection() {
 					<div className="flex space-x-4">
 						<button
 							onClick={() => {
-								setShowAddForum(!showAddForum), setTitle(title);
+								setShowAddForum(!showAddForum);
+								setTitle(title);
 							}}
 							className="bg-black-300 bg-opacity-25 border space-x-1 flex font-medium items-center border-black-300 border-opacity-25 text-black-500 hover:text-secondary h-9 px-2 rounded-lg "
 						>
@@ -73,7 +85,8 @@ export default function MainSection() {
 
 						<button
 							onClick={() => {
-								setShowManage(!showManage), setTitle(title);
+								setShowManage(!showManage);
+								setTitle(title);
 							}}
 							className="bg-black-300 bg-opacity-25 border space-x-1 flex font-medium items-center border-black-300 border-opacity-25 text-black-500 hover:text-secondary h-9 px-2 rounded-lg "
 						>

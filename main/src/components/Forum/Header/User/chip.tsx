@@ -10,7 +10,7 @@ interface UserChipProps {
 	size: "xs" | "sm";
 }
 
-export default function UserChip({ name, username, photo, highlighted, usernameBeside, nameSize, size }: UserChipProps) {
+export default function UserChip({ name, username, highlighted, usernameBeside, nameSize, size }: UserChipProps) {
 	return (
 		<div className="flex gap-3 items-center h-full">
 			<Image

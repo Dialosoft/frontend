@@ -6,7 +6,6 @@ import { Heart } from "lucide-react";
 import { MessageSquare } from "lucide-react";
 import { Bookmark } from "lucide-react";
 
-interface PostProps {}
 const formatNumber = (num: number): string => {
 	if (num < 1000) {
 		return num.toString();
@@ -14,7 +13,7 @@ const formatNumber = (num: number): string => {
 	return (num / 1000).toFixed(1) + "k";
 };
 
-export default function Post({}: PostProps) {
+export default function Post() {
 	const User = {
 		name: "Flussen",
 		username: "@flussen",

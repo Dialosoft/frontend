@@ -1,7 +1,7 @@
 import { MessagesSquare as CommentIcon, Bookmark as BookmarkIcon, Share2 as ShareIcon, Ellipsis as EllipsisIcon } from "lucide-react";
 
 interface ActionButtonProps {
-	Icon: any;
+	Icon: React.ElementType;
 	children?: string;
 }
 

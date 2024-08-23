@@ -27,7 +27,7 @@ export default function ManageCategory({ onClose, title, onChange }: Props) {
 						<div className=" font-medium">Forum Title</div>
 						<input
 							type="text"
-							value={title}
+							value={inputValue}
 							placeholder="Write Forum title..."
 							onChange={handleChange}
 							className="border bg-black-900 border-black-300 rounded-md outline-none px-2 h-9 font-normal w-full appearance-none placeholder:text-black-500"

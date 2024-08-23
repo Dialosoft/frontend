@@ -10,7 +10,7 @@ interface ChatPreviewProps {
 	opened: boolean;
 }
 
-function ChatPreview({ name, username, photo, opened }: ChatPreviewProps) {
+function ChatPreview({ name, username, opened }: ChatPreviewProps) {
 	// TEST
 	const randomDate = new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000);
 	const lastMessageTimestamp = randomDate;

@@ -10,8 +10,18 @@ import AccountMovileNav from "@/components/Forum/Account/movilenav";
 
 import { getUser } from "@/utils/User/getUser";
 
+interface UserProps {
+	created_at: string;
+	uuid: string;
+	username: string;
+	role: {
+		admin_role: boolean;
+		mod_role: boolean;
+	};
+}
+
 export default function ProfileSection() {
-	const [user, setUser] = useState<any>(null);
+	const [user, setUser] = useState<UserProps | null>(null);
 	const [activeSection, setActiveSection] = useState("feed");
 
 	useEffect(() => {

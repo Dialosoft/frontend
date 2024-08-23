@@ -1,23 +1,28 @@
+import { v4 as uuidv4 } from "uuid";
+
 interface PostComment {
 	title: string;
 	answers: number;
 	date: string;
 	views: number;
 }
+
 const formatNumber = (num: number): string => {
 	if (num < 1000) {
 		return num.toString();
 	}
 	return (num / 1000).toFixed(1) + "k";
 };
+
 interface PostProps {
 	messages: PostComment[];
 }
+
 export default function UserPosts({ messages }: PostProps) {
 	return (
 		<div className="bg-black-300 bg-opacity-25 max-w-[1110px] p-2 grid grid-cols-1 gap-2 rounded-lg">
 			{messages.map(msg => (
-				<div className="flex justify-between space-x-2 items-center hover:bg-black-300 py-2 px-4 rounded-md hover:bg-opacity-25">
+				<div key={uuidv4()} className="flex justify-between space-x-2 items-center hover:bg-black-300 py-2 px-4 rounded-md hover:bg-opacity-25">
 					<div className="border border-primary-400  rounded-full aspect-square h-12  " />
 
 					<div className="w-full flex-col">
