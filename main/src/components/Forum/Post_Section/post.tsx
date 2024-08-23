@@ -32,9 +32,9 @@ export default function Post({ postId, postOwner, content, creationTime, positiv
 	};
 	const PostContent = {
 		message: content,
-		comments: 423,
-		likes: 3241,
-		date: creationTime, //TODO parse to Date
+		comments: 0,
+		likes: 0,
+		date: creationTime,
 	};
 
 	return (
