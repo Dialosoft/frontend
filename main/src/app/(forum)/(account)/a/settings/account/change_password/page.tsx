@@ -15,9 +15,8 @@ export default function StgsChangePass() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
-	const [hasChanges, setHasChanges] = useState(false);
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
-	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isSubmitting, _setIsSubmitting] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
 
 	type FieldName = "password" | "confirmPassword";
@@ -73,13 +72,11 @@ export default function StgsChangePass() {
 	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPassword(e.target.value);
 		validateField("password", e.target.value);
-		setHasChanges(true);
 	};
 
 	const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setConfirmPassword(e.target.value);
 		validateField("confirmPassword", e.target.value);
-		setHasChanges(true);
 	};
 
 	useEffect(() => {
@@ -123,6 +120,7 @@ export default function StgsChangePass() {
 
 						<input
 							type="password"
+							value={actualPass}
 							placeholder="Write actual password..."
 							onChange={e => setActualPass(e.target.value)}
 							className={

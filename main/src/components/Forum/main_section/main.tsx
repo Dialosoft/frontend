@@ -22,7 +22,7 @@ interface UserProps {
 		mod_role: boolean;
 	};
 }
-interface CategoriesProps {}
+
 
 export default function MainSection() {
 	const [title, setTitle] = useState("");
