@@ -160,7 +160,6 @@ export async function createForum({ name, category, description, type }: CreateP
 			},
 			{
 				headers: {
-					"Content-Type": "application/json",
 					Authorization: "Bearer " + sessionUser.value,
 				},
 				timeout: 60 * 1000, // 1 minute

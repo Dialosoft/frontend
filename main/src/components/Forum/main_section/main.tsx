@@ -145,6 +145,12 @@ export default function MainSection() {
 	const handleSubmitForum = async (event: React.FormEvent) => {
 		event.preventDefault();
 
+		if (!categoryId) {
+			setShowAddForum(false);
+			displayError("No category selected for the forum.");
+			return;
+		}
+
 		const result = await createForum({ name: title, category: categoryId as string, description: "", type: selectedOption });
 		if (result.success) {
 			const forumsData = await getForums();
@@ -170,6 +176,7 @@ export default function MainSection() {
 								<button
 									onClick={() => {
 										setShowAddForum(true);
+										setCategoryId(category.id);
 										setTitle("");
 									}}
 									className="bg-black-300 bg-opacity-25 border space-x-1 flex font-medium items-center border-black-300 border-opacity-25 text-black-500 hover:text-secondary h-9 px-2 rounded-lg"
