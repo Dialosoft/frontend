@@ -1,5 +1,7 @@
-import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
-import AccountSideNav from "@/components/Forum/Account/sidenav";
+import dynamic from "next/dynamic";
+
+const SettingsNav = dynamic(() => import("@/components/Forum/Account/Settings_Section/settingsnav"), { ssr: false });
+const AccountSideNav = dynamic(() => import("@/components/Forum/Account/sidenav"), { ssr: false });
 
 export default function StgsNotifications() {
 	return (

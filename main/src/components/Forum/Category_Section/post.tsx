@@ -16,7 +16,8 @@ const formatNumber = (num: number): string => {
 	}
 	return (num / 1000).toFixed(1) + "k";
 };
-export default function Post({ id, title, answers, views, user, date, fixed }: CategoryProps) {
+
+export default function Post({ title, answers, views, user, date, fixed }: CategoryProps) {
 	return (
 		<>
 			<div className="flex justify-between space-x-2 items-center hover:bg-black-300 py-2 px-2 sm:px-4 rounded-md hover:bg-opacity-25">

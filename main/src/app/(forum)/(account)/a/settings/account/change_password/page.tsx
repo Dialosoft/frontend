@@ -1,11 +1,14 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
-import AccountSideNav from "@/components/Forum/Account/sidenav";
-import SettingsNav from "@/components/Forum/Account/Settings_Section/settingsnav";
 import { ChevronLeft, Eye, EyeOff } from "lucide-react";
-import AccountMovileNav from "@/components/Forum/Account/movilenav";
 import Link from "next/link";
 import changePassSchema from "@/schemas/Session/changePass";
+
+const AccountSideNav = dynamic(() => import("@/components/Forum/Account/sidenav"));
+const SettingsNav = dynamic(() => import("@/components/Forum/Account/Settings_Section/settingsnav"));
+const AccountMovileNav = dynamic(() => import("@/components/Forum/Account/movilenav"));
 
 export default function StgsChangePass() {
 	const [actualPass, setActualPass] = useState("");

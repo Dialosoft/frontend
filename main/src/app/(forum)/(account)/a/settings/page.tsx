@@ -1,10 +1,13 @@
 "use client";
-import AccountMovileNav from "@/components/Forum/Account/movilenav";
 
+import dynamic from "next/dynamic";
 import { Bell, HelpCircle, MonitorCog, ScrollText, Shield, UserRoundCog } from "lucide-react";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 import { usePathname } from "next/navigation";
+
+const AccountMovileNav = dynamic(() => import("@/components/Forum/Account/movilenav"));
+
 export default function SettingsPage() {
 	const pathname = usePathname();
 
@@ -40,6 +43,7 @@ export default function SettingsPage() {
 			link: "/a/settings/help",
 		},
 	];
+
 	return (
 		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-4 lg:mt-16">
 			<AccountMovileNav />

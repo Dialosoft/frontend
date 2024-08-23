@@ -1,10 +1,8 @@
-import Rol from "../Header/User/rol";
-import { Share2 } from "lucide-react";
-import { Ellipsis } from "lucide-react";
-import ProfileRol from "../Header/User/profile_rol";
-import { Heart } from "lucide-react";
-import { MessageSquare } from "lucide-react";
-import { Bookmark } from "lucide-react";
+import dynamic from "next/dynamic";
+import { Share2, Ellipsis, Heart, MessageSquare, Bookmark } from "lucide-react";
+
+const Rol = dynamic(() => import("../Header/User/rol"));
+const ProfileRol = dynamic(() => import("../Header/User/profile_rol"));
 
 const formatNumber = (num: number): string => {
 	if (num < 1000) {
