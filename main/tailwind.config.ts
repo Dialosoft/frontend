@@ -1,12 +1,8 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-	content: [
-		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-	],
-	darkMode: "selector",
+	content: ["./src/pages/**/*.{js,ts,jsx,tsx,mdx}", "./src/components/**/*.{js,ts,jsx,tsx,mdx}", "./src/app/**/*.{js,ts,jsx,tsx,mdx}"],
+	darkMode: "class",
 	theme: {
 		extend: {
 			colors: {
@@ -27,18 +23,14 @@ const config: Config = {
 				black: {
 					300: "#3A3A50", //gray for boxes with 25% opacity
 					500: "#43435B", //gray for text
+					700: "#1A1A22", //black same tone with 300 but is 100% opacity
 					900: "#0F0F13", //background
 				},
 				green: "#00A32E",
 				red: "#D11335",
-				yelllow: "#D29827",
+				yellow: "#D29827",
 			},
 			screens: {
-				sm: "100%",
-				md: "768px",
-				lg: "1024px",
-				xl: "1280px",
-				"2xl": "1536px",
 				"3xl": "1920px",
 				"4xl": "2560px",
 			},
@@ -48,7 +40,7 @@ const config: Config = {
 					DEFAULT: "1rem",
 				},
 				screens: {
-					"3xl": "1920px",
+					"2xl": "1536px",
 				},
 			},
 		},

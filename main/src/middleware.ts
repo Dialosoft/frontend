@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import refreshToken from "@/utils/Session/refreshToken";
+
 function generateNonce() {
 	const array = new Uint8Array(30);
 	crypto.getRandomValues(array);
 	return btoa(String.fromCharCode(...array));
 }
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
 	/* Add headers */
 	const nonce = generateNonce();
 	const cspHeader = `
@@ -32,8 +34,80 @@ export function middleware(req: NextRequest) {
 	requestHeaders.set("x-nonce", nonce);
 	requestHeaders.set("Content-Security-Policy", cspHeader.replace(/\s{2,}/g, " ").trim());
 
+	/* Redirects */
+	const normalizedUrl = req.nextUrl.pathname.toLowerCase();
+
+	// Session
+	if (["/login", "/register"].includes(normalizedUrl)) {
+		if (req.cookies.has("_rtkn")) {
+			return NextResponse.redirect(new URL("/", req.url));
+		}
+	}
+
+	// Session: Reset password
+	if (normalizedUrl.startsWith("/reset-password/token")) {
+		const token = req.nextUrl.searchParams.get("id");
+		const username = req.nextUrl.searchParams.get("user");
+
+		if (!token || !username) {
+			return NextResponse.redirect(new URL("/reset-password", req.url));
+		}
+	}
+
+	// Account
+	if (normalizedUrl.startsWith("/a")) {
+		if (normalizedUrl === "/a") {
+			return NextResponse.redirect(new URL("/a/profile", req.url));
+		}
+
+		// Verify cookies
+		if (!req.cookies.has("_rtkn")) {
+			return NextResponse.redirect(new URL("/", req.url));
+		}
+	}
+
 	/* Server - Headers */
-	const response = NextResponse.next({ request: { headers: requestHeaders }});
+	const response = NextResponse.next({ request: { headers: requestHeaders } });
+
+	// Verify Session: Access Token
+	if (req.cookies.has("_atkn")) {
+		if (req.cookies.get("_atkn")?.value === "") {
+			response.cookies.delete("_atkn");
+		}
+	}
+
+	// Verify Session: Refresh Token
+	if (req.cookies.has("_rtkn")) {
+		if (req.cookies.get("_rtkn")?.value === "") {
+			response.cookies.delete("_rtkn");
+		}
+	}
+
+	// Session: Access Token
+	if (req.cookies.has("_atkn") && !req.cookies.has("_rtkn")) {
+		response.cookies.delete("_atkn");
+	}
+
+	// Session: Refresh Token
+	if (!req.cookies.has("_atkn") && req.cookies.has("_rtkn")) {
+		const statusRefresh = await refreshToken();
+
+		if (statusRefresh.redirect && normalizedUrl !== "/") {
+			return NextResponse.redirect(new URL("/", req.url));
+		} else {
+			if (statusRefresh.status === "delete") {
+				response.cookies.delete("_rtkn");
+			} else {
+				response.cookies.set("_atkn", statusRefresh.token, {
+					httpOnly: true,
+					secure: false,
+					sameSite: "strict",
+					maxAge: statusRefresh.time,
+					path: "/",
+				});
+			}
+		}
+	}
 
 	response.headers.set("Content-Security-Policy", cspHeader.replace(/\s{2,}/g, " ").trim());
 	response.headers.set("X-Content-Type-Options", "nosniff");
@@ -52,5 +126,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"]
+	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

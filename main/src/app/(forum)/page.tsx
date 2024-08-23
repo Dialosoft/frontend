@@ -1,10 +1,15 @@
-import PostOverview from "@/components/Post/overview";
+import dynamic from "next/dynamic";
+
+const Categories = dynamic(() => import("@/components/Forum/main_section/main"), { ssr: false });
+const Aside = dynamic(() => import("@/components/Forum/side_info/main"));
 
 export default function Home() {
 	return (
-		<div className="max-w-screen-lg flex flex-column flex-col gap-4 p-4 pl-40">
-			<PostOverview />
-			<PostOverview />
-		</div>
+		<>
+			<div className="container w-full flex items-start justify-between space-x-4 mt-8 lg:mt-16">
+				<Categories />
+				<Aside />
+			</div>
+		</>
 	);
 }
