@@ -19,7 +19,7 @@ function formatDate(dateString: string) {
         year: "numeric" 
     };
     
-    return new Intl.DateTimeFormat("en-US", options).format(date);
+    return new Intl.DateTimeFormat("en-UK", options).format(date);
 }
 
 export default function ProfileSection() {
@@ -94,9 +94,9 @@ export default function ProfileSection() {
 	const UserPostCount = User.user_posts.length;
 
 	return (
-		<div className="lg:container max-lg:mx-4 max-sm:flex-col  flex   mt-8 lg:mt-16">
+		<div className="lg:container max-lg:mx-4 max-sm:flex-col max-sm:mb-20 flex mt-8 lg:mt-16">
 			<AccountMovileNav />
-			<div className="lg:max-w-[317px] mr-4 w-fit lg:w-full min-w-[60px] max-sm:hidden max-lg:sm:mr-4">
+			<div className="xl:max-w-[317px] mr-4 w-fit xl:w-full min-w-[60px] max-sm:hidden max-xl:sm:mr-4">
 				<AccountSideNav />
 			</div>
 
