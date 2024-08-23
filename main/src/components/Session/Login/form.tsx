@@ -206,7 +206,7 @@ export default function Login_Form() {
 						</Link>
 
 						<div className="select-none flex space-x-2">
-							<p className="text-black-500">Don't have an account?</p>
+							<p className="text-black-500">Don&apos;t have an account?</p>
 							<Link
 								className="inline-block text-primary-400 opacity-80 transition-opacity ease-in-out duration-300 hover:opacity-100"
 								href="/register"

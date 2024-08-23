@@ -15,10 +15,6 @@ export default function Reset_Token() {
 	const token = searchParams.get("id");
 	const username = searchParams.get("user");
 
-	if (!token || !username) {
-		return null;
-	}
-
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -29,6 +25,17 @@ export default function Reset_Token() {
 	const [showOkModal, setShowOkModal] = useState(false);
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
+
+	/* Button */
+	useEffect(() => {
+		const noErrors = Object.keys(errors).length === 0;
+		const allFieldsFilled = password;
+		setIsDisabled(!(noErrors && allFieldsFilled));
+	}, [errors, password]);
+
+	if (!token || !username) {
+		return null;
+	}
 
 	/* Password */
 	const handle_Password_Change = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,13 +72,6 @@ export default function Reset_Token() {
 			}
 		}
 	};
-
-	/* Button */
-	useEffect(() => {
-		const noErrors = Object.keys(errors).length === 0;
-		const allFieldsFilled = password;
-		setIsDisabled(!(noErrors && allFieldsFilled));
-	}, [errors, password]);
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();

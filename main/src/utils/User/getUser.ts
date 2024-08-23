@@ -32,7 +32,7 @@ export async function getUser_Simple() {
 		});
 
 		return response.data.data;
-	} catch (error) {
+	} catch {
 		return false;
 	}
 }
@@ -52,7 +52,7 @@ export async function getUser() {
 		});
 
 		return response.data.data;
-	} catch (error) {
+	} catch {
 		return false;
 	}
 }
@@ -72,7 +72,7 @@ export async function getUser_Avatar(id: string) {
 		});
 
 		return response.data.data;
-	} catch (error) {
+	} catch {
 		return false;
 	}
 }

@@ -11,7 +11,6 @@ export default function Login_Form() {
 	const router = useRouter();
 	const [recoverList, setRecoverList] = useState(Array(12).fill(""));
 	const [username, setUsername] = useState("");
-	const [seeds, setSeeds] = useState("");
 
 	const [errors, setErrors] = useState<{ [key: string]: string }>({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,16 +28,6 @@ export default function Login_Form() {
 		[setUsername]
 	);
 	const handle_Username_Change = (e: React.ChangeEvent<HTMLInputElement>) => debounced_setUsername(e.target.value);
-
-	/* Seeds */
-	const handle_Seeds_Change = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		const value = e.target.value
-			.replace(/[^a-zA-Z0-9\s]/g, "")
-			.replace(/^\s+/g, "")
-			.replace(/\s+/g, " ");
-		setSeeds(value);
-		validateField("seeds", value);
-	};
 
 	const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
 		event.preventDefault();
@@ -59,7 +48,7 @@ export default function Login_Form() {
 	const validateField = (field: string, value: string) => {
 		const formValues = {
 			username: field === "username" ? value : username,
-			seeds: field === "seeds" ? value : seeds,
+			seeds: field === "seeds" ? value : recoverList.join(" "),
 		};
 
 		const result = resetPasswordSchema.safeParse(formValues);
@@ -94,14 +83,10 @@ export default function Login_Form() {
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
 		setIsSubmitting(true);
-		const seedsValue = recoverList.join(" ");
-		const result = resetPasswordSchema.safeParse({
-			username,
-			seeds: seedsValue,
-		});
+		const result = resetPasswordSchema.safeParse({ username, seeds: recoverList.join(" ") });
 
 		if (result.success) {
-			const status = await Reset_Password({ username: username, seeds: seedsValue });
+			const status = await Reset_Password({ username: username, seeds: recoverList.join(" ") });
 			if (!status.success) {
 				setErrorMessage(status.message as string);
 				setShowErrorModal(true);

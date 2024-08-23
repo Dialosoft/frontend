@@ -3,29 +3,21 @@
 	"extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
 	"plugins": ["prettier", "unused-imports"],
 	"rules": {
-		"prettier/prettier": ["error", { "endOfLine": "crlf" }],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
+  		"prettier/prettier": ["error", { "endOfLine": "crlf", "useTabs": true }],
 		"semi": ["error", "always"],
 		"quotes": ["error", "double"],
-		"indent": ["error", "tab"],
-		"no-unused-vars": "off", // Desactiva la regla original de no-unused-vars
-		"@typescript-eslint/no-unused-vars": "off", // Desactiva la regla de no-unused-vars para TypeScript
-		"unused-imports/no-unused-imports": "error", // Elimina automáticamente importaciones no utilizadas
-		"unused-imports/no-unused-vars": [
-			"error",
-			{
-				"vars": "all",
-				"varsIgnorePattern": "^_", // Variables que empiezan con _ no se considerarán como no usadas
-				"args": "after-used",
-				"argsIgnorePattern": "^_"
-			}
-		],
-		"no-console": ["warn"],
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": "off",
+		"unused-imports/no-unused-vars": "warn",
+		"unused-imports/no-unused-imports": "error",
 		"eqeqeq": ["error", "always"],
 		"curly": ["error", "all"],
 		"comma-dangle": ["error", "always-multiline"],
 		"no-trailing-spaces": ["error"],
 		"object-curly-spacing": ["error", "always"],
 		"array-bracket-spacing": ["error", "never"],
-		"arrow-spacing": ["error", { "before": true, "after": true }]
+		"arrow-spacing": ["error", { "before": true, "after": true }],
+		"no-multi-spaces": ["error", { "ignoreEOLComments": false }]
 	}
 }

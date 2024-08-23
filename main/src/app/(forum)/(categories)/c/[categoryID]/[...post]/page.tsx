@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
-import { ChevronRight, ChevronLeft, BellRing, Smile, Image, Paperclip, Send, ChevronDown, Search } from "lucide-react";
+import { ChevronRight, ChevronLeft, BellRing, Smile, Image as ImageIcon, Paperclip, Send, ChevronDown, Search } from "lucide-react";
 import Aside from "@/components/Forum/side_info/main";
 import Post from "@/components/Forum/Post_Section/post";
 import Comments from "@/components/Forum/Post_Section/comments";
@@ -191,7 +191,7 @@ export default function PostPage({ params }: Props) {
 						value={inputValue}
 						onChange={e => setInputValue(e.target.value)}
 					/>
-					<Image className="h-6 w-6 hover:text-secondary" />
+					<ImageIcon className="h-6 w-6 hover:text-secondary" />
 					<Paperclip className="h-6 w-6 hover:text-secondary" />
 					<Send onClick={handleSubmit} className="h-6 w-6 text-primary-400 hover:text-primary-500" />
 				</div>

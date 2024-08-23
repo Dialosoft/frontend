@@ -347,8 +347,8 @@ export default function Register_Form() {
 							<div className="flex flex-col items-center justify-center">
 								<span className="font-semibold text-2xl text-red">IMPORTANT</span>
 								<span>
-									Here are your recovery words in case you forget your password. It's crucial to keep them safe and secure. Don't
-									lose them.
+									Here are your recovery words in case you forget your password. It&apos;s crucial to keep them safe and secure.
+									Don&apos;t lose them.
 								</span>
 							</div>
 

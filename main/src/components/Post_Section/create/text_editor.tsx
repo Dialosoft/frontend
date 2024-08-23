@@ -106,19 +106,19 @@ export default function BasicEditor() {
 			colorInputRef.current.click();
 		}
 	};
-	const handleHeadingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-		const level = parseInt(event.target.value, 10);
+	// const handleHeadingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+	// 	const level = parseInt(event.target.value, 10);
 
-		if (level >= 1 && level <= 6) {
-			if (editor) {
-				editor
-					.chain()
-					.focus()
-					.toggleHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 })
-					.run();
-			}
-		}
-	};
+	// 	if (level >= 1 && level <= 6) {
+	// 		if (editor) {
+	// 			editor
+	// 				.chain()
+	// 				.focus()
+	// 				.toggleHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 })
+	// 				.run();
+	// 		}
+	// 	}
+	// };
 	if (!editor) {
 		return null;
 	}

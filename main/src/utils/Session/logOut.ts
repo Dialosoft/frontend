@@ -20,7 +20,7 @@ export default async function Session_LogOut() {
 		});
 
 		return true;
-	} catch (error) {
+	} catch {
 		return false;
 	}
 }

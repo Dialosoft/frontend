@@ -23,7 +23,7 @@ export async function getForums_byUser() {
 		});
 
 		return response.data.data;
-	} catch (error) {
+	} catch {
 		return false;
 	}
 }
