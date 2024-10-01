@@ -14,9 +14,9 @@ export default function LastArticles() {
 	];
 
 	return (
-		<div className="w-full flex-col space-y-4 ">
+		<div className="w-full flex-col space-y-2 ">
 			<h2 className=" text-3xl font-semibold">Last Articles</h2>
-			<div className="bg-black-300 bg-opacity-25 p-2 space-y-2 rounded-lg">
+			<div className="bg-black-300 bg-opacity-25 p-2 space-y-1 rounded-3xl">
 				{article.map(article => (
 					<Article key={uuidv4()} title={article.title} user={article.user} time={article.date} />
 				))}

@@ -201,7 +201,7 @@ export default function MainSection() {
 					</div>
 
 					{forums.filter(forum => forum.category_id === category.id).length > 0 && (
-						<div className="w-full bg-black-300 bg-opacity-25 p-2 grid grid-cols-1 gap-2 rounded-lg">
+						<div className="w-full bg-black-300 bg-opacity-25 p-2 grid grid-cols-1 gap-1 rounded-3xl">
 							{forums
 								.filter(forum => forum.category_id === category.id)
 								.map(forum => (

@@ -42,10 +42,17 @@ export default function SavedSection() {
 	const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
 	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
-	useEffect(() => {
+	
+    useEffect(() => {
 		const fetchSaved = async () => {
 			const userData = await getAllSaved(username);
-			setPostsList(userData);
+
+			if (Array.isArray(userData)) {
+				setPostsList(userData);
+			} else {
+				console.error("Expected an array from getAllSaved, received:", userData);
+				setPostsList([]);
+			}
 		};
 
 		fetchSaved();
@@ -71,10 +78,8 @@ export default function SavedSection() {
 		}
 	}, [selectedPostId, isFavorite]);
 
-	if (!postsList.length) {
-		return <div>Loading...</div>;
-	}
-	const sortedPosts = postsList.sort((a, b) => new Date(b.saveTime).getTime() - new Date(a.saveTime).getTime());
+	
+	 const sortedPosts = Array.isArray(postsList) ? postsList.sort((a, b) => new Date(b.saveTime).getTime() - new Date(a.saveTime).getTime()) : [];
 
 	const filteredPosts = sortedPosts.filter(
 		post => post.content.toLowerCase().includes(searchTerm.toLowerCase()) || post.comments.some(comment => comment.content.toLowerCase().includes(searchTerm.toLowerCase()))

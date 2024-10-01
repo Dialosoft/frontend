@@ -5,7 +5,7 @@ const Members = dynamic(() => import("./members/main"));
 
 export default function Aside() {
 	return (
-		<div className="flex-col space-y-4 max-lg:hidden">
+		<div className="flex-col space-y-4 min-w-[399px]  max-lg:hidden">
 			<LastArticles />
 			<Members />
 		</div>

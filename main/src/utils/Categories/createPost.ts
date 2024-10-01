@@ -73,15 +73,13 @@ export async function getPost(id: string) {
 				timeout: 60 * 1000, // 1 minute
 			}
 		);
-
+console.log(response)
 		return { success: true, data: response.data.data };
 	} catch (error) {
+		console.error("Error fetching post:", error);
 		if (axios.isAxiosError(error)) {
-			if (error.response?.status === 404) {
-				return { success: false, message: "Not found" };
-			}
+			console.error("Axios error details:", error.response?.data);
 		}
-
-		return { success: false, message: "A network error occurred. Please check your connection and try again." };
+		return { success: false, error: (error as Error).message };
 	}
 }
