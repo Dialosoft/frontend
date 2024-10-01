@@ -33,7 +33,7 @@ export default async function Category({ params }: Props) {
 	console.log(PostsInfo);
 
 	return (
-		<div className="lg:container w-full max-lg:mx-4 flex justify-center space-x-4 mt-8 lg:mt-16">
+		<div className="lg:container     max-lg:mx-4 flex justify-center lg:space-x-4 mt-8 lg:mt-16">
 			<div className="w-full -my-1">
 				<div className="flex max-sm:flex-col items-start justify-between w-full">
 					<div className="text-3xl font-semibold">
@@ -68,9 +68,9 @@ export default async function Category({ params }: Props) {
 					</div>
 				</div>
 
-				{((PostsInfo.length > 0) && (PostsInfo.filter(post => post.fixed).length > 0)) && (
+				{((PostsInfo.length > 0) && (PostsInfo.filter((post: string) => post.fixed).length > 0)) && (
 					<div className="w-full bg-black-300 bg-opacity-25 p-2 space-y-2 rounded-lg">
-						{PostsInfo.filter(post => post.fixed).map(post => (
+						{PostsInfo.filter((post: string) => post.fixed).map((post: { id: number; user: string; title: string; answers: number; views: number; date: string | number | Date; fixed: boolean; }) => (
 							<Link href={`${params.categoryID}/${post.id}`} key={uuidv4()}>
 								<Post
 									id={post.id}
@@ -91,7 +91,7 @@ export default async function Category({ params }: Props) {
 				</div>
 
 				<div className="w-full bg-black-300 bg-opacity-25 p-2 space-y-2 rounded-lg">
-					{PostsInfo.filter(post => !post.fixed).map(post => (
+					{PostsInfo.filter((post: string) => !post.fixed).map((post: { postId: number; postOwner: string; title: string; comments: string | any[]; creationTime: string | number | Date; fixed: boolean; }) => (
 						<Link href={`${params.categoryID}/${post.postId}`} key={uuidv4()}>
 							<Post
 								id={post.postId}
