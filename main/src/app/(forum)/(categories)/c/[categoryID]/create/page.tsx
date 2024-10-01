@@ -49,7 +49,7 @@ export default function Create({ params }: Props) {
 			setTimeout(() => setShowErrorModal(false), 5000);
 			return;
 		}
-
+console.log(title, content)
 		const result = await createPost({ id: "", title: title, content: content, username: "", image: "", forumId: params.categoryID });
 		if (result.success) {
 			setOkMessage("Post created successfully!");
@@ -59,6 +59,7 @@ export default function Create({ params }: Props) {
 				router.push(`/c/${params.categoryID}`);
 			}, 3000);
 		} else {
+			console.log('wtf manito')
 			setErrorMessage(result.message || "An unexpected error occurred.");
 			setShowErrorModal(true);
 			setTimeout(() => setShowErrorModal(false), 5000);

@@ -35,20 +35,20 @@ export default function Category({ title, posts, comments, type }: CategoryProps
 
 	return (
 		<>
-			<div className="flex  justify-between space-x-2 items-center h-16 hover:bg-black-300 py-2 px-2 sm:px-4  rounded-md hover:bg-opacity-25">
-				<div className="flex w-full text-primary-400 space-x-2">
-					{renderIcon()}
-					<h3 className="text-xl text-secondary font-semibold">{title}</h3>
+			<div className="flex  justify-between space-x-2 items-center h-20 hover:bg-black-300 py-2 px-2 sm:px-4   rounded-2xl hover:bg-opacity-25">
+				<div className="flex w-full items-center text-primary-400 space-x-2">
+					<MessageCircleQuestion />
+					<h3 className="text-2xl text-secondary font-semibold">{title}</h3>
 				</div>
-				<div className="flex space-x-4 w-fit justify-end items-center max-[550px]:hidden">
+				<div className="flex space-x-4 w-fit justify-end items-center max-[550px]:hidden font-medium">
 					<div className="flex space-x-4">
 						<div className="flex-col">
-							<div className="text-black-500 text-xs">Posts</div>
-							<span>{posts}</span>
+							<div className="text-black-500 text-base ">Posts</div>
+							<span className="text-xl">{posts}</span>
 						</div>
 						<div className="flex-col">
-							<div className="text-black-500 text-xs">Comments</div>
-							<span>{formatNumber(comments)}</span>
+							<div className="text-black-500 text-base">Comments</div>
+							<span className="text-xl">{formatNumber(comments)}</span>
 						</div>
 					</div>
 					<LastPost title={post[0].title} user={post[0].user} time={post[0].date} />
