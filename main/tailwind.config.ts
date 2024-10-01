@@ -21,9 +21,9 @@ const config: Config = {
 				},
 				secondary: "#D3D3ED",
 				black: {
-					300: "#3A3A50", //gray for boxes with 25% opacity
-					500: "#43435B", //gray for text
-					700: "#1A1A22", //black same tone with 300 but is 100% opacity
+					300: "#464677", //gray for boxes with 25% opacity
+					500: "#505076", //gray for text
+					700: "#1D1D2C", //black same tone with 300 but is 100% opacity
 					900: "#0F0F13", //background
 				},
 				green: "#00A32E",
@@ -36,11 +36,9 @@ const config: Config = {
 			},
 			container: {
 				center: true,
-				padding: {
-					DEFAULT: "1rem",
-				},
+				
 				screens: {
-					"2xl": "1536px",
+					"2xl": "1618px",
 				},
 			},
 		},
