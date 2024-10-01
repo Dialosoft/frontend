@@ -27,6 +27,21 @@ export async function getCategory(id: string) {
 		return { success: false };
 	}
 }
+export async function getAllForums() {
+	const sessionUser = cookies().get("_atkn");
+
+		try {
+		const response = await axios.get("http://gateway-service:8080/dialosoft-api/management-service/forums/get-all-forums");
+			if (!sessionUser?.value) {
+				return { success: true, logged: false, data: response.data.data };
+			} else {
+				return { success: true, logged: true, data: response.data.data };
+			}
+
+	} catch (error) {
+		return { success: false };
+	}
+}
 
 interface CategoryProps {
 	name: string;
